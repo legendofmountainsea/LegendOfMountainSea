@@ -1,0 +1,3 @@
+rootProject.name = 'LOMS'
+
+include ':app'
