@@ -1,0 +1,23 @@
+{
+  "name": "legend_of_mountain_sea",
+  "version": "0.0.1",
+  "description": "4X sandbox game with Mountain & Sea Classics",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TyrealGray/LegendOfMountainSea.git"
+  },
+  "keywords": [
+    "react-native",
+    "javascript",
+    "nodejs"
+  ],
+  "author": "TyrealGray",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/TyrealGray/LegendOfMountainSea/issues"
+  },
+  "homepage": "https://github.com/TyrealGray/LegendOfMountainSea#readme"
+}
