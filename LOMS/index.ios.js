@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Platform
 } from 'react-native';
 
 class LOMS extends Component {
@@ -50,3 +51,12 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('LOMS', () => LOMS);
+
+if(Platform.OS == 'web'){
+  var app = document.createElement('div');
+  document.body.appendChild(app);
+
+  AppRegistry.runApplication('LOMS', {
+    rootTag: app
+  })
+}
