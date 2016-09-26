@@ -17,14 +17,13 @@ class LOMS extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          LegendOfMountainSea
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          4X sandbox game
         </Text>
         <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          with legend of Mountain and Sea Classics
         </Text>
       </View>
     );
