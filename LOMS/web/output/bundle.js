@@ -135,6 +135,15 @@
 	  return LOMS;
 	});
 	
+	if (_reactNative.Platform.OS == 'web') {
+	  var app = document.createElement('div');
+	  document.body.appendChild(app);
+	
+	  _reactNative.AppRegistry.runApplication('LOMS', {
+	    rootTag: app
+	  });
+	}
+	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/tyrealgray/GithubProjects/LegendOfMountainSea/LOMS/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.ios.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
