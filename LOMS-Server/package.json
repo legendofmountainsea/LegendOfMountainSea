@@ -2,5 +2,10 @@
   "name": "loms-server",
   "version": "0.0.1",
   "author": "TyrealGray",
-  "license": "GPL-2.0"
+  "license": "GPL-2.0",
+  "dependencies": {
+    "bufferutil": "^1.2.1",
+    "utf-8-validate": "^1.2.1",
+    "ws": "^1.1.1"
+  }
 }
