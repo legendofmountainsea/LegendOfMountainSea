@@ -10,11 +10,10 @@
     "url": "git+https://github.com/TyrealGray/LegendOfMountainSea.git"
   },
   "keywords": [
-    "react-native",
     "javascript",
     "nodejs"
   ],
-  "author": "TyrealGray",
+  "author": "Tyreal Gray",
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/TyrealGray/LegendOfMountainSea/issues"

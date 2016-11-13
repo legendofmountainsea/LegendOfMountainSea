@@ -1,0 +1,11 @@
+{
+  "name": "loms",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "~/Workshop/nwjs-v0.16.0-osx-x64/nwjs.app/Contents/MacOS/nwjs ."
+  },
+  "author": "Tyreal Gray",
+  "license": "GPL-2.0"
+}
