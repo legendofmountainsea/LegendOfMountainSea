@@ -4,8 +4,16 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "~/Workshop/nwjs-v0.16.0-osx-x64/nwjs.app/Contents/MacOS/nwjs ."
+    "start": "~/Workshop/nwjs-v0.16.0-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
+    "dev": "webpack-dev-server --progress --colors"
   },
   "author": "Tyreal Gray",
-  "license": "GPL-2.0"
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "script-loader": "^0.7.0",
+    "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "pixi.js": "^4.1.1"
+  }
 }
