@@ -1,6 +1,7 @@
 require("pixi.js");
 
 var renderer = new PIXI.WebGLRenderer(800, 600);
+renderer.backgroundColor = 0xeeeeee;
 
 // The renderer will create a canvas element for you that you can then insert into the DOM.
 document.body.appendChild(renderer.view);
@@ -20,8 +21,8 @@ PIXI.loader.add('bunny', '../LOMS.png').load(function (loader, resources) {
     bunny.position.x = 400;
     bunny.position.y = 300;
 
-    bunny.scale.x = 2;
-    bunny.scale.y = 2;
+    bunny.scale.x = 1;
+    bunny.scale.y = 1;
 
     // Add the bunny to the scene we are building.
     stage.addChild(bunny);
