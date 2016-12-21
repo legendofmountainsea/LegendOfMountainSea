@@ -46,6 +46,16 @@
 
 	__webpack_require__(1);
 
+	var socket = new WebSocket("ws://localhost:1126");
+
+	socket.onopen = function(event){
+	    console.log('client connected: '+ event.currentTarget.URL);
+	}
+
+	socket.onmessage = function(event){
+	    console.log('client received message: '+ event.data);
+	}
+
 	var renderer = new PIXI.WebGLRenderer(800, 600);
 	renderer.backgroundColor = 0xeeeeee;
 
