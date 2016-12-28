@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "start": "~/Workshop/nwjs-v0.16.0-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
-    "dev": "webpack-dev-server --progress --colors"
+    "dev": "webpack-dev-server --progress --colors",
+    "build-dev":"webpack"
   },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
