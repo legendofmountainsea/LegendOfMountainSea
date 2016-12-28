@@ -25,7 +25,7 @@ var logo = null;
 // load the texture we need
 PIXI.loader.add('logo', '../LOMS.png').load(function (loader, resources) {
     // This creates a texture from a 'bunny.png' image.
-    logo = new PIXI.Sprite(resources.bunny.texture);
+    logo = new PIXI.Sprite(resources.logo.texture);
 
     // Setup the position and scale of the bunny
     logo.position.x = 400;
