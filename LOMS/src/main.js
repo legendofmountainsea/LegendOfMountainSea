@@ -2,12 +2,12 @@ require("pixi.js");
 
 var socket = new WebSocket("ws://localhost:1126");
 
-socket.onopen = function(event){
-    console.log('client connected: '+ event.currentTarget.url);
+socket.onopen = function (event) {
+    console.log('client connected: ' + event.currentTarget.url);
 }
 
-socket.onmessage = function(event){
-    console.log('client received message: '+ event.data);
+socket.onmessage = function (event) {
+    console.log('client received message: ' + event.data);
 }
 
 var renderer = new PIXI.WebGLRenderer(800, 600);
@@ -20,22 +20,22 @@ document.body.appendChild(renderer.view);
 var stage = new PIXI.Container();
 
 // Declare a global variable for our sprite so that the animate function can access it.
-var bunny = null;
+var logo = null;
 
 // load the texture we need
-PIXI.loader.add('bunny', '../LOMS.png').load(function (loader, resources) {
+PIXI.loader.add('logo', '../LOMS.png').load(function (loader, resources) {
     // This creates a texture from a 'bunny.png' image.
-    bunny = new PIXI.Sprite(resources.bunny.texture);
+    logo = new PIXI.Sprite(resources.logo.texture);
 
     // Setup the position and scale of the bunny
-    bunny.position.x = 400;
-    bunny.position.y = 300;
+    logo.position.x = 400;
+    logo.position.y = 300;
 
-    bunny.scale.x = 1;
-    bunny.scale.y = 1;
+    logo.scale.x = 1;
+    logo.scale.y = 1;
 
     // Add the bunny to the scene we are building.
-    stage.addChild(bunny);
+    stage.addChild(logo);
 
     // kick off the animation loop (defined below)
     animate();
@@ -46,7 +46,7 @@ function animate() {
     requestAnimationFrame(animate);
 
     // each frame we spin the bunny around a bit
-    bunny.rotation += 0.01;
+    logo.rotation += 0.01;
 
     // this is the main render call that makes pixi draw your container and its children.
     renderer.render(stage);
