@@ -1,7 +1,7 @@
 # LegendOfMountainSea ![icon](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS.png)
 
 [![Software License](https://img.shields.io/badge/license-GPLv2-brightgreen.svg)](LICENSE)
-<a href="https://gitter.im/LegendOfMountainSea/LegendOfMountainSea">
+<a href="https://gitter.im/LegendOfMountainSea/LegendOfMountainSea" target="_blank">
   <img src="https://badges.gitter.im/LegendOfMountainSea/LegendOfMountainSea.svg">
 </a>
 
