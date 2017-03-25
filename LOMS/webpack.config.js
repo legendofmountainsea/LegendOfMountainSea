@@ -1,7 +1,5 @@
 var path = require('path');
 
-var pixi = path.join(__dirname, '/node_modules/pixi.js/bin/pixi.min.js');
-
 module.exports = {
     entry: "./src/main.js",
     output: {
@@ -9,13 +7,25 @@ module.exports = {
         filename: "loms.js"
     },
     module: {
-        loaders: [
-            { test: /pixi.js/, loader: "script" },
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            "es2015",
+                            "stage-0"
+                        ]
+                    }
+                }
+            }
         ]
     },
     resolve: {
         alias: {
-            'pixi.js': pixi
+            'pixi$': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
         }
     }
 }
