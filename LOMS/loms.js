@@ -18219,15 +18219,15 @@ global.PIXI = exports; // eslint-disable-line
 
 __webpack_require__(88);
 
-// var socket = new WebSocket("ws://localhost:1126");
+var socket = new WebSocket("ws://localhost:1126");
 
-// socket.onopen = function (event) {
-//     console.log('client connected: ' + event.currentTarget.url);
-// }
+socket.onopen = function (event) {
+    console.log('client connected: ' + event.currentTarget.url);
+};
 
-// socket.onmessage = function (event) {
-//     console.log('client received message: ' + event.data);
-// }
+socket.onmessage = function (event) {
+    console.log('client received message: ' + event.data);
+};
 
 var renderer = new PIXI.WebGLRenderer(800, 600);
 renderer.backgroundColor = 0xeeeeee;
