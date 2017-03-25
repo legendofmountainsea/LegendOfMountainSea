@@ -1,4 +1,4 @@
-require("pixi.js");
+import 'pixi.js';
 
 var socket = new WebSocket("ws://localhost:1126");
 
