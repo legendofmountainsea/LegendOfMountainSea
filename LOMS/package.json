@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.html",
   "scripts": {
+    "start_mac": "~/Workshop/nwjs-v0.21.3-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
+    "dev": "webpack-dev-server --open",
+    "build-dev": "webpack --color"
     "start-win": "F:\\nwjs-v0.21.3-win-x64\\nw.exe G:\\LegendOfMountainSea\\LOMS",
-    "start-mac": "~/Workshop/nwjs-v0.21.3-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
-    "dev": "webpack-dev-server --progress --colors",
-    "build-dev": "webpack"
   },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
@@ -18,7 +18,8 @@
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",
     "script-loader": "^0.7.0",
-    "webpack": "^2.3.2"
+    "webpack": "^2.3.2",
+    "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
     "pixi.js": "^4.1.1"
