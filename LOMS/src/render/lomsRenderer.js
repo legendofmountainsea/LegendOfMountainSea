@@ -1,14 +1,28 @@
-class LOMSRenderer {
-    constructor() {
-        this._renderer = new PIXI.WebGLRenderer(800, 600);
-        this._renderer.backgroundColor = 0xeeeeee;
+import 'pixi.js';
+
+export default class LOMSRenderer {
+
+    initRenderer() {
+
+        this._renderer = new PIXI.Application(800, 600, { backgroundColor: 0xeeeeee });
+
+        document.body.appendChild(this._renderer.view);
     }
 
-    loadScene(scene){
-        
+    addResource(name, path, onload) {
+        PIXI.loader.add(name, path).load(function (loader, resources) {
+
+            onload(resources[name]);
+        });
+    }
+
+    loadSprite(sprite) {
+        this._renderer.stage.addChild(sprite);
     }
 
     render() {
-        //render here
+        // this._renderer.ticker.add((delta) =>{
+        //     this._s.rotation += 0.01 * delta;
+        // });
     }
 }
