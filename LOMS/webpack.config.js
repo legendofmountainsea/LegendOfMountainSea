@@ -6,6 +6,7 @@ module.exports = {
         path: __dirname,
         filename: "loms.js"
     },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {

@@ -1,53 +1,20 @@
-import 'pixi.js';
+import LOMSRenderer from './render/lomsRenderer';
 
-var socket = new WebSocket("ws://localhost:1126");
+var mainRenderer = new LOMSRenderer;
 
-socket.onopen = function (event) {
-    console.log('client connected: ' + event.currentTarget.url);
-}
+mainRenderer.initRenderer();
 
-socket.onmessage = function (event) {
-    console.log('client received message: ' + event.data);
-}
+mainRenderer.addResource('logo','./LOMS.png',(logo)=>{
 
-var renderer = new PIXI.WebGLRenderer(800, 600);
-renderer.backgroundColor = 0xeeeeee;
+    let sprite = new PIXI.Sprite(logo.texture);
 
-// The renderer will create a canvas element for you that you can then insert into the DOM.
-document.body.appendChild(renderer.view);
+    sprite.position.x = 400;
+    sprite.position.y = 300;
 
-// You need to create a root container that will hold the scene you want to draw.
-var stage = new PIXI.Container();
+    sprite.scale.x = 1;
+    sprite.scale.y = 1;
 
-// Declare a global variable for our sprite so that the animate function can access it.
-var logo = null;
+    mainRenderer.loadSprite(sprite);
 
-// load the texture we need
-PIXI.loader.add('logo', '../LOMS.png').load(function (loader, resources) {
-    // This creates a texture from a 'bunny.png' image.
-    logo = new PIXI.Sprite(resources.logo.texture);
-
-    // Setup the position and scale of the bunny
-    logo.position.x = 400;
-    logo.position.y = 300;
-
-    logo.scale.x = 1;
-    logo.scale.y = 1;
-
-    // Add the bunny to the scene we are building.
-    stage.addChild(logo);
-
-    // kick off the animation loop (defined below)
-    animate();
+    mainRenderer.render();
 });
-
-function animate() {
-    // start the timer for the next animation loop
-    requestAnimationFrame(animate);
-
-    // each frame we spin the bunny around a bit
-    logo.rotation += 0.01;
-
-    // this is the main render call that makes pixi draw your container and its children.
-    renderer.render(stage);
-}
