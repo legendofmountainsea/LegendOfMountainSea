@@ -12,6 +12,7 @@ mainRenderer.addResource('logo','./LOMS.png',(logo)=>{
     sprite.position.y = 300;
 
     mainRenderer.loadSprite(sprite);
-
-    mainRenderer.render();
+    
 });
+
+mainRenderer.render();
