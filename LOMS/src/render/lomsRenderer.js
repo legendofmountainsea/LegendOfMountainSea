@@ -6,6 +6,8 @@ export default class LOMSRenderer {
 
         this._renderer = new PIXI.Application(800, 600, { backgroundColor: 0xeeeeee });
 
+        this._stage = null;
+
         document.body.appendChild(this._renderer.view);
     }
 
