@@ -1,3 +1,6 @@
+/**
+ * manage all the renderer here
+ */
 export default class StageAgent {
     constructor(){
 
