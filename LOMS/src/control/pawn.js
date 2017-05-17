@@ -8,5 +8,5 @@ export default class Pawn {
         return this;
     }
 
-
+    
 };

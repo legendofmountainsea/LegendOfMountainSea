@@ -1,5 +1,6 @@
 export default class Controller {
     constructor(){
+        this._pawn = null;
         this._bindKeyboardEvent();
     }
 
@@ -10,8 +11,12 @@ export default class Controller {
             // As the user release the Ctrl key, the key is no longer active.
             // So event.ctrlKey is false.
             if (keyName === 'Control') {
-                alert('Control key was released');
+                console.log('Control key was released');
             }
         }, false);
+    }
+
+    possess(pawn){
+        this._pawn = pawn;
     }
 }

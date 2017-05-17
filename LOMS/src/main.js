@@ -1,20 +1,29 @@
 import LOMSRenderer from './render/lomsRenderer';
 import Controller from './control/controller';
 
-var mainRenderer = new LOMSRenderer,
-    controller = new Controller;
+class LOMSGame {
+    constructor() {
+        this._renderer = new LOMSRenderer;
+        this._controller = new Controller;
+    }
 
-mainRenderer.initRenderer();
+    beginGame() {
+        this._renderer.initRenderer();
 
-mainRenderer.addResource('logo', './LOMS.png', (logo) => {
+        this._renderer.addResource('logo', './LOMS.png', (logo) => {
 
-    let sprite = new PIXI.Sprite(logo.texture);
+            let sprite = new PIXI.Sprite(logo.texture);
 
-    sprite.position.x = 400;
-    sprite.position.y = 300;
+            sprite.position.x = 400;
+            sprite.position.y = 300;
 
-    mainRenderer.loadSprite(sprite);
+            this._renderer.loadSprite(sprite);
 
-});
+        });
 
-mainRenderer.render();
+        this._renderer.render();
+    }
+}
+
+const app = new LOMSGame;
+app.beginGame();
