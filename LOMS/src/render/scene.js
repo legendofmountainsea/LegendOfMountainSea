@@ -3,7 +3,7 @@ class Scene {
         this._renderer = renderer;
     }
 
-    render(){
+    render(delta){
 
     };
 }
