@@ -1,6 +1,8 @@
 import LOMSRenderer from './render/lomsRenderer';
 import Controller from './control/controller';
 
+import MainMenu from './view/mainMenu';
+
 class LOMSGame {
     constructor() {
         this._renderer = new LOMSRenderer;
@@ -8,18 +10,11 @@ class LOMSGame {
     }
 
     beginGame() {
-        this._renderer.initRenderer();
 
-        this._renderer.addResource('logo', './LOMS.png', (logo) => {
+        const renderer = this._renderer,
+        controller = this._controller;
 
-            let sprite = new PIXI.Sprite(logo.texture);
-
-            sprite.position.x = 400;
-            sprite.position.y = 300;
-
-            this._renderer.loadSprite(sprite);
-
-        });
+        new MainMenu({renderer,controller}).render();
 
         this._renderer.render();
     }
