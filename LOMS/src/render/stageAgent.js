@@ -2,11 +2,11 @@
  * manage all the renderer here
  */
 export default class StageAgent {
-    constructor(){
-
+    constructor(engineProps){
+        this.engineProps = engineProps;
     }
 
-    addElement(){
+    addElement() {
 
     };
 
