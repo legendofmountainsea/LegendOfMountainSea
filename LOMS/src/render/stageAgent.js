@@ -3,11 +3,12 @@
  */
 export default class StageAgent {
     constructor(engineProps){
-        this.engineProps = engineProps;
+        this._engineProps = engineProps;
+        this._stages = [];
     }
 
-    addElement() {
-
+    addElements(...element) {
+        
     };
 
     //use lomsRenderer render function to call this
