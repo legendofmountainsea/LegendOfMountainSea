@@ -30,6 +30,9 @@ export default class Actor {
         return this;
     }
 
+    onRender(delta){
+    }
+
     render(delta) {
         this._sprite.rotation += (0.01 * delta);
     }
