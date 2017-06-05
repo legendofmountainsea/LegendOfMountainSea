@@ -3,13 +3,12 @@ export default class StageAgent {
     constructor(engineProps){
         this._engineProps = engineProps;
         this._stages = {};
-        this._idCounter = 0;
-        this._actor = new Actor().render();
+        this._size = 0;
     }
 
     addElements(...element) {
         for(let index = 0; index < element; ++index){
-            this._stages[this._idCounter++] = element[index];
+            this._stages[this._size++] = element[index];
         }
     };
 
