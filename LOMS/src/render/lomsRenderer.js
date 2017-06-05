@@ -7,25 +7,25 @@ export default class LOMSRenderer {
 
         this._renderer = new PIXI.Application(800, 600, { backgroundColor: 0xeeeeee });
 
-        this._stageAgent = new StageAgent(this);
+        this._stageAgent = new StageAgent(this._renderer);
 
         document.body.appendChild(this._renderer.view);
     }
 
-    addResource(name, path, onload) {
-        PIXI.loader.add(name, path).load(function (loader, resources) {
+    addResource(name, path) {
+        PIXI.loader.add(name, path).load((loader, resources) => {
 
-            onload(resources[name]);
+            this._stageAgent.addActors(resources[name]);
         });
     }
 
-    loadSprite(sprite) {
-        this._renderer.stage.addChild(sprite);
-    }
+    // loadSprite(sprite) {
+    //     this._renderer.stage.addChild(sprite);
+    // }
 
     render() {
-        // this._renderer.ticker.add((delta) =>{
-        //     this._s.rotation += 0.01 * delta;
-        // });
+        this._renderer.ticker.add((delta) => {
+            this._stageAgent.render(delta);
+        });
     }
 }
