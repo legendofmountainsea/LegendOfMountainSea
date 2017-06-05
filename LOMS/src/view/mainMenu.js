@@ -7,15 +7,6 @@ export default class MainMenu {
 
     render(){
 
-        this.props.renderer.addResource('logo', './LOMS.png', (logo) => {
-
-            let sprite = new PIXI.Sprite(logo.texture);
-
-            sprite.position.x = 400;
-            sprite.position.y = 300;
-
-            this.props.renderer.loadSprite(sprite);
-
-        });
+        this.props.renderer.addResource('logo', './LOMS.png');
     }
 }
