@@ -19,10 +19,6 @@ export default class LOMSRenderer {
         });
     }
 
-    // loadSprite(sprite) {
-    //     this._renderer.stage.addChild(sprite);
-    // }
-
     render() {
         this._renderer.ticker.add((delta) => {
             this._stageAgent.render(delta);
