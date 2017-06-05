@@ -29,6 +29,8 @@ export default class StageAgent {
 
     //use lomsRenderer render function to call this
     render(delta) {
-        
+        for(let actorID in this._stages){
+            this._stages[actorID].render(delta);
+        }
     }
 }
