@@ -19,7 +19,7 @@
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
     "start-win": "F:\\nwjs-v0.21.3-win-x64\\nw.exe G:\\LegendOfMountainSea\\LOMS",
-    "dist": "build --tasks win-x86,mac-x64 ."
+    "dist": "build --tasks win-x64,mac-x64 ."
   },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
