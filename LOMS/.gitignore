@@ -5,4 +5,5 @@ npm-debug.log
 
 ＃dist
 loms.js
+loms.node.js
 dist/*
