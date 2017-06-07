@@ -15,11 +15,12 @@
     ]
   },
   "scripts": {
-    "start_mac": "~/Workshop/nwjs-v0.21.3-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
+    "start-mac": "~/Workshop/nwjs-v0.21.3-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
     "start-win": "F:\\nwjs-v0.21.3-win-x64\\nw.exe G:\\LegendOfMountainSea\\LOMS",
-    "dist": "build --tasks win-x64,mac-x64 ."
+    "dist-mac": "build --tasks mac-x64 .",
+    "dist-win": "build --tasks win-x64 ."
   },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
