@@ -37,7 +37,7 @@ var serverConfig = {
     entry: "./src/main.js",
     output: {
         path: __dirname,
-        filename: "loms.js"
+        filename: "loms.node.js"
     },
     devtool: 'inline-source-map',
     module: {
