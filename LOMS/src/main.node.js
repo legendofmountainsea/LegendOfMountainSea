@@ -21,7 +21,7 @@ class LOMSGame {
 }
 
 if (typeof window !=="undefined" && root===window) {
-    
+    console.log('dev mode');
 } else {
     const app = new LOMSGame;
     app.beginGame();
