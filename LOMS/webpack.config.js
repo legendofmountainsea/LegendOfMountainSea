@@ -34,7 +34,7 @@ var clientConfig = {
 
 var serverConfig = {
 	target:'node',
-    entry: "./src/main.js",
+    entry: "./src/main.node.js",
     output: {
         path: __dirname,
         filename: "loms.node.js"
