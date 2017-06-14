@@ -6,3 +6,5 @@
 </a>
 
 4X sandbox game with legend of Mountain and Sea Classics
+
+[Community in Chinese](https://zh-eu.com/category/34)
