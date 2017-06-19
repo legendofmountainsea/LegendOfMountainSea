@@ -1,3 +1,5 @@
+import 'pixi.js';
+
 import LOMSRenderer from './render/lomsRenderer';
 import Controller from './control/controller';
 

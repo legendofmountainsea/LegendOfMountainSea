@@ -6,22 +6,15 @@ export default class StageAgent {
         this._size = 0;
     }
 
-    addActors(...resouces) {
+    addActor(actor){
+        let ID = ++this._size;
 
-        for (let index = 0; index < resouces.length; ++index) {
+        actor.setID(ID);
 
-            let ID = ++this._size;
+        this._stages[ID] = actor;
 
-            let actor = new Actor({
-                ID: this._size,
-                resouce: resouces[index]
-            });
-
-            this._stages[ID] = actor;
-
-            this._engineProps.stage.addChild(this._stages[ID].getSprite());
-        }
-    };
+        this._engineProps.stage.addChild(this._stages[ID].getSprite());
+    }
 
     removeActors(...resouses) {
 
