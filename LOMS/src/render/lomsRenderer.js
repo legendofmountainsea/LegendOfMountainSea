@@ -1,4 +1,3 @@
-import 'pixi.js';
 import StageAgent from './stageAgent';
 
 export default class LOMSRenderer {
@@ -12,10 +11,12 @@ export default class LOMSRenderer {
         document.body.appendChild(this._renderer.view);
     }
 
-    addResource(name, path) {
-        PIXI.loader.add(name, path).load((loader, resources) => {
+    addActor(actor){
+        PIXI.loader.add(actor.getName(), actor.getPath()).load((loader, resources) => {
 
-            this._stageAgent.addActors(resources[name]);
+            actor.initResouce(resources[actor.getName()]);
+
+            this._stageAgent.addActor(actor);
         });
     }
 
