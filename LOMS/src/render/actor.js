@@ -4,7 +4,7 @@ export default class Actor {
         this._name = props.name;
         this._path = props.path;
         this._initPosition = props.position? props.position : {x:0,y:0};
-        this._onRender = null;
+        this._onRender = props.onRender? props.onRender : null;
         this._sprite = null;
     }
 
