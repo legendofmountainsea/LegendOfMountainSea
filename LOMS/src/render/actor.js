@@ -3,7 +3,8 @@ export default class Actor {
     constructor(props) {
         this._name = props.name;
         this._path = props.path;
-
+        this._initPosition = props.position? props.position : {x:0,y:0};
+        this._onRender = null;
         this._sprite = null;
     }
 
@@ -16,17 +17,9 @@ export default class Actor {
         this._sprite.position.y = this._initPosition.y;
     }
 
-    _init() {
-        this._sprite = new PIXI.Sprite(this._resouce.texture);
-
-        this._sprite.anchor.set(0.5,0.5);
-
-        this._sprite.position.x = 400;
-        this._sprite.position.y = 300;
-    }
-
     setID(ID){
         this._ID = ID;
+        return this;
     }
 
     getID(){
@@ -52,16 +45,18 @@ export default class Actor {
         return this;
     }
 
-    setInitPosition(position){
-        this._initPosition = position;
-
+    bindRender(onRender){
+        this._onRender = onRender;
         return this;
     }
 
     onRender(delta){
+        if(this._onRender){
+            this._onRender(this._sprite, delta);
+        }
     }
 
     render(delta) {
-        this._sprite.rotation += (0.01 * delta);
+        this.onRender(delta);
     }
 }
