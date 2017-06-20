@@ -7,9 +7,15 @@ export default class MainMenu {
     }
 
     render(){
-        let logoActor = new Actor({name:'logo',path:'./LOMS.png'});
+        let logoActor = new Actor({
+            name:'logo',
+            path:'./LOMS.png',
+            position: {x:300,y:400}
+        });
 
-        logoActor.setInitPosition({x:300,y:400});
+        logoActor.bindRender((sprite, delta)=>{
+            sprite.rotation += (0.01 * delta);
+        });
  
         this.props.renderer.addActor(logoActor);
     }
