@@ -1,7 +1,8 @@
-var path = require('path');
+var path = require('path'),
+    webpack = require('webpack');
 
 var clientConfig = {
-	target:'web',
+    target: 'web',
     entry: "./src/main.js",
     output: {
         path: __dirname,
@@ -29,11 +30,14 @@ var clientConfig = {
         alias: {
             'pixi$': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
         }
-    }
+    },
+    plugins: [
+        new webpack.optimize.ModuleConcatenationPlugin()
+    ]
 }
 
 var serverConfig = {
-	target:'node',
+    target: 'node',
     entry: "./src/main.node.js",
     output: {
         path: __dirname,
@@ -61,7 +65,10 @@ var serverConfig = {
         alias: {
             'pixi$': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
         }
-    }
+    },
+    plugins: [
+        new webpack.optimize.ModuleConcatenationPlugin()
+    ]
 }
 
-module.exports = [ serverConfig, clientConfig ];
+module.exports = [serverConfig, clientConfig];
