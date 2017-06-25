@@ -7,4 +7,6 @@
 
 4X sandbox game with legend of Mountain and Sea Classics
 
+To experience hundreds of Chinese ancient legends like shoot down nine suns with Hou Yi ![houyi](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/29658a4a17790c286689522952b1cc8c90dce7ef/LOMS/houyi_walk.gif)
+
 [Community in Chinese](https://zh-eu.com/category/34)
