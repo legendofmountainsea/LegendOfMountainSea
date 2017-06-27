@@ -3,6 +3,9 @@
 node_modules/*
 npm-debug.log
 
+#assets
+assets/*
+
 ＃dist
 loms.js
 loms.node.js
