@@ -13,4 +13,4 @@ To experience hundreds of Chinese ancient legends like shoot down nine suns with
 [A LOMS game BBS Community using Chinese](https://zh-eu.com/category/34)
 
 ## License
-The license is GPLv2 but with an additional patent grant
+This game is under GPLv2 but with an [additional license](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/ADDTIONAL-LICENSE)
