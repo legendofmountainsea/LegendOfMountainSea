@@ -1,6 +1,12 @@
+import S_assetData from '../static/assetData';
 import StageAgent from './stageAgent';
 
 export default class LOMSRenderer {
+
+    init(onFinish){
+        this.initRenderer();
+        this.initAssets(onFinish);
+    }
 
     initRenderer() {
 
@@ -8,16 +14,27 @@ export default class LOMSRenderer {
 
         this._stageAgent = new StageAgent(this._renderer);
 
+        this._isAssetsLoadingDone = false;
+
         document.body.appendChild(this._renderer.view);
     }
 
-    addActor(actor){
-        PIXI.loader.add(actor.getName(), actor.getPath()).load((loader, resources) => {
+    initAssets(onFinish){
 
-            actor.initResouce(resources[actor.getName()]);
+        let loader = PIXI.loader;
+        for(let asset in S_assetData){
+            loader.add(S_assetData[asset].NAME,S_assetData[asset].PATH);
+        }
 
-            this._stageAgent.addActor(actor);
+        loader.load((loader, resources)=>{
+            this._resources = resources;
+            onFinish();
         });
+    }
+
+    addActor(actor){
+        actor.initResouce(this._resources[actor.getName()]);
+        this._stageAgent.addActor(actor);
     }
 
     render() {
