@@ -16,7 +16,7 @@ export default class LOMS {
         const renderer = this._renderer,
         controller = this._controller;
 
-        new MainMenu({renderer,controller}).render();
+        new MainMenu({renderer,controller});
 
         this._renderer.render();
     }
