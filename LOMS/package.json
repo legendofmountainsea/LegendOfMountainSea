@@ -5,7 +5,7 @@
   "main": "index.html",
   "build":{
     "appId": "io.github.skyharp.tyrealgray.loms",
-    "nwVersion":"0.21.3",
+    "nwVersion":"0.23.5",
     "packed": true,
     "targets": [
       "zip"
@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "start-mac": "~/Workshop/nwjs-v0.21.3-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
+    "start-mac": "~/Workshop/nwjs-v0.23.5-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
     "start-win": "F:\\nwjs-v0.23.5-win-x64\\nw.exe G:\\LegendOfMountainSea\\LOMS",
