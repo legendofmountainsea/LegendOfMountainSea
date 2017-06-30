@@ -15,10 +15,12 @@
     ]
   },
   "scripts": {
-    "start-mac": "~/Workshop/nwjs-v0.21.3-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
-    "start-win": "F:\\nwjs-v0.23.5-win-x64\\nw.exe G:\\LegendOfMountainSea\\LOMS",
+    "build-win": "F:\\nwjs-v0.23.5-win-x64\\nw.exe \"F:\\Github Projects\\LegendOfMountainSea\\LOMS\"",
+    "start-win": "npm run build-dev && npm run build-win",
+    "build-mac": "~/Workshop/nwjs-v0.21.3-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
+    "start-mac": "npm run build-dev && npm run build-nac",
     "dist-mac": "build --tasks mac-x64 .",
     "dist-win": "build --tasks win-x64 ."
   },
