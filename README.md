@@ -9,6 +9,41 @@
 
 To experience hundreds of Chinese ancient legends like shoot down nine suns with Hou Yi ![houyi](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/29658a4a17790c286689522952b1cc8c90dce7ef/LOMS/houyi_walk.gif)
 
+## Getting started LOMS
+
+Go **"./LegendOfMountainSea/LOMS/"** folder and install dependencies
+```
+$ cd ./LOMS
+$ npm install
+```
+#### Optional: with NW.js Client
+Download NW.js Client [0.23.5](https://dl.nwjs.io/v0.23.5/)
+
+Put **nwjs-v0.23.5-win-x64** or **nwjs-v0.23.5-osx-x64** folder into **"./LegendOfMountainSea/LOMS/"**
+
+## Getting started LOMS-Server
+
+Go **"./LegendOfMountainSea/LOMS-Server/"** folder and install dependencies
+```
+$ cd ./LOMS-Server
+$ npm install
+```
+Begin coding
+
+## Start the game
+**Run game on web browser without NW.js Client**
+```
+$ npm run dev
+```
+**Mac** `with NW.js Client`
+```
+$ npm run start-mac
+```
+**Window** `with NW.js Client`
+```
+$ npm run start-win
+```
+
 ## Community
 [A LOMS game BBS Community using Chinese](https://zh-eu.com/category/34)
 
