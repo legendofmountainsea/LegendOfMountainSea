@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
-    "build-win": "F:\\nwjs-v0.23.5-win-x64\\nw.exe \"F:\\Github Projects\\LegendOfMountainSea\\LOMS\"",
+    "build-win": "nwjs-v0.23.5-win-x64\\nw.exe .",
     "start-win": "npm run build-dev && npm run build-win",
     "build-mac": "~/Workshop/nwjs-v0.23.5-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
     "start-mac": "npm run build-dev && npm run build-nac",

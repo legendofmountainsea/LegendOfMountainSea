@@ -10,3 +10,6 @@ assets/*
 loms.js
 loms.node.js
 dist/*
+
+#nwjs
+nwjs-v0.23.5-win-x64/*
