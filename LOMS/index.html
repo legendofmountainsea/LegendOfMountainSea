@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Legend Of Mountain Sea</title>
-  </head>
-  <body>
-    <h4>Legend Of Mountain Sea</h4>
-    <script type="text/javascript" src="loms.js" charset="utf-8"></script>
-    <script type="text/javascript" src="loms.node.js" charset="utf-8"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Legend Of Mountain Sea</title>
+</head>
+
+<body>
+  <script type="text/javascript" charset="utf-8">
+
+  //set NW.js client window size
+    var wingui = require('nw.gui').Window.get();
+
+    if (wingui !== 'undefined') {
+      wingui.setMinimumSize(1024, 768);
+      wingui.setResizable(false);
+      wingui.moveTo(0, 0);
+    }
+  </script>
+  <script type="text/javascript" src="loms.js" charset="utf-8"></script>
+  <script type="text/javascript" src="loms.node.js" charset="utf-8"></script>
+</body>
+
 </html>
