@@ -10,7 +10,7 @@ export default class LOMSRenderer {
 
     initRenderer() {
 
-        this._renderer = new PIXI.Application(800, 600, { backgroundColor: 0xeeeeee });
+        this._renderer = new PIXI.Application(990, 768, { backgroundColor: 0xeeeeee });
 
         this._stageAgent = new StageAgent(this._renderer);
 

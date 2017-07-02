@@ -32,7 +32,7 @@ var clientConfig = {
         }
     },
     plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin()
+        new webpack.optimize.ModuleConcatenationPlugin(),
     ]
 }
 
@@ -67,7 +67,7 @@ var serverConfig = {
         }
     },
     plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin()
+        new webpack.optimize.ModuleConcatenationPlugin(),
     ]
 }
 
