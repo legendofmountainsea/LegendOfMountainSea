@@ -3,6 +3,10 @@ import StageAgent from './stageAgent';
 
 export default class LOMSRenderer {
 
+    /**
+     * init assets and renderer
+     * @param {*callback} onFinish will be triggered if init is finished
+     */
     init(onFinish){
         this.initRenderer();
         this.initAssets(onFinish);
