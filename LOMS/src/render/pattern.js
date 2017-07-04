@@ -7,11 +7,11 @@ export default class Pattern extends Actor {
         this._path = props.path;
     }
 
-     initResouces(resouces) {
+     initResources(resources) {
 
-        let resouce = resouces[this.getName()];
+        let resource = resources[this.getName()];
 
-        this._sprite = new PIXI.Sprite(resouce.texture);
+        this._sprite = new PIXI.Sprite(resource.texture);
 
         this._sprite.anchor.set(0.5, 0.5);
 
