@@ -1,6 +1,7 @@
 import S_assetData from '../static/assetData';
 
-import Actor from '../render/actor';
+import Pattern from '../render/pattern';
+import Character from '../render/Character';
 
 export default class MainMenu {
     constructor(props) {
@@ -13,28 +14,25 @@ export default class MainMenu {
 
     render() {
 
-        let logo2Actor = new Actor({
+        let loge = new Pattern({
             name: S_assetData.LOGO.NAME,
             path: S_assetData.LOGO.PATH,
-            position: { x: 100, y: 200 }
+            position: { x: 200, y: 200 }
         });
 
-        logo2Actor.bindRender((sprite, delta) => {
+        loge.bindRender((sprite, delta) => {
             sprite.rotation += (0.01 * delta);
         });
 
-        let logoActor = new Actor({
-            name: S_assetData.LOGO.NAME,
-            path: S_assetData.LOGO.PATH,
-            position: { x: 300, y: 400 }
-        });
+        // let houyi = new Character({
+        //     name: S_assetData.HOUYI_STAND.NAME,
+        //     path: S_assetData.HOUYI_STAND.PATH,
+        //     isSpriteSheet:true,
+        //     position: { x: 300, y: 400 }
+        // });
 
-        logoActor.bindRender((sprite, delta) => {
-            sprite.rotation += (0.01 * delta);
-        });
+        this.props.renderer.addActor(logo);
 
-        this.props.renderer.addActor(logoActor);
-
-        this.props.renderer.addActor(logo2Actor);
+        //this.props.renderer.addActor(houyi);
     }
 }

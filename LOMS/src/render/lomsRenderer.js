@@ -37,7 +37,7 @@ export default class LOMSRenderer {
     }
 
     addActor(actor){
-        actor.initResouce(this._resources[actor.getName()]);
+        actor.initResources(this._resources);
         this._stageAgent.addActor(actor);
     }
 

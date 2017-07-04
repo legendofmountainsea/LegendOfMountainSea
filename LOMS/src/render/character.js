@@ -8,12 +8,12 @@ export default class Character extends Actor {
         this._frames = [];
     }
 
-    initResouces(resouces){
+    initResources(resources){
 
-        let resouce = resouces[this.getName()];
+        let resource = resources[this.getName()];
         
-        for(let texture in resouce.textures){
-            this._frames.push(resouce.textures[texture]);
+        for(let texture in resource.textures){
+            this._frames.push(resource.textures[texture]);
         }
         
         this._sprite = new PIXI.extras.AnimatedSprite(this._frames);
