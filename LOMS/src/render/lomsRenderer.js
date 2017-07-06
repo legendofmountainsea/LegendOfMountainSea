@@ -18,16 +18,22 @@ export default class LOMSRenderer {
 
         this._stageAgent = new StageAgent(this._renderer);
 
-        this._isAssetsLoadingDone = false;
-
         document.body.appendChild(this._renderer.view);
     }
 
     initAssets(onFinish){
 
         let loader = PIXI.loader;
+        
         for(let asset in S_assetData){
-            loader.add(S_assetData[asset].NAME,S_assetData[asset].PATH);
+            if(S_assetData[asset].IS_CHARACTER){
+                for(let animation in S_assetData[asset]){
+                    loader.add(S_assetData[asset][animation].NAME,S_assetData[asset][animation].PATH);
+                }
+            }
+            else{
+                loader.add(S_assetData[asset].NAME,S_assetData[asset].PATH);
+            }
         }
 
         loader.load((loader, resources)=>{
