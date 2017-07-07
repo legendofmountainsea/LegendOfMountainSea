@@ -5,12 +5,13 @@ export default class Character extends Actor {
         super(props);
         this._name = props.name;
         this._path = props.path;
+        this._assetData = props.assetData;
         this._frames = [];
     }
 
     initResources(resources){
 
-        let resource = resources[this.getName()];
+        let resource = resources[this._name];
         
         for(let texture in resource.textures){
             this._frames.push(resource.textures[texture]);
