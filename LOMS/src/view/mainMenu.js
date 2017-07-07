@@ -14,23 +14,23 @@ export default class MainMenu {
 
     render() {
 
-        let loge = new Pattern({
+        let logo = new Pattern({
             name: S_assetData.LOGO.NAME,
             path: S_assetData.LOGO.PATH,
             position: { x: 200, y: 200 }
         });
 
-        loge.bindRender((sprite, delta) => {
+        logo.bindRender((sprite, delta) => {
             sprite.rotation += (0.01 * delta);
         });
 
-        let houyi = new Character({
-            assetData: S_assetData.HOUYI,
-            position: { x: 300, y: 400 }
-        });
+        // let houyi = new Character({
+        //     assetData: S_assetData.HOUYI,
+        //     position: { x: 300, y: 400 }
+        // });
 
         this.props.renderer.addActor(logo);
 
-        this.props.renderer.addActor(houyi);
+        // this.props.renderer.addActor(houyi);
     }
 }
