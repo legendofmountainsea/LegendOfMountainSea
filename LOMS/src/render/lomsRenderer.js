@@ -7,7 +7,7 @@ export default class LOMSRenderer {
      * init assets and renderer
      * @param {*callback} onFinish will be triggered if init is finished
      */
-    init(onFinish){
+    init(onFinish) {
         this.initRenderer();
         this.initAssets(onFinish);
     }
@@ -21,28 +21,31 @@ export default class LOMSRenderer {
         document.body.appendChild(this._renderer.view);
     }
 
-    initAssets(onFinish){
+    initAssets(onFinish) {
 
         let loader = PIXI.loader;
-        
-        for(let asset in S_assetData){
-            if(S_assetData[asset].IS_CHARACTER){
-                for(let animation in S_assetData[asset]){
-                    loader.add(S_assetData[asset][animation].NAME,S_assetData[asset][animation].PATH);
+
+        for (let asset in S_assetData) {
+            if (S_assetData[asset].IS_CHARACTER) {
+                for (let animation in S_assetData[asset]) {
+
+                    if (animation !== 'IS_CHARACTER') {
+                        loader.add(S_assetData[asset][animation].NAME, S_assetData[asset][animation].PATH);
+                    }
                 }
             }
-            else{
-                loader.add(S_assetData[asset].NAME,S_assetData[asset].PATH);
+            else {
+                loader.add(S_assetData[asset].NAME, S_assetData[asset].PATH);
             }
         }
 
-        loader.load((loader, resources)=>{
+        loader.load((loader, resources) => {
             this._resources = resources;
             onFinish();
         });
     }
 
-    addActor(actor){
+    addActor(actor) {
         actor.initResources(this._resources);
         this._stageAgent.addActor(actor);
     }
