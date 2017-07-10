@@ -29,4 +29,11 @@ export default class Character extends Actor {
         this._sprite.position.y = this._initPosition.y;
         this._sprite.play();
     }
+
+    setAnimation(name){
+
+        this._sprite.textures = this._frames[this._assetData[name].NAME];
+
+        this._sprite.play();
+    }
 };
