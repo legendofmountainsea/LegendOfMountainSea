@@ -17,7 +17,7 @@ $ cd ./LOMS
 $ npm install
 ```
 #### Optional: with NW.js Client
-Download NW.js Client [0.23.5](https://dl.nwjs.io/v0.23.5/)
+Download NW.js 64-bit Client [0.23.5](https://dl.nwjs.io/v0.23.5/)
 
 Put **nwjs-v0.23.5-win-x64** or **nwjs-v0.23.5-osx-x64** folder into **"./LegendOfMountainSea/LOMS/"**
 
