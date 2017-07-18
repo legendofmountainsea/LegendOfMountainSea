@@ -3,7 +3,6 @@ import Actor from './actor';
 export default class Character extends Actor {
     constructor(props) {
         super(props);
-        this._assetData = props.assetData;
         this._frames = {};
     }
 

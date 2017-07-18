@@ -3,12 +3,13 @@ import Actor from './actor';
 export default class Pattern extends Actor {
     constructor(props){
         super(props);
-        this._name = props.name;
-        this._path = props.path;
+    }
+
+    getName() {
+        return this._assetData.DATA.NAME;
     }
 
      initResources(resources) {
-
         let resource = resources[this.getName()];
 
         this._sprite = new PIXI.Sprite(resource.texture);
