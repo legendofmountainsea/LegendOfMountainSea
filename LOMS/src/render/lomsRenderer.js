@@ -27,15 +27,12 @@ export default class LOMSRenderer {
 
         for (let asset in S_assetData) {
             if (S_assetData[asset].IS_CHARACTER) {
-                for (let animation in S_assetData[asset]) {
-
-                    if (animation !== 'IS_CHARACTER') {
-                        loader.add(S_assetData[asset][animation].NAME, S_assetData[asset][animation].PATH);
-                    }
+                for (let animation in S_assetData[asset].DATA) {
+                    loader.add(S_assetData[asset].DATA[animation].NAME, S_assetData[asset].DATA[animation].PATH);
                 }
             }
             else {
-                loader.add(S_assetData[asset].NAME, S_assetData[asset].PATH);
+                loader.add(S_assetData[asset].DATA.NAME, S_assetData[asset].DATA.PATH);
             }
         }
 

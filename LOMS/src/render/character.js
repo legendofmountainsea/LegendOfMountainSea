@@ -9,19 +9,16 @@ export default class Character extends Actor {
 
     initResources(resources) {
 
-        for (let asset in this._assetData) {
-            if (asset !== 'IS_CHARACTER') {
-                this._frames[this._assetData[asset].NAME] = [];
+        for (let asset in this._assetData.DATA) {
+                this._frames[this._assetData.DATA[asset].NAME] = [];
 
-                let resource = resources[this._assetData[asset].NAME];
-
+                let resource = resources[this._assetData.DATA[asset].NAME];
                 for (let texture in resource.textures) {
-                    this._frames[this._assetData[asset].NAME].push(resource.textures[texture]);
+                    this._frames[this._assetData.DATA[asset].NAME].push(resource.textures[texture]);
                 }
-            }
         }
 
-        this._sprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData['STAND'].NAME]);
+        this._sprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA['STAND'].NAME]);
         this._sprite.anchor.set(0.5, 0.5);
         this._sprite.animationSpeed = 0.025;
 
@@ -32,7 +29,7 @@ export default class Character extends Actor {
 
     setAnimation(name){
 
-        this._sprite.textures = this._frames[this._assetData[name].NAME];
+        this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
 
         this._sprite.play();
     }
