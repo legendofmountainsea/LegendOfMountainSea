@@ -5,6 +5,7 @@ export default class Actor {
         this._initPosition = props.position ? props.position : { x: 0, y: 0 };
         this._onRender = props.onRender ? props.onRender : null;
         this._sprite = null;
+        this._assetData = props.assetData;
     }
 
     setID(ID) {
@@ -15,15 +16,7 @@ export default class Actor {
     getID() {
         return this._ID;
     }
-
-    getName() {
-        return this._name;
-    }
-
-    getPath() {
-        return this._path;
-    }
-
+    
     getSprite() {
         return this._sprite;
     }

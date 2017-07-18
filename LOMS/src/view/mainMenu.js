@@ -15,8 +15,7 @@ export default class MainMenu {
     render() {
 
         let logo = new Pattern({
-            name: S_assetData.LOGO.DATA.NAME,
-            path: S_assetData.LOGO.DATA.PATH,
+            assetData: S_assetData.LOGO,
             position: { x: 200, y: 200 }
         });
 
