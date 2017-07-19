@@ -40,15 +40,12 @@ export default class LOMSRenderer {
             console.log(e.progress);
         });
 
-        loader.onComplete.add(() => {
-            console.log('loader.onComplete');
-            loader.reset();
-        });
-
-        loader.load((loader, resources) => {
+        loader.onComplete.add((loader, resources) => {
             this._resources = resources;
             onFinish();
         });
+
+        loader.load();
     }
 
     addActor(actor) {
