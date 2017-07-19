@@ -26,9 +26,15 @@ export default class Character extends Actor {
         this._sprite.play();
     }
 
-    setAnimation(name){
+    playWalk(){
+        this.setAnimation('WALK', 0.08);
+    }
+
+    setAnimation(name, speed){
 
         this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
+
+        this._sprite.animationSpeed = speed;
 
         this._sprite.play();
     }
