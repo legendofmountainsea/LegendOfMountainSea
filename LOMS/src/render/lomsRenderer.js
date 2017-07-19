@@ -36,6 +36,15 @@ export default class LOMSRenderer {
             }
         }
 
+        loader.onProgress.add((e) => {
+            console.log(e.progress);
+        });
+
+        loader.onComplete.add(() => {
+            console.log('loader.onComplete');
+            loader.reset();
+        });
+
         loader.load((loader, resources) => {
             this._resources = resources;
             onFinish();
