@@ -26,15 +26,29 @@ export default class Character extends Actor {
         this._sprite.play();
     }
 
+    playStand(){
+        this.setAnimation('STAND', 0.025);
+    }
+
     playWalk(){
         this.setAnimation('WALK', 0.08);
     }
 
-    setAnimation(name, speed){
+    playAttack(){
+        this.setAnimation('ATTACK',0.12, false, ()=>{
+            this.playStand();
+        });
+    }
+
+    setAnimation(name, speed, loop = true, onCompletefunction){
 
         this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
 
         this._sprite.animationSpeed = speed;
+
+        this._sprite.onComplete = onCompletefunction;
+
+        this._sprite.loop = loop;
 
         this._sprite.play();
     }
