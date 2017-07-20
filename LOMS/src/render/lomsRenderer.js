@@ -18,6 +18,8 @@ export default class LOMSRenderer {
 
         this._stageAgent = new StageAgent(this._renderer);
 
+        this._stageAgent.initController();
+
         document.body.appendChild(this._renderer.view);
     }
 
