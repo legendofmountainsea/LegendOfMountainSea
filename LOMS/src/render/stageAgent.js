@@ -1,9 +1,16 @@
 import Actor from './actor';
+import Controller from '../control/controller';
 export default class StageAgent {
     constructor(engineProps) {
         this._engineProps = engineProps;
         this._stages = {};
         this._size = 0;
+        this._controller = null;
+    }
+
+    initController(){
+        this._engineProps.stage.interactive = true;
+        this._controller = new Controller();
     }
 
     addActor(actor){
@@ -14,10 +21,6 @@ export default class StageAgent {
         this._stages[ID] = actor;
 
         this._engineProps.stage.addChild(this._stages[ID].getSprite());
-    }
-
-    removeActors(...resouses) {
-
     }
 
     render(delta) {
