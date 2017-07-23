@@ -13,6 +13,7 @@ export default class StageAgent {
         this._controller = new Controller();
         this._engineProps.stage.hitArea = new PIXI.Rectangle(0, 0, 990, 768);
         this._engineProps.stage.mousedown = (e) => {
+            this._controller.onMouseDown(e);
             console.log(e.data.originalEvent.layerX, e.data.originalEvent.layerY)
         };
     }
