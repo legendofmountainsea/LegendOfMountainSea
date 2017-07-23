@@ -16,6 +16,10 @@ export default class Controller {
         }, false);
     }
 
+    onMouseDown(e){
+        this._pawn.onMouseDown(e);
+    }
+
     possess(pawn){
         this._pawn = pawn;
     }

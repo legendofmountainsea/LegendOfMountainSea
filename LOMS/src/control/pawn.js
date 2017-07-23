@@ -3,5 +3,8 @@ export default class Pawn {
         this._character = props.character;
     }
 
-    
+    onmousedown(e) {
+        const { layerX, layerY } = e.data.originalEvent;
+        this._character.moveTo({ x: layerX, y: layerY });
+    }
 };
