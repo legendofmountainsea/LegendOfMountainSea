@@ -9,12 +9,12 @@ export default class Character extends Actor {
     initResources(resources) {
 
         for (let asset in this._assetData.DATA) {
-                this._frames[this._assetData.DATA[asset].NAME] = [];
+            this._frames[this._assetData.DATA[asset].NAME] = [];
 
-                let resource = resources[this._assetData.DATA[asset].NAME];
-                for (let texture in resource.textures) {
-                    this._frames[this._assetData.DATA[asset].NAME].push(resource.textures[texture]);
-                }
+            let resource = resources[this._assetData.DATA[asset].NAME];
+            for (let texture in resource.textures) {
+                this._frames[this._assetData.DATA[asset].NAME].push(resource.textures[texture]);
+            }
         }
 
         this._sprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA['STAND'].NAME]);
@@ -26,21 +26,25 @@ export default class Character extends Actor {
         this._sprite.play();
     }
 
-    playStand(){
+    moveTo(position) {
+        const { x, y } = position;
+    }
+
+    playStand() {
         this.setAnimation('STAND', 0.025);
     }
 
-    playWalk(){
+    playWalk() {
         this.setAnimation('WALK', 0.08);
     }
 
-    playAttack(){
-        this.setAnimation('ATTACK',0.12, false, ()=>{
+    playAttack() {
+        this.setAnimation('ATTACK', 0.12, false, () => {
             this.playStand();
         });
     }
 
-    setAnimation(name, speed, loop = true, onCompletefunction){
+    setAnimation(name, speed, loop = true, onCompletefunction) {
 
         this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
 
