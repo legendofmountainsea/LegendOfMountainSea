@@ -1,5 +1,5 @@
 export default class Controller {
-    constructor(){
+    constructor() {
         this._pawn = null;
         this._bindKeyboardEvent();
     }
@@ -16,11 +16,13 @@ export default class Controller {
         }, false);
     }
 
-    onMouseDown(e){
-        this._pawn.onMouseDown(e);
+    onMouseDown(e) {
+        if (this._pawn) {
+            this._pawn.onMouseDown(e);
+        }
     }
 
-    possess(pawn){
+    possess(pawn) {
         this._pawn = pawn;
     }
 }

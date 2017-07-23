@@ -30,11 +30,24 @@ export default class Character extends Actor {
         this._destination = position;
     }
 
-    tick(delta){
+    tick(delta) {
 
-        if(this._sprite){
+        if (this._sprite) {
             return;
         }
+        const { x, y } = this._sprite.position;
+        let dx = x,
+            dy = y;
+
+        if (x !== this._destination.x) {
+            dx = x + 1;
+        }
+
+        if (y !== this._destination.y) {
+            dy = y + 1;
+        }
+
+        this.setPosition({ x: dx, y: dy });
     }
 
     playStand() {
