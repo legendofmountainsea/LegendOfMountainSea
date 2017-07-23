@@ -17,6 +17,10 @@ export default class StageAgent {
         };
     }
 
+    getController(){
+        return this._controller;
+    }
+
     addActor(actor){
         let ID = ++this._size;
 

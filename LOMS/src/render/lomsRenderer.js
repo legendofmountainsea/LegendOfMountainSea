@@ -50,6 +50,10 @@ export default class LOMSRenderer {
         loader.load();
     }
 
+    getController(){
+        return this._stageAgent.getController();
+    }
+
     addActor(actor) {
         actor.initResources(this._resources);
         this._stageAgent.addActor(actor);
