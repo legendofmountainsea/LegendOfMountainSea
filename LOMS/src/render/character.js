@@ -32,9 +32,10 @@ export default class Character extends Actor {
 
     tick(delta) {
 
-        if (this._sprite) {
+        if (!this._sprite || !this._destination) {
             return;
         }
+
         const { x, y } = this._sprite.position;
         let dx = x,
             dy = y;
