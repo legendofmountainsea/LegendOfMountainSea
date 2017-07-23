@@ -16,7 +16,7 @@ export default class Actor {
     getID() {
         return this._ID;
     }
-    
+
     getSprite() {
         return this._sprite;
     }
@@ -35,13 +35,18 @@ export default class Actor {
         return this;
     }
 
+    render(delta) {
+        this.tick(delta);
+        this.onRender(delta);
+    }
+
     onRender(delta) {
         if (this._onRender && this._sprite) {
             this._onRender(this._sprite, delta);
         }
     }
 
-    render(delta) {
-        this.onRender(delta);
+    tick(delta){
+        //override in subClass
     }
 }

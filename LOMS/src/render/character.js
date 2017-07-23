@@ -4,6 +4,7 @@ export default class Character extends Actor {
     constructor(props) {
         super(props);
         this._frames = {};
+        this._destination = null;
     }
 
     initResources(resources) {
@@ -21,13 +22,19 @@ export default class Character extends Actor {
         this._sprite.anchor.set(0.5, 0.5);
         this._sprite.animationSpeed = 0.025;
 
-        this._sprite.position.x = this._initPosition.x;
-        this._sprite.position.y = this._initPosition.y;
+        this.setPosition(this._initPosition);
         this._sprite.play();
     }
 
     moveTo(position) {
-        const { x, y } = position;
+        this._destination = position;
+    }
+
+    tick(delta){
+
+        if(this._sprite){
+            return;
+        }
     }
 
     playStand() {
