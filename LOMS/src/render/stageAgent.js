@@ -11,6 +11,7 @@ export default class StageAgent {
     initController(){
         this._engineProps.stage.interactive = true;
         this._controller = new Controller();
+        this._engineProps.stage.hitArea = new PIXI.Rectangle(0, 0, 990, 768);
         this._engineProps.stage.mousedown = (e) => {
             console.log(e)
         };
