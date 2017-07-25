@@ -40,6 +40,11 @@ export default class Character extends Actor {
         }
 
         const { x, y } = this._sprite.position;
+
+        if(x === this._destination.x && y === this._destination.y){
+            return;
+        }
+
         let dx = x,
             dy = y;
 
