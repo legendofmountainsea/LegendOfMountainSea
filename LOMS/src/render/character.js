@@ -5,6 +5,7 @@ export default class Character extends Actor {
         super(props);
         this._frames = {};
         this._destination = null;
+        this._animationStatus = 'STAND';
     }
 
     initResources(resources) {
@@ -28,6 +29,7 @@ export default class Character extends Actor {
 
     moveTo(position) {
         this._destination = position;
+        this.playWalk();
     }
 
     tick(delta) {
@@ -42,6 +44,9 @@ export default class Character extends Actor {
         const { x, y } = this._sprite.position;
 
         if(x === this._destination.x && y === this._destination.y){
+            if(this._animationStatus === 'WALK'){
+                this.playStand();
+            }
             return;
         }
 
@@ -61,16 +66,23 @@ export default class Character extends Actor {
 
     playStand() {
         this.setAnimation('STAND', 0.025);
+        this.setAnimationStatus('STAND');
     }
 
     playWalk() {
         this.setAnimation('WALK', 0.08);
+        this.setAnimationStatus('WALK');
     }
 
     playAttack() {
         this.setAnimation('ATTACK', 0.12, false, () => {
             this.playStand();
         });
+    }
+
+    setAnimationStatus(status){
+        this._animationStatus = status;
+        return this;
     }
 
     setAnimation(name, speed, loop = true, onCompletefunction) {
