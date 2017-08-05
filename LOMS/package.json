@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.html",
-  "build":{
+  "build": {
     "appId": "io.github.skyharp.tyrealgray.loms",
-    "nwVersion":"0.21.3",
+    "nwVersion": "0.21.3",
     "packed": true,
     "targets": [
       "zip"
@@ -38,6 +38,7 @@
     "webpack-dev-server": "2.5.0"
   },
   "dependencies": {
+    "pathfinding": "^0.4.18",
     "pixi.js": "4.5.3"
   }
 }
