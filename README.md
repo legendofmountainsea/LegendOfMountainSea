@@ -44,8 +44,5 @@ $ npm run start-mac
 $ npm run start-win
 ```
 
-## Community
-[A LOMS game BBS Community using Chinese](https://zh-eu.com/category/34)
-
 ## License
 This game is under GPLv2 but with an [additional license](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/ADDTIONAL-LICENSE)
