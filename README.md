@@ -4,6 +4,7 @@
 <a href="https://gitter.im/SkyHarp/LegendOfMountainSea" target="_blank">
   <img src="https://badges.gitter.im/SkyHarp/LegendOfMountainSea.svg">
 </a>
+[![Build Status](https://travis-ci.org/SkyHarp/LegendOfMountainSea.svg?branch=master)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
 
 4X sandbox game with legend of Mountain and Sea Classics
 
