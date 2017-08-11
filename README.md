@@ -1,8 +1,8 @@
 # LegendOfMountainSea ![icon](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS.png)
 
 [![Software License](https://img.shields.io/badge/license-GPLv2-brightgreen.svg)](LICENSE)
-<a href="https://gitter.im/LegendOfMountainSea/LegendOfMountainSea" target="_blank">
-  <img src="https://badges.gitter.im/LegendOfMountainSea/LegendOfMountainSea.svg">
+<a href="https://gitter.im/SkyHarp/LegendOfMountainSea" target="_blank">
+  <img src="https://badges.gitter.im/SkyHarp/LegendOfMountainSea.svg">
 </a>
 
 4X sandbox game with legend of Mountain and Sea Classics
@@ -43,9 +43,6 @@ $ npm run start-mac
 ```
 $ npm run start-win
 ```
-
-## Community
-[A LOMS game BBS Community using Chinese](https://zh-eu.com/category/34)
 
 ## License
 This game is under GPLv2 but with an [additional license](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/ADDTIONAL-LICENSE)
