@@ -8,3 +8,4 @@ cache:
 install:
   - cd ./LOMS
   - npm install
+  - npm run dist-mac && npm run dist-win
