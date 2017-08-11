@@ -44,4 +44,4 @@ $ npm run start-win
 ```
 
 ## License
-This game is under GPLv2 but with an [additional license](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/ADDTIONAL-LICENSE)
+This game is under GPL-2.0 but with an [additional license](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/ADDTIONAL-LICENSE)
