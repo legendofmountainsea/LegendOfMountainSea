@@ -5,10 +5,6 @@ node_js:
 cache:
   directories:
     - "node_modules"
-    - "$HOME/.wine"
-before_install:
-  - brew install wine
-  - export PATH="$HOME/.wine:$PATH"
 install:
   - cd ./LOMS
   - npm install
