@@ -1,13 +1,12 @@
 language: node_js
 os: osx
-sudo: enabled
 node_js:
   - "6"
 cache:
   directories:
     - "node_modules"
 before_install:
-  - sudo brew install wine
+  - brew install wine
 install:
   - cd ./LOMS
   - npm install
