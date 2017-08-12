@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-GPL%202-blue.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/SkyHarp/LegendOfMountainSea)
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
+[![Build Status](https://travis-ci.org/SkyHarp/LegendOfMountainSea.svg?branch=master)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
 
 4X sandbox game with legend of Mountain and Sea Classics
 
