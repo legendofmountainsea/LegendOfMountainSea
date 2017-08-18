@@ -24,6 +24,11 @@ export default {
                 SPEED: 0.25,
                 PATH: './assets/characters/HouYi/houyi_attack/houyi_attack.json',
             },
+            BATTLE: {
+                NAME: 'houyi_battle',
+                SPEED: 0.025,
+                PATH: './assets/characters/HouYi/houyi_battle/houyi_battle.json',
+            },
         },
     }
 };
