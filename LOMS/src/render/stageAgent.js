@@ -1,39 +1,33 @@
 import Actor from './actor';
-import Controller from '../control/controller';
 export default class StageAgent {
     constructor(engineProps) {
         this._engineProps = engineProps;
         this._stages = {};
         this._size = 0;
-        this._controller = null;
     }
 
-    initController(){
-        this._engineProps.stage.interactive = true;
-        this._controller = new Controller();
-        this._engineProps.stage.hitArea = new PIXI.Rectangle(0, 0, 990, 768);
-        this._engineProps.stage.mousedown = (e) => {
-            this._controller.onMouseDown(e);
-            console.log(e.data.originalEvent.layerX, e.data.originalEvent.layerY)
+    init() {
+        const {renderer,controller} = this._engineProps;
+        renderer.stage.interactive = true;
+        renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 990, 768);
+        renderer.stage.mousedown = (e) => {
+            controller.onMouseDown(e);
+            console.log(e.data.originalEvent.layerX, e.data.originalEvent.layerY);
         };
     }
 
-    getController(){
-        return this._controller;
-    }
-
-    addActor(actor){
+    addActor(actor) {
         let ID = ++this._size;
 
         actor.setID(ID);
 
         this._stages[ID] = actor;
 
-        this._engineProps.stage.addChild(this._stages[ID].getSprite());
+        this._engineProps.renderer.stage.addChild(this._stages[ID].getSprite());
     }
 
     render(delta) {
-        for(let actorID in this._stages){
+        for (let actorID in this._stages) {
             this._stages[actorID].render(delta);
         }
     }

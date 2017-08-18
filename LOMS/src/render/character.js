@@ -21,7 +21,7 @@ export default class Character extends Actor {
 
         this._sprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA['STAND'].NAME]);
         this._sprite.anchor.set(0.5, 0.5);
-        this._sprite.animationSpeed = 0.025;
+        this._sprite.animationSpeed = this._assetData.DATA['STAND'].SPEED;
 
         this.setPosition(this._initPosition);
         this._sprite.play();
@@ -36,15 +36,15 @@ export default class Character extends Actor {
         this.updatePosition();
     }
 
-    updatePosition(){
+    updatePosition() {
         if (!this._sprite || !this._destination) {
             return;
         }
 
         const { x, y } = this._sprite.position;
 
-        if(x === this._destination.x && y === this._destination.y){
-            if(this._animationStatus === 'WALK'){
+        if (x === this._destination.x && y === this._destination.y) {
+            if (this._animationStatus === 'WALK') {
                 this.playStand();
             }
             return;
@@ -65,31 +65,35 @@ export default class Character extends Actor {
     }
 
     playStand() {
-        this.setAnimation('STAND', 0.025);
+        this.setAnimation('STAND');
         this.setAnimationStatus('STAND');
     }
 
     playWalk() {
-        this.setAnimation('WALK', 0.08);
+        this.setAnimation('WALK');
         this.setAnimationStatus('WALK');
     }
 
     playAttack() {
-        this.setAnimation('ATTACK', 0.12, false, () => {
-            this.playStand();
+        this.setAnimation('ATTACK', false, () => {    
+            this.setAnimation(this.getAnimationStatus());
         });
     }
 
-    setAnimationStatus(status){
+    setAnimationStatus(status) {
         this._animationStatus = status;
         return this;
     }
+ 
+    getAnimationStatus() {
+        return this._animationStatus;
+    }
 
-    setAnimation(name, speed, loop = true, onCompletefunction) {
+    setAnimation(name, loop = true, onCompletefunction) {
 
         this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
 
-        this._sprite.animationSpeed = speed;
+        this._sprite.animationSpeed = this._assetData.DATA[name].SPEED;
 
         this._sprite.onComplete = onCompletefunction;
 

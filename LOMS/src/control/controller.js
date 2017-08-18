@@ -5,15 +5,17 @@ export default class Controller {
     }
 
     _bindKeyboardEvent() {
-        document.addEventListener('keyup', (event) => {
-            const keyName = event.key;
+        document.addEventListener('keyup', this._onKeyDown.bind(this), false);
+    }
 
-            // As the user release the Ctrl key, the key is no longer active.
-            // So event.ctrlKey is false.
-            if (keyName === 'Control') {
-                console.log('Control key was released');
-            }
-        }, false);
+    _onKeyDown(event) {
+        const keyName = event.key;
+
+        // As the user release the Ctrl key, the key is no longer active.
+        // So event.ctrlKey is false.
+        if (keyName === 'Control') {
+            console.log('Control key was released');
+        }
     }
 
     onMouseDown(e) {

@@ -7,23 +7,25 @@ export default class LOMSRenderer {
      * init assets and renderer
      * @param {*callback} onFinish will be triggered if init is finished
      */
-    init(onFinish) {
+    init(props) {
+        this._onFinish = props.onFinish;
+        this._controller = props.controller;
         this.initRenderer();
-        this.initAssets(onFinish);
+        this.initAssets();
     }
 
     initRenderer() {
 
         this._renderer = new PIXI.Application(970, 755, { backgroundColor: 0xeeeeee });
 
-        this._stageAgent = new StageAgent(this._renderer);
+        this._stageAgent = new StageAgent({renderer:this._renderer,controller:this._controller});
 
-        this._stageAgent.initController();
+        this._stageAgent.init();
 
         document.body.appendChild(this._renderer.view);
     }
 
-    initAssets(onFinish) {
+    initAssets() {
 
         let loader = PIXI.loader;
 
@@ -44,14 +46,14 @@ export default class LOMSRenderer {
 
         loader.onComplete.add((loader, resources) => {
             this._resources = resources;
-            onFinish();
+            this._onFinish();
         });
 
         loader.load();
     }
 
     getController(){
-        return this._stageAgent.getController();
+        return this._controller;
     }
 
     addActor(actor) {
