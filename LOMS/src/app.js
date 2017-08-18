@@ -13,12 +13,9 @@ export default class LOMS {
 
     beginGame() {
 
-        const renderer = this._renderer,
-        controller = this._controller;
-
         new MainMenu({
-            renderer,
-            controller
+            renderer: this._renderer,
+            controller: this._controller
         });
 
         this._renderer.render();
