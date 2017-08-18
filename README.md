@@ -2,7 +2,7 @@
 
 [![Platform](https://img.shields.io/badge/platform-osx%20%7C%20win-orange.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/releases)
 [![Software License](https://img.shields.io/badge/license-GPL%202-blue.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/LICENSE)
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/SkyHarp/LegendOfMountainSea)
+[![Gitter](https://img.shields.io/gitter/room/SkyHarp/LegendOfMountainSea.svg?style=flat-square)](https://gitter.im/SkyHarp/LegendOfMountainSea)
 [![PRs](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/pulls)
 [![Build Status](https://img.shields.io/travis/SkyHarp/LegendOfMountainSea/master.svg?style=flat-square)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
 
