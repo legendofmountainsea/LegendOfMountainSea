@@ -80,6 +80,11 @@ export default class Character extends Actor {
         });
     }
 
+    playBattle(){
+        this.setAnimation('BATTLE');
+        this.setAnimationStatus('BATTLE');
+    }
+
     setAnimationStatus(status) {
         this._animationStatus = status;
         return this;

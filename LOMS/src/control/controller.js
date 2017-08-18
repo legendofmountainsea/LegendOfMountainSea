@@ -9,19 +9,30 @@ export default class Controller {
     }
 
     _onKeyDown(event) {
+        if (!this._pawn) {
+            return;
+        };
+
         const keyName = event.key;
 
-        // As the user release the Ctrl key, the key is no longer active.
-        // So event.ctrlKey is false.
-        if (keyName === 'Control') {
-            console.log('Control key was released');
+        switch (keyName) {
+            case 'a':
+            case 'A':
+                this._pawn.onPressKeyA(event);
+                break;
+            case 'b':
+            case 'B':
+                this._pawn.onPressKeyB(event);
+            default:
+                break;
         }
     }
 
     onMouseDown(e) {
-        if (this._pawn) {
-            this._pawn.onMouseDown(e);
+        if (!this._pawn) {
+            return;
         }
+        this._pawn.onMouseDown(e);
     }
 
     possess(pawn) {
