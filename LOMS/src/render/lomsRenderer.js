@@ -28,6 +28,7 @@ export default class LOMSRenderer {
     initAssets() {
 
         let loader = PIXI.loader;
+        
 
         for (let asset in S_assetData) {
             if (S_assetData[asset].IS_CHARACTER) {
@@ -57,8 +58,15 @@ export default class LOMSRenderer {
     }
 
     addActor(actor) {
-        actor.initResources(this._resources);
+
+        if(!actor.isNoAsset()){
+            actor.initResources(this._resources);
+        }
         this._stageAgent.addActor(actor);
+    }
+
+    addUIText(uiText){
+        this._stageAgent.addUIText(uiText);
     }
 
     render() {
