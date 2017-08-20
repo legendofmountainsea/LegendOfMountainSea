@@ -1,11 +1,15 @@
 
 export default class Actor {
     constructor(props) {
-        this._isSpriteSheet = props.isSpriteSheet ? props.isSpriteSheet : false;
+        this._noAsset = props.noAsset ? props.noAsset : false;
         this._initPosition = props.position ? props.position : { x: 0, y: 0 };
-        this._onRender = props.onRender ? props.onRender : null;
+        this._onRender = props.onRender ? props.onRender :  ()=>{};
         this._sprite = null;
         this._assetData = props.assetData;
+    }
+
+    isNoAsset(){
+        return this._noAsset;
     }
 
     setID(ID) {
@@ -41,7 +45,7 @@ export default class Actor {
     }
 
     onRender(delta) {
-        if (this._onRender && this._sprite) {
+        if (this._sprite) {
             this._onRender(this._sprite, delta);
         }
     }
