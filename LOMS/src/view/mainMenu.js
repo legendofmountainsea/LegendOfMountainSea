@@ -3,6 +3,7 @@ import S_assetData from '../static/assetData';
 import Pattern from '../render/pattern';
 import Character from '../render/Character';
 import Pawn from '../control/pawn';
+import UIText from '../render/uiText';
 
 export default class MainMenu {
     constructor(props) {
@@ -10,7 +11,7 @@ export default class MainMenu {
 
         this.props.renderer.init({
             controller: props.controller,
-            onFinish:() => {
+            onFinish: () => {
                 this.render();
             }
         });
@@ -32,9 +33,15 @@ export default class MainMenu {
             position: { x: 300, y: 400 },
         });
 
-        const controller = this.props.renderer.getController();
-        controller.possess(new Pawn({character:houyi}));
+        let newGameText = new UIText({
+            string: 'new Game',
+            position: { x: 300, y: 400 }
+        });
 
+        const controller = this.props.renderer.getController();
+        controller.possess(new Pawn({ character: houyi }));
+
+        this.props.renderer.addActor(newGameText);
         this.props.renderer.addActor(houyi);
         this.props.renderer.addActor(logo);
     }
