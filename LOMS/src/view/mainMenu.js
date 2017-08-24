@@ -4,6 +4,7 @@ import Pattern from '../render/pattern';
 import Character from '../render/Character';
 import Pawn from '../control/pawn';
 import UIText from '../render/uiText';
+import Style from '../static/textStyle';
 
 export default class MainMenu {
     constructor(props) {
@@ -34,8 +35,10 @@ export default class MainMenu {
         });
 
         let newGameText = new UIText({
-            string: 'new Game',
-            position: { x: 300, y: 400 }
+            string: 'New Game',
+            position: { x: 300, y: 400 },
+            style: Style.MAIN_MENU,
+            onClick: (e)=>{alert(e);}
         });
 
         const controller = this.props.renderer.getController();
