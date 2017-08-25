@@ -1,27 +1,24 @@
 import S_assetData from '../static/assetData';
 
+import Scene from '../scene/scene';
+
 import Pattern from '../render/pattern';
-import Character from '../render/Character';
+import Character from '../render/character';
 import Pawn from '../control/pawn';
 import UIText from '../render/uiText';
 import Style from '../static/textStyle';
 
-export default class MainMenu {
+export default class MainMenu extends Scene {
     constructor(props) {
-        this.props = props;
-
-        this.props.renderer.init({
-            controller: props.controller,
-            onFinish: () => {
-                this.render();
-            }
-        });
+        super(props);
+        this._assetsData = S_assetData;
+        this._onFinish = this.render.bind(this);
     }
 
     render() {
 
         let logo = new Pattern({
-            assetData: S_assetData.LOGO,
+            assetData: this._assetsData.LOGO,
             position: { x: 200, y: 200 },
         });
 
@@ -30,7 +27,7 @@ export default class MainMenu {
         });
 
         let houyi = new Character({
-            assetData: S_assetData.HOUYI,
+            assetData: this._assetsData.HOUYI,
             position: { x: 300, y: 400 },
         });
 
@@ -38,14 +35,16 @@ export default class MainMenu {
             string: 'New Game',
             position: { x: 300, y: 400 },
             style: Style.MAIN_MENU,
-            onClick: (e)=>{alert(e);}
+            onClick: (e) => {
+                //this._renderer.renderScene()
+            }
         });
 
-        const controller = this.props.renderer.getController();
+        const controller = this._renderer.getController();
         controller.possess(new Pawn({ character: houyi }));
 
-        this.props.renderer.addActor(newGameText);
-        this.props.renderer.addActor(houyi);
-        this.props.renderer.addActor(logo);
+        this._renderer.addActor(newGameText);
+        this._renderer.addActor(houyi);
+        this._renderer.addActor(logo);
     }
 }
