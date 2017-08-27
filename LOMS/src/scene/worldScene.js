@@ -1,4 +1,4 @@
-import WorldAssetData from '../static/worldAssetData';
+import S_worldAsset from '../static/worldAsset';
 
 import Scene from './scene';
 import Pattern from '../render/pattern';
@@ -9,7 +9,7 @@ import UIText from '../render/uiText';
 export default class WorldScene extends Scene {
     constructor(props) {
         super(props);
-        this._assetsData = WorldAssetData;
+        this._assetsData = S_worldAsset;
         this._onFinish = this.onFinish.bind(this);
     }
 

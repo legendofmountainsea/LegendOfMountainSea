@@ -1,4 +1,4 @@
-import S_assetData from '../static/assetData';
+import S_mainMenuAsset from '../static/mainMenuAsset';
 
 import Scene from '../scene/scene';
 
@@ -12,7 +12,7 @@ import WorldScene from '../scene/worldScene';
 export default class MainMenu extends Scene {
     constructor(props) {
         super(props);
-        this._assetsData = S_assetData;
+        this._assetsData = S_mainMenuAsset;
         this._onFinish = this.onFinish.bind(this);
     }
 
