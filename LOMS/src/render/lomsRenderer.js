@@ -6,9 +6,10 @@ import { prepare } from 'pixi.js';
 export default class LOMSRenderer {
     
     constructor(props) {
-        this._onFinish = () => {};
+        this._onAssetLoadingFinish = () => {};
         this._controller = new Controller();
         this.initRenderer();
+        this.initAssetLoader();
     }
 
     initRenderer() {
@@ -22,7 +23,23 @@ export default class LOMSRenderer {
         document.body.appendChild(this._renderer.view);
     }
 
-    _prepareAssets(assetsData, onFinish) {
+    initAssetLoader(){
+        let loader = PIXI.loader;
+        loader.onProgress.add((e) => {
+            console.log(e.progress);
+        });
+
+        loader.onComplete.add((loader, resources) => {
+            this._resources = resources;
+            this._onAssetLoadingFinish();
+        });
+    }
+
+    _setAssetLoadingListener(onFinish){
+        this._onAssetLoadingFinish = onFinish;
+    }
+
+    _prepareAssets(assetsData) {
         let loader = PIXI.loader;
         loader.reset();
 
@@ -37,21 +54,13 @@ export default class LOMSRenderer {
             }
         }
 
-        loader.onProgress.add((e) => {
-            console.log(e.progress);
-        });
-
-        loader.onComplete.add((loader, resources) => {
-            this._resources = resources;
-            onFinish();
-        });
-
         loader.load();
     }
 
     renderScene(scene) {
         scene.setRenderer(this);
-        this._prepareAssets(scene.getAssetsDate(), scene.onAssetsFinish());
+        this._setAssetLoadingListener( scene.onAssetsFinish());
+        this._prepareAssets(scene.getAssetsDate());
     }
 
     getController() {
