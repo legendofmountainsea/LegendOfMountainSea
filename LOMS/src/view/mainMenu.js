@@ -7,15 +7,16 @@ import Character from '../render/character';
 import Pawn from '../control/pawn';
 import UIText from '../render/uiText';
 import Style from '../static/textStyle';
+import WorldScene from '../scene/worldScene';
 
 export default class MainMenu extends Scene {
     constructor(props) {
         super(props);
         this._assetsData = S_assetData;
-        this._onFinish = this.render.bind(this);
+        this._onFinish = this.onFinish.bind(this);
     }
 
-    render() {
+    onFinish() {
 
         let logo = new Pattern({
             assetData: this._assetsData.LOGO,
@@ -26,25 +27,18 @@ export default class MainMenu extends Scene {
             sprite.rotation += (0.01 * delta);
         });
 
-        let houyi = new Character({
-            assetData: this._assetsData.HOUYI,
-            position: { x: 300, y: 400 },
-        });
-
         let newGameText = new UIText({
             string: 'New Game',
             position: { x: 300, y: 400 },
             style: Style.MAIN_MENU,
             onClick: (e) => {
-                //this._renderer.renderScene()
+                const worldScene = new WorldScene;
+                this._renderer.renderScene(worldScene);
+                console.log(e);
             }
         });
 
-        const controller = this._renderer.getController();
-        controller.possess(new Pawn({ character: houyi }));
-
         this._renderer.addActor(newGameText);
-        this._renderer.addActor(houyi);
         this._renderer.addActor(logo);
     }
 }

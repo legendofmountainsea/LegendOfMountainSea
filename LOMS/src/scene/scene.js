@@ -14,7 +14,7 @@ export default class Scene {
         return this._assetsData;
     }
 
-    onAssetsFinish(onFinish) {
+    onAssetsFinish() {
         return this._onFinish;
     }
 }
