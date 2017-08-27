@@ -1,4 +1,3 @@
-import S_assetData from '../static/assetData';
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
 import { prepare } from 'pixi.js';
