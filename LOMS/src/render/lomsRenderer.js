@@ -20,6 +20,8 @@ export default class LOMSRenderer {
         this._stageAgent.init();
 
         document.body.appendChild(this._renderer.view);
+
+        return this;
     }
 
     initAssetLoader(){
