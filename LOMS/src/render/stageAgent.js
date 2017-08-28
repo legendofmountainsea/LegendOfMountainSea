@@ -14,6 +14,8 @@ export default class StageAgent {
             controller.onMouseDown(e);
             console.log(e.data.originalEvent.layerX, e.data.originalEvent.layerY);
         };
+
+        return this;
     }
 
     addActor(actor) {
@@ -24,11 +26,14 @@ export default class StageAgent {
         this._stages[ID] = actor;
 
         this._engineProps.renderer.stage.addChild(this._stages[ID].getSprite());
+
+        return this;
     }
 
     render(delta) {
         for (let actorID in this._stages) {
             this._stages[actorID].render(delta);
         }
+        return this;
     }
 }
