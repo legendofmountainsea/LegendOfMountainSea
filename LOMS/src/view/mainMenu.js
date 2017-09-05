@@ -33,6 +33,7 @@ export default class MainMenu extends Scene {
             position: { x: 300, y: 400 },
             style: Style.MAIN_MENU,
             onClick: (e) => {
+                this.dispose();
                 const worldScene = new WorldScene;
                 this._renderer.renderScene(worldScene);
             }

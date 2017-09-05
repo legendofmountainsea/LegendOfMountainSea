@@ -30,6 +30,17 @@ export default class StageAgent {
         return this;
     }
 
+    removeActor(actor){
+        for (let actorID in this._stages) {
+
+            if(actor === this._stages[actorID] ){
+                this._engineProps.renderer.stage.removeChild(this._stages[actorID].getSprite());
+                this._stages[actorID] = null;
+                delete  this._stages[actorID];
+            }
+        }
+    }
+
     render(delta) {
         for (let actorID in this._stages) {
             this._stages[actorID].render(delta);
