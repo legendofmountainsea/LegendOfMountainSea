@@ -76,6 +76,10 @@ export default class LOMSRenderer {
         this._stageAgent.addActor(actor);
     }
 
+    removeActor(actor){
+        this._stageAgent.removeActor(actor);
+    }
+
     addUIText(uiText) {
         this._stageAgent.addUIText(uiText);
     }
