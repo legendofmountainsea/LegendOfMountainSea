@@ -7,7 +7,7 @@ export default class StageAgent {
     }
 
     init() {
-        const {renderer,controller} = this._engineProps;
+        const { renderer, controller } = this._engineProps;
         renderer.stage.interactive = true;
         renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 990, 768);
         renderer.stage.mousedown = (e) => {
@@ -30,15 +30,15 @@ export default class StageAgent {
         return this;
     }
 
-    removeActor(actor){
+    clearActors() {
+        this._size = 0;
         for (let actorID in this._stages) {
 
-            if(actor === this._stages[actorID] ){
-                this._engineProps.renderer.stage.removeChild(this._stages[actorID].getSprite());
-                this._stages[actorID] = null;
-                delete  this._stages[actorID];
-            }
+            this._engineProps.renderer.stage.removeChild(this._stages[actorID].getSprite());
+            this._stages[actorID] = null;
+            delete this._stages[actorID];
         }
+        return this;
     }
 
     render(delta) {

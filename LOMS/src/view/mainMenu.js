@@ -14,7 +14,6 @@ export default class MainMenu extends Scene {
         super(props);
         this._assetsData = S_mainMenuAsset;
         this._onFinish = this.onFinish.bind(this);
-        this._actors = [];
     }
 
     onFinish() {
@@ -42,17 +41,11 @@ export default class MainMenu extends Scene {
         this._renderer.addActor(newGameText);
         this._renderer.addActor(logo);
 
-        this._actors.push(logo);
-        this._actors.push(newGameText);
-
         return this;
     }
 
     dispose(){
-        for(let actor of this._actors){
-            this._renderer.removeActor(actor);
-        }
-        
+        this._renderer.clearStage();
         return this;
     }
 }
