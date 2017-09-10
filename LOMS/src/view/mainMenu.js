@@ -18,6 +18,9 @@ export default class MainMenu extends Scene {
 
     onFinish() {
 
+        var audio = new Audio('../../assets/sound/Angelic_Happiness.mp3');
+        audio.play();
+
         let logo = new Pattern({
             assetData: this._assetsData.LOGO,
             position: { x: 200, y: 200 },
