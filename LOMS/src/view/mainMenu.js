@@ -14,12 +14,13 @@ export default class MainMenu extends Scene {
         super(props);
         this._assetsData = S_mainMenuAsset;
         this._onFinish = this.onFinish.bind(this);
+        this._backGroundMusic = null;
     }
 
     onFinish() {
-
-        var audio = new Audio('../../assets/sound/Angelic_Happiness.mp3');
-        audio.play();
+        this._backGroundMusic  = new Audio('../../assets/sound/Angelic_Happiness.mp3');
+        this._backGroundMusic.loop = true;
+        this._backGroundMusic.play();
 
         let logo = new Pattern({
             assetData: this._assetsData.LOGO,
@@ -38,6 +39,7 @@ export default class MainMenu extends Scene {
                 this.dispose();
                 const worldScene = new WorldScene;
                 this._renderer.renderScene(worldScene);
+                this._backGroundMusic.pause();
             }
         });
 
