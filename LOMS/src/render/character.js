@@ -33,10 +33,10 @@ export default class Character extends Actor {
     }
 
     tick(delta) {
-        this.updatePosition();
+        this.updatePosition(delta);
     }
 
-    updatePosition() {
+    updatePosition(delta) {
         if (!this._sprite || !this._destination) {
             return;
         }
@@ -54,11 +54,11 @@ export default class Character extends Actor {
             dy = y;
 
         if (x !== this._destination.x) {
-            dx = x + Math.sign(this._destination.x - x);
+            dx = x + Math.sign(this._destination.x - x) * delta;
         }
 
         if (y !== this._destination.y) {
-            dy = y + Math.sign(this._destination.y - y);
+            dy = y + Math.sign(this._destination.y - y) * delta;
         }
 
         this.setPosition({ x: dx, y: dy });
