@@ -54,11 +54,23 @@ export default class Character extends Actor {
             dy = y;
 
         if (x !== this._destination.x) {
-            dx = x + Math.sign(this._destination.x - x) * delta;
+
+            if(  Math.abs(Math.sign(this._destination.x - x) * delta) > Math.abs(this._destination.x - x)) {
+                dx = x + (this._destination.x - x);
+            }
+            else{
+                dx = x + Math.sign(this._destination.x - x) * delta;
+            }
         }
 
         if (y !== this._destination.y) {
-            dy = y + Math.sign(this._destination.y - y) * delta;
+
+            if(  Math.abs(Math.sign(this._destination.y - y) * delta) > Math.abs(this._destination.y - y)) {
+                dy = y + (this._destination.y - y);
+            }
+            else{
+                dy = y + Math.sign(this._destination.y - y) * delta;
+            }
         }
 
         this.setPosition({ x: dx, y: dy });
