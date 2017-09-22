@@ -4,9 +4,13 @@ export default class Character extends Actor {
     constructor(props) {
         super(props);
         this._frames = {};
+        this._direction = this.DIRECTION_RIGHT;
         this._destination = null;
         this._animationStatus = 'STAND';
     }
+
+    DIRECTION_RIGHT = 0;
+    DIRECTION_LEFT = 1;
 
     initResources(resources) {
 
