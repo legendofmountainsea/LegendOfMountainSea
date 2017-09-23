@@ -6,7 +6,7 @@ export default class Character extends Actor {
         this._frames = {};
         this._direction = this.DIRECTION_RIGHT;
         this._destination = null;
-        this._animationStatus = 'STAND';
+        this._animationStatus = 'STAND'+ this._direction;
     }
 
     DIRECTION_RIGHT = 0;
@@ -23,9 +23,9 @@ export default class Character extends Actor {
             }
         }
 
-        this._sprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA['STAND'].NAME]);
+        this._sprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA[this._animationStatus].NAME]);
         this._sprite.anchor.set(0.5, 0.5);
-        this._sprite.animationSpeed = this._assetData.DATA['STAND'].SPEED;
+        this._sprite.animationSpeed = this._assetData.DATA[this._animationStatus].SPEED;
 
         this.setPosition(this._initPosition);
         this._sprite.play();
@@ -48,7 +48,7 @@ export default class Character extends Actor {
         const { x, y } = this._sprite.position;
 
         if (x === this._destination.x && y === this._destination.y) {
-            if (this._animationStatus === 'WALK') {
+            if (this._animationStatus === 'WALK' + this._direction) {
                 this.playStand();
             }
             return;
@@ -59,11 +59,20 @@ export default class Character extends Actor {
 
         if (x !== this._destination.x) {
 
-            if(  Math.abs(Math.sign(this._destination.x - x) * delta) > Math.abs(this._destination.x - x)) {
-                dx = x + (this._destination.x - x);
+            let distanceX = this._destination.x - x;
+
+            const direction = Math.sign(distanceX) < 0? this.DIRECTION_RIGHT : this.DIRECTION_LEFT;
+
+            if(this._direction !== direction){
+                this.playWalk(direction);
+                this._direction = direction;
+            }
+
+            if(  Math.abs(Math.sign(distanceX) * delta) > Math.abs(distanceX)) {
+                dx = x + distanceX;
             }
             else{
-                dx = x + Math.sign(this._destination.x - x) * delta;
+                dx = x + Math.sign(distanceX) * delta;
             }
         }
 
@@ -81,24 +90,24 @@ export default class Character extends Actor {
     }
 
     playStand() {
-        this.setAnimation('STAND');
-        this.setAnimationStatus('STAND');
+        this.setAnimation('STAND'+ this._direction);
+        this.setAnimationStatus('STAND'+ this._direction);
     }
 
-    playWalk() {
-        this.setAnimation('WALK');
-        this.setAnimationStatus('WALK');
+    playWalk(direction) {
+        this.setAnimation('WALK' + direction);
+        this.setAnimationStatus('WALK' + direction);
     }
 
     playAttack() {
-        this.setAnimation('ATTACK', false, () => {    
+        this.setAnimation('ATTACK' + this._direction, false, () => {
             this.setAnimation(this.getAnimationStatus());
         });
     }
 
     playBattle(){
-        this.setAnimation('BATTLE');
-        this.setAnimationStatus('BATTLE');
+        this.setAnimation('BATTLE' + this._direction);
+        this.setAnimationStatus('BATTLE' + this._direction);
     }
 
     setAnimationStatus(status) {
