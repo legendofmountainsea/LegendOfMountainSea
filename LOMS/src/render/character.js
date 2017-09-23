@@ -4,13 +4,9 @@ export default class Character extends Actor {
     constructor(props) {
         super(props);
         this._frames = {};
-        this._direction = this.DIRECTION_RIGHT;
         this._destination = null;
-        this._animationStatus = 'STAND'+ this._direction;
+        this._animationStatus = 'STAND';
     }
-
-    DIRECTION_RIGHT = 0;
-    DIRECTION_LEFT = 1;
 
     initResources(resources) {
 
@@ -48,7 +44,7 @@ export default class Character extends Actor {
         const { x, y } = this._sprite.position;
 
         if (x === this._destination.x && y === this._destination.y) {
-            if (this._animationStatus === 'WALK' + this._direction) {
+            if (this._animationStatus === 'WALK') {
                 this.playStand();
             }
             return;
@@ -61,18 +57,17 @@ export default class Character extends Actor {
 
             let distanceX = this._destination.x - x;
 
-            const direction = Math.sign(distanceX) < 0? this.DIRECTION_RIGHT : this.DIRECTION_LEFT;
-
-            if(this._direction !== direction){
-                this.playWalk(direction);
-                this._direction = direction;
-            }
+            const direction = Math.sign(distanceX) < 0? this.DIRECTION_LEFT : this.DIRECTION_RIGHT ;
 
             if(  Math.abs(Math.sign(distanceX) * delta) > Math.abs(distanceX)) {
                 dx = x + distanceX;
             }
             else{
                 dx = x + Math.sign(distanceX) * delta;
+            }
+
+            if(this._sprite.scale.x !== direction){
+                this._sprite.scale.x = direction;
             }
         }
 
@@ -90,24 +85,24 @@ export default class Character extends Actor {
     }
 
     playStand() {
-        this.setAnimation('STAND'+ this._direction);
-        this.setAnimationStatus('STAND'+ this._direction);
+        this.setAnimation('STAND');
+        this.setAnimationStatus('STAND');
     }
 
-    playWalk(direction) {
-        this.setAnimation('WALK' + direction);
-        this.setAnimationStatus('WALK' + direction);
+    playWalk() {
+        this.setAnimation('WALK');
+        this.setAnimationStatus('WALK');
     }
 
     playAttack() {
-        this.setAnimation('ATTACK' + this._direction, false, () => {
+        this.setAnimation('ATTACK' , false, () => {
             this.setAnimation(this.getAnimationStatus());
         });
     }
 
     playBattle(){
-        this.setAnimation('BATTLE' + this._direction);
-        this.setAnimationStatus('BATTLE' + this._direction);
+        this.setAnimation('BATTLE');
+        this.setAnimationStatus('BATTLE');
     }
 
     setAnimationStatus(status) {

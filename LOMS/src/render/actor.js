@@ -8,6 +8,9 @@ export default class Actor {
         this._assetData = props.assetData;
     }
 
+    DIRECTION_RIGHT = 1;
+    DIRECTION_LEFT = -1;
+
     isNoAsset(){
         return this._noAsset;
     }
