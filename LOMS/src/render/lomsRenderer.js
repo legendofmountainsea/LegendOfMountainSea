@@ -1,6 +1,5 @@
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
-import { prepare } from 'pixi.js';
 
 export default class LOMSRenderer {
     
@@ -78,10 +77,6 @@ export default class LOMSRenderer {
 
     clearStage(){
         this._stageAgent.clearActors();
-    }
-
-    addUIText(uiText) {
-        this._stageAgent.addUIText(uiText);
     }
 
     render() {
