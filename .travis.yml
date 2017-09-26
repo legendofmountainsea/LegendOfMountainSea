@@ -12,7 +12,8 @@ node_js:
 install:
   - cd ./LOMS
   - npm install
+  - npm run dist-mac
 cache:
   directories:
-    - "node_modules"
+    - "LOMS/node_modules"
   
