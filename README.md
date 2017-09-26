@@ -5,7 +5,7 @@
 [![Gitter](https://img.shields.io/gitter/room/SkyHarp/LegendOfMountainSea.svg?style=flat-square)](https://gitter.im/SkyHarp/LegendOfMountainSea)
 [![PRs](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/pulls)
 [![Build Status](https://img.shields.io/travis/SkyHarp/LegendOfMountainSea/master.svg?style=flat-square)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
-[![Build status](https://ci.appveyor.com/api/projects/status/jc03ejlg88grnqa4/branch/master?svg=true&style=flat-square)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea/branch/master)
+[![AppVeyor branch](https://img.shields.io/appveyor/ci/TyrealGray/legendofmountainsea/master.svg?style=flat-square)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea)
 
 4X sandbox game with legend of Mountain and Sea Classics
 
