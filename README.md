@@ -9,7 +9,7 @@
 
 4X sandbox game with legend of Mountain and Sea Classics
 
-To experience hundreds of Chinese ancient legends like shoot down nine suns with Hou Yi ![houyi](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS/houyi_battle.gif)
+To experience hundreds of Chinese ancient legends like to shoot down nine suns with Hou Yi ![houyi](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS/houyi_battle.gif)
 
 ## Getting started LOMS
 
