@@ -5,7 +5,7 @@
   "main": "index.html",
   "build": {
     "appId": "io.github.skyharp.tyrealgray.loms",
-    "nwVersion": "0.21.3",
+    "nwVersion": "0.23.5",
     "packed": true,
     "targets": [
       "zip"
