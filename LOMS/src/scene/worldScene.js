@@ -24,5 +24,5 @@ export default class WorldScene extends Scene {
         controller.possess(new Pawn({ character: houyi }));
 
         this._renderer.addActor(houyi);
-    }   
+    }
 }
