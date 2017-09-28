@@ -1,4 +1,3 @@
-import Actor from './actor';
 export default class StageAgent {
     constructor(engineProps) {
         this._engineProps = engineProps;
@@ -7,9 +6,9 @@ export default class StageAgent {
     }
 
     init() {
-        const { renderer, controller } = this._engineProps;
+        const {renderer, controller} = this._engineProps;
         renderer.stage.interactive = true;
-        renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 990, 768);
+        renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
         renderer.stage.mousedown = (e) => {
             controller.onMouseDown(e);
             console.log(e.data.originalEvent.layerX, e.data.originalEvent.layerY);

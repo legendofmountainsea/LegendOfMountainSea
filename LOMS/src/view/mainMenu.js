@@ -45,7 +45,7 @@ export default class MainMenu extends Scene {
 
         let loadGameText = new UIText({
             string:'Load Game',
-            position: { x: 300, y: 600 },
+            position: { x: 300, y: 450 },
             style: Style.MAIN_MENU,
             onClick: (e) => {
                 //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
@@ -53,6 +53,7 @@ export default class MainMenu extends Scene {
         });
 
         this._renderer.addActor(newGameText);
+        this._renderer.addActor(loadGameText);
         this._renderer.addActor(logo);
 
         return this;
