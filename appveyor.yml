@@ -2,6 +2,14 @@
 environment:
   nodejs_version: "6"
 
+notifications:
+
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/1857811ea920596b1bea
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: true
+
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js

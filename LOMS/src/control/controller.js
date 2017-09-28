@@ -1,4 +1,5 @@
 export default class Controller {
+    //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/30
     constructor() {
         this._pawn = null;
         this._bindKeyboardEvent();
