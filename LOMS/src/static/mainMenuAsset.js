@@ -1,6 +1,6 @@
 export default {
     LOGO: {
-        IS_CHARACTER: false,
+        IS_CONTAIN_ANIMATION: false,
         DATA: {
             NAME: 'logo',
             PATH: './LOMS.png',

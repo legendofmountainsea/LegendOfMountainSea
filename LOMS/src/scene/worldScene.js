@@ -1,4 +1,4 @@
-import S_worldAsset from '../static/worldAsset';
+import S_worldAsset from '../static/heroCharecter/heroAsset';
 
 import Scene from './scene';
 import Pattern from '../render/pattern';

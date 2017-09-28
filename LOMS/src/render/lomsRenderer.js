@@ -12,7 +12,8 @@ export default class LOMSRenderer {
 
     initRenderer() {
 
-        this._renderer = new PIXI.Application(1000, 725, { backgroundColor: 0xeeeeee });
+        //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/31
+        this._renderer = new PIXI.Application(980, 725, { backgroundColor: 0xeeeeee });
 
         this._stageAgent = new StageAgent({ renderer: this._renderer, controller: this._controller });
 
@@ -44,7 +45,7 @@ export default class LOMSRenderer {
         loader.reset();
 
         for (let asset in assetsData) {
-            if (assetsData[asset].IS_CHARACTER) {
+            if (assetsData[asset].IS_CONTAIN_ANIMATION) {
                 for (let animation in assetsData[asset].DATA) {
                     loader.add(assetsData[asset].DATA[animation].NAME, assetsData[asset].DATA[animation].PATH);
                 }
