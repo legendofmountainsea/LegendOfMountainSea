@@ -28,7 +28,7 @@ var clientConfig = {
     },
     resolve: {
         alias: {
-            'pixi$': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
+            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
         }
     },
     plugins: [
@@ -63,7 +63,7 @@ var serverConfig = {
     },
     resolve: {
         alias: {
-            'pixi$': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
+            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
         }
     },
     plugins: [
