@@ -28,7 +28,7 @@ test_script:
   - npm test
 after_test:
   - npm install -g istanbul
-  - istanbul cover jasmine-node --captureExceptions spec/
+  - istanbul cover run.js --captureExceptions spec/
   - ./node_modules/.bin/codecov
 
 # Don't actually build.
