@@ -8,9 +8,6 @@ notifications:
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
-before_build:
-  - npm install -g istanbul
-  - npm install -g codecov
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -19,6 +16,7 @@ install:
   # install modules
   - cd ./LOMS
   - npm install
+  - npm install codecov --save-dev
   - npm run dist-win
 
 # Post-install test scripts.
@@ -29,7 +27,8 @@ test_script:
   # run tests
   - npm test
 after_test:
-  - istanbul cover node_modules\jasmine\bin\jasmine.js
+  - istanbul cover jasmine-node --captureExceptions spec/
+  - ./node_modules/.bin/codecov
 
 # Don't actually build.
 build: off
