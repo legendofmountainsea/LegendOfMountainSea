@@ -17,7 +17,8 @@ install:
   - cd ./LOMS
   - npm install
   - npm install codecov --save-dev
-  # - npm run dist-win
+  - npm install istanbul --save-dev
+  #- npm run dist-win
 
 # Post-install test scripts.
 test_script:
@@ -26,9 +27,8 @@ test_script:
   - npm --version
   # run tests
   - npm test
-after_test:
-  - npm install -g istanbul
-  - istanbul cover spec/run.js --captureExceptions spec/
+#after_test:
+  - babel-node istanbul cover spec/run.js --captureExceptions spec/
   - ./node_modules/.bin/codecov
 
 # Don't actually build.
