@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "test": "npm run jasmin && npm run build-dev && codecov",
+    "test": "npm run jasmine && npm run build-dev && codecov",
     "jasmine": "babel-node spec/run.js",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
