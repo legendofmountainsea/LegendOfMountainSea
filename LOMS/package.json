@@ -15,7 +15,8 @@
     ]
   },
   "scripts": {
-    "test": "npm run build-dev && codecov",
+    "test": "npm run jasmin && npm run build-dev && codecov",
+    "jasmine": "babel-node spec/run.js",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
     "build-win": "nwjs-v0.23.5-win-x64\\nw.exe .",
@@ -28,6 +29,7 @@
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
   "devDependencies": {
+    "babel-cli": "6.26.0",
     "babel-core": "6.25.0",
     "babel-loader": "7.1.0",
     "babel-preset-env": "1.5.2",
@@ -38,7 +40,7 @@
     "script-loader": "0.7.0",
     "webpack": "3.0.0",
     "webpack-dev-server": "2.5.1",
-    "codecov": "^1.0.0"
+    "codecov": "^2.3.0"
   },
   "dependencies": {
     "pathfinding": "0.4.18",
