@@ -17,10 +17,8 @@ var clientConfig = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: [
-                            "es2015",
-                            "stage-0"
-                        ]
+                        presets: ['env'],
+                        plugins: [require('babel-plugin-transform-object-rest-spread'),require('babel-plugin-transform-class-properties')]
                     }
                 }
             }
@@ -52,10 +50,8 @@ var serverConfig = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: [
-                            "es2015",
-                            "stage-0"
-                        ]
+                        presets: ['env'],
+                        plugins: [require('babel-plugin-transform-object-rest-spread'),require('babel-plugin-transform-class-properties')]
                     }
                 }
             }
