@@ -32,18 +32,23 @@ export default class Character extends Actor {
         this.playWalk();
     }
 
+    getDestination(){
+        return this._destination;
+    }
+
     tick(delta) {
         this.updatePosition(delta);
     }
 
     updatePosition(delta) {
-        if (!this._sprite || !this._destination) {
+        if (!this._sprite || !this.getDestination()) {
             return;
         }
 
-        const { x, y } = this._sprite.position;
+        const { x, y } = this._sprite.position,
+            destination = this.getDestination();
 
-        if (x === this._destination.x && y === this._destination.y) {
+        if (x === destination.x && y === destination.y) {
             if (this._animationStatus === 'WALK') {
                 this.playStand();
             }
@@ -53,9 +58,9 @@ export default class Character extends Actor {
         let dx = x,
             dy = y;
 
-        if (x !== this._destination.x) {
+        if (x !== destination.x) {
 
-            let distanceX = this._destination.x - x;
+            let distanceX = destination.x - x;
 
             const direction = Math.sign(distanceX) < 0? this.DIRECTION_LEFT : this.DIRECTION_RIGHT ;
 
@@ -71,13 +76,13 @@ export default class Character extends Actor {
             }
         }
 
-        if (y !== this._destination.y) {
+        if (y !== destination.y) {
 
-            if(  Math.abs(Math.sign(this._destination.y - y) * delta) > Math.abs(this._destination.y - y)) {
-                dy = y + (this._destination.y - y);
+            if(  Math.abs(Math.sign(destination.y - y) * delta) > Math.abs(destination.y - y)) {
+                dy = y + (destination.y - y);
             }
             else{
-                dy = y + Math.sign(this._destination.y - y) * delta;
+                dy = y + Math.sign(destination.y - y) * delta;
             }
         }
 
@@ -115,6 +120,10 @@ export default class Character extends Actor {
     }
 
     setAnimation(name, loop = true, onCompletefunction) {
+
+        if(!this._sprite){
+            return;
+        }
 
         this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
 
