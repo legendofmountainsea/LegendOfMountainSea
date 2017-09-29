@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "test": "npm run build-dev",
+    "test": "npm run build-dev && codecov",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
     "build-win": "nwjs-v0.23.5-win-x64\\nw.exe .",
@@ -36,7 +36,8 @@
     "nwjs-builder-phoenix": "1.14.3",
     "script-loader": "0.7.0",
     "webpack": "3.0.0",
-    "webpack-dev-server": "2.5.1"
+    "webpack-dev-server": "2.5.1",
+    "codecov": "^1.0.0"
   },
   "dependencies": {
     "pathfinding": "0.4.18",
