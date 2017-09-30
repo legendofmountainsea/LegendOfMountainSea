@@ -20,17 +20,17 @@ install:
 
 # Post-install test scripts.
 test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
   # run tests
   - npm test
+
 after_test:
-  - npm install --save-dev istanbul@1.0.0-alpha.2
+  - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev codecov
-  - npm install --save-dev babel-register
-  - node_modules/.bin/babel-node node_modules/.bin/istanbul cover --dir spec/coverage spec/run.js
+  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R spec --compilers js:babel-register
   - ./node_modules/.bin/codecov
+
+cache:
+  - LOMS/node_modules -> LOMS/package.json
 
 # Don't actually build.
 build: off

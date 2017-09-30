@@ -1,6 +1,6 @@
 import expect from 'expect.js';
-import Pawn from '../src/control/pawn';
-import Character from '../src/render/character';
+import Pawn from '../../src/control/pawn';
+import Character from '../../src/render/character';
 
 describe("Pawn", function () {
     let pawn;
