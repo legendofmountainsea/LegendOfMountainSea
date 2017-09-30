@@ -26,6 +26,7 @@ test_script:
   # run tests
   - npm test
 after_test:
+  - cd ./LOMS
   - npm install --save-dev istanbul
   - npm install --save-dev codecov
   - npm install --save-dev babel-register
