@@ -13,7 +13,8 @@ install:
   - cd ./LOMS
   - npm install
   - npm run dist-mac
-cache:
-  directories:
-    - "LOMS/node_modules"
-  
+after_script:
+  - npm install --save-dev istanbul@1.1.0-alpha.1
+  - npm install --save-dev codecov
+  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/test.js -R spec --compilers js:babel-register
+  - ./node_modules/.bin/codecov
