@@ -1,5 +1,6 @@
-import Pawn from '../../src/control/pawn';
-import Character from '../../src/render/character';
+import expect from 'expect.js';
+import Pawn from '../src/control/pawn';
+import Character from '../src/render/character';
 
 describe("Pawn", function () {
     let pawn;
@@ -13,8 +14,8 @@ describe("Pawn", function () {
         pawn.onMouseDown(mouseEvent);
 
         const character = pawn.getCharacter();
-        expect(character.getDestination().x).toBe(5);
-        expect(character.getDestination().y).toBe(6);
+        expect(character.getDestination().x).to.be(5);
+        expect(character.getDestination().y).to.be(6);
     });
 
 });

@@ -15,8 +15,7 @@
     ]
   },
   "scripts": {
-    "test": "npm run jasmine && npm run build-dev",
-    "jasmine": "babel-node spec/run.js",
+    "test": "mocha --compilers js:babel-register && npm run build-dev",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
     "build-win": "nwjs-v0.23.5-win-x64\\nw.exe .",
@@ -29,12 +28,15 @@
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
   "devDependencies": {
-    "babel-cli": "6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "expect.js": "^0.3.1",
     "jasmine": "^2.8.0",
+    "mocha": "^3.5.3",
     "nwjs-builder-phoenix": "1.14.3",
     "script-loader": "0.7.0",
     "webpack": "^3.6.0",
