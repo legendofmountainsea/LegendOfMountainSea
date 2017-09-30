@@ -16,7 +16,7 @@ install:
   # install modules
   - cd ./LOMS
   - npm install
-  - npm run dist-win
+  # - npm run dist-win
 
 # Post-install test scripts.
 test_script:
@@ -24,7 +24,7 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - npm test
+  # - npm test
 after_test:
   - npm install --save-dev istanbul@1.0.0-alpha.2
   - npm install --save-dev codecov
