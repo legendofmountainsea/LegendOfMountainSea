@@ -29,7 +29,7 @@ after_test:
   - npm install --save-dev istanbul@1.0.0-alpha.2
   - npm install --save-dev babel-register
   - npm install --save-dev codecov
-  - node_modules/.bin/istanbul cover node_modules/.bin/babel-node.cmd node_modules/jasmine/bin/jasmine.js -- spec/run.js
+  - node_modules/.bin/istanbul cover node_modules/jasmine/bin/jasmine.js -- spec/run.js
   - node_modules/.bin/codecov
 
 # Don't actually build.
