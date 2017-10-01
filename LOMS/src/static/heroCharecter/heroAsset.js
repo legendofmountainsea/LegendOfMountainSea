@@ -23,6 +23,16 @@ export default {
                 SPEED: 0.025,
                 PATH: './assets/characters/HouYi/houyi_battle/houyi_battle.json',
             },
+            NEAR_DEATH: {
+                NAME: 'houyi_nearDeath',
+                SPEED: 0.025,
+                PATH: './assets/characters/HouYi/houyi_nearDeath/houyi_nearDeath.json',
+            },
+            DYING: {
+                NAME: 'houyi_dying',
+                SPEED: 0.08,
+                PATH: './assets/characters/HouYi/houyi_dying/houyi_dying.json',
+            },
         },
     }
 };

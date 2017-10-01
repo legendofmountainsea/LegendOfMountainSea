@@ -24,6 +24,11 @@ export default class Controller {
             case 'b':
             case 'B':
                 this._pawn.onPressKeyB(event);
+                break;
+            case 'd':
+            case 'D':
+                this._pawn.onPressKeyD(event);
+                break;
             default:
                 break;
         }
