@@ -19,7 +19,18 @@ export default class Character extends Actor {
             }
         }
 
-        this._sprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA[this._animationStatus].NAME]);
+        const animatedSprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA[this._animationStatus].NAME]);
+
+        this.setSprite(animatedSprite);
+
+        this.initSprite();
+    }
+
+    setSprite(sprite){
+        this._sprite = sprite;
+    }
+
+    initSprite(){
         this._sprite.anchor.set(0.5, 0.5);
         this._sprite.animationSpeed = this._assetData.DATA[this._animationStatus].SPEED;
 
@@ -36,6 +47,10 @@ export default class Character extends Actor {
         return this._destination;
     }
 
+    getDirection(){
+        return this._sprite.scale.x;
+    }
+
     tick(delta) {
         this.updatePosition(delta);
     }
@@ -45,48 +60,77 @@ export default class Character extends Actor {
             return;
         }
 
-        const { x, y } = this._sprite.position,
-            destination = this.getDestination();
-
-        if (x === destination.x && y === destination.y) {
+        if (this.isArrivedAtDestination()) {
             if (this._animationStatus === 'WALK') {
                 this.playStand();
             }
             return;
         }
 
-        let dx = x,
-            dy = y;
+        const deltaX = this.movingOnAxisXToDestination(delta),
+            deltaY = this.movingOnAxisYToDestination(delta);
 
-        if (x !== destination.x) {
+        this.setPosition({ x: deltaX, y: deltaY });
+    }
 
-            let distanceX = destination.x - x;
+    movingOnAxisXToDestination(delta){
+        const { x } = this._sprite.position,
+            distanceX = this.getDestination().x - x;
 
-            const direction = Math.sign(distanceX) < 0? this.DIRECTION_LEFT : this.DIRECTION_RIGHT ;
+        let deltaX = x;
+
+        if (0 !== distanceX) {
 
             if(  Math.abs(Math.sign(distanceX) * delta) > Math.abs(distanceX)) {
-                dx = x + distanceX;
+                deltaX = x + distanceX;
             }
             else{
-                dx = x + Math.sign(distanceX) * delta;
+                deltaX = x + Math.sign(distanceX) * delta;
             }
 
-            if(this._sprite.scale.x !== direction){
-                this._sprite.scale.x = direction;
+            if(this.isMovingDirectionNeedToChange()){
+                this._sprite.scale.x = - this._sprite.scale.x;
             }
         }
 
-        if (y !== destination.y) {
+        return deltaX;
+    }
 
-            if(  Math.abs(Math.sign(destination.y - y) * delta) > Math.abs(destination.y - y)) {
-                dy = y + (destination.y - y);
+    isMovingDirectionNeedToChange() {
+        const { x } = this._sprite.position,
+            destination = this.getDestination();
+        const distanceX = destination.x - x;
+
+        const direction = Math.sign(distanceX) < 0 ? this.DIRECTION_LEFT : this.DIRECTION_RIGHT;
+
+        return (this._sprite.scale.x !== direction);
+    }
+
+
+    movingOnAxisYToDestination(delta){
+        const { y } = this._sprite.position,
+            distanceY = this.getDestination().y - y;
+
+        let deltaY = y;
+
+        if (0 !== distanceY) {
+
+            if(  Math.abs(Math.sign(distanceY) * delta) > Math.abs(distanceY)) {
+                deltaY = y + (distanceY);
             }
             else{
-                dy = y + Math.sign(destination.y - y) * delta;
+                deltaY = y + Math.sign(distanceY) * delta;
             }
         }
 
-        this.setPosition({ x: dx, y: dy });
+        return deltaY;
+    }
+
+    isArrivedAtDestination(){
+        const { x, y } = this._sprite.position,
+            destination = this.getDestination();
+
+        return (x === destination.x && y === destination.y);
     }
 
     playStand() {
@@ -119,9 +163,9 @@ export default class Character extends Actor {
         return this._animationStatus;
     }
 
-    setAnimation(name, loop = true, onCompletefunction) {
+    setAnimation(name, loop = true, onComplete) {
 
-        if(!this._sprite){
+        if(!this._sprite || this._noAsset){
             return;
         }
 
@@ -129,7 +173,7 @@ export default class Character extends Actor {
 
         this._sprite.animationSpeed = this._assetData.DATA[name].SPEED;
 
-        this._sprite.onComplete = onCompletefunction;
+        this._sprite.onComplete = onComplete;
 
         this._sprite.loop = loop;
 

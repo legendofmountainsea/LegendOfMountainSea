@@ -1,4 +1,4 @@
-import LOMSServer from './src/LOMSServer';
+import LOMSServer from './src/lomsServer';
 
 new LOMSServer({config:{ port: 1126 }});
 

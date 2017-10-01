@@ -51,4 +51,4 @@ var LOMSServer = function () {
 }();
 
 exports.default = LOMSServer;
-//# sourceMappingURL=LOMSServer.js.map
+//# sourceMappingURL=lomsServer.js.map

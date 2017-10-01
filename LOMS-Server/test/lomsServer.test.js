@@ -1,5 +1,5 @@
 import expect from 'expect.js';
-import LOMSServer from '../src/LOMSServer';
+import LOMSServer from '../src/lomsServer';
 
 describe("LOMSServer", function () {
     let lomsServer;
