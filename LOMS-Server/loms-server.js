@@ -1,12 +1,5 @@
-var WebSocketServer = require('ws').Server,
-    wss = new WebSocketServer({ port: 1126 });
+import LOMSServer from './src/LOMSServer';
 
-wss.on('connection', function connection(ws) {
-    ws.on('message', function incoming(message) {
-        console.log('received: %s', message);
-    });
+new LOMSServer({config:{ port: 1126 }});
 
-    ws.send('something');
-});
-
-console.log("loms server running...")
+console.log("loms server running...");

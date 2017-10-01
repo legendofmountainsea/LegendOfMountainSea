@@ -4,11 +4,24 @@
   "author": "TyrealGray",
   "license": "GPL-2.0",
   "scripts": {
-    "start": "node loms-server.js"
+    "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run build",
+    "dev": "node script/dev",
+    "build": "babel ./src -s -d bin"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "6.26.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^3.5.3"
   },
   "dependencies": {
-    "bufferutil": "^1.2.1",
-    "utf-8-validate": "^1.2.1",
-    "ws": "^1.1.1"
+    "ws": "3.2.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "3.0.2",
+    "utf-8-validate": "3.0.3"
   }
 }

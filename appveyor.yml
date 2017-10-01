@@ -18,12 +18,26 @@ install:
   - npm install
   - npm run dist-win
 
+  - cd ../LOMS-Server
+  - npm install
+  - npm run build
+
 # Post-install test scripts.
 test_script:
-  # run tests
+  - cd ../LOMS
+  - npm test
+
+  - cd ../LOMS-Server
   - npm test
 
 after_test:
+  - cd ../LOMS
+  - npm install --save-dev istanbul@1.1.0-alpha.1
+  - npm install --save-dev codecov
+  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R spec --compilers js:babel-register
+  - ./node_modules/.bin/codecov
+
+  - cd ../LOMS-Server
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev codecov
   - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R spec --compilers js:babel-register
@@ -31,6 +45,7 @@ after_test:
 
 cache:
   - LOMS/node_modules -> LOMS/package.json
+  - LOMS-Server/node_modules -> LOMS-Server/package.json
 
 # Don't actually build.
 build: off
