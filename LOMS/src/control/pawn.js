@@ -19,4 +19,8 @@ export default class Pawn {
     onPressKeyB(e){
         this._character.playBattle();
     }
+
+    onPressKeyD(e){
+        this._character.playNearDeath();
+    }
 };

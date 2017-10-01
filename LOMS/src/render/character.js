@@ -154,6 +154,11 @@ export default class Character extends Actor {
         this.setAnimationStatus('BATTLE');
     }
 
+    playNearDeath(){
+        this.setAnimation('NEAR_DEATH');
+        this.setAnimationStatus('NEAR_DEATH');
+    }
+
     setAnimationStatus(status) {
         this._animationStatus = status;
         return this;
