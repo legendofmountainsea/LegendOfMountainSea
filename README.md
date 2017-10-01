@@ -10,11 +10,11 @@
 
 4X sandbox game with legend of Mountain and Sea Classics
 
-To experience hundreds of Chinese ancient legends like to shoot down nine suns with Hou Yi ![houyi](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS/houyi_battle.gif)
+To experience hundreds of Chinese ancient legends, start with Hou Yi ![houyi](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS/houyi_battle.gif) to shoot down nine suns
 
 ## Getting started LOMS
 
-Go **"./LegendOfMountainSea/LOMS/"** folder and install dependencies
+Navigating to **"./LOMS"** folder and install dependencies
 ```
 $ cd ./LOMS
 $ npm install
@@ -26,7 +26,7 @@ Put **nwjs-v0.23.5-win-x64** or **nwjs-v0.23.5-osx-x64** folder into **"./Legend
 
 ## Getting started LOMS-Server
 
-Go **"./LegendOfMountainSea/LOMS-Server/"** folder and install dependencies
+Navigating to **"./LOMS-Server"** folder and install dependencies
 ```
 $ cd ./LOMS-Server
 $ npm install
@@ -34,6 +34,8 @@ $ npm install
 Begin coding
 
 ## Start the game
+Navigating to **"./LOMS"** folder and start
+
 **Run game on web browser without NW.js Client**
 ```
 $ npm run dev
@@ -45,6 +47,13 @@ $ npm run start-mac
 **Window** `with NW.js Client`
 ```
 $ npm run start-win
+```
+
+## Start the server
+Navigating to **"./LOMS-Server"** folder and start
+
+```
+$ npm run dev
 ```
 
 ## License

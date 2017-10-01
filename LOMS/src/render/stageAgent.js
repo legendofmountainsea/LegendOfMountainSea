@@ -1,16 +1,16 @@
 export default class StageAgent {
-    constructor(engineProps) {
-        this._engineProps = engineProps;
+    constructor(props) {
+        this._renderer = props.renderer;
+        this._controller = props.controller;
         this._stages = {};
         this._size = 0;
     }
 
     init() {
-        const {renderer, controller} = this._engineProps;
-        renderer.stage.interactive = true;
-        renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
-        renderer.stage.mousedown = (e) => {
-            controller.onMouseDown(e);
+        this._renderer.stage.interactive = true;
+        this._renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
+        this._renderer.stage.mousedown = (e) => {
+            this._controller.onMouseDown(e);
             console.log(e.data.originalEvent.layerX, e.data.originalEvent.layerY);
         };
 
@@ -24,7 +24,7 @@ export default class StageAgent {
 
         this._stages[ID] = actor;
 
-        this._engineProps.renderer.stage.addChild(this._stages[ID].getSprite());
+        this._renderer.stage.addChild(this._stages[ID].getSprite());
 
         return this;
     }
@@ -33,7 +33,7 @@ export default class StageAgent {
         this._size = 0;
         for (let actorID in this._stages) {
 
-            this._engineProps.renderer.stage.removeChild(this._stages[actorID].getSprite());
+            this._renderer.stage.removeChild(this._stages[actorID].getSprite());
             this._stages[actorID] = null;
             delete this._stages[actorID];
         }
