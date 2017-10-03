@@ -12,8 +12,7 @@ export default class Controller {
     _onKeyDown(event) {
         if (!this._pawn) {
             return;
-        };
-
+        }
         const keyName = event.key;
 
         switch (keyName) {
