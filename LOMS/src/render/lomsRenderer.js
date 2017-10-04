@@ -68,6 +68,13 @@ export default class LOMSRenderer {
         return this._controller;
     }
 
+    addTerrain(terrain) {
+        if (!terrain.isNoAsset()) {
+            terrain.initResources(this._resources);
+        }
+        this._stageAgent.addTerrain(terrain);
+    }
+
     addActor(actor) {
 
         if (!actor.isNoAsset()) {
