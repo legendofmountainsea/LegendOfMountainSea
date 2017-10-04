@@ -20,9 +20,7 @@ describe("Pawn", () => {
 
     it("should be able to set destination", () => {
         const mouseEvent = {
-            data: {
-                originalEvent: {layerX: 5, layerY: 6}
-            }
+            layerX: 5, layerY: 6
         };
         pawn.onMouseDown(mouseEvent);
 
