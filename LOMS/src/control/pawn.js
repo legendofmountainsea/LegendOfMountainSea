@@ -9,7 +9,8 @@ export default class Pawn {
 
     onMouseDown(e) {
         const { layerX, layerY } = e.data.originalEvent;
-        this._character.moveTo({ x: layerX, y: layerY });
+        //this._character.moveTo({ x: layerX, y: layerY });
+        this._character.moveTo(e.data.posInTerrain);
     }
 
     onPressKeyA(e){
