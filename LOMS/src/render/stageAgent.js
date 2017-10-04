@@ -10,8 +10,11 @@ export default class StageAgent {
         this._renderer.stage.interactive = true;
         this._renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
         this._renderer.stage.mousedown = (e) => {
-            this._controller.onMouseDown(e);
-            console.log(e.data.originalEvent.layerX, e.data.originalEvent.layerY);
+
+            this._controller.onMouseDown({
+                layerX: e.data.originalEvent.layerX,
+                layerY: e.data.originalEvent.layerY
+            });
         };
 
         return this;

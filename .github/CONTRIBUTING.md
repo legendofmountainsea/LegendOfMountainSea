@@ -1,5 +1,15 @@
 ## Contributing to LegendOfMountainSea
-So you want to help out? Great! There's a number of ways you can get involved, and we need volunteer to help this game come to fruition.
+There's a number of ways you can get involved, and we need volunteer to help this game come to fruition.
 
-LegendOfMountainSea game welcomes all contributions from anyone willing to work in good faith both with other contributors and with the community. 
-No contribution is too small and all contributions are valued.
+##If you are
+### a developer
+feel free to check out our [issues](https://github.com/SkyHarp/LegendOfMountainSea/issues) and submit pull requests.
+
+### a Artist
+all the LOMS assets are in [here](https://github.com/SkyHarp/LegendOfMountainSea/tree/master/LOMS/assets), and our game needs nice looking interface and character!
+
+### a Chinese history hobbyist
+we have a huge task about Chinese ancient legends translation and story creation, feel free to join us.
+
+## Code of Conduct
+The LOMS project has a [Code of Conduct](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CODE_OF_CONDUCT.md) that all contributors are expected to follow. This code describes the minimum behavior expectations for all contributors.
