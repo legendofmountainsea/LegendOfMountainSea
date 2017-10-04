@@ -72,9 +72,7 @@ export default class Terrain {
     }
 
     getCoordinate(position) {
-        let col, row = 0;
-        let measurement = this._measurement;
-        let hexagon = {};
+
     }
 
     addActor(actor) {
