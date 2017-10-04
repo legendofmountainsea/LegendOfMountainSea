@@ -1,7 +1,7 @@
 ## Contributing to LegendOfMountainSea
 There's a number of ways you can get involved, and we need volunteer to help this game come to fruition.
 
-##If you are
+## If you are
 ### a developer
 feel free to check out our [issues](https://github.com/SkyHarp/LegendOfMountainSea/issues) and submit pull requests.
 
