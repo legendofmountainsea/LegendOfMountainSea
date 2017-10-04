@@ -32,7 +32,7 @@ var clientConfig = {
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
     ]
-}
+};
 
 var serverConfig = {
     target: 'node',
@@ -65,6 +65,6 @@ var serverConfig = {
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
     ]
-}
+};
 
 module.exports = [serverConfig, clientConfig];
