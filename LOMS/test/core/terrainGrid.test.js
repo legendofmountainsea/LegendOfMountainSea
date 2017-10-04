@@ -1,5 +1,6 @@
 import expect from 'expect.js';
 import TerrainGrid from '../../src/core/terrainGrid';
+import Coordinates from '../../src/core/coordinates';
 
 describe("TerrainGrid", () => {
     let terrainGrid;
@@ -15,16 +16,15 @@ describe("TerrainGrid", () => {
     it("should be able to return correct number of grid by radius", () => {
         const radius = 2,
             originalPoint = {x: 2, y:3},
-            grids = terrainGrid.getData(originalPoint, {radius:radius});
+            blocks = terrainGrid.getData(originalPoint, {radius:radius});
 
-        for ( let index = 0; index < grids.length; ++index){
-            for (let columnIndex = 0; columnIndex <grids[index].length; ++columnIndex){
-                let coordinates = grids[index][columnIndex];
-                expect(coordinates.x).to.be(originalPoint.x - (radius - 1) - Math.floor(index/2) + columnIndex);
-                expect(coordinates.y).to.be(originalPoint.y - radius + index);
-            }
-
-        }
+        expect(blocks).to.eql([
+            [new Coordinates(1,1),new Coordinates(2,1),new Coordinates(3,1),new Coordinates(4,1),new Coordinates(5,1)],
+            [new Coordinates(1,2),new Coordinates(2,2),new Coordinates(3,2),new Coordinates(4,2),new Coordinates(5,2)],
+            [new Coordinates(0,3),new Coordinates(1,3),new Coordinates(2,3),new Coordinates(3,3),new Coordinates(4,3)],
+            [new Coordinates(0,4),new Coordinates(1,4),new Coordinates(2,4),new Coordinates(3,4),new Coordinates(4,4)],
+            [new Coordinates(-1,5),new Coordinates(0,5),new Coordinates(1,5),new Coordinates(2,5),new Coordinates(3,5)],
+        ]);
     });
 
 });
