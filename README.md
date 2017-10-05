@@ -56,8 +56,8 @@ Navigating to **"./LOMS-Server"** folder and start
 $ npm run dev
 ```
 
-## Contribute
-LegendOfMountainSea game welcomes all contributions from anyone willing to work in good faith both with other contributors and with the community.
+## Contributing
+LegendOfMountainSea welcomes all contributions from anyone willing to work in good faith both with other contributors and with the community.
 
 No contribution is too small and all contributions are valued.
 [Contributing to LegendOfMountainSea](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CONTRIBUTING.md)
