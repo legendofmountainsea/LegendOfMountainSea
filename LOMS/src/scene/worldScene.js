@@ -5,6 +5,7 @@ import Pattern from '../render/pattern';
 import Pawn from '../control/pawn';
 import Character from '../render/character';
 import UIText from '../render/uiText';
+import Terrain from '../render/terrain';
 
 export default class WorldScene extends Scene {
     constructor(props) {
@@ -14,10 +15,15 @@ export default class WorldScene extends Scene {
     }
 
     onFinish() {
+        let worldTerrain = new Terrain({
+            scale: { maxCol: 15, maxRow: 15 },
+            measurement: 160,
+        });
+        this._renderer.addTerrain(worldTerrain);
 
         let houyi = new Character({
             assetData: this._assetsData.HOUYI,
-            position: { x: 300, y: 400 },
+            position: { x: 0, y: -400 },
         });
 
         const controller = this._renderer.getController();
