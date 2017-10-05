@@ -5,7 +5,7 @@
 [![Gitter](https://img.shields.io/gitter/room/SkyHarp/LegendOfMountainSea.svg?style=flat-square)](https://gitter.im/SkyHarp/LegendOfMountainSea)
 [![PRs](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/pulls)
 [![Build Status](https://img.shields.io/travis/SkyHarp/LegendOfMountainSea/master.svg?style=flat-square)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
-[![AppVeyor branch](https://img.shields.io/appveyor/ci/TyrealGray/legendofmountainsea/master.svg?style=flat-square)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea)
+[![AppVeyor branch](https://img.shields.io/appveyor/ci/TyrealGray/legendofmountainsea/master.svg?style=flat-square&logo=appveyor)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea)
 [![Codecov](https://img.shields.io/codecov/c/github/SkyHarp/LegendOfMountainSea/master.svg?style=flat-square)](https://codecov.io/gh/SkyHarp/LegendOfMountainSea)
 
 4X sandbox game with legend of Mountain and Sea Classics
@@ -55,6 +55,12 @@ Navigating to **"./LOMS-Server"** folder and start
 ```
 $ npm run dev
 ```
+
+## Contribute
+LegendOfMountainSea game welcomes all contributions from anyone willing to work in good faith both with other contributors and with the community.
+
+No contribution is too small and all contributions are valued.
+[Contributing to LegendOfMountainSea](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CONTRIBUTING.md)
 
 ## License
 GPL-2.0
