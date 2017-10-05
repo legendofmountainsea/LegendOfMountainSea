@@ -2,6 +2,7 @@ export default class StageAgent {
     constructor(props) {
         this._renderer = props.renderer;
         this._controller = props.controller;
+        //this._terrain = null;
         this._stages = {};
         this._size = 0;
     }
@@ -10,25 +11,40 @@ export default class StageAgent {
         this._renderer.stage.interactive = true;
         this._renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
         this._renderer.stage.mousedown = (e) => {
-
+            let pos = { x: e.data.originalEvent.layerX, y: e.data.originalEvent.layerY };
+            if (this._terrain != null) {
+                pos = this._terrain.getContainer().toLocal(pos);
+            }
             this._controller.onMouseDown({
-                layerX: e.data.originalEvent.layerX,
-                layerY: e.data.originalEvent.layerY
+                layerX: pos.x,
+                layerY: pos.y
             });
         };
 
         return this;
     }
 
+    addTerrain(terrain) {
+
+        this._terrain = terrain;
+
+        this._renderer.stage.addChild(this._terrain.getContainer());
+
+        return this;
+    }
+
     addActor(actor) {
-        let ID = ++this._size;
+        if (this._terrain != null) {
+            this._terrain.addActor(actor);
+        } else {
+            let ID = ++this._size;
 
-        actor.setID(ID);
+            actor.setID(ID);
 
-        this._stages[ID] = actor;
+            this._stages[ID] = actor;
 
-        this._renderer.stage.addChild(this._stages[ID].getSprite());
-
+            this._renderer.stage.addChild(this._stages[ID].getSprite());
+        }    
         return this;
     }
 
@@ -47,6 +63,7 @@ export default class StageAgent {
         for (let actorID in this._stages) {
             this._stages[actorID].render(delta);
         }
+        if (this._terrain != null) this._terrain.render(delta);
         return this;
     }
 }
