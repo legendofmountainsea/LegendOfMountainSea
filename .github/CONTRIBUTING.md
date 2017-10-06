@@ -29,3 +29,5 @@ LegendOfMountainSea uses Travis CI and Appveyor to test and build pull requests.
 - Use semicolons;
 - ES6 standards
 - Prefer `'` over `"`
+- Prefer `===` over `==`, `!==` over `!=`
+- Prefer `if(boolean){ func(); };` over `if(boolean) func();`

@@ -40,9 +40,11 @@ export default class LOMSRenderer {
         this._onAssetLoadingFinish = onFinish;
     }
 
-    _prepareAssets(assetsData) {
+    _prepareAssets(assetsSet) {
         let loader = PIXI.loader;
         loader.reset();
+
+        for (let assetsData of assetsSet){
 
         for (let asset in assetsData) {
             if (assetsData[asset].IS_CONTAIN_ANIMATION) {
@@ -53,6 +55,7 @@ export default class LOMSRenderer {
             else {
                 loader.add(assetsData[asset].DATA.NAME, assetsData[asset].DATA.PATH);
             }
+        }
         }
 
         loader.load();

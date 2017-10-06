@@ -3,8 +3,6 @@ import S_mainMenuAsset from '../static/mainMenuAsset';
 import Scene from '../scene/scene';
 
 import Pattern from '../render/pattern';
-import Character from '../render/character';
-import Pawn from '../control/pawn';
 import UIText from '../render/uiText';
 import Style from '../static/textStyle';
 import WorldScene from '../scene/worldScene';
@@ -12,7 +10,7 @@ import WorldScene from '../scene/worldScene';
 export default class MainMenu extends Scene {
     constructor(props) {
         super(props);
-        this._assetsData = S_mainMenuAsset;
+        this._assetsData = [S_mainMenuAsset];
         this._onFinish = this.onFinish.bind(this);
         this._backGroundMusic = null;
     }
@@ -23,7 +21,7 @@ export default class MainMenu extends Scene {
         this._backGroundMusic.play();
 
         let logo = new Pattern({
-            assetData: this._assetsData.LOGO,
+            assetData: S_mainMenuAsset.LOGO,
             position: { x: 200, y: 200 },
         });
 

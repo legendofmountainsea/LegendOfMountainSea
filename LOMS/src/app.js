@@ -10,7 +10,7 @@ export default class LOMS {
     }
 
     beginGame() {
-        this._renderer.renderScene( new MainMenu);
+        this._renderer.renderScene(new MainMenu);
         this._renderer.render();
     }
 }
