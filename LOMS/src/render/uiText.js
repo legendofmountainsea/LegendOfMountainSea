@@ -4,7 +4,6 @@ import Style from '../static/textStyle';
 export default class UIText extends Actor {
     constructor(props) {
         super(props);
-        this._noAsset = true;
         this._style = props.style? props.style : {};
         this._string = props.string ? props.string : '';
         this._onClick = props.onClick ? props.onClick : null;

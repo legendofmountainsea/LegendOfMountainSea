@@ -1,10 +1,10 @@
 
 export default class Actor {
     constructor(props) {
-        this._noAsset = props.noAsset ? props.noAsset : false;
         this._initPosition = props.position ? props.position : { x: 0, y: 0 };
         this._onRender = props.onRender ? props.onRender :  ()=>{};
         this._sprite = null;
+        this._noAsset = !props.assetData;
         this._assetData = props.assetData;
     }
 
