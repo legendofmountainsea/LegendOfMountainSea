@@ -4,14 +4,13 @@ import Controller from '../control/controller';
 export default class LOMSRenderer {
     
     constructor(props) {
-        this._onAssetLoadingFinish = () => {};
         this._controller = new Controller();
+        this._onAssetLoadingFinish = () => {};
         this.initRenderer();
         this.initAssetLoader();
     }
 
     initRenderer() {
-
         //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/31
         this._renderer = new PIXI.Application(980, 725, { backgroundColor: 0xeeeeee });
 

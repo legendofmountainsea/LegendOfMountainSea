@@ -1,4 +1,5 @@
 import Actor from './actor';
+
 const COS_60_DEGREES = Math.cos(Math.PI / 6);
 export default class Hexagon extends Actor {
     constructor(props) {
@@ -36,8 +37,8 @@ export default class Hexagon extends Actor {
 
     setPosition(position) {
         if (this._sprite) {
-            this._sprite.position.x = parseFloat(this._width / 2) + position.x * (this._height * COS_60_DEGREES );
-            this._sprite.position.y = position.y * this._height + parseFloat(this._height / 2) + (position.x % 2) * parseFloat(this._height / 2);
+            this._sprite.position.x = (this._width / 2) + position.x * (this._height * COS_60_DEGREES );
+            this._sprite.position.y = position.y * this._height + (this._height / 2) * (1 + position.x % 2);
         }
 
         return this;
