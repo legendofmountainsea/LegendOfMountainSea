@@ -52,6 +52,18 @@ export default class StageAgent {
         return this;
     }
 
+    update(delta) {
+        for (let actorID in this._stages) {
+            this._stages[actorID].tick(delta);
+        }
+
+        if(this._terrain){
+            this._terrain.tick(delta);
+        }
+
+        return this;
+    }
+
     render(delta) {
         for (let actorID in this._stages) {
             this._stages[actorID].render(delta);

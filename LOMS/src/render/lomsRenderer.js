@@ -1,8 +1,10 @@
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
 
+const GAME_STEP = 1000/60;
+
 export default class LOMSRenderer {
-    
+
     constructor(props) {
         this._controller = new Controller();
         this._onAssetLoadingFinish = () => {};
@@ -93,5 +95,13 @@ export default class LOMSRenderer {
         this._renderer.ticker.add((delta) => {
             this._stageAgent.render(delta);
         });
+
+        let lastTime = Date.now();
+        this._updateIntervalID = setInterval(() => {
+            const now = Date.now();
+            const delta = (now - lastTime) / GAME_STEP;
+            this._stageAgent.update(delta);
+            lastTime = now;
+        }, GAME_STEP);
     }
 }
