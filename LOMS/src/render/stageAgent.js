@@ -1,13 +1,18 @@
+import Mouse from './mouse';
 export default class StageAgent {
     constructor(props) {
         this._renderer = props.renderer;
         this._controller = props.controller;
         this._terrain = null;
+        this._mouse = null;
         this._stages = {};
         this._size = 0;
+        this._interfaceLayer = new PIXI.DisplayGroup(2,false);
+        this._terrainLayer = new PIXI.DisplayGroup(0,false);
     }
 
     init() {
+        this._renderer.stage.displayList = new PIXI.DisplayList();
         this._renderer.stage.interactive = true;
         this._renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
         this._renderer.stage.mousedown = (e) => {
@@ -17,12 +22,22 @@ export default class StageAgent {
             });
         };
 
+        this._initMouse();
+
         return this;
+    }
+
+    _initMouse(){
+        this._mouse = new Mouse().init();
+        this._mouse.getSprite().displayGroup = this._interfaceLayer;
+        this._renderer.stage.addChild(this._mouse.getSprite());
     }
 
     addTerrain(terrain) {
 
         this._terrain = terrain;
+
+        this._terrain.getContainer().displayGroup = this._terrainLayer;
 
         this._renderer.stage.addChild(this._terrain.getContainer());
 
@@ -35,6 +50,8 @@ export default class StageAgent {
         actor.setID(ID);
 
         this._stages[ID] = actor;
+
+        this._stages[ID].getSprite().displayGroup = this._terrainLayer;
 
         this._renderer.stage.addChild(this._stages[ID].getSprite());
 
