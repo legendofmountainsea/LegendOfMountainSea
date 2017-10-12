@@ -1,5 +1,5 @@
 import 'pixi.js';
-import 'pixi-projection';
+import 'pixi-display';
 
 import LOMSRenderer from './render/lomsRenderer';
 import MainMenu from './view/mainMenu';
