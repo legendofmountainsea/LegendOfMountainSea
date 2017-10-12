@@ -49,7 +49,6 @@ export default class Terrain {
     }
 
     render(delta) {
-        this.tick(delta);
         this.onRender(delta);
     }
 }

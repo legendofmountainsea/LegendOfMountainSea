@@ -43,7 +43,6 @@ export default class Actor {
     }
 
     render(delta) {
-        this.tick(delta);
         this.onRender(delta);
     }
 
