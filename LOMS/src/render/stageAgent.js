@@ -1,4 +1,5 @@
 import Mouse from './mouse';
+
 export default class StageAgent {
     constructor(props) {
         this._renderer = props.renderer;
@@ -7,14 +8,17 @@ export default class StageAgent {
         this._mouse = null;
         this._stages = {};
         this._size = 0;
-        this._interfaceLayer = new PIXI.DisplayGroup(2,false);
-        this._terrainLayer = new PIXI.DisplayGroup(0,false);
+
+        this._interfaceLayer = new PIXI.DisplayGroup(2, false);
+        this._characterLayer = new PIXI.DisplayGroup(1, false);
+        this._terrainLayer = new PIXI.DisplayGroup(0, false);
     }
 
     init() {
         this._renderer.stage.displayList = new PIXI.DisplayList();
         this._renderer.stage.interactive = true;
         this._renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
+
         this._renderer.stage.mousedown = (e) => {
             this._controller.onMouseDown({
                 layerX: e.data.originalEvent.layerX,
@@ -27,14 +31,32 @@ export default class StageAgent {
         return this;
     }
 
-    _initMouse(){
+    _initMouse() {
+        //TODO: refactor mouse component, pass renderer instance into Mouse() or pass mouse component into controller
         this._mouse = new Mouse().init();
         this._mouse.getSprite().displayGroup = this._interfaceLayer;
         this._renderer.stage.addChild(this._mouse.getSprite());
+
+        this._renderer.stage.mousemove = (e) => {
+            if(this._mouse.isOut()){
+                return;
+            }
+            this._mouse.setPosition({
+                x: e.data.originalEvent.layerX,
+                y: e.data.originalEvent.layerY,
+            })
+        };
+
+        this._renderer.stage.mouseout = (e) => {
+            this._mouse.setOut(true);
+        };
+
+        this._renderer.stage.mouseover = (e) => {
+            this._mouse.setOut(false);
+        };
     }
 
     addTerrain(terrain) {
-
         this._terrain = terrain;
 
         this._terrain.getContainer().displayGroup = this._terrainLayer;
@@ -51,7 +73,7 @@ export default class StageAgent {
 
         this._stages[ID] = actor;
 
-        this._stages[ID].getSprite().displayGroup = this._terrainLayer;
+        this._stages[ID].getSprite().displayGroup = this._characterLayer;
 
         this._renderer.stage.addChild(this._stages[ID].getSprite());
 
@@ -74,7 +96,7 @@ export default class StageAgent {
             this._stages[actorID].render(delta);
         }
 
-        if(this._terrain){
+        if (this._terrain) {
             this._terrain.render(delta);
         }
 
