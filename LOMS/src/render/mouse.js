@@ -1,4 +1,5 @@
 const MOUSE_TEXTURE_PATH = '../../assets/mouse.png';
+const MOUSE_UP_TEXTURE_PATH = '../../assets/mouseUp.png';
 
 export default class Mouse {
     constructor(){
@@ -6,8 +7,11 @@ export default class Mouse {
         this._sprite = null;
     }
 
+    MOUSE_TEXTURE = new PIXI.Texture.fromImage(MOUSE_TEXTURE_PATH);
+    MOUSE_UP_TEXTURE = new PIXI.Texture.fromImage(MOUSE_UP_TEXTURE_PATH);
+
     init(){
-        this._sprite = new PIXI.Sprite.fromImage(MOUSE_TEXTURE_PATH);
+        this._sprite = new PIXI.Sprite(this.MOUSE_TEXTURE);
         return this;
     }
 
@@ -34,7 +38,15 @@ export default class Mouse {
     }
 
     tick(delta){
+        if(!this._sprite){
+            return;
+        }
 
+        if(this._sprite.position.y <=0){
+            this._sprite.setTexture(this.MOUSE_UP_TEXTURE);
+        }else{
+            this._sprite.setTexture(this.MOUSE_TEXTURE);
+        }
     }
 
     render(delta){

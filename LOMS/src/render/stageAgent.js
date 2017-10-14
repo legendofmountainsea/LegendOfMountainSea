@@ -100,6 +100,8 @@ export default class StageAgent {
             this._terrain.render(delta);
         }
 
+        this._mouse.render(delta);
+
         return this;
     }
 }
