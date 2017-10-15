@@ -15,11 +15,6 @@ export default class WorldScene extends Scene {
 
     onFinish() {
 
-        let worldTerrain = new Terrain({
-            assetData: S_worldTerrainAsset.TERRAIN,
-        });
-        this._renderer.addTerrain(worldTerrain);
-
         let houyi = new Character({
             assetData: S_worldAsset.HOUYI,
             position: { x: 100, y: 400 },
@@ -29,5 +24,10 @@ export default class WorldScene extends Scene {
         controller.possess(new Pawn({ character: houyi }));
 
         this._renderer.addActor(houyi);
+
+        let worldTerrain = new Terrain({
+            assetData: S_worldTerrainAsset.TERRAIN,
+        });
+        this._renderer.addTerrain(worldTerrain);
     }
 }

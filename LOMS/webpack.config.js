@@ -18,11 +18,16 @@ var clientConfig = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['env'],
-                        plugins: [require('babel-plugin-transform-object-rest-spread'),require('babel-plugin-transform-class-properties')]
+                        plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-class-properties')]
                     }
                 }
             }
         ]
+    },
+    resolve: {
+        alias: {
+            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
+        }
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
@@ -46,11 +51,16 @@ var serverConfig = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['env'],
-                        plugins: [require('babel-plugin-transform-object-rest-spread'),require('babel-plugin-transform-class-properties')]
+                        plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-class-properties')]
                     }
                 }
             }
         ]
+    },
+    resolve: {
+        alias: {
+            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
+        }
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
