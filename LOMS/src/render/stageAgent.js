@@ -8,14 +8,9 @@ export default class StageAgent {
         this._mouse = null;
         this._stages = {};
         this._size = 0;
-
-        this._interfaceLayer = new PIXI.DisplayGroup(2, false);
-        this._characterLayer = new PIXI.DisplayGroup(1, false);
-        this._terrainLayer = new PIXI.DisplayGroup(0, false);
     }
 
     init() {
-        this._renderer.stage.displayList = new PIXI.DisplayList();
         this._renderer.stage.interactive = true;
         this._renderer.stage.hitArea = new PIXI.Rectangle(0, 0, 980, 725);
 
@@ -59,9 +54,7 @@ export default class StageAgent {
     addTerrain(terrain) {
         this._terrain = terrain;
 
-        this._terrain.getContainer().displayGroup = this._terrainLayer;
-
-        this._renderer.stage.addChild(this._terrain.getContainer());
+        this._renderer.stage.addChildAt(this._terrain.getContainer(),0);
 
         return this;
     }
@@ -73,9 +66,7 @@ export default class StageAgent {
 
         this._stages[ID] = actor;
 
-        this._stages[ID].getSprite().displayGroup = this._characterLayer;
-
-        this._renderer.stage.addChild(this._stages[ID].getSprite());
+        this._renderer.stage.addChildAt(this._stages[ID].getSprite(),0);
 
         return this;
     }

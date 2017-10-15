@@ -43,9 +43,9 @@ export default class Mouse {
         }
 
         if(this._sprite.position.y <=0){
-            this._sprite.setTexture(this.MOUSE_UP_TEXTURE);
+            this._sprite.texture = this.MOUSE_UP_TEXTURE;
         }else{
-            this._sprite.setTexture(this.MOUSE_TEXTURE);
+            this._sprite.texture = this.MOUSE_TEXTURE;
         }
     }
 
