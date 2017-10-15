@@ -1,7 +1,7 @@
 //set NW.js client window size
-var wingui = require('nw.gui').Window.get();
+var winGUI = require('nw.gui').Window.get();
 
-if (wingui !== 'undefined') {
-    wingui.maximize();
-    wingui.setResizable(false);
+if (winGUI !== 'undefined') {
+    winGUI.maximize();
+    winGUI.setResizable(false);
 }
