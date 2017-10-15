@@ -11,8 +11,10 @@ export default class LOMSRenderer {
     }
 
     initRenderer() {
-        //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/31
-        this._renderer = new PIXI.Application(980, 725, { backgroundColor: 0xeeeeee });
+        const width = winGUI? parseInt(winGUI.width * 0.98) : 1600,
+            height = winGUI? parseInt(winGUI.height * 0.96) : 900;
+
+        this._renderer = new PIXI.Application(width, height, { backgroundColor: 0xeeeeee });
 
         this._stageAgent = new StageAgent({ renderer: this._renderer, controller: this._controller });
 

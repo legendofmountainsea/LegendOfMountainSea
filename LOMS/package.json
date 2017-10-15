@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.html",
+  "window": {
+    "title": "loms",
+    "frame":false
+  },
   "build": {
     "appId": "io.github.skyharp.tyrealgray.loms",
     "nwVersion": "0.23.5",
