@@ -17,6 +17,7 @@ export default class UIText extends Actor {
             this._sprite.mousedown = (e) => {
                 this._onClick(e);
             }
+            this._sprite.cursor = null;
         }
         this.setPosition(this._initPosition);
     }
