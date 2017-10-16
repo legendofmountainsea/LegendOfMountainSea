@@ -5,11 +5,14 @@ import MainMenu from './view/mainMenu';
 
 export default class LOMS {
     constructor() {
-        this._renderer = new LOMSRenderer;
+        this._renderer = null;
     }
 
     beginGame() {
-        this._renderer.renderScene(new MainMenu);
-        this._renderer.render();
+        setTimeout(()=>{
+            this._renderer = new LOMSRenderer;
+            this._renderer.renderScene(new MainMenu);
+            this._renderer.render();
+        },1000);
     }
 }
