@@ -34,5 +34,5 @@ export default {
                 PATH: './assets/characters/HouYi/houyi_dying/houyi_dying.json',
             },
         },
-    }
+    },
 };

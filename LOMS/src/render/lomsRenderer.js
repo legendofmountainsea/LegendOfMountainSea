@@ -28,7 +28,7 @@ export default class LOMSRenderer {
     initAssetLoader(){
         let loader = PIXI.loader;
         loader.onProgress.add((e) => {
-            console.log(e.progress);
+            //console.log(e.progress);
         });
 
         loader.onComplete.add((loader, resources) => {

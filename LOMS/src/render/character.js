@@ -184,4 +184,4 @@ export default class Character extends Actor {
 
         this._sprite.play();
     }
-};
+}
