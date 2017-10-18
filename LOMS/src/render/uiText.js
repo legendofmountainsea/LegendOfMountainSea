@@ -1,5 +1,4 @@
 import Actor from './actor';
-import Style from '../static/textStyle';
 
 export default class UIText extends Actor {
     constructor(props) {
@@ -16,16 +15,16 @@ export default class UIText extends Actor {
             this._sprite.buttonMode = true;
             this._sprite.mousedown = (e) => {
                 this._onClick(e);
-            }
+            };
             this._sprite.mouseover = (e) => {
                 this._sprite.style = { ...this._style, 
                     stroke: 'white',
                     strokeThickness: 5,
                  };
-            }
+            };
             this._sprite.mouseout = (e) => {
                 this._sprite.style = this._style;
-            }
+            };
             this._sprite.cursor = null;
         }
         this.setPosition(this._initPosition);

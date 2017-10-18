@@ -23,4 +23,4 @@ export default class Pawn {
     onPressKeyD(e){
         this._character.playNearDeath();
     }
-};
+}

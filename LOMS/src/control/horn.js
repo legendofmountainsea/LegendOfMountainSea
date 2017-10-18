@@ -5,9 +5,9 @@ export default class Horn {
 
     playSound(name){
         return this;
-    };
+    }
 
     playMusic(name){
         return this;
     }
-};
+}

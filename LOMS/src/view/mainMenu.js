@@ -38,7 +38,7 @@ export default class MainMenu extends Scene {
                 const worldScene = new WorldScene;
                 this._renderer.renderScene(worldScene);
                 this._backGroundMusic.pause();
-            }
+            },
         });
 
         let loadGameText = new UIText({
@@ -47,7 +47,7 @@ export default class MainMenu extends Scene {
             style: Style.MAIN_MENU,
             onClick: (e) => {
                 //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
-            }
+            },
         });
 
         this._renderer.addActor(newGameText);

@@ -4,5 +4,5 @@ export default {
         fontSize: 36,
         fontStyle: 'italic',
         fontWeight: 'bold',
-    }
-}
+    },
+};

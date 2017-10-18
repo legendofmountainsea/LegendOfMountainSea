@@ -5,5 +5,5 @@ export default {
             NAME: 'logo',
             PATH: './LOMS.png',
         },
-    }
+    },
 };
