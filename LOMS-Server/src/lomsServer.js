@@ -17,7 +17,7 @@ export default class LOMSServer {
         this._webSocketServer.on('connection', (webSocket) => {
 
             webSocket.on('message', (message) => {
-                console.log('received: %s', message);
+                //console.log('received: %s', message);
             });
 
             webSocket.send('something');
