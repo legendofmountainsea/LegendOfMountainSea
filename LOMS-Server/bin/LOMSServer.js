@@ -32,7 +32,7 @@ var LOMSServer = function () {
             this._webSocketServer.on('connection', function (webSocket) {
 
                 webSocket.on('message', function (message) {
-                    console.log('received: %s', message);
+                    //console.log('received: %s', message);
                 });
 
                 webSocket.send('something');
