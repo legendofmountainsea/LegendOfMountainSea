@@ -1,6 +1,6 @@
 export default class Horn {
     constructor(props) {
-        
+
     }
 
     playSound(name){

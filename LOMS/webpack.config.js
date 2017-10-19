@@ -13,6 +13,13 @@ var clientConfig = {
         rules: [
             {
                 test: /\.js$/,
+                loader: 'eslint-loader',
+                enforce: 'pre',
+                include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'test')],
+                options: {},
+            },
+            {
+                test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',

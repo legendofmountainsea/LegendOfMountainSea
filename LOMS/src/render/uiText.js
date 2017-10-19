@@ -17,7 +17,7 @@ export default class UIText extends Actor {
                 this._onClick(e);
             };
             this._sprite.mouseover = (e) => {
-                this._sprite.style = { ...this._style, 
+                this._sprite.style = { ...this._style,
                     stroke: 'white',
                     strokeThickness: 5,
                  };
