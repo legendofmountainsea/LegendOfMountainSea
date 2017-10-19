@@ -13,13 +13,6 @@ var clientConfig = {
         rules: [
             {
                 test: /\.js$/,
-                loader: 'eslint-loader',
-                enforce: 'pre',
-                include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'test')],
-                options: {},
-            },
-            {
-                test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',
@@ -38,10 +31,11 @@ var clientConfig = {
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
     ],
 };
 
-var serverConfig = {
+var nodeConfig = {
     target: 'node',
     entry: './src/main.node.js',
     output: {
@@ -71,7 +65,8 @@ var serverConfig = {
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
     ],
 };
 
-module.exports = [serverConfig, clientConfig];
+module.exports = [nodeConfig, clientConfig];

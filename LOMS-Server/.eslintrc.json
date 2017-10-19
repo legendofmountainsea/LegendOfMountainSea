@@ -12,6 +12,7 @@
         "eslint:recommended"
     ],
     "rules": {
+        "curly": "error",
         "comma-dangle": [
             "error",
             "always-multiline"
@@ -29,8 +30,8 @@
             "single",
             { "avoidEscape": true }
         ],
-        "no-console": 0,
-        "no-trailing-spaces": 2
+        "no-console": "off",
+        "no-trailing-spaces": "error"
     },
     "globals": {
         "PIXI": true,
