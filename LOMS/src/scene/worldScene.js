@@ -7,27 +7,30 @@ import Character from '../render/character';
 import Terrain from '../render/terrain';
 
 export default class WorldScene extends Scene {
-    constructor(props) {
-        super(props);
-        this._assetsData = [S_worldAsset,S_worldTerrainAsset];
-        this._onFinish = this.onFinish.bind(this);
-    }
-
-    onFinish() {
-
-        let houyi = new Character({
-            assetData: S_worldAsset.HOUYI,
-            position: { x: 100, y: 400 },
-        });
-
-        const controller = this._renderer.getController();
-        controller.possess(new Pawn({ character: houyi }));
-
-        this._renderer.addActor(houyi);
-
-        let worldTerrain = new Terrain({
-            assetData: S_worldTerrainAsset.TERRAIN,
-        });
-        this._renderer.addTerrain(worldTerrain);
-    }
+	constructor(props) {
+		super(props);
+		this._assetsData = [S_worldAsset, S_worldTerrainAsset];
+		this._onFinish = this.onFinish.bind(this);
+	}
+	
+	onFinish() {
+		let music = new Audio('../../assets/sound/Choose_Your_Path.mp3');
+		music.loop = true;
+		music.play();
+		
+		let houyi = new Character({
+			assetData: S_worldAsset.HOUYI,
+			position: {x: 100, y: 400},
+		});
+		
+		const controller = this._renderer.getController();
+		controller.possess(new Pawn({character: houyi}));
+		
+		this._renderer.addActor(houyi);
+		
+		let worldTerrain = new Terrain({
+			assetData: S_worldTerrainAsset.TERRAIN,
+		});
+		this._renderer.addTerrain(worldTerrain);
+	}
 }
