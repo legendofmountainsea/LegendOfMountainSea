@@ -17,7 +17,7 @@ export default class StageAgent {
         this._renderer.stage.mousedown = (e) => {
             this._controller.onMouseDown({
                 layerX: e.data.originalEvent.layerX,
-                layerY: e.data.originalEvent.layerY
+                layerY: e.data.originalEvent.layerY,
             });
         };
 
@@ -29,7 +29,6 @@ export default class StageAgent {
     _initMouse() {
         //TODO: refactor mouse component, pass renderer instance into Mouse() or pass mouse component into controller
         this._mouse = new Mouse().init();
-        this._mouse.getSprite().displayGroup = this._interfaceLayer;
         this._renderer.stage.addChild(this._mouse.getSprite());
 
         this._renderer.stage.mousemove = (e) => {
@@ -39,7 +38,7 @@ export default class StageAgent {
             this._mouse.setPosition({
                 x: e.data.originalEvent.layerX,
                 y: e.data.originalEvent.layerY,
-            })
+            });
         };
 
         this._renderer.stage.mouseout = (e) => {

@@ -18,9 +18,9 @@
       "build"
     ]
   },
-  "chromium-args" : "--disable-raf-throttling",
+  "chromium-args": "--disable-raf-throttling",
   "scripts": {
-    "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run build-dev",
+    "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run lint && npm run build-dev",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
     "build-win": "nwjs-v0.23.5-win-x64\\nw.exe .",
@@ -28,19 +28,23 @@
     "build-mac": "./nwjs-v0.23.5-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
     "start-mac": "npm run build-dev && npm run build-mac",
     "dist-mac": "build --tasks mac-x64 .",
-    "dist-win": "build --tasks win-x64 ."
+    "dist-win": "build --tasks win-x64 .",
+    "lint": "eslint --ext .js src",
+    "lint-fix": "eslint --ext .js src --fix"
   },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
   "devDependencies": {
     "babel-core": "6.26.0",
+    "babel-eslint": "8.0.1",
     "babel-loader": "7.1.2",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-env": "1.6.0",
     "babel-register": "6.26.0",
+    "eslint": "4.9.0",
+    "eslint-loader": "^1.9.0",
     "expect.js": "0.3.1",
-    "jasmine": "2.8.0",
     "mocha": "3.5.3",
     "nwjs-builder-phoenix": "1.14.3",
     "script-loader": "0.7.0",

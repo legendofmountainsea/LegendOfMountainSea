@@ -5,7 +5,7 @@ export default class Scene {
         this._assetsData = {};
         this._onFinish = () => {};
     }
-    
+
     setRenderer(renderer){
         this._renderer = renderer;
     }

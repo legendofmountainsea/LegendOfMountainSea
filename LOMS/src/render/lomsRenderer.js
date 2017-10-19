@@ -2,7 +2,7 @@ import StageAgent from './stageAgent';
 import Controller from '../control/controller';
 
 export default class LOMSRenderer {
-    
+
     constructor(props) {
         this._controller = new Controller();
         this._onAssetLoadingFinish = () => {};
@@ -28,7 +28,7 @@ export default class LOMSRenderer {
     initAssetLoader(){
         let loader = PIXI.loader;
         loader.onProgress.add((e) => {
-            console.log(e.progress);
+            //console.log(e.progress);
         });
 
         loader.onComplete.add((loader, resources) => {

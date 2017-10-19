@@ -3,14 +3,21 @@ var path = require('path'),
 
 var clientConfig = {
     target: 'web',
-    entry: "./src/main.js",
+    entry: './src/main.js',
     output: {
         path: __dirname,
-        filename: "loms.js"
+        filename: 'loms.js',
     },
     devtool: 'inline-source-map',
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                enforce: 'pre',
+                include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'test')],
+                options: {},
+            },
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
@@ -18,28 +25,28 @@ var clientConfig = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['env'],
-                        plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-class-properties')]
-                    }
-                }
-            }
-        ]
+                        plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-class-properties')],
+                    },
+                },
+            },
+        ],
     },
     resolve: {
         alias: {
-            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
-        }
+            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js'),
+        },
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
-    ]
+    ],
 };
 
 var serverConfig = {
     target: 'node',
-    entry: "./src/main.node.js",
+    entry: './src/main.node.js',
     output: {
         path: __dirname,
-        filename: "loms.node.js"
+        filename: 'loms.node.js',
     },
     devtool: 'inline-source-map',
     module: {
@@ -51,20 +58,20 @@ var serverConfig = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['env'],
-                        plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-class-properties')]
-                    }
-                }
-            }
-        ]
+                        plugins: [require('babel-plugin-transform-object-rest-spread'), require('babel-plugin-transform-class-properties')],
+                    },
+                },
+            },
+        ],
     },
     resolve: {
         alias: {
-            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js')
-        }
+            'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js'),
+        },
     },
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
-    ]
+    ],
 };
 
 module.exports = [serverConfig, clientConfig];
