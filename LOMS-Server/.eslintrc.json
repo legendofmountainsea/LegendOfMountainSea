@@ -30,8 +30,7 @@
             "single",
             { "avoidEscape": true }
         ],
-        "no-console": "off",
-        "no-trailing-spaces": "error"
+        "no-console": "off"
     },
     "globals": {
         "PIXI": true,

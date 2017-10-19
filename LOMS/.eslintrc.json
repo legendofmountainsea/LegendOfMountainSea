@@ -29,8 +29,7 @@
             "error",
             "single",
             { "avoidEscape": true }
-        ],
-        "no-trailing-spaces": "error"
+        ]
     },
     "globals": {
         "PIXI": true,
