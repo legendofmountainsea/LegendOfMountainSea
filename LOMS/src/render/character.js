@@ -163,7 +163,7 @@ export default class Character extends Actor {
         this._animationStatus = status;
         return this;
     }
- 
+
     getAnimationStatus() {
         return this._animationStatus;
     }
@@ -184,4 +184,4 @@ export default class Character extends Actor {
 
         this._sprite.play();
     }
-};
+}

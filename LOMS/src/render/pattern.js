@@ -19,4 +19,4 @@ export default class Pattern extends Actor {
         this._sprite.position.x = this._initPosition.x;
         this._sprite.position.y = this._initPosition.y;
      }
-};
+}

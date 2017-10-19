@@ -5,5 +5,5 @@ export default {
             NAME: 'terrain',
             PATH: './assets/hexagon.png',
         },
-    }
+    },
 };
