@@ -28,7 +28,7 @@ export default class StageAgent {
 
     _initMouse() {
         //TODO: refactor mouse component, pass renderer instance into Mouse() or pass mouse component into controller
-        this._mouse = new Mouse().init();
+        this._mouse = new Mouse(this._renderer).init();
         this._renderer.stage.addChild(this._mouse.getSprite());
 
         this._renderer.stage.mousemove = (e) => {
