@@ -69,11 +69,17 @@ export default class Mouse {
 		
 		if (bounds.y <= EDGE_LENGHT && bounds.x < this._hitArea.width) {
 			this.setStatus(this.STATUS_UP);
-			this._setPosition({x: Math.min(bounds.x, this._hitArea.width - bounds.width), y: bounds.y});
+			this._setPosition({
+				x: Math.min(bounds.x, this._hitArea.width - bounds.width),
+				y: bounds.y,
+			});
 		}
 		else if (bounds.x <= EDGE_LENGHT && bounds.y < this._hitArea.height) {
 			this.setStatus(this.STATUS_LEFT);
-			this._setPosition({x: bounds.x, y: Math.min(bounds.y, this._hitArea.height - bounds.height)});
+			this._setPosition({
+				x: bounds.x,
+				y: Math.min(bounds.y, this._hitArea.height - bounds.height),
+			});
 		}
 		else if (bounds.y >= this._hitArea.height) {
 			this.setStatus(this.STATUS_DOWN);
