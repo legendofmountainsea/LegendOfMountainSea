@@ -2,15 +2,15 @@ import expect from 'expect.js';
 import Pawn from '../../src/control/pawn';
 import Character from '../../src/render/character';
 
-describe("Pawn", () => {
+describe('Pawn', () => {
     let pawn;
 
     beforeEach(() => {
         pawn = new Pawn({
             character: new Character({
                 noAsset: true,
-                position: {x: 0, y: 0}
-            })
+                position: {x: 0, y: 0},
+            }),
         });
     });
 
@@ -18,9 +18,9 @@ describe("Pawn", () => {
         pawn = null;
     });
 
-    it("should be able to set destination", () => {
+    it('should be able to set destination', () => {
         const mouseEvent = {
-            layerX: 5, layerY: 6
+            layerX: 5, layerY: 6,
         };
         pawn.onMouseDown(mouseEvent);
 
