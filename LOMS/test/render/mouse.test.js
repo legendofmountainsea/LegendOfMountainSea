@@ -15,6 +15,18 @@ describe('Mouse', () => {
 		mouse = null;
 	});
 	
+	it('should be not out', ()=>{
+		
+		expect(mouse.isOut()).to.be(false);
+	});
+	
+	it('should be not out', ()=>{
+		
+		mouse.setOut(true);
+		
+		expect(mouse.isOut()).to.be(true);
+	});
+	
 	it('status should be up', () => {
 		mouse._checkPosition({x: 9, y: 5, width: 9, height: 5});
 		
