@@ -1,4 +1,5 @@
 import Mouse from './mouse';
+import LayerAgent from './layerAgent';
 
 export default class StageAgent {
 	constructor(props) {
@@ -6,6 +7,7 @@ export default class StageAgent {
 		this._controller = props.controller;
 		this._terrain = null;
 		this._mouse = null;
+		this._layerAgent = null;
 		this._stages = {};
 		this._size = 0;
 	}
@@ -25,6 +27,10 @@ export default class StageAgent {
 		this._initMouse(hitArea);
 		
 		return this;
+	}
+
+	_initLayerAgent(){
+		this._layerAgent = new LayerAgent({stage: this._renderer.stage}).init();
 	}
 	
 	_initMouse(hitArea) {
