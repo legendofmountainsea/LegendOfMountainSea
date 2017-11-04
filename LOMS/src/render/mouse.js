@@ -1,8 +1,8 @@
-const MOUSE_DEFAULT_TEXTURE_PATH = '../../assets/mouse.png';
-const MOUSE_UP_TEXTURE_PATH = '../../assets/mouseUp.png';
-const MOUSE_DOWN_TEXTURE_PATH = '../../assets/mouseDown.png';
-const MOUSE_LEFT_TEXTURE_PATH = '../../assets/mouseLeft.png';
-const MOUSE_RIGHT_TEXTURE_PATH = '../../assets/mouseRight.png';
+const MOUSE_DEFAULT_TEXTURE_PATH = '../../assets/interface/mouse.png';
+const MOUSE_UP_TEXTURE_PATH = '../../assets/interface/mouseUp.png';
+const MOUSE_DOWN_TEXTURE_PATH = '../../assets/interface/mouseDown.png';
+const MOUSE_LEFT_TEXTURE_PATH = '../../assets/interface/mouseLeft.png';
+const MOUSE_RIGHT_TEXTURE_PATH = '../../assets/interface/mouseRight.png';
 const EDGE_LENGHT = 8;
 
 export default class Mouse {
