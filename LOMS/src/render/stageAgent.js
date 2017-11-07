@@ -42,7 +42,9 @@ export default class StageAgent {
 			hitArea: hitArea,
 		}).init();
 		
-		this._renderer.stage.addChild(this._mouse.getElement());
+		//this._renderer.stage.addChild(this._mouse.getElement());
+		
+		this._layerAgent.addElement(this._mouse, 2);
 		
 		this._renderer.stage.mousemove = (e) => {
 			
@@ -87,8 +89,6 @@ export default class StageAgent {
 	render(delta) {
 		
 		this._layerAgent.render(delta);
-		
-		this._mouse.render(delta);
 		
 		return this;
 	}

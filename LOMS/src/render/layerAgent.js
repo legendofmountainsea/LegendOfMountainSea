@@ -21,6 +21,10 @@ export default class LayerAgent {
 	
 	removeElementsByIndex(index){
 		let elements = this._layer[index];
+		
+		this._layer[index] = null;
+		delete this._layer[index];
+		
 		if(!elements || elements.length === 0 ){
 			return;
 		}
@@ -28,9 +32,6 @@ export default class LayerAgent {
 		for( let element of elements){
 			this._stage.removeChild(element.getElement());
 			element.dispose();
-			
-			this._layer[index] = null;
-			delete this._layer[index];
 		}
 	}
 	
