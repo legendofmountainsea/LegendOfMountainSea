@@ -5,7 +5,6 @@ export default class UIText extends Actor {
         super(props);
         this._style = props.style? props.style : {};
         this._string = props.string ? props.string : '';
-        this._onClick = props.onClick ? props.onClick : null;
     }
 
     _init(){
@@ -29,8 +28,8 @@ export default class UIText extends Actor {
         }
         this.setPosition(this._initPosition);
     }
-
-    getSprite() {
+	
+	getElement() {
 
         if(!this._sprite){
             this._init();

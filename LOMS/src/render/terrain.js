@@ -1,8 +1,10 @@
+import Element from './element';
 import Hexagon from './hexagon';
 
-export default class Terrain {
+export default class Terrain extends Element {
     //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/40
     constructor(props) {
+    	super(props);
         this._noAsset = !props.assetData;
         this._container = null;
         this._assetData = props.assetData;
@@ -29,17 +31,16 @@ export default class Terrain {
                     y: columnIndex,
                 });
 
-                this._container.addChild(hexagon.getSprite());
+                this._container.addChild(hexagon.getElement());
             }
         }
         return this;
     }
-
-    getContainer() {
+	
+	getElement() {
         return this._container;
     }
-
-
+	
     tick(delta) {
 
     }
@@ -52,4 +53,9 @@ export default class Terrain {
         this.tick(delta);
         this.onRender(delta);
     }
+	
+	dispose(){
+		this._container.destroy({children:true, texture:true, baseTexture:true});
+		this._container = null;
+	}
 }

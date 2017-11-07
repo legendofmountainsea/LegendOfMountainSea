@@ -12,7 +12,7 @@ describe('Character', () => {
             position: {x: 5, y: 5},
         });
 
-        character.setSprite({
+        character.setElement({
             position: {x: 5, y: 5},
             scale: {x: 1, y: 1},
         });

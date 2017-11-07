@@ -31,7 +31,7 @@ export default class Mouse {
 		return this;
 	}
 	
-	getSprite() {
+	getElement() {
 		return this._sprite;
 	}
 	

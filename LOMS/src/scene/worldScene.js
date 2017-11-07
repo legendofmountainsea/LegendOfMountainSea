@@ -14,18 +14,20 @@ export default class WorldScene extends Scene {
 		this._assetsData = [S_gameMenuAsset, S_worldAsset, S_worldTerrainAsset];
 		this._onFinish = this.onFinish.bind(this);
 	}
-
+	
 	onFinish() {
 		let music = new Audio('../../assets/sound/Choose_Your_Path.mp3');
 		music.loop = true;
 		music.play();
-
-        let systemMenuIcon = new Pattern({
-            assetData: S_gameMenuAsset.SYSTEM_ICON,
-            position: {x: 20, y: 20},
-        });
-
-        this._renderer.addActor(systemMenuIcon);
+		
+		let systemMenuIcon = new Pattern({
+			assetData: S_gameMenuAsset.SYSTEM_ICON,
+			position: {x: 20, y: 20},
+			onClick: (e) => {
+			},
+		});
+		
+		this._renderer.addActor(systemMenuIcon);
 		
 		let houyi = new Character({
 			assetData: S_worldAsset.HOUYI,
