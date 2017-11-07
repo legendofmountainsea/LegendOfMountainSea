@@ -9,7 +9,6 @@ export default class StageAgent {
 		this._mouse = null;
 		this._layerAgent = null;
 		this._stages = {};
-		this._size = 0;
 	}
 	
 	init() {
@@ -24,13 +23,15 @@ export default class StageAgent {
 			});
 		};
 		
+		this._initLayerAgent();
+		
 		this._initMouse(hitArea);
 		
 		return this;
 	}
 
 	_initLayerAgent(){
-		this._layerAgent = new LayerAgent({stage: this._renderer.stage}).init();
+		this._layerAgent = new LayerAgent({stage: this._renderer.stage});
 	}
 	
 	_initMouse(hitArea) {
@@ -41,7 +42,7 @@ export default class StageAgent {
 			hitArea: hitArea,
 		}).init();
 		
-		this._renderer.stage.addChild(this._mouse.getSprite());
+		this._renderer.stage.addChild(this._mouse.getElement());
 		
 		this._renderer.stage.mousemove = (e) => {
 			
@@ -66,42 +67,26 @@ export default class StageAgent {
 	addTerrain(terrain) {
 		this._terrain = terrain;
 		
-		this._renderer.stage.addChildAt(this._terrain.getContainer(), 0);
+		this._layerAgent.addElement(this._terrain, 1);
 		
 		return this;
 	}
 	
 	addActor(actor) {
-		let ID = ++this._size;
 		
-		actor.setID(ID);
-		
-		this._stages[ID] = actor;
-		
-		this._renderer.stage.addChildAt(this._stages[ID].getSprite(), 0);
+		this._layerAgent.addElement(actor, 0);
 		
 		return this;
 	}
 	
 	clearActors() {
-		this._size = 0;
-		for (let actorID in this._stages) {
-			
-			this._renderer.stage.removeChild(this._stages[actorID].getSprite());
-			this._stages[actorID] = null;
-			delete this._stages[actorID];
-		}
+		this._layerAgent.removeElementsByIndex(0);
 		return this;
 	}
 	
 	render(delta) {
-		for (let actorID in this._stages) {
-			this._stages[actorID].render(delta);
-		}
 		
-		if (this._terrain) {
-			this._terrain.render(delta);
-		}
+		this._layerAgent.render(delta);
 		
 		this._mouse.render(delta);
 		

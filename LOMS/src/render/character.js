@@ -21,12 +21,12 @@ export default class Character extends Actor {
 
         const animatedSprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA[this._animationStatus].NAME]);
 
-        this.setSprite(animatedSprite);
+        this.setElement(animatedSprite);
 
         this.initSprite();
     }
-
-    setSprite(sprite){
+	
+	setElement(sprite){
         this._sprite = sprite;
     }
 
