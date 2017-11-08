@@ -1,3 +1,5 @@
+import {uuid} from 'loms.uuid';
+
 export default class LayerAgent {
 	constructor(props) {
 		this._stage = props.stage;
@@ -5,8 +7,8 @@ export default class LayerAgent {
 	}
 	
 	addElement(element, index = 0) {
-
-		element.setIndex(index);
+		
+		element.setID(uuid()).setIndex(index);
 		
 		const result = this._getTopElementInLayer(index);
 		
