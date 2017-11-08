@@ -51,6 +51,7 @@
     "webpack-dev-server": "2.7.1"
   },
   "dependencies": {
+    "loms.uuid": "1.0.0",
     "pixi.js": "4.5.6"
   }
 }
