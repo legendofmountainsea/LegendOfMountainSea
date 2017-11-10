@@ -2,7 +2,7 @@ import {uuid} from 'loms.uuid';
 
 export default class LayerAgent {
 	constructor(props) {
-		this._stage = props.stage;
+		this._container = props.contatiner;
 		this._layer = {};
 	}
 	
@@ -12,9 +12,9 @@ export default class LayerAgent {
 		
 		const result = this._getTopElementInLayer(index);
 		
-		const childIndex = (result) ? this._stage.getChildIndex(result.getElement()) : 0;
+		const childIndex = (result) ? this._container.getChildIndex(result.getElement()) : 0;
 		
-		this._stage.addChildAt(element.getElement(), childIndex);
+		this._container.addChildAt(element.getElement(), childIndex);
 		
 		this._addToLayer(element, index);
 		
@@ -32,7 +32,7 @@ export default class LayerAgent {
 		}
 		
 		for( let element of elements){
-			this._stage.removeChild(element.getElement());
+			this._container.removeChild(element.getElement());
 			element.dispose();
 		}
 	}
