@@ -31,7 +31,7 @@ export default class StageAgent {
 	}
 
 	_initLayerAgent(){
-		this._layerAgent = new LayerAgent({stage: this._renderer.stage});
+		this._layerAgent = new LayerAgent({contatiner: this._renderer.stage});
 	}
 	
 	_initMouse(hitArea) {
@@ -41,8 +41,6 @@ export default class StageAgent {
 		this._mouse = new Mouse({
 			hitArea: hitArea,
 		}).init();
-		
-		//this._renderer.stage.addChild(this._mouse.getElement());
 		
 		this._layerAgent.addElement(this._mouse, 2);
 		
