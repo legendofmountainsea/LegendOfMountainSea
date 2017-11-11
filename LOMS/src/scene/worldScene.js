@@ -1,5 +1,5 @@
 import S_gameMenuAsset from '../static/gameMenuAsset';
-import S_worldAsset from '../static/heroCharecter/heroAsset';
+import S_worldAsset from '../static/heroCharacter/heroAsset';
 import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
 
 import Scene from './scene';
