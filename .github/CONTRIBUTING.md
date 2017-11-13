@@ -4,7 +4,7 @@ There's a number of ways you can get involved, and we need volunteer to help thi
 ###  a developer
 Feel free to check out our [issues](https://github.com/SkyHarp/LegendOfMountainSea/issues) and submit pull requests.
 
-### a Artist
+### an Artist
 All the LOMS assets are in [here](https://github.com/SkyHarp/LegendOfMountainSea/tree/master/LOMS/assets), and our game needs nice looking interface and character!
 
 ### a Chinese history hobbyist
@@ -18,7 +18,7 @@ We welcome the non-technical discussions, share your idea with us at [loms.space
 SkyHarp has a [Code of Conduct](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CODE_OF_CONDUCT.md) that all contributors are expected to follow. This code describes the minimum behavior expectations for all contributors.
 
 ## Our development process
-LegendOfMountainSea uses Travis CI and Appveyor to test and build pull requests. When a pull request on CI is passing, the changes will be merged into `master`.
+LegendOfMountainSea uses Travis CI and Appveyor to test and build pull requests. When a pull request on CI is passing and review is approved, the changes will be merged into `master`.
 
 ## Style Guide
 ### Code Conventions
