@@ -1,5 +1,6 @@
 import Element from './element';
 import Hexagon from './hexagon';
+import LayerAgent from './layerAgent';
 
 export default class Terrain extends Element {
 	//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/40
@@ -14,10 +15,16 @@ export default class Terrain extends Element {
 		return this._noAsset;
 	}
 	
+	_initLayerAgent() {
+		this._layerAgent = new LayerAgent({contatiner: this._container});
+	}
+	
 	initResources(resources) {
 		this._container = new PIXI.Container();
 		this._container.x = 0;
 		this._container.y = 0;
+		
+		this._initLayerAgent();
 		const terrainResource = resources[this._assetData.DATA.NAME];
 		const {height, width} = terrainResource.texture;
 		
@@ -34,10 +41,14 @@ export default class Terrain extends Element {
 					y: columnIndex,
 				});
 				
-				this._container.addChild(hexagon.getElement());
+				this.addHexagon(hexagon);
 			}
 		}
 		return this;
+	}
+	
+	addHexagon(hexagon) {
+		this._layerAgent.addElement(hexagon, 0);
 	}
 	
 	getElement() {
