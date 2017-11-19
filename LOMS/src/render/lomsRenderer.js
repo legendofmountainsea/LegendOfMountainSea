@@ -1,10 +1,12 @@
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
+import Window from '../control/window';
 
 export default class LOMSRenderer {
 	
 	constructor(props) {
 		this._controller = new Controller();
+		this._window = new Window();
 		this._onAssetLoadingFinish = () => {
 		};
 		this.initRenderer();
@@ -12,8 +14,8 @@ export default class LOMSRenderer {
 	}
 	
 	initRenderer() {
-		const width = winGUI ? parseInt(winGUI.width * 0.98) : 1600,
-			height = winGUI ? parseInt(winGUI.height * 0.96) : 900;
+		
+		const {width, height} = this._window.getDimension();
 		
 		this._renderer = new PIXI.Application(width, height, {backgroundColor: 0xeeeeee});
 		
@@ -95,6 +97,10 @@ export default class LOMSRenderer {
 	
 	clearStage() {
 		this._stageAgent.clearActors();
+	}
+	
+	close(){
+		this._window.close();
 	}
 	
 	render() {
