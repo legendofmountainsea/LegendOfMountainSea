@@ -55,7 +55,7 @@ export default class MainMenu extends Scene {
 			position: {x: 400, y: 500},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
-				winGUI ? winGUI.close() : window.close();
+				this._renderer.close();
 			},
 		});
 		
