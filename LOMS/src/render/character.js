@@ -158,6 +158,12 @@ export default class Character extends Actor {
         this.setAnimation('NEAR_DEATH');
         this.setAnimationStatus('NEAR_DEATH');
     }
+	
+	playUltimate(){
+		this.setAnimation('ULTIMATE' , false, () => {
+			this.setAnimation(this.getAnimationStatus());
+		});
+    }
 
     setAnimationStatus(status) {
         this._animationStatus = status;
