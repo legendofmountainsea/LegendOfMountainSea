@@ -14,6 +14,8 @@ export default class Mouse extends Element {
 		this._isOut = false;
 		this._sprite = null;
 		this._status = null;
+		this._onStatusLeft = props.onStatusLeft ? props.onStatusLeft : ()=>{};
+		this._onStatusRight = props.onStatusRight ? props.onStatusRight : ()=>{};
 		this._hitArea = props.hitArea;
 	}
 	
@@ -113,9 +115,11 @@ export default class Mouse extends Element {
 				break;
 			case this.STATUS_LEFT:
 				this._sprite.texture = this.TEXTURE_LEFT;
+				this._onStatusLeft();
 				break;
 			case this.STATUS_RIGHT:
 				this._sprite.texture = this.TEXTURE_RIGHT;
+				this._onStatusRight();
 				break;
 			case this.STATUS_INSIDE:
 				this._sprite.texture = this.TEXTURE_DEFAULT;
@@ -137,8 +141,12 @@ export default class Mouse extends Element {
 		this.tick(delta);
 	}
 	
-	dispose(){
-		this._sprite.destroy({children:true, texture:true, baseTexture:true});
+	dispose() {
+		this._sprite.destroy({
+			children: true,
+			texture: true,
+			baseTexture: true,
+		});
 		this._sprite = null;
 	}
 }

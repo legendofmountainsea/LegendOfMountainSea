@@ -40,6 +40,12 @@ export default class StageAgent {
 		 */
 		this._mouse = new Mouse({
 			hitArea: hitArea,
+			onStatusRight: ()=>{
+			
+			},
+			onStatusLeft: ()=>{
+			
+			},
 		}).init();
 		
 		this._layerAgent.addElement(this._mouse, 2);

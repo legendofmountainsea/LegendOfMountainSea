@@ -21,6 +21,14 @@ export default class LayerAgent {
 		return this;
 	}
 	
+	moveToLeft(){
+		this._container.x -= 10;
+	}
+	
+	moveToRight(){
+		this._container.x += 10;
+	}
+	
 	removeElementsByIndex(index){
 		let elements = this._layer[index];
 		
