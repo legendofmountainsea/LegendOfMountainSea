@@ -41,10 +41,16 @@ export default class StageAgent {
 		this._mouse = new Mouse({
 			hitArea: hitArea,
 			onStatusRight: ()=>{
-			
+				if(!this._terrain){
+					return;
+				}
+				this._terrain.movingRight();
 			},
 			onStatusLeft: ()=>{
-			
+				if(!this._terrain){
+					return;
+				}
+				this._terrain.movingLeft();
 			},
 		}).init();
 		
