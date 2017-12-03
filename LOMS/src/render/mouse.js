@@ -105,7 +105,7 @@ export default class Mouse extends Element {
 		}
 	}
 	
-	_checkStatus() {
+	_checkStatus(delta) {
 		switch (this._status) {
 			case this.STATUS_UP:
 				this._sprite.texture = this.TEXTURE_UP;
@@ -115,11 +115,11 @@ export default class Mouse extends Element {
 				break;
 			case this.STATUS_LEFT:
 				this._sprite.texture = this.TEXTURE_LEFT;
-				this._onStatusLeft();
+				this._onStatusLeft(delta);
 				break;
 			case this.STATUS_RIGHT:
 				this._sprite.texture = this.TEXTURE_RIGHT;
-				this._onStatusRight();
+				this._onStatusRight(delta);
 				break;
 			case this.STATUS_INSIDE:
 				this._sprite.texture = this.TEXTURE_DEFAULT;
@@ -134,7 +134,7 @@ export default class Mouse extends Element {
 	}
 	
 	tick(delta) {
-		this._checkStatus();
+		this._checkStatus(delta);
 	}
 	
 	render(delta) {

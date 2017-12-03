@@ -4,6 +4,7 @@ export default class LayerAgent {
 	constructor(props) {
 		this._container = props.contatiner;
 		this._layer = {};
+		this._layerTo = [];
 	}
 	
 	addElement(element, index = 0) {
@@ -21,25 +22,36 @@ export default class LayerAgent {
 		return this;
 	}
 	
-	moveToLeft(){
-		this._container.x -= 10;
+	moveLayerTo(...layerTo) {
+		try {
+			for (const movingInfo of layerTo) {
+				for (const element of this._layer[movingInfo.index]) {
+					
+					if (movingInfo.deltaX) {
+						element.getElement().x += (10 * movingInfo.deltaX);
+					}
+					if (movingInfo.deltaY) {
+						element.getElement().y += (10 * movingInfo.deltaY);
+					}
+				}
+			}
+		}
+		catch (e) {
+			console.log(e);
+		}
 	}
 	
-	moveToRight(){
-		this._container.x += 10;
-	}
-	
-	removeElementsByIndex(index){
+	removeElementsByIndex(index) {
 		let elements = this._layer[index];
 		
 		this._layer[index] = null;
 		delete this._layer[index];
 		
-		if(!elements || elements.length === 0 ){
+		if (!elements || elements.length === 0) {
 			return;
 		}
 		
-		for( let element of elements){
+		for (let element of elements) {
 			this._container.removeChild(element.getElement());
 			element.dispose();
 		}
@@ -64,14 +76,18 @@ export default class LayerAgent {
 			}
 		}
 		
-		return elements? elements[0] : null;
+		return elements ? elements[0] : null;
 	}
 	
-	render(delta) {
-		for(let index in this._layer){
-			for(let element of this._layer[index]){
+	tick(delta) {
+		for (let index in this._layer) {
+			for (let element of this._layer[index]) {
 				element.render(delta);
 			}
 		}
+	}
+	
+	render(delta) {
+		this.tick(delta);
 	}
 }
