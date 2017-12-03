@@ -23,21 +23,16 @@ export default class LayerAgent {
 	}
 	
 	moveLayerTo(...layerTo) {
-		try {
-			for (const movingInfo of layerTo) {
-				for (const element of this._layer[movingInfo.index]) {
-					
-					if (movingInfo.deltaX) {
-						element.getElement().x += (10 * movingInfo.deltaX);
-					}
-					if (movingInfo.deltaY) {
-						element.getElement().y += (10 * movingInfo.deltaY);
-					}
+		for (const movingInfo of layerTo) {
+			for (const element of this._layer[movingInfo.index]) {
+				
+				if (movingInfo.deltaX) {
+					element.getElement().x += (10 * movingInfo.deltaX);
+				}
+				if (movingInfo.deltaY) {
+					element.getElement().y += (10 * movingInfo.deltaY);
 				}
 			}
-		}
-		catch (e) {
-			console.log(e);
 		}
 	}
 	
