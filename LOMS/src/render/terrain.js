@@ -19,14 +19,6 @@ export default class Terrain extends Element {
 		this._layerAgent = new LayerAgent({contatiner: this._container});
 	}
 	
-	movingRight(){
-		this._layerAgent.moveToRight();
-	}
-	
-	movingLeft(){
-		this._layerAgent.moveToLeft();
-	}
-	
 	initResources(resources) {
 		this._container = new PIXI.Container();
 		this._container.x = 0;

@@ -64,6 +64,7 @@ export default class Character extends Actor {
             if (this._animationStatus === 'WALK') {
                 this.playStand();
             }
+            this._destination = null;
             return;
         }
 

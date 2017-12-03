@@ -29,8 +29,8 @@ export default class StageAgent {
 		
 		return this;
 	}
-
-	_initLayerAgent(){
+	
+	_initLayerAgent() {
 		this._layerAgent = new LayerAgent({contatiner: this._renderer.stage});
 	}
 	
@@ -40,17 +40,17 @@ export default class StageAgent {
 		 */
 		this._mouse = new Mouse({
 			hitArea: hitArea,
-			onStatusRight: ()=>{
-				if(!this._terrain){
-					return;
-				}
-				this._terrain.movingRight();
+			onStatusRight: (delta) => {
+				this._layerAgent.moveLayerTo(
+					{index: 0, deltaX: delta, deltaY: 0},
+					{index: 1, deltaX: delta, deltaY: 0},
+				);
 			},
-			onStatusLeft: ()=>{
-				if(!this._terrain){
-					return;
-				}
-				this._terrain.movingLeft();
+			onStatusLeft: (delta) => {
+				this._layerAgent.moveLayerTo(
+					{index: 0, deltaX: -delta, deltaY: 0},
+					{index: 1, deltaX: -delta, deltaY: 0},
+				);
 			},
 		}).init();
 		
