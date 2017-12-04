@@ -1,4 +1,3 @@
-import Mouse from './mouse';
 import LayerAgent from './layerAgent';
 
 export default class StageAgent {
