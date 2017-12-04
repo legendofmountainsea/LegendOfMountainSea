@@ -1,6 +1,6 @@
 export default class Controller {
-	//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/30
-	constructor() {
+	constructor(props) {
+		this._mouse = props.mouse? props.mouse : null;
 		this._pawn = null;
 		this._bindKeyboardEvent();
 	}
@@ -35,6 +35,10 @@ export default class Controller {
 			default:
 				break;
 		}
+	}
+	
+	getMouseInstance(){
+		return this._mouse;
 	}
 	
 	onMouseDown(e) {
