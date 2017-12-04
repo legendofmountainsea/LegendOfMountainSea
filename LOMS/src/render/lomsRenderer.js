@@ -1,3 +1,4 @@
+import Mouse from './mouse';
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
 import Window from '../control/window';
@@ -5,7 +6,7 @@ import Window from '../control/window';
 export default class LOMSRenderer {
 	
 	constructor(props) {
-		this._controller = new Controller();
+		this._controller = null;
 		this._window = new Window();
 		this._onAssetLoadingFinish = () => {
 		};
@@ -18,6 +19,12 @@ export default class LOMSRenderer {
 		const {width, height} = this._window.getDimension();
 		
 		this._renderer = new PIXI.Application(width, height, {backgroundColor: 0xeeeeee});
+		
+		this._controller = new Controller({
+			mouse: new Mouse({
+				hitArea: new PIXI.Rectangle(0, 0, width, height),
+			}).init(),
+		});
 		
 		this._stageAgent = new StageAgent({renderer: this._renderer, controller: this._controller});
 		
@@ -99,7 +106,7 @@ export default class LOMSRenderer {
 		this._stageAgent.clearActors();
 	}
 	
-	close(){
+	close() {
 		this._window.close();
 	}
 	

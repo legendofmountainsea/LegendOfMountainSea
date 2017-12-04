@@ -6,9 +6,7 @@ export default class StageAgent {
 		this._renderer = props.renderer;
 		this._controller = props.controller;
 		this._terrain = null;
-		this._mouse = null;
 		this._layerAgent = null;
-		this._stages = {};
 	}
 	
 	init() {
@@ -16,16 +14,9 @@ export default class StageAgent {
 		this._renderer.stage.interactive = true;
 		this._renderer.stage.hitArea = hitArea;
 		
-		this._renderer.stage.mousedown = (e) => {
-			this._controller.onMouseDown({
-				layerX: e.data.originalEvent.layerX,
-				layerY: e.data.originalEvent.layerY,
-			});
-		};
-		
 		this._initLayerAgent();
 		
-		this._initMouse(hitArea);
+		this._initMouse();
 		
 		return this;
 	}
@@ -34,33 +25,38 @@ export default class StageAgent {
 		this._layerAgent = new LayerAgent({contatiner: this._renderer.stage});
 	}
 	
-	_initMouse(hitArea) {
-		/**
-		 * TODO: refactor mouse component, pass renderer instance into Mouse() or pass mouse component into controller
-		 */
-		this._mouse = new Mouse({
-			hitArea: hitArea,
-			onStatusRight: (delta) => {
-				this._layerAgent.moveLayerTo(
-					{index: 0, deltaX: delta, deltaY: 0},
-					{index: 1, deltaX: delta, deltaY: 0},
-				);
-			},
-			onStatusLeft: (delta) => {
-				this._layerAgent.moveLayerTo(
-					{index: 0, deltaX: -delta, deltaY: 0},
-					{index: 1, deltaX: -delta, deltaY: 0},
-				);
-			},
-		}).init();
+	_initMouse() {
 		
-		this._layerAgent.addElement(this._mouse, 2);
+		this._renderer.stage.mousedown = (e) => {
+			this._controller.onMouseDown({
+				layerX: e.data.originalEvent.layerX,
+				layerY: e.data.originalEvent.layerY,
+			});
+		};
+		
+		const mouse = this._controller.getMouseInstance();
+		
+		mouse.bindOnStatusLeft((delta) => {
+			this._layerAgent.moveLayerTo(
+				{index: 0, deltaX: delta, deltaY: 0},
+				{index: 1, deltaX: delta, deltaY: 0},
+			);
+		});
+		
+		mouse.bindOnStatusRight((delta) => {
+			this._layerAgent.moveLayerTo(
+				{index: 0, deltaX: -delta, deltaY: 0},
+				{index: 1, deltaX: -delta, deltaY: 0},
+			);
+		});
+		
+		this._layerAgent.addElement(mouse, 2);
 		
 		this._renderer.stage.mousemove = (e) => {
 			
 			const {layerX, layerY} = e.data.originalEvent;
 			
-			this._mouse.showAtPosition({
+			mouse.showAtPosition({
 				x: layerX,
 				y: layerY,
 			});
@@ -68,11 +64,11 @@ export default class StageAgent {
 		};
 		
 		this._renderer.stage.mouseout = (e) => {
-			this._mouse.setOut(true);
+			mouse.setOut(true);
 		};
 		
 		this._renderer.stage.mouseover = (e) => {
-			this._mouse.setOut(false);
+			mouse.setOut(false);
 		};
 	}
 	

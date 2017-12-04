@@ -129,6 +129,16 @@ export default class Mouse extends Element {
 		}
 	}
 	
+	bindOnStatusRight(onStatusRight){
+		this._onStatusRight = onStatusRight;
+		return this;
+	}
+	
+	bindOnStatusLeft(onStatusLeft){
+		this._onStatusLeft = onStatusLeft;
+		return this;
+	}
+	
 	getPosition() {
 		return this._sprite.position;
 	}
