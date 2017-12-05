@@ -8,6 +8,11 @@ export default class StageAgent {
 		this._layerAgent = null;
 	}
 	
+	ACTOR_LAYER_INDEX = 0;
+	TERRAIN_LAYER_INDEX = 1;
+	UI_LAYER_INDEX = 2;
+	MOUSE_LAYER_INDEX = 3;
+	
 	init() {
 		let hitArea = new PIXI.Rectangle(0, 0, this._renderer.view.width, this._renderer.view.height);
 		this._renderer.stage.interactive = true;
@@ -22,9 +27,40 @@ export default class StageAgent {
 	
 	_initLayerAgent() {
 		this._layerAgent = new LayerAgent({contatiner: this._renderer.stage});
+		return this;
 	}
 	
 	_initMouse() {
+		
+		this._layerAgent.addElement(this._controller.getMouseInstance(), this.MOUSE_LAYER_INDEX);
+		
+		this._controller.bindMouseOnRightEdge((delta) => {
+			this._layerAgent.moveLayerTo(
+				{index: 0, deltaX: -delta, deltaY: 0},
+				{index: 1, deltaX: -delta, deltaY: 0},
+			);
+		});
+		
+		this._controller.bindMouseOnLeftEdge((delta) => {
+			this._layerAgent.moveLayerTo(
+				{index: 0, deltaX: delta, deltaY: 0},
+				{index: 1, deltaX: delta, deltaY: 0},
+			);
+		});
+		
+		this._controller.bindMouseOnTopEdge((delta) => {
+			this._layerAgent.moveLayerTo(
+				{index: 0, deltaX: 0, deltaY: delta},
+				{index: 1, deltaX: 0, deltaY: delta},
+			);
+		});
+		
+		this._controller.bindMouseOnBottomEdge((delta) => {
+			this._layerAgent.moveLayerTo(
+				{index: 0, deltaX: 0, deltaY: -delta},
+				{index: 1, deltaX: 0, deltaY: -delta},
+			);
+		});
 		
 		this._renderer.stage.mousedown = (e) => {
 			this._controller.onMouseDown({
@@ -33,61 +69,50 @@ export default class StageAgent {
 			});
 		};
 		
-		const mouse = this._controller.getMouseInstance();
-		
-		mouse.bindOnStatusLeft((delta) => {
-			this._layerAgent.moveLayerTo(
-				{index: 0, deltaX: delta, deltaY: 0},
-				{index: 1, deltaX: delta, deltaY: 0},
-			);
-		});
-		
-		mouse.bindOnStatusRight((delta) => {
-			this._layerAgent.moveLayerTo(
-				{index: 0, deltaX: -delta, deltaY: 0},
-				{index: 1, deltaX: -delta, deltaY: 0},
-			);
-		});
-		
-		this._layerAgent.addElement(mouse, 2);
-		
 		this._renderer.stage.mousemove = (e) => {
 			
 			const {layerX, layerY} = e.data.originalEvent;
 			
-			mouse.showAtPosition({
+			this._controller.setMousePosition({
 				x: layerX,
 				y: layerY,
 			});
-			
 		};
 		
 		this._renderer.stage.mouseout = (e) => {
-			mouse.setOut(true);
+			this._controller.setMouseOutEdge(true);
 		};
 		
 		this._renderer.stage.mouseover = (e) => {
-			mouse.setOut(false);
+			this._controller.setMouseOutEdge(false);
 		};
 	}
 	
 	addTerrain(terrain) {
 		this._terrain = terrain;
 		
-		this._layerAgent.addElement(this._terrain, 1);
+		this._layerAgent.addElement(this._terrain, this.TERRAIN_LAYER_INDEX);
 		
+		return this;
+	}
+	
+	addUI(uiElement){
+		this._layerAgent.addElement(uiElement, this.UI_LAYER_INDEX);
 		return this;
 	}
 	
 	addActor(actor) {
-		
-		this._layerAgent.addElement(actor, 0);
-		
+		this._layerAgent.addElement(actor, this.ACTOR_LAYER_INDEX);
 		return this;
 	}
 	
 	clearActors() {
-		this._layerAgent.removeElementsByIndex(0);
+		this._layerAgent.removeElementsByIndex(this.ACTOR_LAYER_INDEX);
+		return this;
+	}
+	
+	clearUI(){
+		this._layerAgent.removeElementsByIndex(this.UI_LAYER_INDEX);
 		return this;
 	}
 	

@@ -30,11 +30,11 @@ describe('Mouse', () => {
 	it('status should be up', () => {
 		mouse._checkPosition({x: 9, y: 5, width: 9, height: 5});
 		
-		expect(mouse._status).to.be(mouse.STATUS_UP);
+		expect(mouse._status).to.be(mouse.STATUS_TOP_EDGE);
 		
 		mouse._checkPosition({x: 9, y: 8, width: 9, height: 8});
 		
-		expect(mouse._status).to.be(mouse.STATUS_UP);
+		expect(mouse._status).to.be(mouse.STATUS_TOP_EDGE);
 	});
 	
 	it('status should be inside', () => {
@@ -50,31 +50,31 @@ describe('Mouse', () => {
 	it('status should be down', () => {
 		mouse._checkPosition({x: 9, y: 60, width: 9, height: 60});
 		
-		expect(mouse._status).to.be(mouse.STATUS_DOWN);
+		expect(mouse._status).to.be(mouse.STATUS_BOTTOM_EDGE);
 		
 		mouse._checkPosition({x: 40, y: 61, width: 40, height: 61});
 		
-		expect(mouse._status).to.be(mouse.STATUS_DOWN);
+		expect(mouse._status).to.be(mouse.STATUS_BOTTOM_EDGE);
 	});
 	
 	it('status should be left', () => {
 		mouse._checkPosition({x: 8, y: 50, width: 8, height: 50});
 		
-		expect(mouse._status).to.be(mouse.STATUS_LEFT);
+		expect(mouse._status).to.be(mouse.STATUS_LEFT_EDGE);
 		
 		mouse._checkPosition({x: 1, y: 50, width: 1, height: 50});
 		
-		expect(mouse._status).to.be(mouse.STATUS_LEFT);
+		expect(mouse._status).to.be(mouse.STATUS_LEFT_EDGE);
 	});
 	
 	it('status should be right', () => {
 		mouse._checkPosition({x: 50, y: 50, width: 50, height: 50});
 		
-		expect(mouse._status).to.be(mouse.STATUS_RIGHT);
+		expect(mouse._status).to.be(mouse.STATUS_RIGHT_EDGE);
 		
 		mouse._checkPosition({x: 51, y: 50, width: 51, height: 50});
 		
-		expect(mouse._status).to.be(mouse.STATUS_RIGHT);
+		expect(mouse._status).to.be(mouse.STATUS_RIGHT_EDGE);
 	});
 	
 })

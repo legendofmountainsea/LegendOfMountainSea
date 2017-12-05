@@ -94,6 +94,13 @@ export default class LOMSRenderer {
 		this._stageAgent.addTerrain(terrain);
 	}
 	
+	addUI(ui){
+		if(!ui.isNoAsset()){
+			ui.initResources(this._resources);
+		}
+		this._stageAgent.addUI(ui);
+	}
+	
 	addActor(actor) {
 		
 		if (!actor.isNoAsset()) {
@@ -103,6 +110,7 @@ export default class LOMSRenderer {
 	}
 	
 	clearStage() {
+		this._stageAgent.clearUI();
 		this._stageAgent.clearActors();
 	}
 	

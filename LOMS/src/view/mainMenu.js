@@ -59,11 +59,11 @@ export default class MainMenu extends Scene {
 			},
 		});
 		
-		this._renderer.addActor(logo);
+		this._renderer.addUI(logo);
 		
-		this._renderer.addActor(newGameText);
-		this._renderer.addActor(loadGameText);
-		this._renderer.addActor(quitGameText);
+		this._renderer.addUI(newGameText);
+		this._renderer.addUI(loadGameText);
+		this._renderer.addUI(quitGameText);
 		
 		return this;
 	}

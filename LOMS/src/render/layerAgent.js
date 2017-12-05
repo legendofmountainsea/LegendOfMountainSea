@@ -24,6 +24,11 @@ export default class LayerAgent {
 	
 	moveLayerTo(...layerTo) {
 		for (const movingInfo of layerTo) {
+			
+			if(!this._layer[movingInfo.index]){
+				continue;
+			}
+			
 			for (const element of this._layer[movingInfo.index]) {
 				
 				if (movingInfo.deltaX) {
