@@ -12,7 +12,7 @@ export default class Terrain extends Element {
 		this._center = props.center? props.center : {
 			x: 0, y: 0,
 		};
-		this._runtimeRenderSize = 50;
+		this._runtimeRenderSize = 10;
 		this._preRenderSize = 5;
 	}
 	
@@ -31,8 +31,8 @@ export default class Terrain extends Element {
 		const terrainResource = resources[this._assetData.DATA.NAME];
 		const {height, width} = terrainResource.texture;
 		
-		const currentX = this._container.x,
-			currentY = this._container.y;
+		const currentX = this._center.x,
+			currentY = this._center.y;
 		
 		for (let index = currentX - this._preRenderSize; index < currentX + this._runtimeRenderSize; ++index) {
 			for (let columnIndex = currentY - this._preRenderSize; columnIndex < currentY + this._runtimeRenderSize; ++columnIndex) {
