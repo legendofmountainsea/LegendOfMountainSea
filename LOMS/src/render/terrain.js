@@ -12,6 +12,8 @@ export default class Terrain extends Element {
 		this._center = props.center? props.center : {
 			x: 0, y: 0,
 		};
+		this._runtimeRenderSize = 50;
+		this._preRenderSize = 5;
 	}
 	
 	isNoAsset() {
@@ -29,8 +31,11 @@ export default class Terrain extends Element {
 		const terrainResource = resources[this._assetData.DATA.NAME];
 		const {height, width} = terrainResource.texture;
 		
-		for (let index = 0; index < 20; ++index) {
-			for (let columnIndex = 0; columnIndex < 20; ++columnIndex) {
+		const currentX = this._container.x,
+			currentY = this._container.y;
+		
+		for (let index = currentX - this._preRenderSize; index < currentX + this._runtimeRenderSize; ++index) {
+			for (let columnIndex = currentY - this._preRenderSize; columnIndex < currentY + this._runtimeRenderSize; ++columnIndex) {
 				
 				let hexagon = new Hexagon({assetData: this._assetData}).initResources(resources).setDimensions({
 					height,
