@@ -9,6 +9,9 @@ export default class Terrain extends Element {
 		this._noAsset = !props.assetData;
 		this._container = null;
 		this._assetData = props.assetData;
+		this._center = props.center? props.center : {
+			x: 0, y: 0,
+		};
 	}
 	
 	isNoAsset() {
@@ -21,8 +24,6 @@ export default class Terrain extends Element {
 	
 	initResources(resources) {
 		this._container = new PIXI.Container();
-		this._container.x = 0;
-		this._container.y = 0;
 		
 		this._initLayerAgent();
 		const terrainResource = resources[this._assetData.DATA.NAME];
