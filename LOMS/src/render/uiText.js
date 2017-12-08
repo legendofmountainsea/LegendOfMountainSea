@@ -29,20 +29,12 @@ export default class UIText extends Actor {
         this.setPosition(this._initPosition);
     }
 	
-	getElement() {
+	getRenderObject() {
 
         if(!this._sprite){
             this._init();
         }
         return this._sprite;
     }
-
-    setPosition(position) {
-        if (this._sprite) {
-            this._sprite.x = position.x;
-            this._sprite.y = position.y;
-        }
-
-        return this;
-    }
+    
 }

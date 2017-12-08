@@ -1,4 +1,4 @@
-export default class Element {
+export default class ElementCore {
 	constructor(props) {
 		this._ID = null;
 		this._index = 0;

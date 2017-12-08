@@ -1,7 +1,8 @@
-import Element from './element';
-export default class Actor extends Element{
+import ElementCore from './elementCore';
+export default class Actor extends ElementCore{
 	constructor(props) {
 		super(props);
+		this._position = null;
 		this._initPosition = props.position ? props.position : {x: 0, y: 0};
 		this._onRender = props.onRender ? props.onRender : () => {
 		};
@@ -18,17 +19,22 @@ export default class Actor extends Element{
 		return this._noAsset;
 	}
 	
-	getElement() {
+	getRenderObject() {
 		return this._sprite;
 	}
 	
 	setPosition(position) {
+		this._position = position;
 		if (this._sprite) {
-			this._sprite.position.x = position.x;
-			this._sprite.position.y = position.y;
+			this._sprite.x = position.x;
+			this._sprite.y = position.y;
 		}
 		
 		return this;
+	}
+	
+	getPosition(){
+		return this._position;
 	}
 	
 	bindRender(onRender) {
@@ -54,5 +60,11 @@ export default class Actor extends Element{
 	dispose(){
 		this._sprite.destroy({children:true, texture:true, baseTexture:true});
 		this._sprite = null;
+		
+		this._initPosition = null;
+		this._onRender = null;
+		this._onClick = null;
+		this._noAsset = null;
+		this._assetData = null;
 	}
 }

@@ -13,9 +13,9 @@ export default class LayerAgent {
 		
 		const result = this._getTopElementInLayer(index);
 		
-		const childIndex = (result) ? this._container.getChildIndex(result.getElement()) : 0;
+		const childIndex = (result) ? this._container.getChildIndex(result.getRenderObject()) : 0;
 		
-		this._container.addChildAt(element.getElement(), childIndex);
+		this._container.addChildAt(element.getRenderObject(), childIndex);
 		
 		this._addToLayer(element, index);
 		
@@ -32,10 +32,10 @@ export default class LayerAgent {
 			for (const element of this._layer[movingInfo.index]) {
 				
 				if (movingInfo.deltaX) {
-					element.getElement().x += (10 * movingInfo.deltaX);
+					element.getRenderObject().x += (10 * movingInfo.deltaX);
 				}
 				if (movingInfo.deltaY) {
-					element.getElement().y += (10 * movingInfo.deltaY);
+					element.getRenderObject().y += (10 * movingInfo.deltaY);
 				}
 			}
 		}
@@ -52,7 +52,7 @@ export default class LayerAgent {
 		}
 		
 		for (let element of elements) {
-			this._container.removeChild(element.getElement());
+			this._container.removeChild(element.getRenderObject());
 			element.dispose();
 		}
 	}

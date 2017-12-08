@@ -1,4 +1,4 @@
-import Element from './element';
+import ElementCore from './elementCore';
 
 const MOUSE_DEFAULT_TEXTURE_PATH = '../../assets/interface/mouse.png';
 const MOUSE_UP_TEXTURE_PATH = '../../assets/interface/mouseUp.png';
@@ -7,7 +7,7 @@ const MOUSE_LEFT_TEXTURE_PATH = '../../assets/interface/mouseLeft.png';
 const MOUSE_RIGHT_TEXTURE_PATH = '../../assets/interface/mouseRight.png';
 const EDGE_LENGHT = 8;
 
-export default class Mouse extends Element {
+export default class Mouse extends ElementCore {
 	
 	constructor(props) {
 		super(props);
