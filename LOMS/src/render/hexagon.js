@@ -6,6 +6,7 @@ export default class Hexagon extends Actor {
         super(props);
         this._height = 0;
         this._width = 0;
+        this._position = null;
     }
 
     getName() {
@@ -36,12 +37,17 @@ export default class Hexagon extends Actor {
     }
 
     setPosition(position) {
+	    this._position = position;
         if (this._sprite) {
-            this._sprite.position.x = (this._width / 2) + position.x * (this._height * COS_60_DEGREES );
-            this._sprite.position.y = position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2);
+            this._sprite.x = (this._width / 2) + position.x * (this._height * COS_60_DEGREES );
+            this._sprite.y = position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2);
         }
 
         return this;
+    }
+    
+    getPosition(){
+    	return this._position;
     }
 
     tick(delta){
