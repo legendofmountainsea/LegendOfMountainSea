@@ -9,7 +9,7 @@
   },
   "build": {
     "appId": "io.github.skyharp.tyrealgray.loms",
-    "nwVersion": "0.23.5",
+    "nwVersion": "0.27.0",
     "packed": true,
     "targets": [
       "zip"
@@ -23,9 +23,9 @@
     "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run lint && npm run build-dev",
     "dev": "webpack-dev-server --open",
     "build-dev": "webpack --color",
-    "build-win": "nwjs-v0.23.5-win-x64\\nw.exe .",
+    "build-win": "nwjs-v0.27.0-win-x64\\nw.exe .",
     "start-win": "npm run build-dev && npm run build-win",
-    "build-mac": "./nwjs-v0.23.5-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
+    "build-mac": "./nwjs-v0.27.0-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
     "start-mac": "npm run build-dev && npm run build-mac",
     "dist-mac": "build --tasks mac-x64 .",
     "dist-win": "build --tasks win-x64 .",
