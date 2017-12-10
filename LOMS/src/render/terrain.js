@@ -68,7 +68,7 @@ export default class Terrain extends ElementCore {
 			for (let columnIndex = topLeftY - this._preRenderSize; columnIndex < topLeftY + this._runtimeRenderSize; ++columnIndex) {
 				
 				if (this._hexagons.find((hexagon) => {
-						let position = hexagon.getPosition();
+						let position = hexagon.getPositionOnTerrain();
 						return position.x === index && position.y === columnIndex;
 					})
 				) {
@@ -80,7 +80,7 @@ export default class Terrain extends ElementCore {
 					width,
 				});
 				
-				hexagon.setPosition({
+				hexagon.setPositionOnTerrain({
 					x: index,
 					y: columnIndex,
 				});
