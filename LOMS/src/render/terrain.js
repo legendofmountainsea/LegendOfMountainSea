@@ -10,7 +10,7 @@ export default class Terrain extends ElementCore {
 		this._resources = null;
 		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
-		this._runtimeRenderSize = 10;
+		this._runtimeRenderSize = 5;
 		this._preRenderSize = 5;
 		this._hexagons = [];
 	}
@@ -36,7 +36,7 @@ export default class Terrain extends ElementCore {
 		this._layerAgent.addElement(hexagon, 0);
 	}
 	
-	getElement() {
+	getRenderObject() {
 		return this._container;
 	}
 	
@@ -57,6 +57,7 @@ export default class Terrain extends ElementCore {
 	}
 	
 	renderHexagonRegion(topLeft){
+		//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/65
 		const terrainResource = this._resources[this._assetData.DATA.NAME];
 		const {height, width} = terrainResource.texture;
 		
