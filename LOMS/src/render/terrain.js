@@ -2,6 +2,7 @@ import ElementCore from './elementCore';
 import Hexagon from './hexagon';
 import LayerAgent from './layerAgent';
 
+const COS_60_DEGREES = Math.cos(Math.PI / 6);
 export default class Terrain extends ElementCore {
 	//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/40
 	constructor(props) {
@@ -57,11 +58,10 @@ export default class Terrain extends ElementCore {
 	}
 	
 	renderHexagonRegion(topLeft){
-		//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/65
 		const terrainResource = this._resources[this._assetData.DATA.NAME];
 		const {height, width} = terrainResource.texture;
 		
-		const topLeftX = - parseInt(topLeft.x / width),
+		const topLeftX = - parseInt(topLeft.x / (height * COS_60_DEGREES)),
 			topLeftY = - parseInt(topLeft.y / height);
 		
 		for (let index = topLeftX - this._preRenderSize; index < topLeftX + this._runtimeRenderSize; ++index) {
