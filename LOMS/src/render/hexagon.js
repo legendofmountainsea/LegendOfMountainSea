@@ -68,4 +68,8 @@ export default class Hexagon extends Actor {
 	tick(delta) {
 		//override in subClass
 	}
+	
+	dispose(){
+		super.dispose();
+	}
 }
