@@ -22,7 +22,7 @@ export default class LayerAgent {
 		return this;
 	}
 	
-	moveLayerTo(...layerTo) {
+	moveLayerTo(layerTo) {
 		for (const movingInfo of layerTo) {
 			
 			if(!this._layer[movingInfo.index]){

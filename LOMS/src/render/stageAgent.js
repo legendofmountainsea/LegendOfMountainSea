@@ -36,29 +36,29 @@ export default class StageAgent {
 		
 		this._controller.bindMouseOnRightEdge((delta) => {
 			this._layerAgent.moveLayerTo(
-				{index: this.ACTOR_LAYER_INDEX, deltaX: -delta, deltaY: 0},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta, deltaY: 0},
+				[{index: this.ACTOR_LAYER_INDEX, deltaX: -delta, deltaY: 0},
+				{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta, deltaY: 0}]
 			);
 		});
 		
 		this._controller.bindMouseOnLeftEdge((delta) => {
 			this._layerAgent.moveLayerTo(
-				{index: this.ACTOR_LAYER_INDEX, deltaX: delta, deltaY: 0},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: delta, deltaY: 0},
+				[{index: this.ACTOR_LAYER_INDEX, deltaX: delta, deltaY: 0},
+				{index: this.TERRAIN_LAYER_INDEX, deltaX: delta, deltaY: 0}]
 			);
 		});
 		
 		this._controller.bindMouseOnTopEdge((delta) => {
 			this._layerAgent.moveLayerTo(
-				{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: delta},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: delta},
+				[{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: delta},
+				{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: delta}]
 			);
 		});
 		
 		this._controller.bindMouseOnBottomEdge((delta) => {
 			this._layerAgent.moveLayerTo(
-				{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: -delta},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: -delta},
+				[{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: -delta},
+				{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: -delta}]
 			);
 		});
 		

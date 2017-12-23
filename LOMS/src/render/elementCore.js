@@ -22,6 +22,14 @@ export default class ElementCore {
 		return this._index;
 	}
 	
+	setTransform(transform){
+		//override in subClass
+	}
+	
+	getRenderObject(){
+		//override in subClass
+	}
+	
 	dispose(){
 		//override in subClass
 	}
