@@ -5,6 +5,7 @@
   "main": "index.html",
   "window": {
     "title": "loms",
+    "icon": "LOMS.png",
     "frame": false
   },
   "build": {
