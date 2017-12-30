@@ -27,7 +27,7 @@ export default class WorldScene extends Scene {
 			},
 		});
 		
-		this._renderer.addActor(systemMenuIcon);
+		this._renderer.addUI(systemMenuIcon);
 		
 		let houyi = new Character({
 			assetData: S_worldAsset.HOUYI,
