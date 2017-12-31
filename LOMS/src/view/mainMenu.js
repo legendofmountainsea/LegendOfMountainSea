@@ -1,7 +1,5 @@
 import S_mainMenuAsset from '../static/mainMenuAsset';
 
-import i18n from '../static/interface/i18n';
-
 import Scene from '../scene/scene';
 
 import Pattern from '../render/pattern';
@@ -15,7 +13,6 @@ export default class MainMenu extends Scene {
 		this._assetsData = [S_mainMenuAsset];
 		this._onFinish = this.onFinish.bind(this);
 		this._backGroundMusic = null;
-		alert(i18n);
 	}
 	
 	onFinish() {
