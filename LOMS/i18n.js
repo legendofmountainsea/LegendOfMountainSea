@@ -20,7 +20,6 @@ class i18n {
 
 function saveSettings (settings, callback) {
     var file = 'my-settings-file.json';
-    alert(nw.App.dataPath)
     var filePath = path.join(nw.App.dataPath, file);
     fs.writeFile(filePath, settings, function (err) {
         if (err) {
