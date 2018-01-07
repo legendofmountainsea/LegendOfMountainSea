@@ -1,6 +1,6 @@
 //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/67
-var fs = require('fs');
-var path = require('path');
+var fileSystem = require('fs');
+var pathHelper = require('path');
 
 const language = window.navigator.language;
 
@@ -20,8 +20,8 @@ class i18n {
 
 function saveSettings (settings, callback) {
     var file = 'my-settings-file.json';
-    var filePath = path.join(nw.App.dataPath, file);
-    fs.writeFile(filePath, settings, function (err) {
+    var filePath = pathHelper.join(nw.App.dataPath, file);
+	fileSystem.writeFile(filePath, settings, function (err) {
         if (err) {
             console.info("There was an error attempting to save your data.");
             console.warn(err.message);
