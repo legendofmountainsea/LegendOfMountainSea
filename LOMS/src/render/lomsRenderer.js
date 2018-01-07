@@ -1,7 +1,7 @@
 import Mouse from './mouse';
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
-import Window from '../control/window';
+import Window from '../module/window';
 
 export default class LOMSRenderer {
 	
