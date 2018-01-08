@@ -46,6 +46,7 @@
   },
   "globals": {
     "PIXI": true,
-    "winGUI": true
+    "winGUI": true,
+    "fileSystem": true
   }
 }
