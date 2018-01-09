@@ -1,10 +1,8 @@
 //set NW.js client window size
-var winGUI = require('nw.gui').Window.get();
+var winGUI = nw.Window.get();
 
-if (winGUI !== 'undefined') {
-	winGUI.maximize();
-	
-	setTimeout(function () {
-		winGUI.enterFullscreen();
-	}, 1000);
-}
+winGUI.maximize();
+
+setTimeout(function () {
+	winGUI.enterFullscreen();
+}, 1000);
