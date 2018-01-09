@@ -1,15 +1,22 @@
 //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
 export default class Store {
-	constructor(){
-		this._fileSystem = fileSystem ? fileSystem : null;
-	}
 	
 	clearConfig(){
 	
 	}
 	
-	readConfig(){
-	
+	static readConfig(){
+		if(!fileSystem){
+			return;
+		}
+		
+		fileSystem.readFile('my-settings-file.json', function (err, config) {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			console.warn('config '+ config);
+		});
 	}
 	
 	writeConfig(){
