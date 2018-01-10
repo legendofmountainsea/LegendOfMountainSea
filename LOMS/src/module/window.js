@@ -1,26 +1,32 @@
+import {EXECUTE_IN_CLIENT, EXECUTE_IN_CLIENT_WITH_RETURN} from "./envUtil";
+
 export default class Window {
-	constructor(props){
-		this._winGUI = winGUI ? winGUI : null;
+
+	static enterFullscreen(){
+		EXECUTE_IN_CLIENT(()=>{
+			nwWinGUI.maximize();
+			nwWinGUI.enterFullscreen();
+		});
 	}
 	
-	getDimension(){
+	static getDimension(){
 		
-		if(!this._winGUI){
+		const dimension = EXECUTE_IN_CLIENT_WITH_RETURN(()=>{
 			return {
-				width: 1600,
-				height: 800,
+				width: parseInt(nwWinGUI.width * 0.98),
+				height: parseInt(nwWinGUI.height * 0.96),
 			};
-		}
-	
-		return {
-			width: parseInt(this._winGUI.width * 0.98),
-			height: parseInt(this._winGUI.height * 0.96),
+		});
+		
+		return dimension? dimension : {
+			width: 1600,
+			height: 800,
 		};
 	}
 	
-	close(){
-		if(this._winGUI){
-			this._winGUI.close();
+	static close(){
+		if(nwWinGUI){
+			nwWinGUI.close();
 		}
 		else {
 			window.close();

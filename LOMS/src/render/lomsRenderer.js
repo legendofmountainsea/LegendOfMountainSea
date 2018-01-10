@@ -7,7 +7,6 @@ export default class LOMSRenderer {
 	
 	constructor(props) {
 		this._controller = null;
-		this._window = new Window();
 		this._onAssetLoadingFinish = () => {
 		};
 		this.initRenderer();
@@ -16,7 +15,7 @@ export default class LOMSRenderer {
 	
 	initRenderer() {
 		
-		const {width, height} = this._window.getDimension();
+		const {width, height} = Window.getDimension();
 		
 		this._renderer = new PIXI.Application(width, height, {backgroundColor: 0xeeeeee});
 		
@@ -115,7 +114,7 @@ export default class LOMSRenderer {
 	}
 	
 	close() {
-		this._window.close();
+		Window.close();
 	}
 	
 	render() {

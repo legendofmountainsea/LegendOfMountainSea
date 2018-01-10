@@ -2,6 +2,7 @@ import 'pixi.js';
 
 import LOMSRenderer from './render/lomsRenderer';
 import MainMenu from './view/mainMenu';
+import Window from './module/window';
 
 export default class LOMS {
 	constructor() {
@@ -9,6 +10,8 @@ export default class LOMS {
 	}
 	
 	beginGame() {
+		Window.enterFullscreen();
+		
 		setTimeout(() => {
 			this._renderer = new LOMSRenderer;
 			this._renderer.renderScene(new MainMenu);
