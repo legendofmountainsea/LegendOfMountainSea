@@ -45,6 +45,7 @@
     ]
   },
   "globals": {
+    "nw": true,
     "PIXI": true,
     "nwWinGUI": true,
     "fileSystem": true
