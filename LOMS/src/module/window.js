@@ -1,35 +1,35 @@
-import {EXECUTE_IN_CLIENT, EXECUTE_IN_CLIENT_WITH_RETURN} from "./envUtil";
+import {EXECUTE_IN_CLIENT, EXECUTE_IN_CLIENT_WITH_RETURN} from '../util/envUtil';
 
 export default class Window {
-
-	static enterFullscreen(){
-		EXECUTE_IN_CLIENT(()=>{
+	
+	static enterFullscreen() {
+		EXECUTE_IN_CLIENT(() => {
 			nwWinGUI.maximize();
 			nwWinGUI.enterFullscreen();
 		});
 	}
 	
-	static getDimension(){
+	static getDimension() {
 		
-		const dimension = EXECUTE_IN_CLIENT_WITH_RETURN(()=>{
+		try {
+			return EXECUTE_IN_CLIENT_WITH_RETURN(() => {
+				return {
+					width: parseInt(nwWinGUI.width * 0.98),
+					height: parseInt(nwWinGUI.height * 0.96),
+				};
+			});
+		} catch (e) {
+			console.error(e);
 			return {
-				width: parseInt(nwWinGUI.width * 0.98),
-				height: parseInt(nwWinGUI.height * 0.96),
+				width: 1600,
+				height: 800,
 			};
-		});
-		
-		return dimension? dimension : {
-			width: 1600,
-			height: 800,
-		};
+		}
 	}
 	
-	static close(){
-		if(nwWinGUI){
+	static close() {
+		EXECUTE_IN_CLIENT(() => {
 			nwWinGUI.close();
-		}
-		else {
-			window.close();
-		}
+		});
 	}
 }
