@@ -14,15 +14,12 @@ export default class Store {
 		fileSystem.writeFile(configPath, JSON.stringify(config), (error) => {
 			if (error) {
 				console.error(error);
-				return;
 			}
-			
-			console.log(`config is init!`);
 		});
 	}
 	
 	static getConfig() {
-		if(!config){
+		if (!config) {
 			Store._initConfig(initConfig);
 			return initConfig;
 		}
@@ -63,10 +60,7 @@ export default class Store {
 			fileSystem.writeFile(configPath, JSON.stringify(config), (error) => {
 				if (error) {
 					console.error(error);
-					return;
 				}
-				
-				console.log(`config is saved!`);
 			});
 		});
 	}
