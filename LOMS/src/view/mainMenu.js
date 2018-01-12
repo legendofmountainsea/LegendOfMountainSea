@@ -1,13 +1,12 @@
 import S_mainMenuAsset from '../static/mainMenuAsset';
 
-import Store from '../module/store';
-
 import Scene from '../scene/scene';
 
 import Pattern from '../render/pattern';
 import UIText from '../render/uiText';
 import Style from '../static/textStyle';
 import WorldScene from '../scene/worldScene';
+import Localization from '../i18n/localization';
 
 export default class MainMenu extends Scene {
 	constructor(props) {
@@ -15,13 +14,17 @@ export default class MainMenu extends Scene {
 		this._assetsData = [S_mainMenuAsset];
 		this._onFinish = this.onFinish.bind(this);
 		this._backGroundMusic = null;
-		Store.readConfig();
 	}
 	
 	onFinish() {
 		this._backGroundMusic = new Audio('../../assets/sound/Angelic_Happiness.mp3');
 		this._backGroundMusic.loop = true;
 		this._backGroundMusic.play();
+		
+		let languageInfoText = new UIText({
+			string: `language: ${Localization.getCurrentLanguage()}`,
+			// position: {x: 20, y: 20},
+		});
 		
 		let logo = new Pattern({
 			assetData: S_mainMenuAsset.LOGO,
@@ -67,6 +70,7 @@ export default class MainMenu extends Scene {
 		this._renderer.addUI(newGameText);
 		this._renderer.addUI(loadGameText);
 		this._renderer.addUI(quitGameText);
+		this._renderer.addUI(languageInfoText);
 		
 		return this;
 	}

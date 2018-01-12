@@ -1,4 +1,7 @@
 import LOMS from './app';
+import {EXECUTE_WITHOUT_CLIENT} from './util/envUtil';
 
-const app = new LOMS;
-app.beginGame();
+EXECUTE_WITHOUT_CLIENT(()=>{
+	const app = new LOMS;
+	app.beginGame();
+});
