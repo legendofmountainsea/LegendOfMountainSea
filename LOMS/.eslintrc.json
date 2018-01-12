@@ -40,7 +40,8 @@
       "error",
       "single",
       {
-        "avoidEscape": true
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
       }
     ]
   },
@@ -48,6 +49,9 @@
     "nw": true,
     "PIXI": true,
     "nwWinGUI": true,
+    "pathHelper": true,
+    "appRootPath": true,
+    "systemLanguage": true,
     "fileSystem": true
   }
 }
