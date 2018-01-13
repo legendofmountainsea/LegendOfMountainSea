@@ -7,6 +7,7 @@ import UIText from '../render/uiText';
 import Style from '../static/textStyle';
 import WorldScene from '../scene/worldScene';
 import Localization from '../i18n/localization';
+import {EXECUTE_IN_CLIENT} from '../util/envUtil';
 
 export default class MainMenu extends Scene {
 	constructor(props) {
@@ -20,11 +21,6 @@ export default class MainMenu extends Scene {
 		this._backGroundMusic = new Audio('../../assets/sound/Angelic_Happiness.mp3');
 		this._backGroundMusic.loop = true;
 		this._backGroundMusic.play();
-		
-		let languageInfoText = new UIText({
-			string: `language: ${Localization.getCurrentLanguage()}`,
-			// position: {x: 20, y: 20},
-		});
 		
 		let logo = new Pattern({
 			assetData: S_mainMenuAsset.LOGO,
@@ -70,7 +66,13 @@ export default class MainMenu extends Scene {
 		this._renderer.addUI(newGameText);
 		this._renderer.addUI(loadGameText);
 		this._renderer.addUI(quitGameText);
-		this._renderer.addUI(languageInfoText);
+		
+		EXECUTE_IN_CLIENT(()=>{
+			let languageInfoText = new UIText({
+				string: `language: ${Localization.getCurrentLanguage()}`,
+			});
+			this._renderer.addUI(languageInfoText);
+		});
 		
 		return this;
 	}
