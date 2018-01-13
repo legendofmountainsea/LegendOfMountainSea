@@ -1,17 +1,20 @@
 //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
 import {EXECUTE_IN_CLIENT} from '../util/envUtil';
 
-const configPath = pathHelper.join(appRootPath, 'lomsConfig.json');
 let config = null;
-const initConfig = {
-	language: systemLanguage,
-};
-
 export default class Store {
+	
+	static _getInitConfig() {
+		return {language: systemLanguage};
+	}
+	
+	static _getConfigPath(){
+		return pathHelper.join(appRootPath, 'lomsConfig.json');
+	}
 	
 	static _initConfig(initConfigJson) {
 		config = initConfigJson;
-		fileSystem.writeFile(configPath, JSON.stringify(config), (error) => {
+		fileSystem.writeFile(Store._getConfigPath(), JSON.stringify(config), (error) => {
 			if (error) {
 				console.error(error);
 			}
@@ -20,8 +23,8 @@ export default class Store {
 	
 	static getConfig() {
 		if (!config) {
-			Store._initConfig(initConfig);
-			return initConfig;
+			Store._initConfig(Store._getInitConfig());
+			return Store._getInitConfig();
 		}
 		return config;
 	}
@@ -29,10 +32,10 @@ export default class Store {
 	static readConfig() {
 		EXECUTE_IN_CLIENT(() => {
 			if (!config) {
-				Store._initConfig();
+				Store._initConfig(Store._getInitConfig());
 				return;
 			}
-			fileSystem.readFile(configPath, (error, configStr) => {
+			fileSystem.readFile(Store._getConfigPath(), (error, configStr) => {
 				if (error) {
 					console.error(error);
 					return;
@@ -46,7 +49,7 @@ export default class Store {
 		EXECUTE_IN_CLIENT(() => {
 			if (!config) {
 				Store._initConfig({
-					...initConfig,
+					...Store._getInitConfig(),
 					...newConfig,
 				});
 				return;
@@ -57,7 +60,7 @@ export default class Store {
 				...newConfig,
 			};
 			
-			fileSystem.writeFile(configPath, JSON.stringify(config), (error) => {
+			fileSystem.writeFile(Store._getConfigPath(), JSON.stringify(config), (error) => {
 				if (error) {
 					console.error(error);
 				}
