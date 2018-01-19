@@ -12,30 +12,25 @@
 
 To experience hundreds of Chinese ancient legends, start with Hou Yi ![houyi](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS/houyi_battle.gif) to shoot down nine suns
 
+## Installing
+
+You will need LOMS Development CLI
+```
+$ npm install loms-cli -g
+```
+
+Setting your project in current directory
+```
+$ loms init
+```
+- Windows user might get `node-gyp rebuild` error, open Powershell as admin and run `npm install -g windows-build-tools`
+
 ## Getting started LOMS
 
-Navigating to **"./LOMS"** folder and install dependencies
+Navigating to **"./LOMS"** folder
 ```
 $ cd ./LOMS
-$ npm install
 ```
-#### Optional: with NW.js Client
-Download NW.js 64-bit Client [0.27.0](https://dl.nwjs.io/v0.27.0/)
-
-Put **nwjs-v0.27.0-win-x64** or **nwjs-v0.27.0-osx-x64** folder into **"./LegendOfMountainSea/LOMS/"**
-
-## Getting started LOMS-Server
-
-Navigating to **"./LOMS-Server"** folder and install dependencies
-```
-$ cd ./LOMS-Server
-$ npm install
-```
-Begin coding
-
-## Start the game
-Navigating to **"./LOMS"** folder and start
-
 **Run game on web browser without NW.js Client**
 ```
 $ npm run dev
@@ -49,10 +44,11 @@ $ npm run start-mac
 $ npm run start-win
 ```
 
-## Start the server
-Navigating to **"./LOMS-Server"** folder and start
+## Getting started LOMS-Server
 
+Navigating to **"./LOMS-Server"** folder
 ```
+$ cd ./LOMS-Server
 $ npm run dev
 ```
 
