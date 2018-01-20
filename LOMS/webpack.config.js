@@ -8,6 +8,7 @@ var clientConfig = {
 		path: __dirname,
 		filename: 'loms.js',
 	},
+	devtool: 'eval-source-map',
 	module: {
 		rules: [
 			{
