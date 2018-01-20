@@ -1,6 +1,6 @@
 # Test against the latest version of this Node.js version
 environment:
-  nodejs_version: "6"
+  nodejs_version: "9"
 
 notifications:
   - provider: Webhook
@@ -12,7 +12,7 @@ notifications:
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node 6.11.0 x64
+  - ps: Install-Product node 9.2.0 x64
   # install modules
   - cd ./LOMS
   - npm install
