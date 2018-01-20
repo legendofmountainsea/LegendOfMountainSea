@@ -23,7 +23,11 @@ Setting your project in current directory
 ```
 $ loms init
 ```
-- Windows user might get `node-gyp rebuild` error, open Powershell as admin and run `npm install -g windows-build-tools`
+- Windows might get `node-gyp rebuild` error, open Powershell as admin and run
+```
+$ npm install -g windows-build-tools
+```
+ 
 
 ## Getting started LOMS
 
@@ -33,15 +37,11 @@ $ cd ./LOMS
 ```
 **Run game on web browser without NW.js Client**
 ```
-$ npm run dev
+$ loms run-dev
 ```
-**Mac** `with NW.js Client`
+**Run game on Windows or macOS with NW.js Client**
 ```
-$ npm run start-mac
-```
-**Window** `with NW.js Client`
-```
-$ npm run start-win
+$ loms run-client
 ```
 
 ## Getting started LOMS-Server
@@ -49,7 +49,7 @@ $ npm run start-win
 Navigating to **"./LOMS-Server"** folder
 ```
 $ cd ./LOMS-Server
-$ npm run dev
+$ loms run-server
 ```
 
 ## Requirement

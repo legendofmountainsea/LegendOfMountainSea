@@ -5,7 +5,7 @@
   "license": "GPL-2.0",
   "scripts": {
     "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run lint && npm run build",
-    "dev": "node script/dev",
+    "server": "node script/dev",
     "build": "babel ./src -s -d bin",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix"
