@@ -1,6 +1,7 @@
 import Actor from './actor';
 
-const COS_60_DEGREES = Math.cos(Math.PI / 6);
+export const COS_60_DEGREES = Math.cos(Math.PI / 6);
+
 export default class Hexagon extends Actor {
 	constructor(props) {
 		super(props);
@@ -48,9 +49,9 @@ export default class Hexagon extends Actor {
 		return this;
 	}
 	
-	setRenderPosition(position){
+	setRenderPosition(position) {
 		this._renderPosition = {
-			x:(this._width / 2) + position.x * (this._height * COS_60_DEGREES ),
+			x: (this._width / 2) + position.x * (this._height * COS_60_DEGREES ),
 			y: position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2),
 		};
 		
@@ -61,7 +62,7 @@ export default class Hexagon extends Actor {
 		return this._positionOnTerrain;
 	}
 	
-	getRenderPosition(){
+	getRenderPosition() {
 		return this._renderPosition;
 	}
 	
@@ -69,7 +70,7 @@ export default class Hexagon extends Actor {
 		//override in subClass
 	}
 	
-	dispose(){
+	dispose() {
 		super.dispose();
 	}
 }

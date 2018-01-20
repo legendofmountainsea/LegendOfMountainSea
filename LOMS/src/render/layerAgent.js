@@ -25,18 +25,16 @@ export default class LayerAgent {
 	moveLayerTo(layerTo) {
 		for (const movingInfo of layerTo) {
 			
-			if(!this._layer[movingInfo.index]){
+			if (!this._layer[movingInfo.index]) {
 				continue;
 			}
 			
 			for (const element of this._layer[movingInfo.index]) {
 				
-				if (movingInfo.deltaX) {
-					element.getRenderObject().x += (10 * movingInfo.deltaX);
-				}
-				if (movingInfo.deltaY) {
-					element.getRenderObject().y += (10 * movingInfo.deltaY);
-				}
+				element.setTransform({
+					x: (movingInfo.deltaX) ? (10 * movingInfo.deltaX) : 0,
+					y: (movingInfo.deltaY) ? (10 * movingInfo.deltaY) : 0,
+				});
 			}
 		}
 	}

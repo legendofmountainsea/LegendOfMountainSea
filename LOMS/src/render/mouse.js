@@ -46,6 +46,10 @@ export default class Mouse extends ElementCore {
 		return this;
 	}
 	
+	setTransform(transform){
+		//no need
+	}
+	
 	getRenderObject() {
 		return this._sprite;
 	}
