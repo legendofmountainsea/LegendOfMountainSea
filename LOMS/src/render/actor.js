@@ -23,6 +23,14 @@ export default class Actor extends ElementCore{
 		return this._sprite;
 	}
 	
+	setTransform(transform){
+		if(this._sprite){
+			this._sprite.x += transform.x;
+			this._sprite.y += transform.y;
+		}
+		return this;
+	}
+	
 	setPosition(position) {
 		this._position = position;
 		if (this._sprite) {

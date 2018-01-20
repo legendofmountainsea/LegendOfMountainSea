@@ -1,19 +1,19 @@
 import ElementCore from './elementCore';
-import Hexagon from './hexagon';
 import LayerAgent from './layerAgent';
+import HexagonRegion from './hexagonRegion';
 
-const COS_60_DEGREES = Math.cos(Math.PI / 6);
 export default class Terrain extends ElementCore {
 	//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/40
 	constructor(props) {
 		super(props);
+		this._coordinates = props.coordinates? props.coordinates : {x:0,y:0};
 		this._container = null;
 		this._resources = null;
 		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
 		this._runtimeRenderSize = 5;
 		this._preRenderSize = 5;
-		this._hexagons = [];
+		this._hexagonRegions = [];
 	}
 	
 	isNoAsset() {
@@ -28,17 +28,42 @@ export default class Terrain extends ElementCore {
 	initResources(resources) {
 		this._resources = resources;
 		this._initLayerAgent();
+		this._createHexagonRegion(this._coordinates);
 		
 		return this;
 	}
 	
-	addHexagon(hexagon) {
-		this._hexagons.push(hexagon);
-		this._layerAgent.addElement(hexagon, 0);
-	}
-	
 	getRenderObject() {
 		return this._container;
+	}
+	
+	setTransform(transform){
+		
+		this._coordinates.x += transform.x;
+		this._coordinates.y += transform.y;
+		
+		const isGenerate = this._hexagonRegions.find((hexagonRegions) => {
+			return hexagonRegions.isContainedCoordinates(this._coordinates);
+		});
+		
+		if(!isGenerate){
+			this._createHexagonRegion(this._coordinates);
+		}
+
+		for(let hexagonRegion of this._hexagonRegions){
+			hexagonRegion.setTransform(transform);
+		}
+	}
+	
+	_createHexagonRegion(coordinates){
+		const hexagonRegion = new HexagonRegion({
+			coordinates: coordinates,
+			assetData: this._assetData,
+		}).initResources(this._resources);
+		
+		this._hexagonRegions.push(hexagonRegion);
+		
+		this._layerAgent.addElement(hexagonRegion, 0);
 	}
 	
 	tick(delta) {
@@ -47,46 +72,17 @@ export default class Terrain extends ElementCore {
 			return;
 		}
 		
-		this.renderHexagonRegion({
-			x: this._container.x,
-			y: this._container.y,
-		});
+		this.renderHexagonRegion(delta);
 	}
 	
 	onRender(delta) {
 	
 	}
 	
-	renderHexagonRegion(topLeft){
-		const terrainResource = this._resources[this._assetData.DATA.NAME];
-		const {height, width} = terrainResource.texture;
+	renderHexagonRegion(delta){
 		
-		const topLeftX = - parseInt(topLeft.x / (height * COS_60_DEGREES)),
-			topLeftY = - parseInt(topLeft.y / height);
-		
-		for (let index = topLeftX - this._preRenderSize; index < topLeftX + this._runtimeRenderSize; ++index) {
-			for (let columnIndex = topLeftY - this._preRenderSize; columnIndex < topLeftY + this._runtimeRenderSize; ++columnIndex) {
-				
-				if (this._hexagons.find((hexagon) => {
-						let position = hexagon.getPositionOnTerrain();
-						return position.x === index && position.y === columnIndex;
-					})
-				) {
-					continue;
-				}
-				
-				let hexagon = new Hexagon({assetData: this._assetData}).initResources(this._resources).setDimensions({
-					height,
-					width,
-				});
-				
-				hexagon.setPositionOnTerrain({
-					x: index,
-					y: columnIndex,
-				});
-				
-				this.addHexagon(hexagon);
-			}
+		for(let hexagonRegion of this._hexagonRegions){
+			hexagonRegion.render(delta);
 		}
 	}
 	
