@@ -6,7 +6,7 @@ var clientConfig = {
 	entry: './src/main.js',
 	output: {
 		path: __dirname,
-		filename: 'loms.js',
+		filename: 'loms.dev.js',
 	},
 	devtool: 'eval-source-map',
 	module: {
