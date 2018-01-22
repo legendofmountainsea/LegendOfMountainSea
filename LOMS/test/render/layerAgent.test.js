@@ -48,6 +48,33 @@ describe('LayerAgent', () => {
 		
 		expect(resultB).to.eql(actor);
 	});
+	//_removeFromLayer
 	
+	it('should remove the right element', () => {
+		
+		const actor = {id: 'a', getID: ()=> 'a' },
+			index = 1,
+			actorB = {id: 'b', getID: ()=> 'b'},
+			indexB = 2;
+		
+		layerAgent._addToLayer(actor, index);
+		layerAgent._addToLayer(actorB, indexB);
+		
+		
+		layerAgent._removeFromLayer(actor,index);
+		
+		const resultA = layerAgent._getTopElementInLayer(index);
+		
+		const resultB = layerAgent._getTopElementInLayer(indexB);
+		
+		expect(resultA).to.eql(null);
+		
+		expect(resultB).to.eql(actorB);
+		
+		layerAgent._removeFromLayer(actorB,indexB);
+		const resultC = layerAgent._getTopElementInLayer(indexB);
+		
+		expect(resultC).to.eql(null);
+	});
 })
 ;

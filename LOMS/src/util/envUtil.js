@@ -2,7 +2,7 @@ import {NativeModuleMissingError} from './errorUtil';
 
 export function EXECUTE_IN_CLIENT(method) {
 	if (typeof nw === 'undefined') {
-		console.warn('Some feature is not showing in web mode.');
+		console.warn('**LOMS** Some feature is not enabled in web mode.');
 	} else {
 		method();
 	}

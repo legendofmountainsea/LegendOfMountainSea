@@ -72,5 +72,7 @@ export default class Hexagon extends Actor {
 	
 	dispose() {
 		super.dispose();
+		this._positionOnTerrain = null;
+		this._renderPosition = null;
 	}
 }
