@@ -22,6 +22,12 @@ export default class LayerAgent {
 		return this;
 	}
 	
+	removeElement(element){
+		this._removeFromLayer(element, element.getIndex());
+		this._container.removeChild(element.getRenderObject());
+		element.dispose();
+	}
+	
 	moveLayerTo(layerTo) {
 		for (const movingInfo of layerTo) {
 			
@@ -61,6 +67,18 @@ export default class LayerAgent {
 		}
 		
 		this._layer[index].push(element);
+	}
+	
+	_removeFromLayer(element, index){
+		let layer = this._layer[index];
+		for(let i = 0; i < layer.length; ++i){
+			if(layer[i].getID() === element.getID()){
+				layer.splice(i, 1);
+				break;
+			}
+		}
+		
+		return this;
 	}
 	
 	_getTopElementInLayer(index) {
