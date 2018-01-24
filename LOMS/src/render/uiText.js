@@ -37,8 +37,8 @@ export default class UIText extends Actor {
         return this._sprite;
     }
 	
-	dispose(){
-        super.dispose();
+	dispose(option){
+        super.dispose(option);
         this._style = null;
         this._string = null;
     }

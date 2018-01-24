@@ -107,12 +107,12 @@ export default class StageAgent {
 	}
 	
 	clearActors() {
-		this._layerAgent.removeElementsByIndex(this.ACTOR_LAYER_INDEX);
+		this._layerAgent.removeElementsByIndex(this.ACTOR_LAYER_INDEX, true);
 		return this;
 	}
 	
 	clearUI(){
-		this._layerAgent.removeElementsByIndex(this.UI_LAYER_INDEX);
+		this._layerAgent.removeElementsByIndex(this.UI_LAYER_INDEX, true);
 		return this;
 	}
 	

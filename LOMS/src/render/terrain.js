@@ -8,12 +8,14 @@ export default class Terrain extends ElementCore {
 		super(props);
 		this._container = null;
 		this._resources = null;
+		this._isPointsOnTerrainChanged = false;
 		this._coordinates = props.coordinates ? props.coordinates : {x: 0, y: 0};
 		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
 		this._runtimeRenderSize = 5;
 		this._preRenderSize = 5;
 		this._hexagons = [];
+		this._renderPointOnTerrain = [];
 	}
 	
 	isNoAsset() {
@@ -69,11 +71,34 @@ export default class Terrain extends ElementCore {
 	}
 	
 	tick(delta) {
-	
+		if(!this._isPointsOnTerrainChanged){
+			return;
+		}
+		this.hexagonRenderRecycle();
 	}
 	
 	onRender(delta) {
 	
+	}
+	
+	hexagonRenderRecycle(){
+		for(let index = 0; index < this._hexagons.length; ++index){
+			const hexagon = this._hexagons[index];
+			let isRecyclingHexagon = true;
+			for(const point of this._renderPointOnTerrain){
+				const position = hexagon.getPositionOnTerrain();
+				if(position.x === point.x && position.y === point.y){
+					isRecyclingHexagon = false;
+					break;
+				}
+			}
+			
+			if(isRecyclingHexagon){
+				this._layerAgent.removeElement(hexagon, false);
+				this._hexagons.splice(index,1);
+				index--;
+			}
+		}
 	}
 	
 	renderHexagonRegion(topLeft) {
@@ -83,8 +108,12 @@ export default class Terrain extends ElementCore {
 		const topLeftX = -parseInt(topLeft.x / (height * COS_60_DEGREES)),
 			topLeftY = -parseInt(topLeft.y / height);
 		
+		this._renderPointOnTerrain = [];
+		
 		for (let index = topLeftX - this._preRenderSize; index < topLeftX + this._runtimeRenderSize; ++index) {
 			for (let columnIndex = topLeftY - this._preRenderSize; columnIndex < topLeftY + this._runtimeRenderSize; ++columnIndex) {
+				
+				this._renderPointOnTerrain.push({x: index, y: columnIndex});
 				
 				if (this._hexagons.find((hexagon) => {
 						let position = hexagon.getPositionOnTerrain();
@@ -103,6 +132,8 @@ export default class Terrain extends ElementCore {
 					x: index,
 					y: columnIndex,
 				});
+				
+				this._isPointsOnTerrainChanged = true;
 				
 				this.addHexagon(hexagon);
 			}
