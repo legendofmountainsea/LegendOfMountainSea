@@ -22,10 +22,10 @@ export default class LayerAgent {
 		return this;
 	}
 	
-	removeElement(element){
+	removeElement(element, option){
 		this._removeFromLayer(element, element.getIndex());
 		this._container.removeChild(element.getRenderObject());
-		element.dispose();
+		element.dispose(option);
 	}
 	
 	moveLayerTo(layerTo) {
@@ -45,7 +45,7 @@ export default class LayerAgent {
 		}
 	}
 	
-	removeElementsByIndex(index) {
+	removeElementsByIndex(index, option) {
 		let elements = this._layer[index];
 		
 		this._layer[index] = null;
@@ -57,7 +57,7 @@ export default class LayerAgent {
 		
 		for (let element of elements) {
 			this._container.removeChild(element.getRenderObject());
-			element.dispose();
+			element.dispose(option);
 		}
 	}
 	

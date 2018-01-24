@@ -192,8 +192,8 @@ export default class Character extends Actor {
 		this._sprite.play();
 	}
 	
-	dispose() {
-		super.dispose();
+	dispose(option) {
+		super.dispose(option);
 		this._frames = null;
 		this._destination = null;
 	}

@@ -30,7 +30,7 @@ export default class ElementCore {
 		//override in subClass
 	}
 	
-	dispose(){
+	dispose(option){
 		//override in subClass
 	}
 }

@@ -65,8 +65,9 @@ export default class Actor extends ElementCore{
 		//override in subClass
 	}
 	
-	dispose(){
-		this._sprite.destroy({children:true, texture:true, baseTexture:true});
+	dispose(option = false){
+		const disposeChildren = option;
+		this._sprite.destroy({children: disposeChildren, texture: disposeChildren, baseTexture: disposeChildren});
 		this._sprite = null;
 		
 		this._initPosition = null;

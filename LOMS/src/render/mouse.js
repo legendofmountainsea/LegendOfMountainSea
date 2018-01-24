@@ -177,11 +177,12 @@ export default class Mouse extends ElementCore {
 		this.tick(delta);
 	}
 	
-	dispose() {
+	dispose(option = false) {
+		const disposeChildren = option;
 		this._sprite.destroy({
-			children: true,
-			texture: true,
-			baseTexture: true,
+			children: disposeChildren,
+			texture: disposeChildren,
+			baseTexture: disposeChildren,
 		});
 		this._sprite = null;
 	}
