@@ -21,8 +21,8 @@ export default class Window {
 		} catch (e) {
 			console.error(e);
 			return {
-				width: 1600,
-				height: 800,
+				width: 800,
+				height: 600,
 			};
 		}
 	}
