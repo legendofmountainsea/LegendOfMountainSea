@@ -2,7 +2,6 @@ export default {
 	HOUYI: {
 		IS_CONTAIN_ANIMATION: true,
 		DATA: {
-			//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/28
 			STAND: {
 				NAME: 'houyi_stand',
 				SPEED: 0.025,
