@@ -1,29 +1,40 @@
-import Actor from './actor';
+import Pattern from './pattern';
 
 export const COS_60_DEGREES = Math.cos(Math.PI / 6);
 
-export default class Hexagon extends Actor {
+export default class Hexagon extends Pattern {
 	constructor(props) {
 		super(props);
 		this._height = 0;
 		this._width = 0;
+		this._terrain = props.terrain;
 		this._positionOnTerrain = null;
 		this._renderPosition = null;
+		this._data = props.data? props.data : {};
+	}
+	
+	initResources(resources){
+		super.initResources(resources);
+		
+		this._sprite.interactive = true;
+		this._sprite.buttonMode = true;
+		this._sprite.mousedown = (e) => {
+			this._terrain.flush();
+			//console.log(this._data);
+		};
+		
+		return this;
+	}
+	
+	setData(data){
+		this._data = data;
+		return this;
 	}
 	
 	getName() {
 		return this._assetData.DATA.NAME;
 	}
-	
-	initResources(resources) {
-		let resource = resources[this.getName()];
-		
-		this._sprite = new PIXI.Sprite(resource.texture);
-		this._sprite.anchor.set(0.5, 0.5);
-		
-		return this;
-	}
-	
+
 	setDimensions(dimensions) {
 		const {height, width} = dimensions;
 		this._height = height;

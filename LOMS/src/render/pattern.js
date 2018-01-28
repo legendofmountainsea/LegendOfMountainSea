@@ -20,6 +20,8 @@ export default class Pattern extends Actor {
 		this._sprite.position.y = this._initPosition.y;
 		
 		this._initMouseEvent();
+		
+		return this;
 	}
 	
 	_initMouseEvent(){
