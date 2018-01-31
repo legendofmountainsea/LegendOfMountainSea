@@ -30,6 +30,10 @@ export default class ElementCore {
 		//override in subClass
 	}
 	
+	getPosition(){
+		//override in subClass
+	}
+	
 	dispose(option){
 		//override in subClass
 	}

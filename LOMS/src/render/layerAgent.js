@@ -4,7 +4,6 @@ export default class LayerAgent {
 	constructor(props) {
 		this._container = props.contatiner;
 		this._layer = {};
-		this._layerTo = [];
 	}
 	
 	addElement(element, index = 0) {
@@ -15,11 +14,39 @@ export default class LayerAgent {
 		
 		const childIndex = (result) ? this._container.getChildIndex(result.getRenderObject()) : 0;
 		
-		this._container.addChildAt(element.getRenderObject(), childIndex);
-		
 		this._addToLayer(element, index);
 		
+		this._container.addChildAt(element.getRenderObject(), childIndex);
+		
 		return this;
+	}
+	
+	updateDepthRenderOrder(){
+		this._container.children.sort((a, b)=>{
+			const elementA = this._getElement(a),
+				elementB = this._getElement(b);
+			
+			if(elementA.getIndex() < elementB.getIndex() || elementA.getPosition().y < elementB.getPosition().y){
+				return -1;
+			}
+			
+			return 1;
+		});
+		
+		for (const index in this._layer) {
+			let layer = this._layer[index];
+			layer.sort((a,b)=>{
+				
+				const positionA = a.getPosition(),
+					positionB = b.getPosition();
+				
+				if(positionA.y > positionB.y){
+					return -1;
+				}
+				
+				return 1;
+			});
+		}
 	}
 	
 	removeElement(element, option){
@@ -67,6 +94,20 @@ export default class LayerAgent {
 		}
 		
 		this._layer[index].push(element);
+	}
+	
+	_getElement(renderObject){
+		for (const index in this._layer) {
+			
+			let layer = this._layer[index];
+			for(let i = 0; i < layer.length; ++i){
+				if(layer[i].getRenderObject() === renderObject){
+					return layer[i];
+				}
+			}
+		}
+		
+		return null;
 	}
 	
 	_removeFromLayer(element, index){

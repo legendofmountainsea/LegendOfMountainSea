@@ -82,6 +82,13 @@ export default class Terrain extends ElementCore {
 		return this._container;
 	}
 	
+	getPosition(){
+		return {
+			x: this._container.x,
+			y: this._container.y,
+		}
+	}
+	
 	tick(delta) {
 		if (!this._isPointsOnTerrainChanged) {
 			return;
