@@ -42,7 +42,7 @@ export default class Actor extends ElementCore{
 	}
 	
 	getPosition(){
-		return this._position;
+		return this._position? this._position : this._initPosition;
 	}
 	
 	bindRender(onRender) {
