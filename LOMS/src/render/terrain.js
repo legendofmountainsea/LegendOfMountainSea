@@ -86,7 +86,7 @@ export default class Terrain extends ElementCore {
 		return {
 			x: this._container.x,
 			y: this._container.y,
-		}
+		};
 	}
 	
 	tick(delta) {
