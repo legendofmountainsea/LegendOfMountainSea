@@ -10,10 +10,10 @@ export default class Hexagon extends Pattern {
 		this._terrain = props.terrain;
 		this._positionOnTerrain = null;
 		this._renderPosition = null;
-		this._data = props.data? props.data : {};
+		this._data = props.data ? props.data : {};
 	}
 	
-	initResources(resources){
+	initResources(resources) {
 		super.initResources(resources);
 		
 		this._sprite.interactive = true;
@@ -26,7 +26,7 @@ export default class Hexagon extends Pattern {
 		return this;
 	}
 	
-	setData(data){
+	setData(data) {
 		this._data = data;
 		return this;
 	}
@@ -34,7 +34,7 @@ export default class Hexagon extends Pattern {
 	getName() {
 		return this._assetData.DATA.NAME;
 	}
-
+	
 	setDimensions(dimensions) {
 		const {height, width} = dimensions;
 		this._height = height;
@@ -52,29 +52,22 @@ export default class Hexagon extends Pattern {
 	setPositionOnTerrain(position) {
 		this._positionOnTerrain = position;
 		this.setRenderPosition(position);
-		if (this._sprite) {
-			this._sprite.x = this._renderPosition.x;
-			this._sprite.y = this._renderPosition.y;
-		}
 		
 		return this;
 	}
 	
 	setRenderPosition(position) {
-		this._renderPosition = {
+		
+		this.setPosition({
 			x: (this._width / 2) + position.x * (this._height * COS_60_DEGREES ),
 			y: position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2),
-		};
+		});
 		
 		return this;
 	}
 	
 	getPositionOnTerrain() {
 		return this._positionOnTerrain;
-	}
-	
-	getRenderPosition() {
-		return this._renderPosition;
 	}
 	
 	tick(delta) {

@@ -25,8 +25,8 @@ describe('Hexagon', () => {
 			y: 1,
 		});
 		
-		expect(hexagon.getRenderPosition().x).to.be((width / 2) + (height * COS_60_DEGREES ));
-		expect(hexagon.getRenderPosition().y).to.be(height + (height / 2) * (1 + 1 % 2));
+		expect(hexagon.getPosition().x).to.be((width / 2) + (height * COS_60_DEGREES ));
+		expect(hexagon.getPosition().y).to.be(height + (height / 2) * (1 + 1 % 2));
 	});
 	
 });
