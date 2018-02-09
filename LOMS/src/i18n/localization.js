@@ -9,7 +9,6 @@ export default class Localization {
 	}
 	
 	static getLanguageContent(){
-		alert(content);
 		if(!content){
 			content = Localization._getInitContent();
 		}
