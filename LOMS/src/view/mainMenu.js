@@ -18,6 +18,12 @@ export default class MainMenu extends Scene {
 	}
 	
 	onFinish() {
+		let languageContent = null;
+		
+		EXECUTE_IN_CLIENT(()=>{
+			languageContent = Localization.getLanguageContent();
+		});
+		
 		this._backGroundMusic = new Audio('../../assets/sound/Angelic_Happiness.mp3');
 		this._backGroundMusic.loop = true;
 		this._backGroundMusic.play();
@@ -32,7 +38,7 @@ export default class MainMenu extends Scene {
 		});
 		
 		let newGameText = new UIText({
-			string: 'New Game',
+			string: languageContent? languageContent.newGame : 'New Game',
 			position: {x: 400, y: 400},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
@@ -44,7 +50,7 @@ export default class MainMenu extends Scene {
 		});
 		
 		let loadGameText = new UIText({
-			string: 'Load Game',
+			string: languageContent? languageContent.loadGame : 'Load Game',
 			position: {x: 400, y: 450},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
@@ -53,7 +59,7 @@ export default class MainMenu extends Scene {
 		});
 		
 		let quitGameText = new UIText({
-			string: 'Quit',
+			string: languageContent? languageContent.quit : 'Quit',
 			position: {x: 400, y: 500},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
