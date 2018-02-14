@@ -31,7 +31,7 @@ export default class Store {
 	
 	static readConfig() {
 		EXECUTE_IN_CLIENT(() => {
-			if (!fs.existsSync(Store._getConfigPath())) {
+			if (!fileSystem.existsSync(Store._getConfigPath())) {
 				Store._initConfig(Store._getInitConfig());
 				return config;
 			}
