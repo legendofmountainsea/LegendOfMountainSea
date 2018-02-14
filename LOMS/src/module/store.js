@@ -31,17 +31,15 @@ export default class Store {
 	
 	static readConfig() {
 		EXECUTE_IN_CLIENT(() => {
-			if (!config) {
+			if (!fs.existsSync(Store._getConfigPath())) {
 				Store._initConfig(Store._getInitConfig());
-				return;
+				return config;
 			}
-			fileSystem.readFile(Store._getConfigPath(), (error, configStr) => {
-				if (error) {
-					console.error(error);
-					return;
-				}
-				config = JSON.parse(configStr);
-			});
+			const configStr = fileSystem.readFileSync(Store._getConfigPath(),'uft-8');
+			
+			config = JSON.parse(configStr);
+			
+			return config;
 		});
 	}
 	
