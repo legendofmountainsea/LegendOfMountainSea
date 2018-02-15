@@ -1,5 +1,5 @@
 //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
-import {EXECUTE_IN_CLIENT} from '../util/envUtil';
+import {EXECUTE_IN_CLIENT, EXECUTE_IN_CLIENT_WITH_RETURN} from '../util/envUtil';
 
 let config = null;
 export default class Store {
@@ -23,34 +23,47 @@ export default class Store {
 	
 	static getConfig() {
 		if (!config) {
-			Store._initConfig(Store._getInitConfig());
-			return Store._getInitConfig();
+			return Store.readConfig();
 		}
+		
 		return config;
 	}
 	
 	static readConfig() {
-		EXECUTE_IN_CLIENT(() => {
-			if (!fileSystem.existsSync(Store._getConfigPath())) {
-				Store._initConfig(Store._getInitConfig());
+		try {
+			return EXECUTE_IN_CLIENT_WITH_RETURN(() => {
+				if (!fileSystem.existsSync(Store._getConfigPath())) {
+					Store._initConfig(Store._getInitConfig());
+					return config;
+				}
+				const configStr = fileSystem.readFileSync(Store._getConfigPath());
+				
+				config = JSON.parse(configStr);
+				
 				return config;
-			}
-			const configStr = fileSystem.readFileSync(Store._getConfigPath(),'uft-8');
-			
-			config = JSON.parse(configStr);
-			
-			return config;
+			});
+		}
+		catch (e){
+			console.error(e);
+			return Store._getInitConfig();
+		}
+	}
+	
+	static changeConfig(newConfig){
+		EXECUTE_IN_CLIENT(() => {
+			config = newConfig;
+			fileSystem.writeFile(Store._getConfigPath(), JSON.stringify(config), (error) => {
+				if (error) {
+					console.error(error);
+				}
+			});
 		});
 	}
 	
 	static addConfig(newConfig) {
 		EXECUTE_IN_CLIENT(() => {
 			if (!config) {
-				Store._initConfig({
-					...Store._getInitConfig(),
-					...newConfig,
-				});
-				return;
+				config = Store.readConfig();
 			}
 			
 			config = {
