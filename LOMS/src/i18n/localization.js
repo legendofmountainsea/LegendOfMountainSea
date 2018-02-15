@@ -17,9 +17,10 @@ export default class Localization {
 	}
 	
 	static _getInitContent(){
-		const supportLanguages = Localization.getSupportLanguages();
+		const supportLanguages = Localization.getSupportLanguages(),
+			currentLanguage = Localization.getCurrentLanguage();
 		
-		let language = supportLanguages[Localization.getCurrentLanguage()];
+		let language = supportLanguages[currentLanguage];
 		
 		if(!language){
 			language = supportLanguages['zh-CN'];

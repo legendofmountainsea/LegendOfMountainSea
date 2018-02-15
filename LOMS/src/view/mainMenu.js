@@ -20,7 +20,7 @@ export default class MainMenu extends Scene {
 	onFinish() {
 		let languageContent = null;
 		
-		EXECUTE_IN_CLIENT(()=>{
+		EXECUTE_IN_CLIENT(() => {
 			languageContent = Localization.getLanguageContent();
 		});
 		
@@ -38,7 +38,7 @@ export default class MainMenu extends Scene {
 		});
 		
 		let newGameText = new UIText({
-			string: languageContent? languageContent.newGame : 'New Game',
+			string: languageContent ? languageContent.newGame : 'New Game',
 			position: {x: 400, y: 400},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
@@ -50,7 +50,7 @@ export default class MainMenu extends Scene {
 		});
 		
 		let loadGameText = new UIText({
-			string: languageContent? languageContent.loadGame : 'Load Game',
+			string: languageContent ? languageContent.loadGame : 'Load Game',
 			position: {x: 400, y: 450},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
@@ -59,7 +59,7 @@ export default class MainMenu extends Scene {
 		});
 		
 		let quitGameText = new UIText({
-			string: languageContent? languageContent.quit : 'Quit',
+			string: languageContent ? languageContent.quit : 'Quit',
 			position: {x: 400, y: 500},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
@@ -73,7 +73,7 @@ export default class MainMenu extends Scene {
 		this._renderer.addUI(loadGameText);
 		this._renderer.addUI(quitGameText);
 		
-		EXECUTE_IN_CLIENT(()=>{
+		EXECUTE_IN_CLIENT(() => {
 			let languageInfoText = new UIText({
 				string: `language: ${Localization.getCurrentLanguage()}`,
 			});
