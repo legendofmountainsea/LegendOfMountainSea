@@ -1,4 +1,5 @@
 import 'pixi.js';
+import 'bootstrap';
 
 import LOMSRenderer from './render/lomsRenderer';
 import MainMenu from './view/mainMenu';

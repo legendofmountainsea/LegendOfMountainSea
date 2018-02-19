@@ -52,7 +52,10 @@
     "webpack-dev-server": "2.7.1"
   },
   "dependencies": {
+    "bootstrap": "4.0.0",
+    "jquery": "3.3.1",
     "loms.uuid": "1.0.0",
-    "pixi.js": "4.5.6"
+    "pixi.js": "4.5.6",
+    "popper.js": "1.12.9"
   }
 }
