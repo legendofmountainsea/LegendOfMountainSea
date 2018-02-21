@@ -19,7 +19,7 @@ You will need LOMS Development CLI
 $ npm install loms-cli -g
 ```
 
-Setting your project in current directory
+Fork repository, create your branch from master and run CLI command-line at project's root directory
 ```
 $ loms init
 ```
