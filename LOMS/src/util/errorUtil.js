@@ -46,18 +46,18 @@ class OnScreenConsole {
 						// eg: at testfunc (http://xxx.com/test.js:130:32)
 						const line = msg[i].trim().split(' ');
 						// get file name, eg: test.js:130:32
-						const line2 = line.length === 3 ? line[2] : line[1]
+						const line2 = line.length === 3 ? line[2] : line[1];
 						const paths = line2.split('/');
 						let fileName = paths[paths.length - 1];
 						fileName = fileName.substring(0, fileName.length - 1);
 						// get file path, eg: http://xxx.com/test.js
-						let filePath = line2.substring(1, line2.length - 1).split(':')
+						let filePath = line2.substring(1, line2.length - 1).split(':');
 						// pop the colomn number, eg: 32
-						filePath.pop()
+						filePath.pop();
 						// pop the line number, eg: 130
-						filePath.pop()
+						filePath.pop();
 						// recover
-						filePath = filePath.join(':')
+						filePath = filePath.join(':');
 						// format markup
 						msg[i] = `&emsp;${line[0]} ${line.length === 3 ? `${line[1]} ` : ''}(<a href="${filePath}">${fileName}</a>)`;
 					}
@@ -77,10 +77,10 @@ class OnScreenConsole {
 	 * overwrite log, warn and error method
 	 */
 	_overwriteNativeMethods() {
-		for (let method of OnScreenConsole._supportedMethods) {
-			this['_' + method] = console[method].bind(console);
-			console[method] = this[method].bind(this);
-		}
+		this._warn = console.warn.bind(console);
+		this._error = console.error.bind(console);
+		console.warn = this.warn.bind(this);
+		console.error = this.error.bind(this);
 	}
 	/**
 	 * create the console panel dom element
@@ -181,9 +181,6 @@ class OnScreenConsole {
 			}
 		};
 	}
-	get log() {
-		return this._print('log');
-	}
 	get warn() {
 		return this._print('warn');
 	}
@@ -230,12 +227,6 @@ class OnScreenConsole {
 		}
 	}
 	// others
-	/**
-	 * supported methods
-	 */
-	static get _supportedMethods() {
-		return ['log', 'warn', 'error'];
-	}
 	/**
 	 * colors corresponding to supported methods
 	 */
