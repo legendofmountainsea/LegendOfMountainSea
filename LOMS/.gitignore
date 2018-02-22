@@ -9,5 +9,5 @@ loms.node.js
 dist/*
 
 #nwjs
-nwjs-v0.23.5-win-x64/*
-nwjs-v0.23.5-osx-x64/*
+nwjs-*-win-x64/*
+nwjs-*-osx-x64/*
