@@ -21,7 +21,7 @@
   },
   "chromium-args": "--disable-raf-throttling",
   "scripts": {
-    "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run lint && npm run build-dev",
+    "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run lint && npm run build-prod",
     "dev": "webpack-dev-server --open --config webpack.dev.js",
     "build-client": "webpack --config webpack.client.js",
     "build-prod": "webpack --config webpack.prod.js",
