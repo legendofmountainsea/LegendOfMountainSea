@@ -4,8 +4,7 @@ node_modules/*
 npm-debug.log
 
 ＃dist
-loms.dev.js
-loms.node.js
+loms.client.js
 dist/*
 
 #nwjs
