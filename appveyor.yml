@@ -16,7 +16,7 @@ install:
   # install modules
   - cd ./LOMS
   - npm install
-  - npm run dist-win
+  - npm run build-win
 
   - cd ../LOMS-Server
   - npm install

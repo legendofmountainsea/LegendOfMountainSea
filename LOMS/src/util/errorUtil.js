@@ -62,7 +62,7 @@ export class DevConsole {
 			}
 			
 			if (seen.indexOf(from[key]) === -1) {
-				to[key] = destroyCircular(from[key], seen.slice(0));
+				to[key] = this.destroyCircular(from[key], seen.slice(0));
 				continue;
 			}
 			
