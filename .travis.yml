@@ -12,7 +12,7 @@ node_js:
 install:
   - cd ./LOMS
   - npm install
-  - npm run dist-mac
+  - npm run build-mac
 
   - cd ../LOMS-Server
   - npm install
