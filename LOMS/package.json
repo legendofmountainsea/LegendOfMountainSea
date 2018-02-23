@@ -22,14 +22,17 @@
   "chromium-args": "--disable-raf-throttling",
   "scripts": {
     "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run lint && npm run build-dev",
-    "dev": "webpack-dev-server --open",
-    "build-dev": "webpack --color",
-    "build-win": "nwjs-v0.27.0-win-x64\\nw.exe .",
-    "start-win": "npm run build-dev && npm run build-win",
-    "build-mac": "./nwjs-v0.27.0-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
-    "start-mac": "npm run build-dev && npm run build-mac",
+    "dev": "webpack-dev-server --open --config webpack.dev.js",
+    "build-client": "webpack --config webpack.client.js",
+    "build-prod": "webpack --config webpack.prod.js",
+    "run-win": "nwjs-v0.27.0-win-x64\\nw.exe .",
+    "start-win": "npm run build-client && npm run run-win",
+    "run-mac": "./nwjs-v0.27.0-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
+    "start-mac": "npm run build-client && npm run run-mac",
     "dist-mac": "build --tasks mac-x64 .",
     "dist-win": "build --tasks win-x64 .",
+    "build-mac": "npm run build-prod && npm run dist-mac",
+    "build-win": "npm run build-prod && npm run dist-win",
     "lint": "eslint --ext .js src",
     "lint-fix": "eslint --ext .js src --fix"
   },
@@ -49,7 +52,8 @@
     "nwjs-builder-phoenix": "1.14.3",
     "script-loader": "0.7.0",
     "webpack": "3.6.0",
-    "webpack-dev-server": "2.7.1"
+    "webpack-dev-server": "2.7.1",
+    "webpack-merge": "4.1.2"
   },
   "dependencies": {
     "bootstrap": "4.0.0",

@@ -1,5 +1,5 @@
-import 'pixi.js';
 import 'bootstrap';
+import 'pixi.js';
 
 import LOMSRenderer from './render/lomsRenderer';
 import MainMenu from './view/mainMenu';
@@ -14,9 +14,14 @@ export default class LOMS {
 		Window.enterFullscreen();
 		
 		setTimeout(() => {
-			this._renderer = new LOMSRenderer;
-			this._renderer.renderScene(new MainMenu);
-			this._renderer.render();
+			try{
+				this._renderer = new LOMSRenderer;
+				this._renderer.renderScene(new MainMenu);
+				this._renderer.render();
+			}catch (error){
+				console.error(error);
+			}
+			
 		}, 1000);
 	}
 }
