@@ -1,9 +1,9 @@
 # LegendOfMountainSea ![icon](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS.png)
 
 [![Platform](https://img.shields.io/badge/platform-osx%20%7C%20win-orange.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/releases)
-[![Software License](https://img.shields.io/badge/license-GPL%202-blue.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/SkyHarp/LegendOfMountainSea.svg?style=flat-square)](https://gitter.im/SkyHarp/LegendOfMountainSea)
 [![PRs](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CONTRIBUTING.md)
+[![npm](https://img.shields.io/npm/v/loms-cli.svg?style=flat-square&label=loms-cli)](https://www.npmjs.com/package/loms-cli)
 [![Build Status](https://img.shields.io/travis/SkyHarp/LegendOfMountainSea/master.svg?style=flat-square)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
 [![AppVeyor branch](https://img.shields.io/appveyor/ci/TyrealGray/legendofmountainsea/master.svg?style=flat-square&logo=appveyor)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea)
 [![Codecov](https://img.shields.io/codecov/c/github/SkyHarp/LegendOfMountainSea/master.svg?style=flat-square)](https://codecov.io/gh/SkyHarp/LegendOfMountainSea)
@@ -14,7 +14,7 @@ To experience hundreds of Chinese ancient legends, start with Hou Yi ![houyi](ht
 
 ## Installing
 
-You will need LOMS Development CLI
+Install LOMS Development CLI
 ```
 $ npm install loms-cli -g
 ```
