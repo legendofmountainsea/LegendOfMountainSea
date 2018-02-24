@@ -26,7 +26,7 @@ before_script:
   - export CC_TEST_REPORTER_ID=cf8d5db98b9c576e25427d1cc6b19fb0aabb3eeeaad6cf2bc400aed10bfe14bb
 
 script:
-  - cd ../LOMS
+  - cd ./LOMS
   - npm test
 
   - cd ../LOMS-Server
