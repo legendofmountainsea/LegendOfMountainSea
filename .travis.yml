@@ -19,13 +19,7 @@ install:
   - npm install
   - npm run build
 before_script:
-  - cd ../LOMS
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.4.5-darwin-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-  - export CC_TEST_REPORTER_ID=cf8d5db98b9c576e25427d1cc6b19fb0aabb3eeeaad6cf2bc400aed10bfe14bb
-
-  - cd ../LOMS-Server
+  - cd ..
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.4.5-darwin-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
@@ -43,17 +37,21 @@ after_script:
   - cd ../LOMS
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
-  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
-  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.$SUITE.json
+  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter > ../coverage/coverage.client.lcov --compilers js:babel-register
+
+  - cd ..
+  - ./cc-test-reporter format-coverage --output ./coverage/codeclimate.client.json
 
   - cd ../LOMS-Server
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
-  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
-  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.$SUITE.json
+  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter > ../coverage/coverage.server.lcov --compilers js:babel-register
+
+  - cd ..
+  - ./cc-test-reporter format-coverage --output ./coverage/codeclimate.server.json
 
   - ./cc-test-reporter sum-coverage ../coverage/codeclimate.*.json
-  - ./cc-test-reporter upload-coverage -i ../coverage/codeclimate.*.json
+  - ./cc-test-reporter upload-coverage
 cache:
   directories:
     - "LOMS/node_modules"
