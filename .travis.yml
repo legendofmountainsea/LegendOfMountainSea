@@ -19,14 +19,20 @@ install:
   - npm install
   - npm run build
 before_script:
-  - cd ..
+  - cd ../LOMS
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.4.5-darwin-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - export CC_TEST_REPORTER_ID=cf8d5db98b9c576e25427d1cc6b19fb0aabb3eeeaad6cf2bc400aed10bfe14bb
+
+  - cd ../LOMS-Server
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.4.5-darwin-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - export CC_TEST_REPORTER_ID=cf8d5db98b9c576e25427d1cc6b19fb0aabb3eeeaad6cf2bc400aed10bfe14bb
 
 script:
-  - cd ./LOMS
+  - cd ../LOMS
   - npm test
 
   - cd ../LOMS-Server
@@ -38,18 +44,16 @@ after_script:
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
   - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
-  - cd ..
-  - ./cc-test-reporter format-coverage --output ./LOMS/coverage/codeclimate.$SUITE.json
+  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.$SUITE.json
 
-  - cd ./LOMS-Server
+  - cd ../LOMS-Server
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
   - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
-  - cd ..
-  - ./cc-test-reporter format-coverage --output ./LOMS-Server/coverage/codeclimate.$SUITE.json
+  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.$SUITE.json
 
-  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
-  - ./cc-test-reporter upload-coverage
+  - ./cc-test-reporter sum-coverage ../coverage/codeclimate.*.json
+  - ./cc-test-reporter upload-coverage -i ../coverage/codeclimate.*.json
 cache:
   directories:
     - "LOMS/node_modules"
