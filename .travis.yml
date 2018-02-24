@@ -54,8 +54,8 @@ after_script:
   - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.server.json
 
   - cd ..
-  - ./cc-test-reporter sum-coverage -o coverage/coverage.total.json coverage/codeclimate.*.json
-  - ./cc-test-reporter upload-coverage -i coverage/coverage.total.json
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.client.json coverage/codeclimate.server.json
+  - ./cc-test-reporter upload-coverage
 cache:
   directories:
     - "LOMS/node_modules"
