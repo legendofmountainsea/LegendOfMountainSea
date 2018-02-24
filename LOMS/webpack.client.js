@@ -3,7 +3,6 @@ const webpack = require('webpack'),
 	common = require('./webpack.common.js');
 
 const nodeConfig = {
-	target: (/^win/.test(process.platform))?'web': 'node',
 	entry: './src/main.client.js',
 	plugins: [
 		new webpack.optimize.ModuleConcatenationPlugin(),
