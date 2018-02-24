@@ -5,7 +5,7 @@ There's a number of ways you can get involved, and we need volunteer to help thi
 Feel free to check out our [issues](https://github.com/SkyHarp/LegendOfMountainSea/issues) and submit pull requests.
 
 ### an Artist
-All game assets are in [here](https://github.com/SkyHarp/LegendOfMountainSea/tree/master/LOMS/assets), and our game needs nice looking interface and character! We are using [piskel](https://github.com/piskelapp/piskel) for drawing the character.
+All game assets are in [here](https://github.com/SkyHarp/LegendOfMountainSea/tree/master/assets), and our game needs nice looking interface and character! We are using [piskel](https://github.com/piskelapp/piskel) for drawing the character.
 
 ### a Chinese history hobbyist
 We have a huge task about Chinese ancient legends translation and story creation, feel free to join our community.
