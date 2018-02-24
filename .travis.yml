@@ -54,7 +54,7 @@ after_script:
   - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.server.json
 
   - cd ..
-  - ./cc-test-reporter sum-coverage --parts=2 [coverage/codeclimate.client.json,coverage/codeclimate.server.json]
+  - ./cc-test-reporter sum-coverage --parts 2 coverage/codeclimate.*.json
   - ./cc-test-reporter upload-coverage
 cache:
   directories:
