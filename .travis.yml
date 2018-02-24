@@ -38,14 +38,18 @@ after_script:
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
   - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
+  - cd ..
+  - ./cc-test-reporter format-coverage --output ./LOMS/coverage/codeclimate.$SUITE.json
 
-  - cd ../LOMS-Server
+  - cd ./LOMS-Server
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
   - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
-
   - cd ..
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter format-coverage --output ./LOMS-Server/coverage/codeclimate.$SUITE.json
+
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
+  - ./cc-test-reporter upload-coverage
 cache:
   directories:
     - "LOMS/node_modules"
