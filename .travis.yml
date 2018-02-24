@@ -45,13 +45,13 @@ after_script:
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
   - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
-  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.$SUITE.json
+  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.client.json
 
   - cd ../LOMS-Server
   - npm install --save-dev istanbul@1.1.0-alpha.1
   - npm install --save-dev mocha-lcov-reporter
   - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R mocha-lcov-reporter --compilers js:babel-register
-  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.$SUITE.json
+  - ./cc-test-reporter format-coverage --output ../coverage/codeclimate.server.json
 
   - cd ..
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
