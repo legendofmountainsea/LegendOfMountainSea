@@ -3,7 +3,7 @@ const webpack = require('webpack'),
 	common = require('./webpack.common.js');
 
 const webConfig = {
-	entry: './src/main.js',
+	entry: './src/main.dev.js',
 	devtool: 'eval-source-map',
 	plugins: [
 		new webpack.optimize.ModuleConcatenationPlugin(),

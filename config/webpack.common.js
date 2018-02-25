@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
 	output: {
-		path: __dirname,
-		filename: 'loms.client.js',
+		path: path.resolve(__dirname,'../'),
+		filename: 'loms.game.js',
 	},
 	module: {
 		rules: [

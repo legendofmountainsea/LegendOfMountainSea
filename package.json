@@ -22,9 +22,9 @@
   "chromium-args": "--disable-raf-throttling",
   "scripts": {
     "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run lint && npm run build-prod",
-    "dev": "webpack-dev-server --open --config webpack.dev.js",
-    "build-client": "webpack --config webpack.client.js",
-    "build-prod": "webpack --config webpack.prod.js",
+    "dev": "webpack-dev-server --open --config config/webpack.dev.js",
+    "build-client": "webpack --config config/webpack.client.js",
+    "build-prod": "webpack --config config/webpack.prod.js",
     "run-win": "nwjs-v0.27.0-win-x64\\nw.exe .",
     "start-win": "npm run build-client && npm run run-win",
     "run-mac": "./nwjs-v0.27.0-osx-x64/nwjs.app/Contents/MacOS/nwjs .",

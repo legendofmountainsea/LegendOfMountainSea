@@ -29,7 +29,7 @@ export default class LOMSRenderer {
 		
 		this._stageAgent.init();
 		
-		document.body.appendChild(this._renderer.view);
+		document.getElementById('CanvasContainer').appendChild(this._renderer.view);
 		
 		this._renderer.view.addEventListener('contextmenu', (e) => {
 			e.preventDefault();
