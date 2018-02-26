@@ -29,7 +29,11 @@ export class DevConsole {
 		
 		console.error = (error) => {
 			if (typeof error === 'object') {
-				consoleAlert(JSON.stringify(this.destroyCircular(error, [])));
+				const errorJson = this.destroyCircular(error, []);
+				const errorTemplate = `error: ${errorJson.name} <br/>
+				info: ${errorJson.message} <br/>
+				stack: ${errorJson.stack.replace(/\n/gi, '<br/>')}`;
+				consoleAlert(errorTemplate);
 			}
 			
 			// People sometimes throw things besides Error objects, so…
