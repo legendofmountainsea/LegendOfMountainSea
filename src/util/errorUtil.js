@@ -29,7 +29,7 @@ export class DevConsole {
 		
 		console.error = (error) => {
 			if (typeof error === 'object') {
-				const errorJson = this.destroyCircular(error, []);
+				const errorJson = this.destroyCircular(error);
 				const errorTemplate = `error: ${errorJson.name} <br/>
 				info: ${errorJson.message} <br/>
 				stack: ${errorJson.stack.replace(/\n/gi, '<br/>')}`;
@@ -48,43 +48,21 @@ export class DevConsole {
 		consoleWarning('DevConsole on');
 	}
 	
-	destroyCircular(from, seen) {
-		const to = Array.isArray(from) ? [] : {};
+	destroyCircular(errorObject) {
+		const jsonObject = Array.isArray(errorObject) ? [] : {};
 		
-		seen.push(from);
-		
-		for (const key of Object.keys(from)) {
-			const value = from[key];
-			
-			if (typeof value === 'function') {
-				continue;
-			}
-			
-			if (!value || typeof value !== 'object') {
-				to[key] = value;
-				continue;
-			}
-			
-			if (seen.indexOf(from[key]) === -1) {
-				to[key] = this.destroyCircular(from[key], seen.slice(0));
-				continue;
-			}
-			
-			to[key] = '[Circular]';
+		if (typeof errorObject.name === 'string') {
+			jsonObject.name = errorObject.name;
 		}
 		
-		if (typeof from.name === 'string') {
-			to.name = from.name;
+		if (typeof errorObject.message === 'string') {
+			jsonObject.message = errorObject.message;
 		}
 		
-		if (typeof from.message === 'string') {
-			to.message = from.message;
+		if (typeof errorObject.stack === 'string') {
+			jsonObject.stack = errorObject.stack;
 		}
 		
-		if (typeof from.stack === 'string') {
-			to.stack = from.stack;
-		}
-		
-		return to;
+		return jsonObject;
 	}
 }
