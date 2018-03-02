@@ -38,7 +38,7 @@ describe('Mouse', () => {
 	});
 	
 	it('status should be inside', () => {
-		mouse._checkPosition({x: 9, y: 9, width: 9, height: 9});
+		mouse._checkPosition({x:11, y: 11, width: 11, height: 11});
 		
 		expect(mouse._status).to.be(mouse.STATUS_INSIDE);
 		
