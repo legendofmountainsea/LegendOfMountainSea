@@ -37,28 +37,35 @@ export default class StageAgent {
 		this._controller.bindMouseOnRightEdge((delta) => {
 			this._layerAgent.moveLayerTo(
 				[{index: this.ACTOR_LAYER_INDEX, deltaX: -delta, deltaY: 0},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta, deltaY: 0}]
+					{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta, deltaY: 0}],
 			);
 		});
 		
 		this._controller.bindMouseOnLeftEdge((delta) => {
 			this._layerAgent.moveLayerTo(
 				[{index: this.ACTOR_LAYER_INDEX, deltaX: delta, deltaY: 0},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: delta, deltaY: 0}]
+					{index: this.TERRAIN_LAYER_INDEX, deltaX: delta, deltaY: 0}],
 			);
 		});
 		
 		this._controller.bindMouseOnTopEdge((delta) => {
 			this._layerAgent.moveLayerTo(
 				[{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: delta},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: delta}]
+					{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: delta}],
 			);
 		});
 		
 		this._controller.bindMouseOnBottomEdge((delta) => {
 			this._layerAgent.moveLayerTo(
 				[{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: -delta},
-				{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: -delta}]
+					{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: -delta}],
+			);
+		});
+		
+		this._controller.bindOnMouseMove((delta) => {
+			this._layerAgent.moveLayerTo(
+				[{index: this.ACTOR_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY},
+					{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY}],
 			);
 		});
 		
@@ -69,11 +76,18 @@ export default class StageAgent {
 			});
 		};
 		
+		this._renderer.stage.mouseup = (e) => {
+			this._controller.onMouseUp({
+				layerX: e.data.originalEvent.layerX,
+				layerY: e.data.originalEvent.layerY,
+			});
+		};
+		
 		this._renderer.stage.mousemove = (e) => {
 			
 			const {layerX, layerY} = e.data.originalEvent;
 			
-			this._controller.setMousePosition({
+			this._controller.onMouseMove({
 				x: layerX,
 				y: layerY,
 			});
@@ -96,7 +110,7 @@ export default class StageAgent {
 		return this;
 	}
 	
-	addUI(uiElement){
+	addUI(uiElement) {
 		this._layerAgent.addElement(uiElement, this.UI_LAYER_INDEX);
 		return this;
 	}
@@ -111,7 +125,7 @@ export default class StageAgent {
 		return this;
 	}
 	
-	clearUI(){
+	clearUI() {
 		this._layerAgent.removeElementsByIndex(this.UI_LAYER_INDEX, true);
 		return this;
 	}

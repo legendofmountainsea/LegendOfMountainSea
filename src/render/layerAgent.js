@@ -63,10 +63,9 @@ export default class LayerAgent {
 			}
 			
 			for (const element of this._layer[movingInfo.index]) {
-				
 				element.setTransform({
-					x: (movingInfo.deltaX) ? (10 * movingInfo.deltaX) : 0,
-					y: (movingInfo.deltaY) ? (10 * movingInfo.deltaY) : 0,
+					x: (movingInfo.deltaX) ? (movingInfo.deltaX) : 0,
+					y: (movingInfo.deltaY) ? (movingInfo.deltaY) : 0,
 				});
 			}
 		}
