@@ -1,6 +1,6 @@
 export default class Controller {
 	constructor(props) {
-		this._mouse = props.mouse? props.mouse : null;
+		this._mouse = props.mouse ? props.mouse : null;
 		this._pawn = null;
 		this._bindKeyboardEvent();
 	}
@@ -37,43 +37,64 @@ export default class Controller {
 		}
 	}
 	
-	getMouseInstance(){
+	getMouseInstance() {
 		return this._mouse;
 	}
 	
-	bindMouseOnRightEdge(onRightEdge){
+	bindMouseOnRightEdge(onRightEdge) {
 		this._mouse.bindOnRightEdge(onRightEdge);
 		return this;
 	}
 	
-	bindMouseOnLeftEdge(onLeftEdge){
+	bindMouseOnLeftEdge(onLeftEdge) {
 		this._mouse.bindOnLeftEdge(onLeftEdge);
 		return this;
 	}
 	
-	bindMouseOnTopEdge(onTopEdge){
+	bindMouseOnTopEdge(onTopEdge) {
 		this._mouse.bindOnTopEdge(onTopEdge);
 		return this;
 	}
 	
-	bindMouseOnBottomEdge(onBottomEdge){
+	bindMouseOnBottomEdge(onBottomEdge) {
 		this._mouse.bindOnBottomEdge(onBottomEdge);
 		return this;
 	}
 	
-	setMousePosition(position){
+	bindOnMouseMove(onMouseMove) {
+		this._mouse.bindOnMouseMove(onMouseMove);
+		return this;
+	}
+	
+	setMousePosition(position) {
 		this._mouse.showAtPosition(position);
 	}
 	
-	setMouseOutEdge(isOut){
+	setMouseOutEdge(isOut) {
 		this._mouse.setOut(isOut);
+		this._mouse.setMouseDown(false);
+	}
+	
+	onMouseUp(e){
+		this._mouse.onMouseUp(e);
 	}
 	
 	onMouseDown(e) {
+		this._mouse.onMouseDown(e);
+		
 		if (!this._pawn) {
 			return;
 		}
 		this._pawn.onMouseDown(e);
+	}
+	
+	onMouseMove(position) {
+		if(this._mouse.isDown()){
+			this._mouse.onMouseMove(position);
+		}
+		else {
+			this._mouse.showAtPosition(position);
+		}
 	}
 	
 	possess(pawn) {

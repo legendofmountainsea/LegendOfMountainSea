@@ -5,7 +5,7 @@ const MOUSE_UP_TEXTURE_PATH = '../../assets/interface/mouseUp.png';
 const MOUSE_DOWN_TEXTURE_PATH = '../../assets/interface/mouseDown.png';
 const MOUSE_LEFT_TEXTURE_PATH = '../../assets/interface/mouseLeft.png';
 const MOUSE_RIGHT_TEXTURE_PATH = '../../assets/interface/mouseRight.png';
-const EDGE_LENGHT = 8;
+const EDGE_LENGHT = 10;
 
 export default class Mouse extends ElementCore {
 	
@@ -14,17 +14,21 @@ export default class Mouse extends ElementCore {
 		this._isOut = false;
 		this._sprite = null;
 		this._status = null;
-		this._onStatusLeftEdge = ()=>{
+		this._isDown = false;
+		this._onStatusLeftEdge = () => {
 			console.warn('use bindOnLeftEdge function to bind mouse event');
 		};
-		this._onStatusRightEdge = ()=>{
+		this._onStatusRightEdge = () => {
 			console.warn('use bindOnRightEdge function to bind mouse event');
 		};
-		this._onStatusTopEdge = ()=>{
+		this._onStatusTopEdge = () => {
 			console.warn('use bindOnTopEdge function to bind mouse event');
 		};
-		this._onStatusBottomEdge= ()=>{
+		this._onStatusBottomEdge = () => {
 			console.warn('use bindOnBottomEdge function to bind mouse event');
+		};
+		this._onMouseMove = () => {
+			console.warn('use bindOnMouseMove function to bind mouse event');
 		};
 		this._hitArea = props.hitArea;
 	}
@@ -46,7 +50,32 @@ export default class Mouse extends ElementCore {
 		return this;
 	}
 	
-	setTransform(transform){
+	onMouseMove(position) {
+		const delta = {
+			deltaX: this._sprite.x - position.x,
+			deltaY: this._sprite.y - position.y,
+		};
+		this._onMouseMove(delta);
+		this.showAtPosition(position);
+	}
+	
+	onMouseDown(e) {
+		this.setMouseDown(true);
+	}
+	
+	onMouseUp(e) {
+		this.setMouseDown(false);
+	}
+	
+	isDown(){
+		return this._isDown;
+	}
+	
+	setMouseDown(isDown) {
+		this._isDown = isDown;
+	}
+	
+	setTransform(transform) {
 		//no need
 	}
 	
@@ -57,7 +86,7 @@ export default class Mouse extends ElementCore {
 	showAtPosition(position) {
 		this._setPosition(position);
 		
-		this._checkPosition(this._sprite.getBounds());
+		//this._checkPosition(this._sprite.getBounds());
 		
 		return this;
 	}
@@ -145,23 +174,28 @@ export default class Mouse extends ElementCore {
 		}
 	}
 	
-	bindOnRightEdge(onRightEdge){
+	bindOnRightEdge(onRightEdge) {
 		this._onStatusRightEdge = onRightEdge;
 		return this;
 	}
 	
-	bindOnLeftEdge(onLeftEdge){
+	bindOnLeftEdge(onLeftEdge) {
 		this._onStatusLeftEdge = onLeftEdge;
 		return this;
 	}
 	
-	bindOnTopEdge(onTopEdge){
+	bindOnTopEdge(onTopEdge) {
 		this._onStatusTopEdge = onTopEdge;
 		return this;
 	}
 	
-	bindOnBottomEdge(onBottomEdge){
+	bindOnBottomEdge(onBottomEdge) {
 		this._onStatusBottomEdge = onBottomEdge;
+		return this;
+	}
+	
+	bindOnMouseMove(onMouseMove) {
+		this._onMouseMove = onMouseMove;
 		return this;
 	}
 	
