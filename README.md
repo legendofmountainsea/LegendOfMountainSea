@@ -40,6 +40,10 @@ $ loms run-dev
 ```
 $ loms run-client
 ```
+**Run game's unit tests**
+```
+$ loms test
+```
 
 ## Requirement
 Node.js **version 9.2.0 or higher**

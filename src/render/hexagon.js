@@ -51,12 +51,12 @@ export default class Hexagon extends Pattern {
 	
 	setPositionOnTerrain(position) {
 		this._positionOnTerrain = position;
-		this.setRenderPosition(position);
+		this.adjustRenderPosition(position);
 		
 		return this;
 	}
 	
-	setRenderPosition(position) {
+	adjustRenderPosition(position) {
 		
 		this.setPosition({
 			x: (this._width / 2) + position.x * (this._height * COS_60_DEGREES ),

@@ -14,8 +14,8 @@ export default class Window {
 		try {
 			return EXECUTE_IN_CLIENT_WITH_RETURN(() => {
 				return {
-					width: parseInt(nwWinGUI.width * 0.98),
-					height: parseInt(nwWinGUI.height * 0.96),
+					width: parseInt(nwWinGUI.width),
+					height: parseInt(nwWinGUI.height),
 				};
 			});
 		} catch (e) {
