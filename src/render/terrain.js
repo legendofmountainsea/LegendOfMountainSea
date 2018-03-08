@@ -1,3 +1,5 @@
+import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
+
 import ElementCore from './elementCore';
 import Hexagon, {COS_60_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
@@ -143,7 +145,7 @@ export default class Terrain extends ElementCore {
 				}
 				
 				let hexagon = new Hexagon({
-					assetData: this._assetData,
+					assetData: (columnIndex % 2) !== 0? S_worldTerrainAsset.HILL : S_worldTerrainAsset.FOREST,
 					terrain: this,
 				}).initResources(
 					this._resources,
