@@ -42,4 +42,4 @@ All pull requests should be opened against the `master` branch. After opening yo
 - Prefer `if(boolean){ func(); };` over `if(boolean) func();`
 
 # License
-By contributing to LegendOfMountainSea, you agree that your contributions will be licensed under its GPL v2 license.
+By contributing to LegendOfMountainSea, you agree that your contributions will be licensed under its GPL-2.0 license.
