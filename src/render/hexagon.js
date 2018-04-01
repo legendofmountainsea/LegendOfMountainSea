@@ -57,7 +57,9 @@ export default class Hexagon extends Pattern {
 	}
 	
 	adjustRenderPosition(position) {
-		
+        /**
+         * found right position for the center of hexagon
+         */
 		this.setPosition({
 			x: (this._width / 2) + position.x * (this._height * COS_60_DEGREES ),
 			y: position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2),

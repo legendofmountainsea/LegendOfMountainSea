@@ -54,7 +54,10 @@ export default class Terrain extends ElementCore {
 			y: this._coordinates.y,
 		});
 	}
-	
+
+    /**
+	 * flush current terrain object in memory, save render coordinates in TerrainChain for re-render
+     */
 	flush() {
 		TerrainChain.setValue({...this._coordinates});
 		this._coordinates = {
@@ -103,6 +106,9 @@ export default class Terrain extends ElementCore {
 	}
 	
 	hexagonRenderRecycle() {
+        /**
+		 * loop the hexagons array, check if there is some hexagon not on the map
+         */
 		for (let index = 0; index < this._hexagons.length; ++index) {
 			const hexagon = this._hexagons[index];
 			let isRecyclingHexagon = true;
@@ -113,7 +119,10 @@ export default class Terrain extends ElementCore {
 					break;
 				}
 			}
-			
+
+            /**
+			 * if hexagon is not show on the map, remove from memory
+             */
 			if (isRecyclingHexagon) {
 				this._layerAgent.removeElement(hexagon, false);
 				this._hexagons.splice(index, 1);

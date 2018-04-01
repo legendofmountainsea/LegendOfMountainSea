@@ -48,6 +48,7 @@
     "babel-register": "6.26.0",
     "eslint": "4.9.0",
     "expect.js": "0.3.1",
+    "jsdoc": "3.5.5",
     "mocha": "3.5.3",
     "nwjs-builder-phoenix": "1.14.3",
     "script-loader": "0.7.0",
