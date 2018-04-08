@@ -23,4 +23,14 @@ export default class TerrainGrid extends Grid {
 
         return coordinatesSet;
     }
+
+    getAssetData(id){
+        let asset = null;
+        switch (id){
+            default:
+                break;
+        }
+
+        return asset;
+    }
 }
