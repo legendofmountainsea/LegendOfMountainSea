@@ -1,4 +1,4 @@
-export default class grid {
+export default class Grid {
     constructor(props){
 
     }
