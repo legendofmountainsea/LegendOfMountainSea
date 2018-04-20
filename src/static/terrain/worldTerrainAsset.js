@@ -6,6 +6,13 @@ export const ASSETS_ID = {
 };
 
 export default {
+	HEXAGON: {
+		IS_CONTAIN_ANIMATION: false,
+		DATA: {
+			NAME: 'hexagon',
+			PATH: './assets/terrains/hexagon.png',
+		},
+	},
 	FOREST: {
 		IS_CONTAIN_ANIMATION: false,
 		DATA: {

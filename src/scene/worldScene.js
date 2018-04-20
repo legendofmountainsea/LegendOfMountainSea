@@ -40,7 +40,7 @@ export default class WorldScene extends Scene {
 		this._renderer.addActor(houyi);
 		
 		let worldTerrain = new Terrain({
-			assetData: S_worldTerrainAsset.HILL,
+			assetData: S_worldTerrainAsset.HEXAGON,
 		});
 		this._renderer.addTerrain(worldTerrain);
 	}
