@@ -1,15 +1,11 @@
-export const TERRAIN_ID = 0;
-export const FOREST_ID = 1;
-export const HILL_ID = 2;
+export const ASSETS_ID = {
+	FOREST_ID: 0,
+	HILL_ID: 1,
+	RIVER_ID: 2,
+	SWAMP_ID: 3,
+};
 
 export default {
-	TERRAIN: {
-		IS_CONTAIN_ANIMATION: false,
-		DATA: {
-			NAME: 'terrain',
-			PATH: './assets/hexagon.png',
-		},
-	},
 	FOREST: {
 		IS_CONTAIN_ANIMATION: false,
 		DATA: {
@@ -22,6 +18,20 @@ export default {
 		DATA: {
 			NAME: 'hill',
 			PATH: './assets/terrains/hills.png',
+		},
+	},
+	RIVER: {
+		IS_CONTAIN_ANIMATION: false,
+		DATA: {
+			NAME: 'river',
+			PATH: './assets/terrains/river.png',
+		},
+	},
+	SWAMP: {
+		IS_CONTAIN_ANIMATION: false,
+		DATA: {
+			NAME: 'swamp',
+			PATH: './assets/terrains/swamp.png',
 		},
 	},
 };
