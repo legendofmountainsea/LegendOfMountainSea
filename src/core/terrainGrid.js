@@ -1,8 +1,8 @@
 import Grid from './grid';
 import Coordinates from './coordinates';
-import S_worldTerrainAsset, {TERRAIN_ID, FOREST_ID, HILL_ID} from '../static/terrain/worldTerrainAsset';
+import S_worldTerrainAsset, {ASSETS_ID} from '../static/terrain/worldTerrainAsset';
 
-export const ASSETS_NUMBER = 3;
+export const ASSETS_NUMBER = 4;
 
 export default class TerrainGrid extends Grid {
 	constructor(props) {
@@ -30,14 +30,17 @@ export default class TerrainGrid extends Grid {
 	static getAssetData(id) {
 		let asset = null;
 		switch (id) {
-			case TERRAIN_ID:
-				asset = S_worldTerrainAsset.TERRAIN;
-				break;
-			case FOREST_ID:
+			case ASSETS_ID.FOREST_ID:
 				asset = S_worldTerrainAsset.FOREST;
 				break;
-			case HILL_ID:
+			case ASSETS_ID.HILL_ID:
 				asset = S_worldTerrainAsset.HILL;
+				break;
+			case ASSETS_ID.RIVER_ID:
+				asset = S_worldTerrainAsset.RIVER;
+				break;
+			case ASSETS_ID.SWAMP_ID:
+				asset = S_worldTerrainAsset.SWAMP;
 				break;
 			default:
 				break;
