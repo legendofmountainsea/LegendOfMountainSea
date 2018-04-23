@@ -20,7 +20,7 @@ Small pull requests are much easier to review and more likely to get merged. Mak
 
 Please make sure the following is done when submitting a pull request:
 - Fork the repository and create your branch from `master`.
-- Add the copyright notice to the top of any new files you've added.
+- Make sure there is no copyright infringement of any new files you've added.
 - Make sure all the unit tests pass (`npm test`).
 
 All pull requests should be opened against the `master` branch. After opening your pull request, ensure all tests pass on CI. If a test fails and you believe it is unrelated to your change, leave a comment on the pull request explaining why.
