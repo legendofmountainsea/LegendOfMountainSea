@@ -3,4 +3,9 @@ export default class Coordinates {
         this.x = x;
         this.y = y;
     }
+    
+    set(coordinates){
+	    this.x = coordinates.x;
+	    this.y = coordinates.y;
+    }
 }
