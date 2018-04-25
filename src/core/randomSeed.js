@@ -1,7 +1,8 @@
 //TODO: https://github.com/SkyHarp/LegendOfMountainSea/issues/21
 export default class RandomSeed {
 	constructor(props){
-		this._seed = props.seed? props.seed : this._getDefaultSeed();
+		props = props || {};
+		this._seed = props.seed || this._getDefaultSeed();
 	}
 	
 	_getDefaultSeed(){
