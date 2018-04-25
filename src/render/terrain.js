@@ -1,5 +1,4 @@
 import ElementCore from './elementCore';
-import TerrainGrid, {ASSETS_NUMBER} from '../core/terrainGrid';
 import Hexagon, {COS_60_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
@@ -18,8 +17,6 @@ export default class Terrain extends ElementCore {
 		this._preRenderSize = 5;
 		this._hexagons = [];
 		this._renderPointOnTerrain = [];
-		
-		TerrainChain.setValue(this._coordinates);
 	}
 	
 	isNoAsset() {
@@ -58,7 +55,7 @@ export default class Terrain extends ElementCore {
 	 * flush current terrain object in memory, save render coordinates in TerrainChain for re-render
      */
 	flush() {
-		TerrainChain.setValue({...this._coordinates});
+		TerrainChain.updateCenterCoordinates({...this._coordinates});
 		this._coordinates = {
 			x: 0,
 			y: 0,
@@ -132,10 +129,14 @@ export default class Terrain extends ElementCore {
 	
 	renderHexagonRegion(topLeft) {
 		const terrainResource = this._resources[this._assetData.DATA.NAME];
+		const centerCoordinates = TerrainChain.getCenterCoordinates();
 		const {height, width} = terrainResource.texture;
 		
 		const topLeftX = -parseInt(topLeft.x / (height * COS_60_DEGREES)),
 			topLeftY = -parseInt(topLeft.y / height);
+		
+		const centerRenderPointX = -parseInt(centerCoordinates.x / (height * COS_60_DEGREES)),
+			centerRenderPointY = -parseInt(centerCoordinates.y / height);
 		
 		this._renderPointOnTerrain = [];
 		
@@ -153,16 +154,14 @@ export default class Terrain extends ElementCore {
 				}
 				
 				let hexagon = new Hexagon({
-					assetData: TerrainGrid.getAssetData(Math.abs(columnIndex) % ASSETS_NUMBER),
+					assetData: TerrainChain.getTerrainAssetData({x:centerRenderPointX + index,y:centerRenderPointY + columnIndex}),
 					terrain: this,
 				}).initResources(
 					this._resources,
 				).setDimensions({
 					height,
 					width,
-				}).setData(
-					TerrainChain.getValue(),
-				);
+				});
 				
 				hexagon.setPositionOnTerrain({
 					x: index,
