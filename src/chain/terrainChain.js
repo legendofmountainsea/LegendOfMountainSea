@@ -3,8 +3,6 @@ import Coordinates from '../core/coordinates';
 import RandomSeed from '../core/randomSeed';
 import S_worldTerrainAsset, {ASSETS_ID} from '../static/terrain/worldTerrainAsset';
 
-export const ASSETS_NUMBER = 4;
-
 let renderCenter = null;
 let seed = null;
 export default class TerrainChain {
