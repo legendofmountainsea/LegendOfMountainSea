@@ -47,7 +47,7 @@ $ loms test
 ```
 
 ## Requirement
-Node.js **version 9.2.0 or higher**
+Node.js **version 10.0.0 or higher**
 
 ## Contributing
 LegendOfMountainSea welcomes all contributions from anyone willing to work in good faith both with other contributors and with the community.
