@@ -21,8 +21,9 @@ Install LOMS Development CLI
 $ npm install loms-cli -g
 ```
 
-Fork repository, create your branch from master and run CLI command-line at project's root directory
+Fork repository, create your branch from master and run CLI command-line inside project folder
 ```
+$ cd LegendOfMountainSea/
 $ loms init
 ```
 - Windows might get `node-gyp rebuild` error, open Powershell as admin and run
