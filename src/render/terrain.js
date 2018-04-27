@@ -3,9 +3,18 @@ import Hexagon, {COS_60_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
 
-export default class Terrain extends ElementCore {
-	//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/40
+/**
+ * class for render terrain on the map
+ * @extends ElementCore
+ */
+class Terrain extends ElementCore {
+	/**
+	 * create terrain
+	 * @param props {object}
+	 * @todo https://github.com/SkyHarp/LegendOfMountainSea/issues/40
+	 */
 	constructor(props) {
+		props = props || {};
 		super(props);
 		this._container = null;
 		this._resources = null;
@@ -185,3 +194,5 @@ export default class Terrain extends ElementCore {
 		this._container = null;
 	}
 }
+
+export default Terrain;

@@ -4,12 +4,12 @@ export const COS_60_DEGREES = Math.cos(Math.PI / 6);
 
 export default class Hexagon extends Pattern {
 	constructor(props) {
+		props = props || {};
 		super(props);
 		this._height = 0;
 		this._width = 0;
 		this._terrain = props.terrain;
 		this._positionOnTerrain = null;
-		this._renderPosition = null;
 		this._data = props.data ? props.data : {};
 	}
 	
@@ -18,10 +18,6 @@ export default class Hexagon extends Pattern {
 		
 		this._sprite.interactive = true;
 		this._sprite.buttonMode = true;
-		this._sprite.mousedown = (e) => {
-			this._terrain.flush();
-			//console.log(this._data);
-		};
 		
 		return this;
 	}
