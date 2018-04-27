@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Source: render/terrain.js</title>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/main.css">
+    
+    
+    <script>
+    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{"outputSourceFiles":true}};
+    </script>
+    
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+    <button id="menuToggle" class="btn btn-link btn-lg menu-toggle">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </button>
+    <div class="search">
+        <input id="search" type="text" class="form-control input-md" placeholder="Search...">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="Coordinates">
+            <span class="title  ">
+                
+                <a href="Coordinates.html">Coordinates</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="Coordinates#set"><a href="Coordinates.html#set">set</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ElementCore">
+            <span class="title  ">
+                
+                <a href="ElementCore.html">ElementCore</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="ElementCore#dispose"><a href="ElementCore.html#dispose">dispose</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getID"><a href="ElementCore.html#getID">getID</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getIndex"><a href="ElementCore.html#getIndex">getIndex</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getPosition"><a href="ElementCore.html#getPosition">getPosition</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getRenderObject"><a href="ElementCore.html#getRenderObject">getRenderObject</a></li>
+            
+                <li class="parent  " data-name="ElementCore#setID"><a href="ElementCore.html#setID">setID</a></li>
+            
+                <li class="parent  " data-name="ElementCore#setIndex"><a href="ElementCore.html#setIndex">setIndex</a></li>
+            
+                <li class="parent  " data-name="ElementCore#setTransform"><a href="ElementCore.html#setTransform">setTransform</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Terrain">
+            <span class="title  ">
+                
+                <a href="Terrain.html">Terrain</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="  " data-name="Terrain#dispose"><a href="Terrain.html#dispose">dispose</a></li>
+            
+                <li class="parent  " data-name="Terrain#flush"><a href="Terrain.html#flush">flush</a></li>
+            
+                <li class="  " data-name="Terrain#getID"><a href="Terrain.html#getID">getID</a></li>
+            
+                <li class="  " data-name="Terrain#getIndex"><a href="Terrain.html#getIndex">getIndex</a></li>
+            
+                <li class="  " data-name="Terrain#getPosition"><a href="Terrain.html#getPosition">getPosition</a></li>
+            
+                <li class="  " data-name="Terrain#getRenderObject"><a href="Terrain.html#getRenderObject">getRenderObject</a></li>
+            
+                <li class="  " data-name="Terrain#setID"><a href="Terrain.html#setID">setID</a></li>
+            
+                <li class="  " data-name="Terrain#setIndex"><a href="Terrain.html#setIndex">setIndex</a></li>
+            
+                <li class="  " data-name="Terrain#setTransform"><a href="Terrain.html#setTransform">setTransform</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="render_terrain.js.html">Source: render/terrain.js</h1>
+        
+
+
+    
+    <section>
+        <header>
+            <div class="header content-size">
+                <h2>render/terrain.js</h2>
+            </div>
+        </header>
+        <article>
+            <pre id="source-code" class="prettyprint source "><code>import ElementCore from './elementCore';
+import Hexagon, {COS_60_DEGREES} from './hexagon';
+import LayerAgent from './layerAgent';
+import TerrainChain from '../chain/terrainChain';
+
+/**
+ * class for render terrain on the map
+ * @extends ElementCore
+ */
+class Terrain extends ElementCore {
+	/**
+	 * create terrain
+	 * @param props {object}
+	 * @todo https://github.com/SkyHarp/LegendOfMountainSea/issues/40
+	 */
+	constructor(props) {
+		props = props || {};
+		super(props);
+		this._container = null;
+		this._resources = null;
+		this._isPointsOnTerrainChanged = false;
+		this._coordinates = props.coordinates ? props.coordinates : {x: 0, y: 0};
+		this._noAsset = !props.assetData;
+		this._assetData = props.assetData;
+		this._runtimeRenderSize = 5;
+		this._preRenderSize = 5;
+		this._hexagons = [];
+		this._renderPointOnTerrain = [];
+	}
+	
+	isNoAsset() {
+		return this._noAsset;
+	}
+	
+	_initLayerAgent() {
+		this._container = new PIXI.Container();
+		this._layerAgent = new LayerAgent({contatiner: this._container});
+	}
+	
+	initResources(resources) {
+		this._resources = resources;
+		this._initLayerAgent();
+		
+		this.setTransform({x: 0, y: 0});
+		
+		return this;
+	}
+	
+	setTransform(transform) {
+		
+		this._coordinates.x += transform.x;
+		this._coordinates.y += transform.y;
+		
+		this._container.x = this._coordinates.x;
+		this._container.y = this._coordinates.y;
+		
+		this.renderHexagonRegion({
+			x: this._coordinates.x,
+			y: this._coordinates.y,
+		});
+	}
+
+    /**
+	 * flush current terrain object in memory, save render coordinates in TerrainChain for re-render
+     */
+	flush() {
+		TerrainChain.updateCenterCoordinates({...this._coordinates});
+		this._coordinates = {
+			x: 0,
+			y: 0,
+		};
+		this._isPointsOnTerrainChanged = true;
+	}
+	
+	addHexagon(hexagon) {
+		this._hexagons.push(hexagon);
+		this._layerAgent.addElement(hexagon, 0);
+	}
+	
+	removeHexagon(hexagon) {
+		for (let index = 0; index &lt; this._hexagons.length; ++index) {
+			if (this._hexagons[index].getID() === hexagon.getID()) {
+				this._hexagons.splice(index, 1);
+				break;
+			}
+		}
+		
+		this._layerAgent.removeElement(hexagon);
+	}
+	
+	getRenderObject() {
+		return this._container;
+	}
+	
+	getPosition(){
+		return {
+			x: this._container.x,
+			y: this._container.y,
+		};
+	}
+	
+	tick(delta) {
+		if (!this._isPointsOnTerrainChanged) {
+			return;
+		}
+		this.hexagonRenderRecycle();
+	}
+	
+	onRender(delta) {
+	
+	}
+	
+	hexagonRenderRecycle() {
+        /**
+		 * loop the hexagons array, check if there is some hexagon not on the map
+         */
+		for (let index = 0; index &lt; this._hexagons.length; ++index) {
+			const hexagon = this._hexagons[index];
+			let isRecyclingHexagon = true;
+			for (const point of this._renderPointOnTerrain) {
+				const position = hexagon.getPositionOnTerrain();
+				if (position.x === point.x &amp;&amp; position.y === point.y) {
+					isRecyclingHexagon = false;
+					break;
+				}
+			}
+
+            /**
+			 * if hexagon is not show on the map, remove from memory
+             */
+			if (isRecyclingHexagon) {
+				this._layerAgent.removeElement(hexagon, false);
+				this._hexagons.splice(index, 1);
+				index--;
+			}
+		}
+	}
+	
+	renderHexagonRegion(topLeft) {
+		const terrainResource = this._resources[this._assetData.DATA.NAME];
+		const centerCoordinates = TerrainChain.getCenterCoordinates();
+		const {height, width} = terrainResource.texture;
+		
+		const topLeftX = -parseInt(topLeft.x / (height * COS_60_DEGREES)),
+			topLeftY = -parseInt(topLeft.y / height);
+		
+		const centerRenderPointX = -parseInt(centerCoordinates.x / (height * COS_60_DEGREES)),
+			centerRenderPointY = -parseInt(centerCoordinates.y / height);
+		
+		this._renderPointOnTerrain = [];
+		
+		for (let index = topLeftX - this._preRenderSize; index &lt; topLeftX + this._runtimeRenderSize; ++index) {
+			for (let columnIndex = topLeftY - this._preRenderSize; columnIndex &lt; topLeftY + this._runtimeRenderSize; ++columnIndex) {
+				
+				this._renderPointOnTerrain.push({x: index, y: columnIndex});
+				
+				if (this._hexagons.find((hexagon) => {
+						let position = hexagon.getPositionOnTerrain();
+						return position.x === index &amp;&amp; position.y === columnIndex;
+					})
+				) {
+					continue;
+				}
+				
+				let hexagon = new Hexagon({
+					assetData: TerrainChain.getTerrainAssetData({x:centerRenderPointX + index,y:centerRenderPointY + columnIndex}),
+					terrain: this,
+				}).initResources(
+					this._resources,
+				).setDimensions({
+					height,
+					width,
+				});
+				
+				hexagon.setPositionOnTerrain({
+					x: index,
+					y: columnIndex,
+				});
+				
+				this._isPointsOnTerrainChanged = true;
+				
+				this.addHexagon(hexagon);
+			}
+		}
+	}
+	
+	render(delta) {
+		this.tick(delta);
+		this.onRender(delta);
+	}
+	
+	dispose() {
+		this._container.destroy({children: true, texture: true, baseTexture: true});
+		this._container = null;
+	}
+}
+
+export default Terrain;</code></pre>
+        </article>
+    </section>
+
+
+
+
+
+
+        
+
+        <footer class="content-size">
+            <div class="footer">
+                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Apr 28 2018 00:00:26 GMT+0200 (西欧夏令时)
+            </div>
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/main.js"></script>
+</body>
+</html>

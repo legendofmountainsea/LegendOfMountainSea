@@ -35,11 +35,12 @@
     "build-win": "npm run build-prod && npm run dist-win",
     "lint": "eslint --ext .js src",
     "lint-fix": "eslint --ext .js src --fix",
-    "jsdoc": "./node_modules/.bin/jsdoc src -r -d docs"
+    "jsdoc": "./node_modules/.bin/jsdoc src -t ./node_modules/@pixi/jsdoc-template -R README.md -r -d docs"
   },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
   "devDependencies": {
+    "@pixi/jsdoc-template": "2.4.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.1",
     "babel-loader": "7.1.2",

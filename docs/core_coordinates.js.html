@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Source: core/coordinates.js</title>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/main.css">
+    
+    
+    <script>
+    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{"outputSourceFiles":true}};
+    </script>
+    
+
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+    <button id="menuToggle" class="btn btn-link btn-lg menu-toggle">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </button>
+    <div class="search">
+        <input id="search" type="text" class="form-control input-md" placeholder="Search...">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="Coordinates">
+            <span class="title  ">
+                
+                <a href="Coordinates.html">Coordinates</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="Coordinates#set"><a href="Coordinates.html#set">set</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="ElementCore">
+            <span class="title  ">
+                
+                <a href="ElementCore.html">ElementCore</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="ElementCore#dispose"><a href="ElementCore.html#dispose">dispose</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getID"><a href="ElementCore.html#getID">getID</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getIndex"><a href="ElementCore.html#getIndex">getIndex</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getPosition"><a href="ElementCore.html#getPosition">getPosition</a></li>
+            
+                <li class="parent  " data-name="ElementCore#getRenderObject"><a href="ElementCore.html#getRenderObject">getRenderObject</a></li>
+            
+                <li class="parent  " data-name="ElementCore#setID"><a href="ElementCore.html#setID">setID</a></li>
+            
+                <li class="parent  " data-name="ElementCore#setIndex"><a href="ElementCore.html#setIndex">setIndex</a></li>
+            
+                <li class="parent  " data-name="ElementCore#setTransform"><a href="ElementCore.html#setTransform">setTransform</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Terrain">
+            <span class="title  ">
+                
+                <a href="Terrain.html">Terrain</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="  " data-name="Terrain#dispose"><a href="Terrain.html#dispose">dispose</a></li>
+            
+                <li class="parent  " data-name="Terrain#flush"><a href="Terrain.html#flush">flush</a></li>
+            
+                <li class="  " data-name="Terrain#getID"><a href="Terrain.html#getID">getID</a></li>
+            
+                <li class="  " data-name="Terrain#getIndex"><a href="Terrain.html#getIndex">getIndex</a></li>
+            
+                <li class="  " data-name="Terrain#getPosition"><a href="Terrain.html#getPosition">getPosition</a></li>
+            
+                <li class="  " data-name="Terrain#getRenderObject"><a href="Terrain.html#getRenderObject">getRenderObject</a></li>
+            
+                <li class="  " data-name="Terrain#setID"><a href="Terrain.html#setID">setID</a></li>
+            
+                <li class="  " data-name="Terrain#setIndex"><a href="Terrain.html#setIndex">setIndex</a></li>
+            
+                <li class="  " data-name="Terrain#setTransform"><a href="Terrain.html#setTransform">setTransform</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="core_coordinates.js.html">Source: core/coordinates.js</h1>
+        
+
+
+    
+    <section>
+        <header>
+            <div class="header content-size">
+                <h2>core/coordinates.js</h2>
+            </div>
+        </header>
+        <article>
+            <pre id="source-code" class="prettyprint source "><code>/**
+ * class of render object's coordinates
+ */
+class Coordinates {
+	/**
+	 * create a coordinates
+	 * @param x {number}
+	 * @param y {number}
+	 */
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
+	 * set coordinates data
+	 * @param coordinates {Coordinates}
+	 * @returns {Coordinates}
+	 */
+	set(coordinates) {
+		this.x = coordinates.x;
+		this.y = coordinates.y;
+		return this;
+	}
+}
+
+export default Coordinates;</code></pre>
+        </article>
+    </section>
+
+
+
+
+
+
+        
+
+        <footer class="content-size">
+            <div class="footer">
+                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Apr 28 2018 00:00:26 GMT+0200 (西欧夏令时)
+            </div>
+        </footer>
+    </div>
+</div>
+<script>prettyPrint();</script>
+<script src="scripts/main.js"></script>
+</body>
+</html>
