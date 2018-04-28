@@ -2,7 +2,11 @@ import Pattern from './pattern';
 
 export const COS_60_DEGREES = Math.cos(Math.PI / 6);
 
-export default class Hexagon extends Pattern {
+/**
+ * class for rendering a hexagon grid on terrain
+ * @extends Pattern
+ */
+class Hexagon extends Pattern {
 	constructor(props) {
 		props = props || {};
 		super(props);
@@ -52,10 +56,12 @@ export default class Hexagon extends Pattern {
 		return this;
 	}
 	
+	/**
+	 * found right position for the center of hexagon
+	 * @param position {Coordinates}
+	 * @returns {Hexagon}
+	 */
 	adjustRenderPosition(position) {
-        /**
-         * found right position for the center of hexagon
-         */
 		this.setPosition({
 			x: (this._width / 2) + position.x * (this._height * COS_60_DEGREES ),
 			y: position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2),
@@ -69,12 +75,12 @@ export default class Hexagon extends Pattern {
 	}
 	
 	tick(delta) {
-		//override in subClass
 	}
 	
 	dispose(option) {
 		super.dispose(option);
 		this._positionOnTerrain = null;
-		this._renderPosition = null;
 	}
 }
+
+export default Hexagon;

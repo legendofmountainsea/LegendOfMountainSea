@@ -15,12 +15,12 @@ describe('Mouse', () => {
 		mouse = null;
 	});
 	
-	it('should be not out', ()=>{
+	it('should be not out', () => {
 		
 		expect(mouse.isOut()).to.be(false);
 	});
 	
-	it('should be not out', ()=>{
+	it('should be not out', () => {
 		
 		mouse.setOut(true);
 		
@@ -38,7 +38,7 @@ describe('Mouse', () => {
 	});
 	
 	it('status should be inside', () => {
-		mouse._checkPosition({x:11, y: 11, width: 11, height: 11});
+		mouse._checkPosition({x: 11, y: 11, width: 11, height: 11});
 		
 		expect(mouse._status).to.be(mouse.STATUS_INSIDE);
 		
@@ -77,5 +77,4 @@ describe('Mouse', () => {
 		expect(mouse._status).to.be(mouse.STATUS_RIGHT_EDGE);
 	});
 	
-})
-;
+});
