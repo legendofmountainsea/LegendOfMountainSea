@@ -1,7 +1,12 @@
 import Actor from './actor';
 
-export default class Pattern extends Actor {
+/**
+ * class for rendering static element
+ * @extends Actor
+ */
+class Pattern extends Actor {
 	constructor(props) {
+		props = props || {};
 		super(props);
 	}
 	
@@ -35,3 +40,5 @@ export default class Pattern extends Actor {
 		}
 	}
 }
+
+export default Pattern;

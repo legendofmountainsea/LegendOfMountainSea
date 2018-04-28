@@ -1,6 +1,12 @@
 import ElementCore from './elementCore';
-export default class Actor extends ElementCore{
+
+/**
+ * class for rendering interactive element in the game
+ * @extends ElementCore
+ */
+class Actor extends ElementCore{
 	constructor(props) {
+		props = props || {};
 		super(props);
 		this._position = null;
 		this._initPosition = props.position ? props.position : {x: 0, y: 0};
@@ -8,16 +14,11 @@ export default class Actor extends ElementCore{
 		};
 		this._sprite = null;
 		this._onClick = props.onClick ? props.onClick : null;
-		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
 	}
 	
 	DIRECTION_RIGHT = 1;
 	DIRECTION_LEFT = -1;
-	
-	isNoAsset() {
-		return this._noAsset;
-	}
 	
 	getRenderObject() {
 		return this._sprite;
@@ -77,3 +78,5 @@ export default class Actor extends ElementCore{
 		this._assetData = null;
 	}
 }
+
+export default Actor;

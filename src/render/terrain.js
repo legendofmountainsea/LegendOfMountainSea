@@ -4,7 +4,7 @@ import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
 
 /**
- * class for render terrain on the map
+ * class for rendering terrain on the map
  * @extends ElementCore
  */
 class Terrain extends ElementCore {
@@ -28,15 +28,24 @@ class Terrain extends ElementCore {
 		this._renderPointOnTerrain = [];
 	}
 	
-	isNoAsset() {
-		return this._noAsset;
-	}
-	
+	/**
+	 * create terrain layer to manage render elements
+	 * @returns {Terrain}
+	 * @private
+	 */
 	_initLayerAgent() {
 		this._container = new PIXI.Container();
 		this._layerAgent = new LayerAgent({contatiner: this._container});
+		
+		return this;
 	}
 	
+	/**
+	 * init terrain asset resources for render
+	 * @param resources
+	 * @returns {Terrain}
+	 * @override
+	 */
 	initResources(resources) {
 		this._resources = resources;
 		this._initLayerAgent();
@@ -46,6 +55,12 @@ class Terrain extends ElementCore {
 		return this;
 	}
 	
+	/**
+	 * make terrain transform by vector
+	 * @param transform {Coordinates}
+	 * @returns {Terrain}
+	 * @override
+	 */
 	setTransform(transform) {
 		
 		this._coordinates.x += transform.x;
@@ -58,10 +73,13 @@ class Terrain extends ElementCore {
 			x: this._coordinates.x,
 			y: this._coordinates.y,
 		});
+		
+		return this;
 	}
 
     /**
-	 * flush current terrain object in memory, save render coordinates in TerrainChain for re-render
+	 * flush current terrain in memory, save render coordinates in TerrainChain for re-render
+     * @returns {Terrain}
      */
 	flush() {
 		TerrainChain.updateCenterCoordinates({...this._coordinates});
@@ -70,11 +88,18 @@ class Terrain extends ElementCore {
 			y: 0,
 		};
 		this._isPointsOnTerrainChanged = true;
+		return this;
 	}
 	
+	/**
+	 * add hexagon element in terrain render array
+	 * @param hexagon {Hexagon}
+	 * @returns {Terrain}
+	 */
 	addHexagon(hexagon) {
 		this._hexagons.push(hexagon);
 		this._layerAgent.addElement(hexagon, 0);
+		return this;
 	}
 	
 	removeHexagon(hexagon) {
@@ -110,10 +135,12 @@ class Terrain extends ElementCore {
 	
 	}
 	
+	/**
+	 * loop the hexagons array, check if there is some hexagon not on the map.
+	 * if hexagon is not show on the map, remove from memory
+	 * @returns {Terrain}
+	 */
 	hexagonRenderRecycle() {
-        /**
-		 * loop the hexagons array, check if there is some hexagon not on the map
-         */
 		for (let index = 0; index < this._hexagons.length; ++index) {
 			const hexagon = this._hexagons[index];
 			let isRecyclingHexagon = true;
@@ -124,18 +151,21 @@ class Terrain extends ElementCore {
 					break;
 				}
 			}
-
-            /**
-			 * if hexagon is not show on the map, remove from memory
-             */
+			
 			if (isRecyclingHexagon) {
 				this._layerAgent.removeElement(hexagon, false);
 				this._hexagons.splice(index, 1);
 				index--;
 			}
 		}
+		return this;
 	}
 	
+	/**
+	 * render hexagon array by Coordinates
+	 * @param topLeft {Coordinates}
+	 * @returns {Terrain}
+	 */
 	renderHexagonRegion(topLeft) {
 		const terrainResource = this._resources[this._assetData.DATA.NAME];
 		const centerCoordinates = TerrainChain.getCenterCoordinates();
@@ -182,6 +212,8 @@ class Terrain extends ElementCore {
 				this.addHexagon(hexagon);
 			}
 		}
+		
+		return this;
 	}
 	
 	render(delta) {

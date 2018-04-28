@@ -24,6 +24,8 @@ export default class Character extends Actor {
 		this.setElement(animatedSprite);
 		
 		this.initSprite();
+		
+		return this;
 	}
 	
 	setElement(sprite) {

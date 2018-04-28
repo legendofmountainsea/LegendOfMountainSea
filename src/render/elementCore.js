@@ -9,6 +9,23 @@ class ElementCore {
 	constructor(props) {
 		this._ID = null;
 		this._index = 0;
+		this._noAsset = !props.assetData;
+	}
+	
+	/**
+	 * init asset resource for render
+	 * @param resources {object} game resources info object
+	 * @abstract
+	 */
+	initResources(resources){
+	}
+	
+	/**
+	 * check element has asset or not
+	 * @returns {boolean} return true if element has asset
+	 */
+	isNoAsset() {
+		return this._noAsset;
 	}
 	
 	/**
@@ -49,7 +66,7 @@ class ElementCore {
 	
 	/**
 	 * make render object transform by vector
-	 * @param transform {vector}
+	 * @param transform {Coordinates}
 	 * @abstract
 	 */
 	setTransform(transform){

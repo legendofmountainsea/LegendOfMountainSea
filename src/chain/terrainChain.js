@@ -5,7 +5,11 @@ import S_worldTerrainAsset, {ASSETS_ID} from '../static/terrain/worldTerrainAsse
 
 let renderCenter = null;
 let seed = null;
-export default class TerrainChain {
+
+/**
+ * class for connecting data and terrain
+ */
+class TerrainChain {
 	static _initRenderCenter(){
 		renderCenter = new Coordinates(0,0);
 
@@ -33,7 +37,9 @@ export default class TerrainChain {
 		return renderCenter;
 	}
 	
-	// TODO: init seed in other place
+	/**
+	 * @todo init seed in other place
+	 */
 	static getTerrainAssetData(renderPoint) {
 		if (!seed) {
 			seed = new RandomSeed();
@@ -87,3 +93,5 @@ export default class TerrainChain {
 		return asset;
 	}
 }
+
+export default TerrainChain;
