@@ -3,6 +3,7 @@ import Hexagon, {COS_60_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
 import Coordinates from '../core/coordinates';
+import Window from '../module/window';
 
 /**
  * class for rendering terrain on the map
@@ -23,8 +24,8 @@ class Terrain extends ElementCore {
 		this._coordinates = props.coordinates ? props.coordinates : new Coordinates(0, 0);
 		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
-		this._runtimeRenderSize = 5;
-		this._preRenderSize = 5;
+		this._PRE_RENDER_SCALE = 1.5;
+		this._RENDER_OUTSIDE_OF_EDGE = 3;
 		this._hexagons = [];
 		this._renderPointOnTerrain = [];
 	}
@@ -130,7 +131,7 @@ class Terrain extends ElementCore {
 	 * @override
 	 */
 	getPosition() {
-		return new Coordinates(this._container.x,this._container.y);
+		return new Coordinates(this._container.x, this._container.y);
 	}
 	
 	/**
@@ -190,17 +191,20 @@ class Terrain extends ElementCore {
 		const terrainResource = this._resources[this._assetData.DATA.NAME];
 		const centerCoordinates = TerrainChain.getCenterCoordinates();
 		const {height, width} = terrainResource.texture;
+		const winDimension = Window.getDimension();
 		
 		const topLeftX = -parseInt(topLeft.x / (height * COS_60_DEGREES)),
 			topLeftY = -parseInt(topLeft.y / height);
 		
-		const centerRenderPointX = -parseInt(centerCoordinates.x / (height * COS_60_DEGREES)),
+		const numberOfHexagonOnX = parseInt((winDimension.width / width) * this._PRE_RENDER_SCALE),
+			numberOfHexagonOnY = parseInt((winDimension.height / height) * this._PRE_RENDER_SCALE),
+			centerRenderPointX = -parseInt(centerCoordinates.x / (height * COS_60_DEGREES)),
 			centerRenderPointY = -parseInt(centerCoordinates.y / height);
 		
 		this._renderPointOnTerrain = [];
 		
-		for (let index = topLeftX - this._preRenderSize; index < topLeftX + this._runtimeRenderSize; ++index) {
-			for (let columnIndex = topLeftY - this._preRenderSize; columnIndex < topLeftY + this._runtimeRenderSize; ++columnIndex) {
+		for (let index = topLeftX - this._RENDER_OUTSIDE_OF_EDGE; index < (topLeftX + numberOfHexagonOnX); ++index) {
+			for (let columnIndex = topLeftY - this._RENDER_OUTSIDE_OF_EDGE; columnIndex < (topLeftY + numberOfHexagonOnY); ++columnIndex) {
 				
 				let renderPoint = new Coordinates(index, columnIndex);
 				
