@@ -1,4 +1,7 @@
-export default class Controller {
+/**
+ * class for gamer input control
+ */
+class Controller {
 	constructor(props) {
 		this._mouse = props.mouse ? props.mouse : null;
 		this._pawn = null;
@@ -101,3 +104,5 @@ export default class Controller {
 		this._pawn = pawn;
 	}
 }
+
+export default Controller;

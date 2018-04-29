@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/pattern.js</title>
+    <title>Source: render/lomsRenderer.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,7 +513,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_pattern.js.html">Source: render/pattern.js</h1>
+        <h1 class="page-title" data-filename="render_lomsRenderer.js.html">Source: render/lomsRenderer.js</h1>
         
 
 
@@ -521,54 +521,202 @@
     <section>
         <header>
             <div class="header content-size">
-                <h2>render/pattern.js</h2>
+                <h2>render/lomsRenderer.js</h2>
             </div>
         </header>
         <article>
-            <pre id="source-code" class="prettyprint source "><code>import Actor from './actor';
+            <pre id="source-code" class="prettyprint source "><code>import Mouse from './mouse';
+import StageAgent from './stageAgent';
+import Controller from '../control/controller';
+import Window from '../module/window';
 
 /**
- * class for rendering static element
- * @extends Actor
+ * class for renderer
  */
-class Pattern extends Actor {
+class LOMSRenderer {
+	
+	/**
+	 * init renderer for game
+	 * @param props
+	 */
 	constructor(props) {
-		props = props || {};
-		super(props);
+		this._controller = null;
+		this._onAssetLoadingFinish = () => {
+		};
+		this.initRenderer();
+		this.initAssetLoader();
 	}
 	
-	getName() {
-		return this._assetData.DATA.NAME;
-	}
-	
-	initResources(resources) {
-		let resource = resources[this.getName()];
+	/**
+	 * init renderer and stage
+	 * @todo left mouse click feature
+	 * @returns {LOMSRenderer}
+	 */
+	initRenderer() {
 		
-		this._sprite = new PIXI.Sprite(resource.texture);
+		const {width, height} = Window.getDimension();
 		
-		this._sprite.anchor.set(0.5, 0.5);
+		this._renderer = new PIXI.Application(width, height, {backgroundColor: 0xeeeeee});
 		
-		this._sprite.position.x = this._initPosition.x;
-		this._sprite.position.y = this._initPosition.y;
+		this._controller = new Controller({
+			mouse: new Mouse({
+				hitArea: new PIXI.Rectangle(0, 0, width, height),
+			}).init(),
+		});
 		
-		this._initMouseEvent();
+		this._stageAgent = new StageAgent({renderer: this._renderer, controller: this._controller});
+		
+		this._stageAgent.init();
+		
+		document.getElementById('CanvasContainer').appendChild(this._renderer.view);
+		
+		this._renderer.view.addEventListener('contextmenu', (e) => {
+			e.preventDefault();
+		});
 		
 		return this;
 	}
 	
-	_initMouseEvent(){
-		if (this._onClick) {
-			this._sprite.interactive = true;
-			this._sprite.buttonMode = true;
-			this._sprite.mousedown = (e) => {
-				this._onClick(e);
-			};
-			this._sprite.cursor = null;
+	/**
+	 * init asset loader for loading asset files
+	 * @returns {LOMSRenderer}
+	 * @todo show progress information
+	 */
+	initAssetLoader() {
+		let loader = PIXI.loader;
+		loader.onProgress.add((e) => {
+			//console.log(e.progress);
+		});
+		
+		loader.onComplete.add((loader, resources) => {
+			this._resources = resources;
+			this._onAssetLoadingFinish();
+		});
+		
+		return this;
+	}
+	
+	_setAssetLoadingListener(onFinish) {
+		this._onAssetLoadingFinish = onFinish;
+	}
+	
+	/**
+	 * loading asset files to memory
+	 * @param assetsSet {object} static object contain files information such as path, name etc.
+	 * @returns {LOMSRenderer}
+	 * @private
+	 */
+	_prepareAssets(assetsSet) {
+		let loader = PIXI.loader;
+		loader.reset();
+		
+		for (let assetsData of assetsSet) {
+			
+			for (const asset in assetsData) {
+				if (assetsData[asset].IS_CONTAIN_ANIMATION) {
+					for (let animation in assetsData[asset].DATA) {
+						loader.add(assetsData[asset].DATA[animation].NAME, assetsData[asset].DATA[animation].PATH);
+					}
+				}
+				else {
+					loader.add(assetsData[asset].DATA.NAME, assetsData[asset].DATA.PATH);
+				}
+			}
 		}
+		
+		loader.load();
+		
+		return this;
+	}
+	
+	/**
+	 * switch to next scene
+	 * @param scene {Scene} class for every scene which renderer could render
+	 * @returns {LOMSRenderer}
+	 */
+	renderScene(scene) {
+		scene.setRenderer(this);
+		this._setAssetLoadingListener(scene.onAssetsFinish());
+		this._prepareAssets(scene.getAssetsDate());
+		return this;
+	}
+	
+	/**
+	 * get controller instance
+	 * @returns {Controller} class for gamer input control
+	 */
+	getController() {
+		return this._controller;
+	}
+	
+	/**
+	 * add terrain to stage
+	 * @param terrain {Terrain}
+	 * @returns {LOMSRenderer}
+	 */
+	addTerrain(terrain) {
+		this._addElementToStage(terrain);
+		this._stageAgent.addTerrain(terrain);
+		return this;
+	}
+	
+	/**
+	 * add ui to stage
+	 * @param ui {UIText}
+	 * @returns {LOMSRenderer}
+	 */
+	addUI(ui){
+		this._addElementToStage(ui);
+		this._stageAgent.addUI(ui);
+		return this;
+	}
+	
+	/**
+	 * add actor to stage
+	 * @param actor {Actor}
+	 * @returns {LOMSRenderer}
+	 */
+	addActor(actor) {
+		this._addElementToStage(actor);
+		this._stageAgent.addActor(actor);
+		return this;
+	}
+	
+	/**
+	 *
+	 * @param element {ElementCore}
+	 * @returns {LOMSRenderer}
+	 * @private
+	 */
+	_addElementToStage(element){
+		if (!element.isNoAsset()) {
+			element.initResources(this._resources);
+		}
+		return this;
+	}
+	
+	/**
+	 * clear ui and actor in current stage
+	 * @returns {LOMSRenderer}
+	 */
+	clearStage() {
+		this._stageAgent.clearUI();
+		this._stageAgent.clearActors();
+		return this;
+	}
+	
+	close() {
+		Window.close();
+	}
+	
+	render() {
+		this._renderer.ticker.add((delta) => {
+			this._stageAgent.render(delta);
+		});
 	}
 }
 
-export default Pattern;</code></pre>
+export default LOMSRenderer;</code></pre>
         </article>
     </section>
 

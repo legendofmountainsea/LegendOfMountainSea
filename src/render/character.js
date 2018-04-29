@@ -1,13 +1,28 @@
 import Actor from './actor';
 
-export default class Character extends Actor {
+/**
+ * class for render player's character
+ * @extends Actor
+ */
+class Character extends Actor {
+	/**
+	 * create a character
+	 * @param props
+	 */
 	constructor(props) {
+		props = props || {};
 		super(props);
 		this._frames = {};
 		this._destination = null;
 		this._animationStatus = 'STAND';
 	}
 	
+	/**
+	 * init asset resource for render
+	 * @param resources
+	 * @returns {Character}
+	 * @override
+	 */
 	initResources(resources) {
 		
 		for (let asset in this._assetData.DATA) {
@@ -200,3 +215,5 @@ export default class Character extends Actor {
 		this._destination = null;
 	}
 }
+
+export default Character;

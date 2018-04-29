@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/pattern.js</title>
+    <title>Source: control/controller.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,7 +513,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_pattern.js.html">Source: render/pattern.js</h1>
+        <h1 class="page-title" data-filename="control_controller.js.html">Source: control/controller.js</h1>
         
 
 
@@ -521,54 +521,118 @@
     <section>
         <header>
             <div class="header content-size">
-                <h2>render/pattern.js</h2>
+                <h2>control/controller.js</h2>
             </div>
         </header>
         <article>
-            <pre id="source-code" class="prettyprint source "><code>import Actor from './actor';
-
-/**
- * class for rendering static element
- * @extends Actor
+            <pre id="source-code" class="prettyprint source "><code>/**
+ * class for gamer input control
  */
-class Pattern extends Actor {
+class Controller {
 	constructor(props) {
-		props = props || {};
-		super(props);
+		this._mouse = props.mouse ? props.mouse : null;
+		this._pawn = null;
+		this._bindKeyboardEvent();
 	}
 	
-	getName() {
-		return this._assetData.DATA.NAME;
+	_bindKeyboardEvent() {
+		document.addEventListener('keyup', this._onKeyDown.bind(this), false);
 	}
 	
-	initResources(resources) {
-		let resource = resources[this.getName()];
+	_onKeyDown(event) {
+		if (!this._pawn) {
+			return;
+		}
+		const keyName = event.key;
 		
-		this._sprite = new PIXI.Sprite(resource.texture);
-		
-		this._sprite.anchor.set(0.5, 0.5);
-		
-		this._sprite.position.x = this._initPosition.x;
-		this._sprite.position.y = this._initPosition.y;
-		
-		this._initMouseEvent();
-		
+		switch (keyName) {
+			case 'a':
+			case 'A':
+				this._pawn.onPressKeyA(event);
+				break;
+			case 'b':
+			case 'B':
+				this._pawn.onPressKeyB(event);
+				break;
+			case 'd':
+			case 'D':
+				this._pawn.onPressKeyD(event);
+				break;
+			case 'u':
+			case 'U':
+				this._pawn.onPressKeyU(event);
+				break;
+			default:
+				break;
+		}
+	}
+	
+	getMouseInstance() {
+		return this._mouse;
+	}
+	
+	bindMouseOnRightEdge(onRightEdge) {
+		this._mouse.bindOnRightEdge(onRightEdge);
 		return this;
 	}
 	
-	_initMouseEvent(){
-		if (this._onClick) {
-			this._sprite.interactive = true;
-			this._sprite.buttonMode = true;
-			this._sprite.mousedown = (e) => {
-				this._onClick(e);
-			};
-			this._sprite.cursor = null;
+	bindMouseOnLeftEdge(onLeftEdge) {
+		this._mouse.bindOnLeftEdge(onLeftEdge);
+		return this;
+	}
+	
+	bindMouseOnTopEdge(onTopEdge) {
+		this._mouse.bindOnTopEdge(onTopEdge);
+		return this;
+	}
+	
+	bindMouseOnBottomEdge(onBottomEdge) {
+		this._mouse.bindOnBottomEdge(onBottomEdge);
+		return this;
+	}
+	
+	bindOnMouseMove(onMouseMove) {
+		this._mouse.bindOnMouseMove(onMouseMove);
+		return this;
+	}
+	
+	setMousePosition(position) {
+		this._mouse.showAtPosition(position);
+	}
+	
+	setMouseOutEdge(isOut) {
+		this._mouse.setOut(isOut);
+		this._mouse.setMouseDown(false);
+	}
+	
+	onMouseUp(e){
+		this._mouse.onMouseUp(e);
+	}
+	
+	onMouseDown(e) {
+		this._mouse.onMouseDown(e);
+		
+		if (!this._pawn) {
+			return;
 		}
+		this._pawn.onMouseDown(e);
+	}
+	
+	onMouseMove(position) {
+		if(this._mouse.isDown()){
+			this._mouse.onMouseMove(position);
+		}
+		else {
+			this._mouse.showAtPosition(position);
+		}
+	}
+	
+	possess(pawn) {
+		this._pawn = pawn;
 	}
 }
 
-export default Pattern;</code></pre>
+export default Controller;</code></pre>
         </article>
     </section>
 

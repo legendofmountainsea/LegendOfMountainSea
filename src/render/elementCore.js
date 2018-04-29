@@ -89,6 +89,29 @@ class ElementCore {
 	}
 	
 	/**
+	 * tick function for renderer
+	 * @abstract
+	 */
+	tick(delta) {
+	}
+	
+	/**
+	 * render function
+	 * @abstract
+	 */
+	render(delta) {
+	}
+	
+	/**
+	 * render callback interface function
+	 * @param delta {number}
+	 * @abstract
+	 */
+	onRender(delta){
+	
+	}
+	
+	/**
 	 * dispose element on the map or in memory
 	 * @param option {boolean} remove from memory or not
 	 * @abstract

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/pattern.js</title>
+    <title>Source: scene/scene.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,7 +513,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_pattern.js.html">Source: render/pattern.js</h1>
+        <h1 class="page-title" data-filename="scene_scene.js.html">Source: scene/scene.js</h1>
         
 
 
@@ -521,54 +521,35 @@
     <section>
         <header>
             <div class="header content-size">
-                <h2>render/pattern.js</h2>
+                <h2>scene/scene.js</h2>
             </div>
         </header>
         <article>
-            <pre id="source-code" class="prettyprint source "><code>import Actor from './actor';
-
-/**
- * class for rendering static element
- * @extends Actor
+            <pre id="source-code" class="prettyprint source "><code>/**
+ * class for every scene which renderer could render
  */
-class Pattern extends Actor {
-	constructor(props) {
-		props = props || {};
-		super(props);
-	}
-	
-	getName() {
-		return this._assetData.DATA.NAME;
-	}
-	
-	initResources(resources) {
-		let resource = resources[this.getName()];
-		
-		this._sprite = new PIXI.Sprite(resource.texture);
-		
-		this._sprite.anchor.set(0.5, 0.5);
-		
-		this._sprite.position.x = this._initPosition.x;
-		this._sprite.position.y = this._initPosition.y;
-		
-		this._initMouseEvent();
-		
-		return this;
-	}
-	
-	_initMouseEvent(){
-		if (this._onClick) {
-			this._sprite.interactive = true;
-			this._sprite.buttonMode = true;
-			this._sprite.mousedown = (e) => {
-				this._onClick(e);
-			};
-			this._sprite.cursor = null;
-		}
-	}
+class Scene {
+    constructor(props) {
+        this.props = props;
+        this._renderer = null;
+        this._assetsData = {};
+        this._onFinish = () => {};
+    }
+
+    setRenderer(renderer){
+        this._renderer = renderer;
+    }
+
+    getAssetsDate() {
+        return this._assetsData;
+    }
+
+    onAssetsFinish() {
+        return this._onFinish;
+    }
 }
 
-export default Pattern;</code></pre>
+ export default Scene;</code></pre>
         </article>
     </section>
 

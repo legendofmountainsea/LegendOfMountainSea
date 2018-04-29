@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/pattern.js</title>
+    <title>Source: render/uiText.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,7 +513,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_pattern.js.html">Source: render/pattern.js</h1>
+        <h1 class="page-title" data-filename="render_uiText.js.html">Source: render/uiText.js</h1>
         
 
 
@@ -521,54 +521,62 @@
     <section>
         <header>
             <div class="header content-size">
-                <h2>render/pattern.js</h2>
+                <h2>render/uiText.js</h2>
             </div>
         </header>
         <article>
             <pre id="source-code" class="prettyprint source "><code>import Actor from './actor';
 
 /**
- * class for rendering static element
+ * class for ui menu in game
  * @extends Actor
  */
-class Pattern extends Actor {
-	constructor(props) {
-		props = props || {};
-		super(props);
-	}
+class UIText extends Actor {
+    constructor(props) {
+        super(props);
+        this._style = props.style? props.style : {};
+        this._string = props.string ? props.string : '';
+    }
+
+    _init(){
+        this._sprite = new PIXI.Text(this._string,this._style);
+        if(this._onClick){
+            this._sprite.interactive = true;
+            this._sprite.buttonMode = true;
+            this._sprite.mousedown = (e) => {
+                this._onClick(e);
+            };
+            this._sprite.mouseover = (e) => {
+                this._sprite.style = { ...this._style,
+                    stroke: 'white',
+                    strokeThickness: 5,
+                 };
+            };
+            this._sprite.mouseout = (e) => {
+                this._sprite.style = this._style;
+            };
+            this._sprite.cursor = null;
+        }
+        this.setPosition(this._initPosition);
+    }
 	
-	getName() {
-		return this._assetData.DATA.NAME;
-	}
+	getRenderObject() {
+
+        if(!this._sprite){
+            this._init();
+        }
+        return this._sprite;
+    }
 	
-	initResources(resources) {
-		let resource = resources[this.getName()];
-		
-		this._sprite = new PIXI.Sprite(resource.texture);
-		
-		this._sprite.anchor.set(0.5, 0.5);
-		
-		this._sprite.position.x = this._initPosition.x;
-		this._sprite.position.y = this._initPosition.y;
-		
-		this._initMouseEvent();
-		
-		return this;
-	}
-	
-	_initMouseEvent(){
-		if (this._onClick) {
-			this._sprite.interactive = true;
-			this._sprite.buttonMode = true;
-			this._sprite.mousedown = (e) => {
-				this._onClick(e);
-			};
-			this._sprite.cursor = null;
-		}
-	}
+	dispose(option){
+        super.dispose(option);
+        this._style = null;
+        this._string = null;
+    }
+    
 }
 
-export default Pattern;</code></pre>
+export default UIText;</code></pre>
         </article>
     </section>
 
