@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/pattern.js</title>
+    <title>Class: LOMSRenderer</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,65 +513,1206 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_pattern.js.html">Source: render/pattern.js</h1>
+        <h1 class="page-title" data-filename="LOMSRenderer.html">Class: LOMSRenderer</h1>
         
 
 
+
+<section>
     
-    <section>
-        <header>
-            <div class="header content-size">
-                <h2>render/pattern.js</h2>
-            </div>
-        </header>
-        <article>
-            <pre id="source-code" class="prettyprint source "><code>import Actor from './actor';
+<header>
+    <div class="header content-size">
+        <h2>LOMSRenderer
+        </h2>
+        
+            <div class="class-description">class for renderer</div>
+        
+    </div>
+</header>  
 
-/**
- * class for rendering static element
- * @extends Actor
- */
-class Pattern extends Actor {
-	constructor(props) {
-		props = props || {};
-		super(props);
-	}
-	
-	getName() {
-		return this._assetData.DATA.NAME;
-	}
-	
-	initResources(resources) {
-		let resource = resources[this.getName()];
-		
-		this._sprite = new PIXI.Sprite(resource.texture);
-		
-		this._sprite.anchor.set(0.5, 0.5);
-		
-		this._sprite.position.x = this._initPosition.x;
-		this._sprite.position.y = this._initPosition.y;
-		
-		this._initMouseEvent();
-		
-		return this;
-	}
-	
-	_initMouseEvent(){
-		if (this._onClick) {
-			this._sprite.interactive = true;
-			this._sprite.buttonMode = true;
-			this._sprite.mousedown = (e) => {
-				this._onClick(e);
-			};
-			this._sprite.cursor = null;
-		}
-	}
-}
+<article class="content-size">
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="LOMSRenderer">
+            <a class="share-icon" href="#LOMSRenderer"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                new LOMSRenderer
+            </span>
+            <span class="signature">(props)</span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line9">lomsRenderer.js:9</a>
+        </div>
+        
+    </div>
 
-export default Pattern;</code></pre>
-        </article>
-    </section>
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        init renderer for game
+    </div>
+    
 
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl class="list-methods">
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="addActor">
+            <a class="share-icon" href="#addActor"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                addActor
+            </span>
+            <span class="signature">(actor)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line152">lomsRenderer.js:152</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        add actor to stage
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>actor</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Actor.html">Actor</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="addTerrain">
+            <a class="share-icon" href="#addTerrain"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                addTerrain
+            </span>
+            <span class="signature">(terrain)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line130">lomsRenderer.js:130</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        add terrain to stage
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>terrain</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Terrain.html">Terrain</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="addUI">
+            <a class="share-icon" href="#addUI"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                addUI
+            </span>
+            <span class="signature">(ui)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line141">lomsRenderer.js:141</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        add ui to stage
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>ui</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="UIText.html">UIText</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="clearStage">
+            <a class="share-icon" href="#clearStage"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                clearStage
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line175">lomsRenderer.js:175</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        clear ui and actor in current stage
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getController">
+            <a class="share-icon" href="#getController"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getController
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="Controller.html">Controller</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line121">lomsRenderer.js:121</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get controller instance
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="Controller.html">Controller</a>
+                        
+                    
+            </td>
+            <td class="description last">class for gamer input control</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="initAssetLoader">
+            <a class="share-icon" href="#initAssetLoader"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                initAssetLoader
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line58">lomsRenderer.js:58</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        init asset loader for loading asset files
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-todo">TODO</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>show progress information</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="initRenderer">
+            <a class="share-icon" href="#initRenderer"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                initRenderer
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line28">lomsRenderer.js:28</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        init renderer and stage
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-todo">TODO</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>left mouse click feature</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="renderScene">
+            <a class="share-icon" href="#renderScene"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                renderScene
+            </span>
+            <span class="signature">(scene)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_lomsRenderer.js.html#line110">lomsRenderer.js:110</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        switch to next scene
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>scene</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Scene.html">Scene</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                class for every scene which renderer could render</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+
+    
+</article>
+
+</section>  
 
 
 
@@ -581,7 +1722,7 @@ export default Pattern;</code></pre>
 
         <footer class="content-size">
             <div class="footer">
-                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Apr 29 2018 19:44:41 GMT+0200 (西欧夏令时)
+                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Apr 29 2018 19:44:41 GMT+0200 (西欧夏令时)
             </div>
         </footer>
     </div>

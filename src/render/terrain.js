@@ -2,6 +2,7 @@ import ElementCore from './elementCore';
 import Hexagon, {COS_60_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
+import Coordinates from '../core/coordinates';
 
 /**
  * class for rendering terrain on the map
@@ -19,7 +20,7 @@ class Terrain extends ElementCore {
 		this._container = null;
 		this._resources = null;
 		this._isPointsOnTerrainChanged = false;
-		this._coordinates = props.coordinates ? props.coordinates : {x: 0, y: 0};
+		this._coordinates = props.coordinates ? props.coordinates : new Coordinates(0, 0);
 		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
 		this._runtimeRenderSize = 5;
@@ -50,7 +51,7 @@ class Terrain extends ElementCore {
 		this._resources = resources;
 		this._initLayerAgent();
 		
-		this.setTransform({x: 0, y: 0});
+		this.setTransform(new Coordinates(0, 0));
 		
 		return this;
 	}
@@ -69,18 +70,15 @@ class Terrain extends ElementCore {
 		this._container.x = this._coordinates.x;
 		this._container.y = this._coordinates.y;
 		
-		this.renderHexagonRegion({
-			x: this._coordinates.x,
-			y: this._coordinates.y,
-		});
+		this.renderHexagonRegion(new Coordinates(this._coordinates.x, this._coordinates.y));
 		
 		return this;
 	}
-
-    /**
+	
+	/**
 	 * flush current terrain in memory, save render coordinates in TerrainChain for re-render
-     * @returns {Terrain}
-     */
+	 * @returns {Terrain}
+	 */
 	flush() {
 		TerrainChain.updateCenterCoordinates({...this._coordinates});
 		this._coordinates = {
@@ -102,6 +100,10 @@ class Terrain extends ElementCore {
 		return this;
 	}
 	
+	/**
+	 * remove hexagon element from terrain render array
+	 * @param hexagon
+	 */
 	removeHexagon(hexagon) {
 		for (let index = 0; index < this._hexagons.length; ++index) {
 			if (this._hexagons[index].getID() === hexagon.getID()) {
@@ -113,17 +115,29 @@ class Terrain extends ElementCore {
 		this._layerAgent.removeElement(hexagon);
 	}
 	
+	/**
+	 * get render element object
+	 * @returns {PIXI.Container}
+	 * @override
+	 */
 	getRenderObject() {
 		return this._container;
 	}
 	
-	getPosition(){
-		return {
-			x: this._container.x,
-			y: this._container.y,
-		};
+	/**
+	 * get render position on render canvas
+	 * @returns {Coordinates}
+	 * @override
+	 */
+	getPosition() {
+		return new Coordinates(this._container.x,this._container.y);
 	}
 	
+	/**
+	 * tick function for renderer
+	 * @param delta {number}
+	 * @override
+	 */
 	tick(delta) {
 		if (!this._isPointsOnTerrainChanged) {
 			return;
@@ -131,6 +145,12 @@ class Terrain extends ElementCore {
 		this.hexagonRenderRecycle();
 	}
 	
+	/**
+	 * render callback interface function
+	 * @param delta {number}
+	 * @param delta
+	 * @override
+	 */
 	onRender(delta) {
 	
 	}
@@ -182,7 +202,9 @@ class Terrain extends ElementCore {
 		for (let index = topLeftX - this._preRenderSize; index < topLeftX + this._runtimeRenderSize; ++index) {
 			for (let columnIndex = topLeftY - this._preRenderSize; columnIndex < topLeftY + this._runtimeRenderSize; ++columnIndex) {
 				
-				this._renderPointOnTerrain.push({x: index, y: columnIndex});
+				let renderPoint = new Coordinates(index, columnIndex);
+				
+				this._renderPointOnTerrain.push(renderPoint);
 				
 				if (this._hexagons.find((hexagon) => {
 						let position = hexagon.getPositionOnTerrain();
@@ -193,7 +215,7 @@ class Terrain extends ElementCore {
 				}
 				
 				let hexagon = new Hexagon({
-					assetData: TerrainChain.getTerrainAssetData({x:centerRenderPointX + index,y:centerRenderPointY + columnIndex}),
+					assetData: TerrainChain.getTerrainAssetData(new Coordinates(centerRenderPointX + index, centerRenderPointY + columnIndex)),
 					terrain: this,
 				}).initResources(
 					this._resources,
@@ -202,10 +224,7 @@ class Terrain extends ElementCore {
 					width,
 				});
 				
-				hexagon.setPositionOnTerrain({
-					x: index,
-					y: columnIndex,
-				});
+				hexagon.setPositionOnTerrain(renderPoint);
 				
 				this._isPointsOnTerrainChanged = true;
 				
@@ -216,12 +235,22 @@ class Terrain extends ElementCore {
 		return this;
 	}
 	
+	/**
+	 * render function
+	 * @param delta
+	 * @override
+	 */
 	render(delta) {
 		this.tick(delta);
 		this.onRender(delta);
 	}
 	
-	dispose() {
+	/**
+	 * dispose element on the map or in memory
+	 * @param option {boolean}
+	 * @override
+	 */
+	dispose(option) {
 		this._container.destroy({children: true, texture: true, baseTexture: true});
 		this._container = null;
 	}

@@ -3,8 +3,15 @@ import StageAgent from './stageAgent';
 import Controller from '../control/controller';
 import Window from '../module/window';
 
-export default class LOMSRenderer {
+/**
+ * class for renderer
+ */
+class LOMSRenderer {
 	
+	/**
+	 * init renderer for game
+	 * @param props
+	 */
 	constructor(props) {
 		this._controller = null;
 		this._onAssetLoadingFinish = () => {
@@ -13,6 +20,11 @@ export default class LOMSRenderer {
 		this.initAssetLoader();
 	}
 	
+	/**
+	 * init renderer and stage
+	 * @todo left mouse click feature
+	 * @returns {LOMSRenderer}
+	 */
 	initRenderer() {
 		
 		const {width, height} = Window.getDimension();
@@ -33,12 +45,16 @@ export default class LOMSRenderer {
 		
 		this._renderer.view.addEventListener('contextmenu', (e) => {
 			e.preventDefault();
-			//TODO: left mouse click feature
 		});
 		
 		return this;
 	}
 	
+	/**
+	 * init asset loader for loading asset files
+	 * @returns {LOMSRenderer}
+	 * @todo show progress information
+	 */
 	initAssetLoader() {
 		let loader = PIXI.loader;
 		loader.onProgress.add((e) => {
@@ -49,19 +65,27 @@ export default class LOMSRenderer {
 			this._resources = resources;
 			this._onAssetLoadingFinish();
 		});
+		
+		return this;
 	}
 	
 	_setAssetLoadingListener(onFinish) {
 		this._onAssetLoadingFinish = onFinish;
 	}
 	
+	/**
+	 * loading asset files to memory
+	 * @param assetsSet {object} static object contain files information such as path, name etc.
+	 * @returns {LOMSRenderer}
+	 * @private
+	 */
 	_prepareAssets(assetsSet) {
 		let loader = PIXI.loader;
 		loader.reset();
 		
 		for (let assetsData of assetsSet) {
 			
-			for (let asset in assetsData) {
+			for (const asset in assetsData) {
 				if (assetsData[asset].IS_CONTAIN_ANIMATION) {
 					for (let animation in assetsData[asset].DATA) {
 						loader.add(assetsData[asset].DATA[animation].NAME, assetsData[asset].DATA[animation].PATH);
@@ -74,43 +98,84 @@ export default class LOMSRenderer {
 		}
 		
 		loader.load();
+		
+		return this;
 	}
 	
+	/**
+	 * switch to next scene
+	 * @param scene {Scene} class for every scene which renderer could render
+	 * @returns {LOMSRenderer}
+	 */
 	renderScene(scene) {
 		scene.setRenderer(this);
 		this._setAssetLoadingListener(scene.onAssetsFinish());
 		this._prepareAssets(scene.getAssetsDate());
+		return this;
 	}
 	
+	/**
+	 * get controller instance
+	 * @returns {Controller} class for gamer input control
+	 */
 	getController() {
 		return this._controller;
 	}
 	
+	/**
+	 * add terrain to stage
+	 * @param terrain {Terrain}
+	 * @returns {LOMSRenderer}
+	 */
 	addTerrain(terrain) {
-		if (!terrain.isNoAsset()) {
-			terrain.initResources(this._resources);
-		}
+		this._addElementToStage(terrain);
 		this._stageAgent.addTerrain(terrain);
+		return this;
 	}
 	
+	/**
+	 * add ui to stage
+	 * @param ui {UIText}
+	 * @returns {LOMSRenderer}
+	 */
 	addUI(ui){
-		if(!ui.isNoAsset()){
-			ui.initResources(this._resources);
-		}
+		this._addElementToStage(ui);
 		this._stageAgent.addUI(ui);
+		return this;
 	}
 	
+	/**
+	 * add actor to stage
+	 * @param actor {Actor}
+	 * @returns {LOMSRenderer}
+	 */
 	addActor(actor) {
-		
-		if (!actor.isNoAsset()) {
-			actor.initResources(this._resources);
-		}
+		this._addElementToStage(actor);
 		this._stageAgent.addActor(actor);
+		return this;
 	}
 	
+	/**
+	 *
+	 * @param element {ElementCore}
+	 * @returns {LOMSRenderer}
+	 * @private
+	 */
+	_addElementToStage(element){
+		if (!element.isNoAsset()) {
+			element.initResources(this._resources);
+		}
+		return this;
+	}
+	
+	/**
+	 * clear ui and actor in current stage
+	 * @returns {LOMSRenderer}
+	 */
 	clearStage() {
 		this._stageAgent.clearUI();
 		this._stageAgent.clearActors();
+		return this;
 	}
 	
 	close() {
@@ -123,3 +188,5 @@ export default class LOMSRenderer {
 		});
 	}
 }
+
+export default LOMSRenderer;

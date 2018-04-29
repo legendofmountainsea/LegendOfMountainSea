@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: Hexagon</title>
+    <title>Class: UIText</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,7 +513,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="Hexagon.html">Class: Hexagon</h1>
+        <h1 class="page-title" data-filename="UIText.html">Class: UIText</h1>
         
 
 
@@ -522,10 +522,10 @@
     
 <header>
     <div class="header content-size">
-        <h2>Hexagon
+        <h2>UIText
         </h2>
         
-            <div class="class-description">class for rendering a hexagon grid on terrain</div>
+            <div class="class-description">class for ui menu in game</div>
         
     </div>
 </header>  
@@ -538,10 +538,10 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="Hexagon">
-            <a class="share-icon" href="#Hexagon"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="UIText">
+            <a class="share-icon" href="#UIText"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                new Hexagon
+                new UIText
             </span>
             <span class="signature">()</span>
             
@@ -552,7 +552,7 @@
     
         
         <div class="tag-source">
-            <a href="render_hexagon.js.html#line9">hexagon.js:9</a>
+            <a href="render_uiText.js.html#line7">uiText.js:7</a>
         </div>
         
     </div>
@@ -613,7 +613,7 @@
         <h3 class="subsection-title">Extends</h3>
         
         <ul>
-            <li><a href="Pattern.html">Pattern</a></li>
+            <li><a href="Actor.html">Actor</a></li>
         </ul>
     
     
@@ -634,21 +634,25 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="adjustRenderPosition">
-            <a class="share-icon" href="#adjustRenderPosition"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="dispose">
+            <a class="share-icon" href="#dispose"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                adjustRenderPosition
+                dispose
             </span>
-            <span class="signature">(position)</span><span class="type-signature"><a href="Hexagon.html">Hexagon</a></span>
+            <span class="signature">(option)</span>
+            
+            <span class="access-signature">abstract</span>
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#dispose">inherited</a></span>
             
             
-            
+                <span class="access-signature overrides"><a href="Actor.html#dispose">overrides</a></span>
             
         </h4>
     
         
         <div class="tag-source">
-            <a href="render_hexagon.js.html#line64">hexagon.js:64</a>
+            <a href="render_elementCore.js.html#line119">elementCore.js:119</a>
         </div>
         
     </div>
@@ -659,7 +663,7 @@
     
     
     <div class="description">
-        found right position for the center of hexagon
+        dispose element on the map or in memory
     </div>
     
 
@@ -690,13 +694,1000 @@
 	
         <tr>
             
-                <td class="name"><code>position</code></td>
+                <td class="name"><code>option</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type"><a href="Coordinates.html">Coordinates</a></span>
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                remove from memory or not</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getID">
+            <a class="share-icon" href="#getID"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getID
+            </span>
+            <span class="signature">()</span><span class="type-signature">null | string</span>
+            
+            
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#getID">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line55">elementCore.js:55</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get object's ID
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        null
+                         | 
+                    
+                        string
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getIndex">
+            <a class="share-icon" href="#getIndex"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getIndex
+            </span>
+            <span class="signature">()</span><span class="type-signature">number</span>
+            
+            
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#getIndex">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line63">elementCore.js:63</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get object's render index
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getPosition">
+            <a class="share-icon" href="#getPosition"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getPosition
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="Coordinates.html">Coordinates</a></span>
+            
+            <span class="access-signature">abstract</span>
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#getPosition">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line88">elementCore.js:88</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get render position on render canvas
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="Coordinates.html">Coordinates</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getRenderObject">
+            <a class="share-icon" href="#getRenderObject"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getRenderObject
+            </span>
+            <span class="signature">()</span><span class="type-signature">object</span>
+            
+            <span class="access-signature">abstract</span>
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#getRenderObject">inherited</a></span>
+            
+            
+                <span class="access-signature overrides"><a href="Actor.html#getRenderObject">overrides</a></span>
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line80">elementCore.js:80</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get render object
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        object
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="initResources">
+            <a class="share-icon" href="#initResources"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                initResources
+            </span>
+            <span class="signature">(resources)</span>
+            
+            <span class="access-signature">abstract</span>
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#initResources">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line20">elementCore.js:20</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        init asset resource for render
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>resources</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                game resources info object</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="isNoAsset">
+            <a class="share-icon" href="#isNoAsset"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                isNoAsset
+            </span>
+            <span class="signature">()</span><span class="type-signature">boolean</span>
+            
+            
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#isNoAsset">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line27">elementCore.js:27</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        check element has asset or not
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        boolean
+                        
+                    
+            </td>
+            <td class="description last">return true if element has asset</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="onRender">
+            <a class="share-icon" href="#onRender"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                onRender
+            </span>
+            <span class="signature">(delta)</span>
+            
+            <span class="access-signature">abstract</span>
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#onRender">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line110">elementCore.js:110</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        render callback interface function
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>delta</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="render">
+            <a class="share-icon" href="#render"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                render
+            </span>
+            <span class="signature">()</span>
+            
+            <span class="access-signature">abstract</span>
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#render">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line102">elementCore.js:102</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        render function
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="setID">
+            <a class="share-icon" href="#setID"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                setID
+            </span>
+            <span class="signature">(ID)</span><span class="type-signature"><a href="ElementCore.html">ElementCore</a></span>
+            
+            
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#setID">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line36">elementCore.js:36</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        set object's ID
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>ID</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
 
 
             
@@ -765,7 +1756,7 @@
             
             <td class="type">
             
-                        <a href="Hexagon.html">Hexagon</a>
+                        <a href="ElementCore.html">ElementCore</a>
                         
                     
             </td>
@@ -775,6 +1766,354 @@
     </tbody>
 </table>
 
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="setIndex">
+            <a class="share-icon" href="#setIndex"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                setIndex
+            </span>
+            <span class="signature">(index)</span><span class="type-signature"><a href="ElementCore.html">ElementCore</a></span>
+            
+            
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#setIndex">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line46">elementCore.js:46</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        set object's render index
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="ElementCore.html">ElementCore</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="setTransform">
+            <a class="share-icon" href="#setTransform"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                setTransform
+            </span>
+            <span class="signature">(transform)</span>
+            
+            <span class="access-signature">abstract</span>
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#setTransform">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line72">elementCore.js:72</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        make render object transform by vector
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>transform</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Coordinates.html">Coordinates</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="tick">
+            <a class="share-icon" href="#tick"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                tick
+            </span>
+            <span class="signature">()</span>
+            
+            
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#tick">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_elementCore.js.html#line95">elementCore.js:95</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        tick function for renderer
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
     
     
     

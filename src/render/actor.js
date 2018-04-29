@@ -63,7 +63,6 @@ class Actor extends ElementCore{
 	}
 	
 	tick(delta) {
-		//override in subClass
 	}
 	
 	dispose(option = false){

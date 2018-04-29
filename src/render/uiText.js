@@ -1,6 +1,10 @@
 import Actor from './actor';
 
-export default class UIText extends Actor {
+/**
+ * class for ui menu in game
+ * @extends Actor
+ */
+class UIText extends Actor {
     constructor(props) {
         super(props);
         this._style = props.style? props.style : {};
@@ -44,3 +48,5 @@ export default class UIText extends Actor {
     }
     
 }
+
+export default UIText;

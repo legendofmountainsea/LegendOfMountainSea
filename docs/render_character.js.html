@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/pattern.js</title>
+    <title>Source: render/character.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -513,7 +513,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_pattern.js.html">Source: render/pattern.js</h1>
+        <h1 class="page-title" data-filename="render_character.js.html">Source: render/character.js</h1>
         
 
 
@@ -521,54 +521,229 @@
     <section>
         <header>
             <div class="header content-size">
-                <h2>render/pattern.js</h2>
+                <h2>render/character.js</h2>
             </div>
         </header>
         <article>
             <pre id="source-code" class="prettyprint source "><code>import Actor from './actor';
 
 /**
- * class for rendering static element
+ * class for render player's character
  * @extends Actor
  */
-class Pattern extends Actor {
+class Character extends Actor {
+	/**
+	 * create a character
+	 * @param props
+	 */
 	constructor(props) {
 		props = props || {};
 		super(props);
+		this._frames = {};
+		this._destination = null;
+		this._animationStatus = 'STAND';
 	}
 	
-	getName() {
-		return this._assetData.DATA.NAME;
-	}
-	
+	/**
+	 * init asset resource for render
+	 * @param resources
+	 * @returns {Character}
+	 * @override
+	 */
 	initResources(resources) {
-		let resource = resources[this.getName()];
 		
-		this._sprite = new PIXI.Sprite(resource.texture);
+		for (let asset in this._assetData.DATA) {
+			this._frames[this._assetData.DATA[asset].NAME] = [];
+			
+			let resource = resources[this._assetData.DATA[asset].NAME];
+			for (let texture in resource.textures) {
+				this._frames[this._assetData.DATA[asset].NAME].push(resource.textures[texture]);
+			}
+		}
 		
-		this._sprite.anchor.set(0.5, 0.5);
+		const animatedSprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA[this._animationStatus].NAME]);
 		
-		this._sprite.position.x = this._initPosition.x;
-		this._sprite.position.y = this._initPosition.y;
+		this.setElement(animatedSprite);
 		
-		this._initMouseEvent();
+		this.initSprite();
 		
 		return this;
 	}
 	
-	_initMouseEvent(){
-		if (this._onClick) {
-			this._sprite.interactive = true;
-			this._sprite.buttonMode = true;
-			this._sprite.mousedown = (e) => {
-				this._onClick(e);
-			};
-			this._sprite.cursor = null;
+	setElement(sprite) {
+		this._sprite = sprite;
+	}
+	
+	initSprite() {
+		this._sprite.anchor.set(0.5, 0.5);
+		this._sprite.animationSpeed = this._assetData.DATA[this._animationStatus].SPEED;
+		
+		this.setPosition(this._initPosition);
+		this._sprite.play();
+	}
+	
+	moveTo(position) {
+		this._destination = position;
+		this.playWalk();
+	}
+	
+	getDestination() {
+		return this._destination;
+	}
+	
+	getDirection() {
+		return this._sprite.scale.x;
+	}
+	
+	tick(delta) {
+		this.updatePosition(delta);
+	}
+	
+	updatePosition(delta) {
+		if (!this._sprite || !this.getDestination()) {
+			return;
 		}
+		
+		if (this.isArrivedAtDestination()) {
+			if (this._animationStatus === 'WALK') {
+				this.playStand();
+			}
+			this._destination = null;
+			return;
+		}
+		
+		const deltaX = this.movingOnAxisXToDestination(delta),
+			deltaY = this.movingOnAxisYToDestination(delta);
+		
+		this.setPosition({x: deltaX, y: deltaY});
+	}
+	
+	movingOnAxisXToDestination(delta) {
+		const {x} = this._sprite.position,
+			distanceX = this.getDestination().x - x;
+		
+		let deltaX = x;
+		
+		if (0 !== distanceX) {
+			
+			if (Math.abs(Math.sign(distanceX) * delta) > Math.abs(distanceX)) {
+				deltaX = x + distanceX;
+			}
+			else {
+				deltaX = x + Math.sign(distanceX) * delta;
+			}
+			
+			if (this.isMovingDirectionNeedToChange()) {
+				this._sprite.scale.x = -this._sprite.scale.x;
+			}
+		}
+		
+		return deltaX;
+	}
+	
+	isMovingDirectionNeedToChange() {
+		const {x} = this._sprite.position,
+			destination = this.getDestination();
+		const distanceX = destination.x - x;
+		
+		const direction = Math.sign(distanceX) &lt; 0 ? this.DIRECTION_LEFT : this.DIRECTION_RIGHT;
+		
+		return (this._sprite.scale.x !== direction);
+	}
+	
+	
+	movingOnAxisYToDestination(delta) {
+		const {y} = this._sprite.position,
+			distanceY = this.getDestination().y - y;
+		
+		let deltaY = y;
+		
+		if (0 !== distanceY) {
+			
+			if (Math.abs(Math.sign(distanceY) * delta) > Math.abs(distanceY)) {
+				deltaY = y + (distanceY);
+			}
+			else {
+				deltaY = y + Math.sign(distanceY) * delta;
+			}
+		}
+		
+		return deltaY;
+	}
+	
+	isArrivedAtDestination() {
+		const {x, y} = this._sprite.position,
+			destination = this.getDestination();
+		
+		return (x === destination.x &amp;&amp; y === destination.y);
+	}
+	
+	playStand() {
+		this.setAnimation('STAND');
+		this.setAnimationStatus('STAND');
+	}
+	
+	playWalk() {
+		this.setAnimation('WALK');
+		this.setAnimationStatus('WALK');
+	}
+	
+	playAttack() {
+		this.setAnimation('ATTACK', false, () => {
+			this.setAnimation(this.getAnimationStatus());
+		});
+	}
+	
+	playBattle() {
+		this.setAnimation('BATTLE');
+		this.setAnimationStatus('BATTLE');
+	}
+	
+	playNearDeath() {
+		this.setAnimation('NEAR_DEATH');
+		this.setAnimationStatus('NEAR_DEATH');
+	}
+	
+	playUltimate() {
+		this.setAnimation('ULTIMATE', false, () => {
+			this.setAnimation(this.getAnimationStatus());
+		});
+	}
+	
+	setAnimationStatus(status) {
+		this._animationStatus = status;
+		return this;
+	}
+	
+	getAnimationStatus() {
+		return this._animationStatus;
+	}
+	
+	setAnimation(name, loop = true, onComplete) {
+		
+		if (!this._sprite || this._noAsset) {
+			return;
+		}
+		
+		this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
+		
+		this._sprite.animationSpeed = this._assetData.DATA[name].SPEED;
+		
+		this._sprite.onComplete = onComplete;
+		
+		this._sprite.loop = loop;
+		
+		this._sprite.play();
+	}
+	
+	dispose(option) {
+		super.dispose(option);
+		this._frames = null;
+		this._destination = null;
 	}
 }
 
-export default Pattern;</code></pre>
+export default Character;</code></pre>
         </article>
     </section>
 

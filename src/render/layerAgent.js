@@ -1,4 +1,5 @@
 import {uuid} from 'loms.uuid';
+import Coordinates from '../core/coordinates';
 
 export default class LayerAgent {
 	constructor(props) {
@@ -21,12 +22,12 @@ export default class LayerAgent {
 		return this;
 	}
 	
-	updateDepthRenderOrder(){
-		this._container.children.sort((a, b)=>{
+	updateDepthRenderOrder() {
+		this._container.children.sort((a, b) => {
 			const elementA = this._getElement(a),
 				elementB = this._getElement(b);
 			
-			if(elementA.getIndex() < elementB.getIndex() || elementA.getPosition().y < elementB.getPosition().y){
+			if (elementA.getIndex() < elementB.getIndex() || elementA.getPosition().y < elementB.getPosition().y) {
 				return -1;
 			}
 			
@@ -35,12 +36,12 @@ export default class LayerAgent {
 		
 		for (const index in this._layer) {
 			let layer = this._layer[index];
-			layer.sort((a,b)=>{
+			layer.sort((a, b) => {
 				
 				const positionA = a.getPosition(),
 					positionB = b.getPosition();
 				
-				if(positionA.y > positionB.y){
+				if (positionA.y > positionB.y) {
 					return -1;
 				}
 				
@@ -49,7 +50,7 @@ export default class LayerAgent {
 		}
 	}
 	
-	removeElement(element, option){
+	removeElement(element, option) {
 		this._removeFromLayer(element, element.getIndex());
 		this._container.removeChild(element.getRenderObject());
 		element.dispose(option);
@@ -62,11 +63,15 @@ export default class LayerAgent {
 				continue;
 			}
 			
+			let deltaX = 0,
+				deltaY = 0;
+			
 			for (const element of this._layer[movingInfo.index]) {
-				element.setTransform({
-					x: (movingInfo.deltaX) ? (movingInfo.deltaX) : 0,
-					y: (movingInfo.deltaY) ? (movingInfo.deltaY) : 0,
-				});
+				
+				deltaX = (movingInfo.deltaX) ? (movingInfo.deltaX) : 0;
+				deltaY = (movingInfo.deltaY) ? (movingInfo.deltaY) : 0;
+				
+				element.setTransform(new Coordinates(deltaX, deltaY));
 			}
 		}
 	}
@@ -95,12 +100,12 @@ export default class LayerAgent {
 		this._layer[index].push(element);
 	}
 	
-	_getElement(renderObject){
+	_getElement(renderObject) {
 		for (const index in this._layer) {
 			
 			let layer = this._layer[index];
-			for(let i = 0; i < layer.length; ++i){
-				if(layer[i].getRenderObject() === renderObject){
+			for (let i = 0; i < layer.length; ++i) {
+				if (layer[i].getRenderObject() === renderObject) {
 					return layer[i];
 				}
 			}
@@ -109,10 +114,10 @@ export default class LayerAgent {
 		return null;
 	}
 	
-	_removeFromLayer(element, index){
+	_removeFromLayer(element, index) {
 		let layer = this._layer[index];
-		for(let i = 0; i < layer.length; ++i){
-			if(layer[i].getID() === element.getID()){
+		for (let i = 0; i < layer.length; ++i) {
+			if (layer[i].getID() === element.getID()) {
 				layer.splice(i, 1);
 				break;
 			}
