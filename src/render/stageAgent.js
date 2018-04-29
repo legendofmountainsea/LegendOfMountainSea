@@ -20,54 +20,20 @@ export default class StageAgent {
 		
 		this._initLayerAgent();
 		
-		this._initMouse();
+		this._initMouseEvent();
 		
 		return this;
 	}
 	
 	_initLayerAgent() {
 		this._layerAgent = new LayerAgent({contatiner: this._renderer.stage});
+		this._layerAgent.addElement(this._controller.getMouseInstance(), this.MOUSE_LAYER_INDEX);
 		return this;
 	}
 	
-	_initMouse() {
+	_initMouseEvent() {
 		
-		this._layerAgent.addElement(this._controller.getMouseInstance(), this.MOUSE_LAYER_INDEX);
-		
-		this._controller.bindMouseOnRightEdge((delta) => {
-			this._layerAgent.moveLayerTo(
-				[{index: this.ACTOR_LAYER_INDEX, deltaX: -delta, deltaY: 0},
-					{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta, deltaY: 0}],
-			);
-		});
-		
-		this._controller.bindMouseOnLeftEdge((delta) => {
-			this._layerAgent.moveLayerTo(
-				[{index: this.ACTOR_LAYER_INDEX, deltaX: delta, deltaY: 0},
-					{index: this.TERRAIN_LAYER_INDEX, deltaX: delta, deltaY: 0}],
-			);
-		});
-		
-		this._controller.bindMouseOnTopEdge((delta) => {
-			this._layerAgent.moveLayerTo(
-				[{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: delta},
-					{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: delta}],
-			);
-		});
-		
-		this._controller.bindMouseOnBottomEdge((delta) => {
-			this._layerAgent.moveLayerTo(
-				[{index: this.ACTOR_LAYER_INDEX, deltaX: 0, deltaY: -delta},
-					{index: this.TERRAIN_LAYER_INDEX, deltaX: 0, deltaY: -delta}],
-			);
-		});
-		
-		this._controller.bindOnMouseMove((delta) => {
-			this._layerAgent.moveLayerTo(
-				[{index: this.ACTOR_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY},
-					{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY}],
-			);
-		});
+		this._initControllerEvent();
 		
 		this._renderer.stage.mousedown = (e) => {
 			this._controller.onMouseDown({
@@ -100,6 +66,17 @@ export default class StageAgent {
 		this._renderer.stage.mouseover = (e) => {
 			this._controller.setMouseOutEdge(false);
 		};
+	}
+	
+	_initControllerEvent(){
+		this._controller.bindOnMouseMove((delta) => {
+			this._layerAgent.moveLayerTo(
+				[{index: this.ACTOR_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY},
+					{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY}],
+			);
+		});
+		
+		return this;
 	}
 	
 	addTerrain(terrain) {
