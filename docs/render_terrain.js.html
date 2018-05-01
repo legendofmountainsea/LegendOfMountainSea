@@ -154,6 +154,14 @@
             </ul>
             <ul class="methods itemMembers">
             
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="Controller#getMouseInstance"><a href="Controller.html#getMouseInstance">getMouseInstance</a></li>
+            
+                <li class="parent  " data-name="Controller#onMouseDown"><a href="Controller.html#onMouseDown">onMouseDown</a></li>
+            
+                <li class="parent  " data-name="Controller#possess"><a href="Controller.html#possess">possess</a></li>
+            
             </ul>
             <ul class="events itemMembers">
             
@@ -302,6 +310,28 @@
             </ul>
         </li>
     
+        <li class="item" data-name="Mouse">
+            <span class="title  ">
+                
+                <a href="Mouse.html">Mouse</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="Pattern">
             <span class="title  ">
                 
@@ -345,6 +375,32 @@
                 <li class="  " data-name="Pattern#setTransform"><a href="Pattern.html#setTransform">setTransform</a></li>
             
                 <li class="  " data-name="Pattern#tick"><a href="Pattern.html#tick">tick</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Pawn">
+            <span class="title  ">
+                
+                <a href="Pawn.html">Pawn</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="Pawn#getCharacter"><a href="Pawn.html#getCharacter">getCharacter</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -530,6 +586,7 @@ import Hexagon, {COS_60_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
 import Coordinates from '../core/coordinates';
+import Window from '../module/window';
 
 /**
  * class for rendering terrain on the map
@@ -550,11 +607,12 @@ class Terrain extends ElementCore {
 		this._coordinates = props.coordinates ? props.coordinates : new Coordinates(0, 0);
 		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
-		this._runtimeRenderSize = 5;
-		this._preRenderSize = 5;
 		this._hexagons = [];
 		this._renderPointOnTerrain = [];
 	}
+	
+	PRE_RENDER_SCALE = 1.5;
+	RENDER_OUTSIDE_OF_EDGE = 3;
 	
 	/**
 	 * create terrain layer to manage render elements
@@ -607,7 +665,7 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 */
 	flush() {
-		TerrainChain.updateCenterCoordinates({...this._coordinates});
+		TerrainChain.updateRenderStartingCoordinates({...this._coordinates});
 		this._coordinates = {
 			x: 0,
 			y: 0,
@@ -657,7 +715,7 @@ class Terrain extends ElementCore {
 	 * @override
 	 */
 	getPosition() {
-		return new Coordinates(this._container.x,this._container.y);
+		return new Coordinates(this._container.x, this._container.y);
 	}
 	
 	/**
@@ -715,19 +773,22 @@ class Terrain extends ElementCore {
 	 */
 	renderHexagonRegion(topLeft) {
 		const terrainResource = this._resources[this._assetData.DATA.NAME];
-		const centerCoordinates = TerrainChain.getCenterCoordinates();
+		const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
 		const {height, width} = terrainResource.texture;
+		const winDimension = Window.getDimension();
 		
 		const topLeftX = -parseInt(topLeft.x / (height * COS_60_DEGREES)),
 			topLeftY = -parseInt(topLeft.y / height);
 		
-		const centerRenderPointX = -parseInt(centerCoordinates.x / (height * COS_60_DEGREES)),
-			centerRenderPointY = -parseInt(centerCoordinates.y / height);
+		const numberOfHexagonOnX = parseInt((winDimension.width / width) * this.PRE_RENDER_SCALE),
+			numberOfHexagonOnY = parseInt((winDimension.height / height) * this.PRE_RENDER_SCALE),
+			renderStartingPointX = -parseInt(renderStartingCoordinates.x / (height * COS_60_DEGREES)),
+			renderStartingPointY = -parseInt(renderStartingCoordinates.y / height);
 		
 		this._renderPointOnTerrain = [];
 		
-		for (let index = topLeftX - this._preRenderSize; index &lt; topLeftX + this._runtimeRenderSize; ++index) {
-			for (let columnIndex = topLeftY - this._preRenderSize; columnIndex &lt; topLeftY + this._runtimeRenderSize; ++columnIndex) {
+		for (let index = topLeftX - this.RENDER_OUTSIDE_OF_EDGE; index &lt; (topLeftX + numberOfHexagonOnX); ++index) {
+			for (let columnIndex = topLeftY - this.RENDER_OUTSIDE_OF_EDGE; columnIndex &lt; (topLeftY + numberOfHexagonOnY); ++columnIndex) {
 				
 				let renderPoint = new Coordinates(index, columnIndex);
 				
@@ -742,7 +803,7 @@ class Terrain extends ElementCore {
 				}
 				
 				let hexagon = new Hexagon({
-					assetData: TerrainChain.getTerrainAssetData(new Coordinates(centerRenderPointX + index, centerRenderPointY + columnIndex)),
+					assetData: TerrainChain.getTerrainAssetData(new Coordinates(renderStartingPointX + index, renderStartingPointY + columnIndex)),
 					terrain: this,
 				}).initResources(
 					this._resources,
@@ -764,7 +825,7 @@ class Terrain extends ElementCore {
 	
 	/**
 	 * render function
-	 * @param delta
+	 * @param delta {number}
 	 * @override
 	 */
 	render(delta) {
@@ -796,7 +857,7 @@ export default Terrain;</code></pre>
 
         <footer class="content-size">
             <div class="footer">
-                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Apr 29 2018 19:44:41 GMT+0200 (西欧夏令时)
+                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 01 2018 15:03:37 GMT+0200 (西欧夏令时)
             </div>
         </footer>
     </div>

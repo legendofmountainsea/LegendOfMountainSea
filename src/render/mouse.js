@@ -7,9 +7,17 @@ const MOUSE_LEFT_TEXTURE_PATH = '../../assets/interface/mouseLeft.png';
 const MOUSE_RIGHT_TEXTURE_PATH = '../../assets/interface/mouseRight.png';
 const EDGE_LENGHT = 10;
 
-export default class Mouse extends ElementCore {
+/**
+ * a class for rendering mouse in game
+ */
+class Mouse extends ElementCore {
 	
+	/**
+	 * create mouse render object
+	 * @param props
+	 */
 	constructor(props) {
+		props = props || {};
 		super(props);
 		this._isOut = false;
 		this._sprite = null;
@@ -27,8 +35,8 @@ export default class Mouse extends ElementCore {
 		this._onStatusBottomEdge = () => {
 			console.warn('use bindOnBottomEdge function to bind mouse event');
 		};
-		this._onMouseMove = () => {
-			console.warn('use bindOnMouseMove function to bind mouse event');
+		this._onMouseDrag = () => {
+			console.warn('use bindOnMouseDrag function to bind mouse event');
 		};
 		this._hitArea = props.hitArea;
 	}
@@ -50,12 +58,12 @@ export default class Mouse extends ElementCore {
 		return this;
 	}
 	
-	onMouseMove(position) {
+	onMouseDrag(position) {
 		const delta = {
 			deltaX: this._sprite.x - position.x,
 			deltaY: this._sprite.y - position.y,
 		};
-		this._onMouseMove(delta);
+		this._onMouseDrag(delta);
 		this.showAtPosition(position);
 	}
 	
@@ -194,8 +202,8 @@ export default class Mouse extends ElementCore {
 		return this;
 	}
 	
-	bindOnMouseMove(onMouseMove) {
-		this._onMouseMove = onMouseMove;
+	bindOnMouseDrag(onMouseMove) {
+		this._onMouseDrag = onMouseMove;
 		return this;
 	}
 	
@@ -221,3 +229,5 @@ export default class Mouse extends ElementCore {
 		this._sprite = null;
 	}
 }
+
+export default Mouse;

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: ElementCore</title>
+    <title>Source: render/mouse.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -569,1726 +569,255 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="ElementCore.html">Class: ElementCore</h1>
+        <h1 class="page-title" data-filename="render_mouse.js.html">Source: render/mouse.js</h1>
         
 
 
+    
+    <section>
+        <header>
+            <div class="header content-size">
+                <h2>render/mouse.js</h2>
+            </div>
+        </header>
+        <article>
+            <pre id="source-code" class="prettyprint source "><code>import ElementCore from './elementCore';
 
-<section>
-    
-<header>
-    <div class="header content-size">
-        <h2>ElementCore
-        </h2>
-        
-            <div class="class-description">Common element class which render on the map.</div>
-        
-    </div>
-</header>  
+const MOUSE_DEFAULT_TEXTURE_PATH = '../../assets/interface/mouse.png';
+const MOUSE_UP_TEXTURE_PATH = '../../assets/interface/mouseUp.png';
+const MOUSE_DOWN_TEXTURE_PATH = '../../assets/interface/mouseDown.png';
+const MOUSE_LEFT_TEXTURE_PATH = '../../assets/interface/mouseLeft.png';
+const MOUSE_RIGHT_TEXTURE_PATH = '../../assets/interface/mouseRight.png';
+const EDGE_LENGHT = 10;
 
-<article class="content-size">
-    <div class="container-overview">
-    
-    
-    
-        
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="ElementCore">
-            <a class="share-icon" href="#ElementCore"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                new ElementCore
-            </span>
-            <span class="signature">(props)</span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line4">elementCore.js:4</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Create a render element
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+/**
+ * a class for rendering mouse in game
+ */
+class Mouse extends ElementCore {
 	
-	<tbody>
+	/**
+	 * create mouse render object
+	 * @param props
+	 */
+	constructor(props) {
+		props = props || {};
+		super(props);
+		this._isOut = false;
+		this._sprite = null;
+		this._status = null;
+		this._isDown = false;
+		this._onStatusLeftEdge = () => {
+			console.warn('use bindOnLeftEdge function to bind mouse event');
+		};
+		this._onStatusRightEdge = () => {
+			console.warn('use bindOnRightEdge function to bind mouse event');
+		};
+		this._onStatusTopEdge = () => {
+			console.warn('use bindOnTopEdge function to bind mouse event');
+		};
+		this._onStatusBottomEdge = () => {
+			console.warn('use bindOnBottomEdge function to bind mouse event');
+		};
+		this._onMouseDrag = () => {
+			console.warn('use bindOnMouseDrag function to bind mouse event');
+		};
+		this._hitArea = props.hitArea;
+	}
 	
+	STATUS_INSIDE = 'STATUS_INSIDE';
+	STATUS_TOP_EDGE = 'STATUS_TOP_EDGE';
+	STATUS_BOTTOM_EDGE = 'STATUS_BOTTOM_EDGE';
+	STATUS_LEFT_EDGE = 'STATUS_LEFT_EDGE';
+	STATUS_RIGHT_EDGE = 'STATUS_RIGHT_EDGE';
 	
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
+	init() {
+		this.TEXTURE_DEFAULT = new PIXI.Texture.fromImage(MOUSE_DEFAULT_TEXTURE_PATH);
+		this.TEXTURE_UP = new PIXI.Texture.fromImage(MOUSE_UP_TEXTURE_PATH);
+		this.TEXTURE_DOWN = new PIXI.Texture.fromImage(MOUSE_DOWN_TEXTURE_PATH);
+		this.TEXTURE_LEFT = new PIXI.Texture.fromImage(MOUSE_LEFT_TEXTURE_PATH);
+		this.TEXTURE_RIGHT = new PIXI.Texture.fromImage(MOUSE_RIGHT_TEXTURE_PATH);
+		
+		this._sprite = new PIXI.Sprite(this.TEXTURE_DEFAULT);
+		return this;
+	}
 	
+	onMouseDrag(position) {
+		const delta = {
+			deltaX: this._sprite.x - position.x,
+			deltaY: this._sprite.y - position.y,
+		};
+		this._onMouseDrag(delta);
+		this.showAtPosition(position);
+	}
 	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl class="list-methods">
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="dispose">
-            <a class="share-icon" href="#dispose"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                dispose
-            </span>
-            <span class="signature">(option)</span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line121">elementCore.js:121</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        dispose element on the map or in memory
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+	onMouseDown(e) {
+		this.setMouseDown(true);
+	}
 	
-	<tbody>
+	onMouseUp(e) {
+		this.setMouseDown(false);
+	}
 	
+	isDown(){
+		return this._isDown;
+	}
 	
-        <tr>
-            
-                <td class="name"><code>option</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                remove from memory or not</td>
-        </tr>
+	setMouseDown(isDown) {
+		this._isDown = isDown;
+	}
 	
+	setTransform(transform) {
+		//no need
+	}
 	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="getID">
-            <a class="share-icon" href="#getID"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                getID
-            </span>
-            <span class="signature">()</span><span class="type-signature">null | string</span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line55">elementCore.js:55</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        get object's ID
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        null
-                         | 
-                    
-                        string
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="getIndex">
-            <a class="share-icon" href="#getIndex"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                getIndex
-            </span>
-            <span class="signature">()</span><span class="type-signature">number</span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line63">elementCore.js:63</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        get object's render index
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        number
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="getPosition">
-            <a class="share-icon" href="#getPosition"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                getPosition
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="Coordinates.html">Coordinates</a></span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line88">elementCore.js:88</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        get render position on render canvas
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="Coordinates.html">Coordinates</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="getRenderObject">
-            <a class="share-icon" href="#getRenderObject"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                getRenderObject
-            </span>
-            <span class="signature">()</span><span class="type-signature">object</span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line80">elementCore.js:80</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        get render object
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        object
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="initResources">
-            <a class="share-icon" href="#initResources"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                initResources
-            </span>
-            <span class="signature">(resources)</span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line20">elementCore.js:20</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        init asset resource for render
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+	getRenderObject() {
+		return this._sprite;
+	}
 	
-	<tbody>
+	showAtPosition(position) {
+		this._setPosition(position);
+		
+		//this._checkPosition(this._sprite.getBounds());
+		
+		return this;
+	}
 	
+	_setPosition(position) {
+		if (this._sprite) {
+			this._sprite.position.x = position.x;
+			this._sprite.position.y = position.y;
+		}
+		
+		return this;
+	}
 	
-        <tr>
-            
-                <td class="name"><code>resources</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                game resources info object</td>
-        </tr>
+	setOut(isMouseOut) {
+		this._isOut = isMouseOut;
+		return this;
+	}
 	
+	setStatus(status) {
+		this._status = status;
+	}
 	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="isNoAsset">
-            <a class="share-icon" href="#isNoAsset"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                isNoAsset
-            </span>
-            <span class="signature">()</span><span class="type-signature">boolean</span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line27">elementCore.js:27</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        check element has asset or not
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        boolean
-                        
-                    
-            </td>
-            <td class="description last">return true if element has asset</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="onRender">
-            <a class="share-icon" href="#onRender"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                onRender
-            </span>
-            <span class="signature">(delta)</span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line112">elementCore.js:112</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        render callback interface function
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+	isOut() {
+		return this._isOut;
+	}
 	
-	<tbody>
+	_checkPosition(bounds) {
+		
+		if (bounds.y &lt;= EDGE_LENGHT &amp;&amp; bounds.x &lt; this._hitArea.width) {
+			this.setStatus(this.STATUS_TOP_EDGE);
+			this._setPosition({
+				x: Math.min(bounds.x, this._hitArea.width - bounds.width),
+				y: bounds.y,
+			});
+		}
+		else if (bounds.x &lt;= EDGE_LENGHT &amp;&amp; bounds.y &lt; this._hitArea.height) {
+			this.setStatus(this.STATUS_LEFT_EDGE);
+			this._setPosition({
+				x: bounds.x,
+				y: Math.min(bounds.y, this._hitArea.height - bounds.height),
+			});
+		}
+		else if (bounds.y >= this._hitArea.height) {
+			this.setStatus(this.STATUS_BOTTOM_EDGE);
+			this._setPosition({
+				x: Math.min(bounds.x, this._hitArea.width - bounds.width),
+				y: this._hitArea.height - bounds.height,
+			});
+		}
+		else if (bounds.x >= this._hitArea.width) {
+			this.setStatus(this.STATUS_RIGHT_EDGE);
+			this._setPosition({
+				x: this._hitArea.width - bounds.width,
+				y: Math.min(bounds.y, this._hitArea.height - bounds.height),
+			});
+		}
+		else {
+			this.setStatus(this.STATUS_INSIDE);
+		}
+	}
 	
+	_checkStatus(delta) {
+		switch (this._status) {
+			case this.STATUS_TOP_EDGE:
+				this._sprite.texture = this.TEXTURE_UP;
+				this._onStatusTopEdge(delta);
+				break;
+			case this.STATUS_BOTTOM_EDGE:
+				this._sprite.texture = this.TEXTURE_DOWN;
+				this._onStatusBottomEdge(delta);
+				break;
+			case this.STATUS_LEFT_EDGE:
+				this._sprite.texture = this.TEXTURE_LEFT;
+				this._onStatusLeftEdge(delta);
+				break;
+			case this.STATUS_RIGHT_EDGE:
+				this._sprite.texture = this.TEXTURE_RIGHT;
+				this._onStatusRightEdge(delta);
+				break;
+			case this.STATUS_INSIDE:
+				this._sprite.texture = this.TEXTURE_DEFAULT;
+				break;
+			default:
+				break;
+		}
+	}
 	
-        <tr>
-            
-                <td class="name"><code>delta</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
+	bindOnRightEdge(onRightEdge) {
+		this._onStatusRightEdge = onRightEdge;
+		return this;
+	}
 	
+	bindOnLeftEdge(onLeftEdge) {
+		this._onStatusLeftEdge = onLeftEdge;
+		return this;
+	}
 	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="render">
-            <a class="share-icon" href="#render"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                render
-            </span>
-            <span class="signature">(delta)</span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line104">elementCore.js:104</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        render function
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+	bindOnTopEdge(onTopEdge) {
+		this._onStatusTopEdge = onTopEdge;
+		return this;
+	}
 	
-	<tbody>
+	bindOnBottomEdge(onBottomEdge) {
+		this._onStatusBottomEdge = onBottomEdge;
+		return this;
+	}
 	
+	bindOnMouseDrag(onMouseMove) {
+		this._onMouseDrag = onMouseMove;
+		return this;
+	}
 	
-        <tr>
-            
-                <td class="name"><code>delta</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
+	getPosition() {
+		return this._sprite.position;
+	}
 	
+	tick(delta) {
+		this._checkStatus(delta);
+	}
 	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="setID">
-            <a class="share-icon" href="#setID"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                setID
-            </span>
-            <span class="signature">(ID)</span><span class="type-signature"><a href="ElementCore.html">ElementCore</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line36">elementCore.js:36</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        set object's ID
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+	render(delta) {
+		this.tick(delta);
+	}
 	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>ID</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+	dispose(option = false) {
+		const disposeChildren = option;
+		this._sprite.destroy({
+			children: disposeChildren,
+			texture: disposeChildren,
+			baseTexture: disposeChildren,
+		});
+		this._sprite = null;
+	}
+}
 
+export default Mouse;
+</code></pre>
+        </article>
+    </section>
 
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="ElementCore.html">ElementCore</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="setIndex">
-            <a class="share-icon" href="#setIndex"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                setIndex
-            </span>
-            <span class="signature">(index)</span><span class="type-signature"><a href="ElementCore.html">ElementCore</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line46">elementCore.js:46</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        set object's render index
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>index</code></td>
-            
-            
-            <td class="type">
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="ElementCore.html">ElementCore</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="setTransform">
-            <a class="share-icon" href="#setTransform"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                setTransform
-            </span>
-            <span class="signature">(transform)</span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line72">elementCore.js:72</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        make render object transform by vector
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>transform</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Coordinates.html">Coordinates</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="tick">
-            <a class="share-icon" href="#tick"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                tick
-            </span>
-            <span class="signature">(delta)</span>
-            
-            <span class="access-signature">abstract</span>
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line96">elementCore.js:96</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        tick function for renderer
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>delta</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-        </dl>
-    
-    
-    
-    
-    
-
-    
-</article>
-
-</section>  
 
 
 
@@ -2298,7 +827,7 @@
 
         <footer class="content-size">
             <div class="footer">
-                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 01 2018 15:03:37 GMT+0200 (西欧夏令时)
+                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 01 2018 15:03:36 GMT+0200 (西欧夏令时)
             </div>
         </footer>
     </div>
