@@ -3,7 +3,7 @@ import Coordinates from '../core/coordinates';
 import RandomSeed from '../core/randomSeed';
 import S_worldTerrainAsset, {ASSETS_ID} from '../static/terrain/worldTerrainAsset';
 
-let renderCenter = null;
+let renderStartingCoordinates = null;
 let seed = null;
 
 /**
@@ -11,30 +11,30 @@ let seed = null;
  */
 class TerrainChain {
 	static _initRenderCenter(){
-		renderCenter = new Coordinates(0,0);
+		renderStartingCoordinates = new Coordinates(0,0);
 
 		return this;
 	}
 	
-	static updateCenterCoordinates(coordinates) {
-		if (!renderCenter) {
+	static updateRenderStartingCoordinates(coordinates) {
+		if (!renderStartingCoordinates) {
 			TerrainChain._initRenderCenter();
 		}
 		
-		renderCenter.set({
-			x: renderCenter.x + coordinates.x,
-			y: renderCenter.y + coordinates.y,
+		renderStartingCoordinates.set({
+			x: renderStartingCoordinates.x + coordinates.x,
+			y: renderStartingCoordinates.y + coordinates.y,
 		});
 		
 		return this;
 	}
 	
-	static getCenterCoordinates() {
-		if (!renderCenter) {
+	static getRenderStartingCoordinates() {
+		if (!renderStartingCoordinates) {
 			TerrainChain._initRenderCenter();
 		}
 		
-		return renderCenter;
+		return renderStartingCoordinates;
 	}
 	
 	/**

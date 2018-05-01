@@ -2,7 +2,13 @@
  * class for gamer input control
  */
 class Controller {
+	/**
+	 * create player input controller
+	 * @todo create warning if props object does not contain mouse instance
+	 * @param props {object}
+	 */
 	constructor(props) {
+		props = props || {};
 		this._mouse = props.mouse ? props.mouse : null;
 		this._pawn = null;
 		this._bindKeyboardEvent();
@@ -40,6 +46,10 @@ class Controller {
 		}
 	}
 	
+	/**
+	 * get mouse instance
+	 * @returns {Mouse}
+	 */
 	getMouseInstance() {
 		return this._mouse;
 	}
@@ -64,8 +74,8 @@ class Controller {
 		return this;
 	}
 	
-	bindOnMouseMove(onMouseMove) {
-		this._mouse.bindOnMouseMove(onMouseMove);
+	bindOnMouseDrag(onMouseMove) {
+		this._mouse.bindOnMouseDrag(onMouseMove);
 		return this;
 	}
 	
@@ -79,10 +89,22 @@ class Controller {
 	}
 	
 	onMouseUp(e){
+		if(this._mouse.isOut()){
+			return;
+		}
+		
 		this._mouse.onMouseUp(e);
 	}
 	
+	/**
+	 * when mouse button is down, this function will be trigger
+	 * @param e {event} mouse event object
+	 */
 	onMouseDown(e) {
+		if(this._mouse.isOut()){
+			return;
+		}
+		
 		this._mouse.onMouseDown(e);
 		
 		if (!this._pawn) {
@@ -92,14 +114,22 @@ class Controller {
 	}
 	
 	onMouseMove(position) {
+		if(this._mouse.isOut()){
+			return;
+		}
+		
 		if(this._mouse.isDown()){
-			this._mouse.onMouseMove(position);
+			this._mouse.onMouseDrag(position);
 		}
 		else {
 			this._mouse.showAtPosition(position);
 		}
 	}
 	
+	/**
+	 * possess a pawn to control
+	 * @param pawn {Pawn}
+	 */
 	possess(pawn) {
 		this._pawn = pawn;
 	}
