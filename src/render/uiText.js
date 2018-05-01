@@ -15,7 +15,6 @@ class UIText extends Actor {
         this._sprite = new PIXI.Text(this._string,this._style);
         if(this._onClick){
             this._sprite.interactive = true;
-            this._sprite.buttonMode = true;
             this._sprite.mousedown = (e) => {
                 this._onClick(e);
             };

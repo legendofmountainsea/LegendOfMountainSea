@@ -21,7 +21,6 @@ class Hexagon extends Pattern {
 		super.initResources(resources);
 		
 		this._sprite.interactive = true;
-		this._sprite.buttonMode = true;
 		
 		return this;
 	}
@@ -57,7 +56,7 @@ class Hexagon extends Pattern {
 	}
 	
 	/**
-	 * found right position for the center of hexagon
+	 * found right render position for the center of hexagon
 	 * @param position {Coordinates}
 	 * @returns {Hexagon}
 	 */
