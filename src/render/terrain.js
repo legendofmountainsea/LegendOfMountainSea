@@ -24,11 +24,12 @@ class Terrain extends ElementCore {
 		this._coordinates = props.coordinates ? props.coordinates : new Coordinates(0, 0);
 		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
-		this._PRE_RENDER_SCALE = 1.5;
-		this._RENDER_OUTSIDE_OF_EDGE = 3;
 		this._hexagons = [];
 		this._renderPointOnTerrain = [];
 	}
+	
+	PRE_RENDER_SCALE = 1.5;
+	RENDER_OUTSIDE_OF_EDGE = 3;
 	
 	/**
 	 * create terrain layer to manage render elements
@@ -81,7 +82,7 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 */
 	flush() {
-		TerrainChain.updateCenterCoordinates({...this._coordinates});
+		TerrainChain.updateRenderStartingCoordinates({...this._coordinates});
 		this._coordinates = {
 			x: 0,
 			y: 0,
@@ -189,22 +190,22 @@ class Terrain extends ElementCore {
 	 */
 	renderHexagonRegion(topLeft) {
 		const terrainResource = this._resources[this._assetData.DATA.NAME];
-		const centerCoordinates = TerrainChain.getCenterCoordinates();
+		const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
 		const {height, width} = terrainResource.texture;
 		const winDimension = Window.getDimension();
 		
 		const topLeftX = -parseInt(topLeft.x / (height * COS_60_DEGREES)),
 			topLeftY = -parseInt(topLeft.y / height);
 		
-		const numberOfHexagonOnX = parseInt((winDimension.width / width) * this._PRE_RENDER_SCALE),
-			numberOfHexagonOnY = parseInt((winDimension.height / height) * this._PRE_RENDER_SCALE),
-			centerRenderPointX = -parseInt(centerCoordinates.x / (height * COS_60_DEGREES)),
-			centerRenderPointY = -parseInt(centerCoordinates.y / height);
+		const numberOfHexagonOnX = parseInt((winDimension.width / width) * this.PRE_RENDER_SCALE),
+			numberOfHexagonOnY = parseInt((winDimension.height / height) * this.PRE_RENDER_SCALE),
+			renderStartingPointX = -parseInt(renderStartingCoordinates.x / (height * COS_60_DEGREES)),
+			renderStartingPointY = -parseInt(renderStartingCoordinates.y / height);
 		
 		this._renderPointOnTerrain = [];
 		
-		for (let index = topLeftX - this._RENDER_OUTSIDE_OF_EDGE; index < (topLeftX + numberOfHexagonOnX); ++index) {
-			for (let columnIndex = topLeftY - this._RENDER_OUTSIDE_OF_EDGE; columnIndex < (topLeftY + numberOfHexagonOnY); ++columnIndex) {
+		for (let index = topLeftX - this.RENDER_OUTSIDE_OF_EDGE; index < (topLeftX + numberOfHexagonOnX); ++index) {
+			for (let columnIndex = topLeftY - this.RENDER_OUTSIDE_OF_EDGE; columnIndex < (topLeftY + numberOfHexagonOnY); ++columnIndex) {
 				
 				let renderPoint = new Coordinates(index, columnIndex);
 				
@@ -219,7 +220,7 @@ class Terrain extends ElementCore {
 				}
 				
 				let hexagon = new Hexagon({
-					assetData: TerrainChain.getTerrainAssetData(new Coordinates(centerRenderPointX + index, centerRenderPointY + columnIndex)),
+					assetData: TerrainChain.getTerrainAssetData(new Coordinates(renderStartingPointX + index, renderStartingPointY + columnIndex)),
 					terrain: this,
 				}).initResources(
 					this._resources,
@@ -241,7 +242,7 @@ class Terrain extends ElementCore {
 	
 	/**
 	 * render function
-	 * @param delta
+	 * @param delta {number}
 	 * @override
 	 */
 	render(delta) {

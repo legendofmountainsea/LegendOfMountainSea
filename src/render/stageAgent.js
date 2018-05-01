@@ -69,7 +69,7 @@ export default class StageAgent {
 	}
 	
 	_initControllerEvent(){
-		this._controller.bindOnMouseMove((delta) => {
+		this._controller.bindOnMouseDrag((delta) => {
 			this._layerAgent.moveLayerTo(
 				[{index: this.ACTOR_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY},
 					{index: this.TERRAIN_LAYER_INDEX, deltaX: -delta.deltaX, deltaY: -delta.deltaY}],
