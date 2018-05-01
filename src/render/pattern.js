@@ -32,7 +32,6 @@ class Pattern extends Actor {
 	_initMouseEvent(){
 		if (this._onClick) {
 			this._sprite.interactive = true;
-			this._sprite.buttonMode = true;
 			this._sprite.mousedown = (e) => {
 				this._onClick(e);
 			};
