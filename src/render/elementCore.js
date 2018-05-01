@@ -90,6 +90,7 @@ class ElementCore {
 	
 	/**
 	 * tick function for renderer
+	 * @param delta {number}
 	 * @abstract
 	 */
 	tick(delta) {
@@ -97,6 +98,7 @@ class ElementCore {
 	
 	/**
 	 * render function
+	 * @param delta {number}
 	 * @abstract
 	 */
 	render(delta) {
