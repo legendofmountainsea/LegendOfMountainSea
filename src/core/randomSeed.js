@@ -14,6 +14,10 @@ export default class RandomSeed {
 		this._seed = seed;
 	}
 	
+	getSeed(){
+		return this._seed;
+	}
+	
 	random(min, max){
 		max = max || 1;
 		min = min || 0;

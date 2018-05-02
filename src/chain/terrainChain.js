@@ -2,6 +2,8 @@ import Perlin from 'loms.perlin';
 import Coordinates from '../core/coordinates';
 import RandomSeed from '../core/randomSeed';
 import S_worldTerrainAsset, {ASSETS_ID} from '../static/terrain/worldTerrainAsset';
+import {EXECUTE_IN_CLIENT} from '../util/envUtil';
+import Store from '../module/store';
 
 let renderStartingCoordinates = null;
 let seed = null;
@@ -38,13 +40,24 @@ class TerrainChain {
 	}
 	
 	/**
-	 * @todo init seed in other place
+	 * get terrain asset data for render by render coordinates point
+	 * @param renderPoint {Coordinates}
+	 * @returns {Object}
 	 */
 	static getTerrainAssetData(renderPoint) {
-		if (!seed) {
-			seed = new RandomSeed();
+		
+		if(!seed){
+			try {
+				EXECUTE_IN_CLIENT(() => {
+					seed = Store.getConfig().seed;
+				});
+			} catch (e) {
+				console.error(e);
+				seed = new RandomSeed().random();
+			}
 		}
-		Perlin.seed(seed.random());
+		
+		Perlin.seed(seed);
 		
 		let vx = renderPoint.x * 0.01,
 			vy = renderPoint.y * 0.2;

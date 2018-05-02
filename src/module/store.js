@@ -1,14 +1,15 @@
 //TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
 import {EXECUTE_IN_CLIENT, EXECUTE_IN_CLIENT_WITH_RETURN} from '../util/envUtil';
+import RandomSeed from '../core/randomSeed';
 
 let config = null;
 export default class Store {
 	
 	static _getInitConfig() {
-		return {language: systemLanguage};
+		return {language: systemLanguage, seed: new RandomSeed().random()};
 	}
 	
-	static _getConfigPath(){
+	static _getConfigPath() {
 		return pathHelper.join(appRootPath, 'lomsConfig.json');
 	}
 	
@@ -43,13 +44,13 @@ export default class Store {
 				return config;
 			});
 		}
-		catch (e){
+		catch (e) {
 			console.error(e);
 			return Store._getInitConfig();
 		}
 	}
 	
-	static changeConfig(newConfig){
+	static changeConfig(newConfig) {
 		EXECUTE_IN_CLIENT(() => {
 			config = newConfig;
 			fileSystem.writeFile(Store._getConfigPath(), JSON.stringify(config), (error) => {
