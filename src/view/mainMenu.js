@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import S_mainMenuAsset from '../static/mainMenuAsset';
+import modalTemplateHTML from '../static/interface/modalTemplate.html';
 
 import Scene from '../scene/scene';
 
@@ -25,7 +26,7 @@ export default class MainMenu extends Scene {
 			languageContent = Localization.getLanguageContent();
 		});
 		
-		this._backGroundMusic = new Audio('../../assets/sound/Angelic_Happiness.mp3');
+		this._backGroundMusic = new Audio('./assets/sound/Angelic_Happiness.mp3');
 		this._backGroundMusic.loop = true;
 		this._backGroundMusic.play();
 		
@@ -47,6 +48,7 @@ export default class MainMenu extends Scene {
 				const worldScene = new WorldScene;
 				this._renderer.renderScene(worldScene);
 				this._backGroundMusic.pause();
+				this._backGroundMusic = null;
 			},
 		});
 		
@@ -55,29 +57,10 @@ export default class MainMenu extends Scene {
 			position: {x: 400, y: 450},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
-				const modalTemplate = `<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-										    <div class="modal-content">
-										        <div class="modal-header">
-										            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-										            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										                <span aria-hidden="true">&times;</span>
-										            </button>
-										        </div>
-										        <div class="modal-body">
-										            ...
-										        </div>
-										        <div class="modal-footer">
-										            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										            <button type="button" class="btn btn-primary">Save changes</button>
-										        </div>
-										    </div>
-										</div>
-									</div>`;
+				const modalTemplate = modalTemplateHTML;
 				$('#GUIContainer').html(modalTemplate);
 				
 				$('#exampleModalCenter').modal();
-				//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
 			},
 		});
 		

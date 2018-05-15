@@ -16,7 +16,7 @@ export default class WorldScene extends Scene {
 	}
 	
 	onFinish() {
-		let music = new Audio('../../assets/sound/Choose_Your_Path.mp3');
+		let music = new Audio('./assets/sound/Choose_Your_Path.mp3');
 		music.loop = true;
 		music.play();
 		
