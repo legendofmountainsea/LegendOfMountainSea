@@ -57,7 +57,7 @@ export default class MainMenu extends Scene {
 			position: {x: 400, y: 450},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
-				const modalTemplate = modalTemplateHTML;
+				const modalTemplate = modalTemplateHTML({test:'content'});
 				$('#GUIContainer').html(modalTemplate);
 				
 				$('#exampleModalCenter').modal();
