@@ -4,6 +4,7 @@
 [![npm](https://img.shields.io/npm/v/loms-cli.svg?style=flat-square&label=loms-cli)](https://www.npmjs.com/package/loms-cli)
 [![Gitter](https://img.shields.io/gitter/room/SkyHarp/LegendOfMountainSea.svg?style=flat-square)](https://gitter.im/SkyHarp/LegendOfMountainSea)
 [![PRs](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CONTRIBUTING.md)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSkyHarp%2FLegendOfMountainSea.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSkyHarp%2FLegendOfMountainSea?ref=badge_shield)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/b89efe9442ffb2142766/maintainability)](https://codeclimate.com/github/SkyHarp/LegendOfMountainSea/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b89efe9442ffb2142766/test_coverage)](https://codeclimate.com/github/SkyHarp/LegendOfMountainSea/test_coverage)
@@ -57,3 +58,6 @@ No contribution is too small and all contributions are valued.
 
 ## License
 GPL-2.0
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSkyHarp%2FLegendOfMountainSea.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSkyHarp%2FLegendOfMountainSea?ref=badge_large)
