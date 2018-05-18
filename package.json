@@ -52,7 +52,7 @@
     "expect.js": "0.3.1",
     "html-es6-template-loader": "1.0.5",
     "jsdoc": "3.5.5",
-    "mocha": "3.5.3",
+    "mocha": "5.1.1",
     "nwjs-builder-phoenix": "1.14.6",
     "script-loader": "0.7.0",
     "webpack": "3.6.0",
