@@ -1,6 +1,8 @@
+import $ from 'jquery';
 import S_gameMenuAsset from '../static/gameMenuAsset';
 import S_worldAsset from '../static/heroCharacter/heroAsset';
 import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
+import T_modalTemplate from '../static/interface/modalTemplate.html';
 
 import Scene from './scene';
 import Pawn from '../control/pawn';
@@ -24,6 +26,10 @@ export default class WorldScene extends Scene {
 			assetData: S_gameMenuAsset.SYSTEM_ICON,
 			position: {x: 20, y: 20},
 			onClick: (e) => {
+				const systemModal = T_modalTemplate({content:'system'});
+				$('#GUIContainer').html(systemModal);
+				
+				$('#modalCenter').modal();
 			},
 		});
 		

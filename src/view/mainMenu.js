@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import S_mainMenuAsset from '../static/mainMenuAsset';
-import modalTemplateHTML from '../static/interface/modalTemplate.html';
+import T_modalTemplate from '../static/interface/modalTemplate.html';
 
 import Scene from '../scene/scene';
 
@@ -23,7 +23,7 @@ export default class MainMenu extends Scene {
 		let languageContent = null;
 		
 		EXECUTE_IN_CLIENT(() => {
-			languageContent = Localization.getLanguageContent();
+			languageContent = Localization.getLanguageContent().mainMenu;
 		});
 		
 		this._backGroundMusic = new Audio('./assets/sound/Angelic_Happiness.mp3');
@@ -57,10 +57,10 @@ export default class MainMenu extends Scene {
 			position: {x: 400, y: 450},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
-				const modalTemplate = modalTemplateHTML({test:'content'});
-				$('#GUIContainer').html(modalTemplate);
+				const loadGameModal = T_modalTemplate({content: 'save list'});
+				$('#GUIContainer').html(loadGameModal);
 				
-				$('#exampleModalCenter').modal();
+				$('#modalCenter').modal();
 			},
 		});
 		

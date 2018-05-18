@@ -1,5 +1,6 @@
+import mainMenu from './uiText/mainMenu';
+import systemModal from './interface/systemModal';
 exports.content = {
-	newGame:'New Game',
-	loadGame:'Load Game',
-	quit:'Quit',
+	mainMenu: mainMenu,
+	systemModal: systemModal,
 };
