@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
 	output: {
-		path: path.resolve(__dirname,'../'),
+		path: path.resolve(__dirname, '../'),
 		filename: 'loms.game.js',
 	},
 	module: {
@@ -24,7 +24,12 @@ module.exports = {
 			{
 				test: /\.html$/,
 				exclude: /node_modules/,
-				use: {loader: 'html-loader'},
+				use: {
+					loader: 'html-es6-template-loader',
+					options: {
+						transpile: true,
+					},
+				},
 			},
 		],
 	},
