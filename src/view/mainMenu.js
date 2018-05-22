@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import S_mainMenuAsset from '../static/mainMenuAsset';
 import T_modalTemplate from '../static/interface/modalTemplate.html';
+import T_contentListContent from '../static/interface/systemModal/contentListContent.html';
+import T_contentListContainer from '../static/interface/systemModal/contentListContainer.html';
 
 import Scene from '../scene/scene';
 
@@ -52,12 +54,28 @@ export default class MainMenu extends Scene {
 			},
 		});
 		
+		let listContents = ()=>{
+			let content = '';
+			for(let index = 0; index < 2; index ++){
+				content += T_contentListContent({itemName:index});
+			}
+			
+			return content;
+		};
+		
 		let loadGameText = new UIText({
 			string: languageContent ? languageContent.loadGame : 'Load Game',
 			position: {x: 400, y: 450},
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
-				const loadGameModal = T_modalTemplate({content: 'save list'});
+				const loadGameModal = T_modalTemplate({
+					titleName: languageContent.loadGame,
+					okButtonName: languageContent.loadGame,
+					closeButtonName: languageContent.quit,
+					content: T_contentListContainer({
+						listContent: listContents(),
+					}),
+				});
 				$('#GUIContainer').html(loadGameModal);
 				
 				$('#modalCenter').modal();
