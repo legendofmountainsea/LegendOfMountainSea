@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/actor.js</title>
+    <title>Class: Cube</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -643,102 +643,307 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_actor.js.html">Source: render/actor.js</h1>
+        <h1 class="page-title" data-filename="Cube.html">Class: Cube</h1>
         
 
 
+
+<section>
     
-    <section>
-        <header>
-            <div class="header content-size">
-                <h2>render/actor.js</h2>
-            </div>
-        </header>
-        <article>
-            <pre id="source-code" class="prettyprint source "><code>import ElementCore from './elementCore';
+<header>
+    <div class="header content-size">
+        <h2>Cube
+        </h2>
+        
+    </div>
+</header>  
 
-/**
- * class for rendering interactive element in the game
- * @extends ElementCore
- */
-class Actor extends ElementCore{
-	constructor(props) {
-		props = props || {};
-		super(props);
-		this._position = null;
-		this._initPosition = props.position ? props.position : {x: 0, y: 0};
-		this._onRender = props.onRender ? props.onRender : () => {
-		};
-		this._sprite = null;
-		this._onClick = props.onClick ? props.onClick : null;
-		this._assetData = props.assetData;
-	}
-	
-	DIRECTION_RIGHT = 1;
-	DIRECTION_LEFT = -1;
-	
-	getRenderObject() {
-		return this._sprite;
-	}
-	
-	setTransform(transform){
-		if(this._sprite){
-			this._sprite.x += transform.x;
-			this._sprite.y += transform.y;
-		}
-		return this;
-	}
-	
-	setPosition(position) {
-		this._position = position;
-		if (this._sprite) {
-			this._sprite.x = position.x;
-			this._sprite.y = position.y;
-		}
+<article class="content-size">
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="Cube">
+            <a class="share-icon" href="#Cube"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                new Cube
+            </span>
+            <span class="signature">(x, y, z)</span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core_cube.js.html#line13">cube.js:13</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
 		
-		return this;
-	}
-	
-	getPosition(){
-		return this._position? this._position : this._initPosition;
-	}
-	
-	bindRender(onRender) {
-		this._onRender = onRender;
-		return this;
-	}
-	
-	render(delta) {
-		this.tick(delta);
-		this.onRender(delta);
-	}
-	
-	onRender(delta) {
-		if (this._sprite) {
-			this._onRender(this._sprite, delta);
-		}
-	}
-	
-	tick(delta) {
-	}
-	
-	dispose(option = false){
-		const disposeChildren = option;
-		this._sprite.destroy({children: disposeChildren, texture: disposeChildren, baseTexture: disposeChildren});
-		this._sprite = null;
+		<th>Name</th>
 		
-		this._initPosition = null;
-		this._onRender = null;
-		this._onClick = null;
-		this._noAsset = null;
-		this._assetData = null;
-	}
-}
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>z</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
 
-export default Actor;</code></pre>
-        </article>
-    </section>
+    
+    
 
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl class="list-methods">
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="convertToGrid">
+            <a class="share-icon" href="#convertToGrid"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                convertToGrid
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="Coordinates.html">Coordinates</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="core_cube.js.html#line23">cube.js:23</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        convert self to the offset coordinates system
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="Coordinates.html">Coordinates</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+
+    
+</article>
+
+</section>  
 
 
 
@@ -748,7 +953,7 @@ export default Actor;</code></pre>
 
         <footer class="content-size">
             <div class="footer">
-                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jun 06 2018 23:20:11 GMT+0200 (西欧夏令时)
+                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jun 06 2018 23:20:11 GMT+0200 (西欧夏令时)
             </div>
         </footer>
     </div>

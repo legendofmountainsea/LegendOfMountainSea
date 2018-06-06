@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/actor.js</title>
+    <title>Source: core/cube.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -643,7 +643,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_actor.js.html">Source: render/actor.js</h1>
+        <h1 class="page-title" data-filename="core_cube.js.html">Source: core/cube.js</h1>
         
 
 
@@ -651,91 +651,39 @@
     <section>
         <header>
             <div class="header content-size">
-                <h2>render/actor.js</h2>
+                <h2>core/cube.js</h2>
             </div>
         </header>
         <article>
-            <pre id="source-code" class="prettyprint source "><code>import ElementCore from './elementCore';
-
-/**
- * class for rendering interactive element in the game
- * @extends ElementCore
+            <pre id="source-code" class="prettyprint source "><code>/**
+ * class of a Cube which provide a better navigation algorithm for grids
  */
-class Actor extends ElementCore{
-	constructor(props) {
-		props = props || {};
-		super(props);
-		this._position = null;
-		this._initPosition = props.position ? props.position : {x: 0, y: 0};
-		this._onRender = props.onRender ? props.onRender : () => {
-		};
-		this._sprite = null;
-		this._onClick = props.onClick ? props.onClick : null;
-		this._assetData = props.assetData;
+import Coordinates from './coordinates';
+
+class Cube {
+	/**
+	 *
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
+	constructor(x,y,z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
-	
-	DIRECTION_RIGHT = 1;
-	DIRECTION_LEFT = -1;
-	
-	getRenderObject() {
-		return this._sprite;
-	}
-	
-	setTransform(transform){
-		if(this._sprite){
-			this._sprite.x += transform.x;
-			this._sprite.y += transform.y;
-		}
-		return this;
-	}
-	
-	setPosition(position) {
-		this._position = position;
-		if (this._sprite) {
-			this._sprite.x = position.x;
-			this._sprite.y = position.y;
-		}
-		
-		return this;
-	}
-	
-	getPosition(){
-		return this._position? this._position : this._initPosition;
-	}
-	
-	bindRender(onRender) {
-		this._onRender = onRender;
-		return this;
-	}
-	
-	render(delta) {
-		this.tick(delta);
-		this.onRender(delta);
-	}
-	
-	onRender(delta) {
-		if (this._sprite) {
-			this._onRender(this._sprite, delta);
-		}
-	}
-	
-	tick(delta) {
-	}
-	
-	dispose(option = false){
-		const disposeChildren = option;
-		this._sprite.destroy({children: disposeChildren, texture: disposeChildren, baseTexture: disposeChildren});
-		this._sprite = null;
-		
-		this._initPosition = null;
-		this._onRender = null;
-		this._onClick = null;
-		this._noAsset = null;
-		this._assetData = null;
+
+	/**
+	 * convert self to the offset coordinates system
+	 * @returns {Coordinates}
+	 */
+	convertToGrid(){
+		let row = this.z + (this.x - (this.x&amp;1)) / 2;
+		return new Coordinates(this.x, row);
 	}
 }
 
-export default Actor;</code></pre>
+export default Cube;</code></pre>
         </article>
     </section>
 

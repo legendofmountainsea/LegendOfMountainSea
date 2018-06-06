@@ -1,16 +1,28 @@
 import Grid from './grid';
 import Coordinates from './coordinates';
+import Cube from './cube';
 
-export default class TerrainGrid extends Grid {
+/**
+ * class of terrain grid which provide navigation algorithm for terrain
+ * @extends Grid
+ */
+class TerrainGrid extends Grid {
+	/**
+	 * create a terrain grid
+	 * @param props {Object}
+	 * @param props.point {Coordinates} position on terrain
+	 */
 	constructor(props) {
+		props = props || {};
 		super(props);
+		this._point = props.point;
 	}
-	
+
 	getData(center, range) {
-		
+
 		const length = range.radius * 2 + 1,
 			coordinatesSet = [];
-		
+
 		for (let index = 0; index < length; ++index) {
 			let blockRow = [];
 			for (let columnIndex = 0; columnIndex < length; ++columnIndex) {
@@ -20,7 +32,19 @@ export default class TerrainGrid extends Grid {
 			}
 			coordinatesSet.push(blockRow);
 		}
-		
+
 		return coordinatesSet;
 	}
+
+	/**
+	 * convert to cube Coordinates system
+	 * @returns {Cube}
+	 */
+	convertToCube() {
+		let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
+		let y = -this._point.x - z;
+		return Cube(this._point.x, y, z);
+	}
 }
+
+export default TerrainGrid;
