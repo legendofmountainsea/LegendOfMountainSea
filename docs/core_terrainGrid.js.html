@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: render/actor.js</title>
+    <title>Source: core/terrainGrid.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -643,7 +643,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="render_actor.js.html">Source: render/actor.js</h1>
+        <h1 class="page-title" data-filename="core_terrainGrid.js.html">Source: core/terrainGrid.js</h1>
         
 
 
@@ -651,91 +651,55 @@
     <section>
         <header>
             <div class="header content-size">
-                <h2>render/actor.js</h2>
+                <h2>core/terrainGrid.js</h2>
             </div>
         </header>
         <article>
-            <pre id="source-code" class="prettyprint source "><code>import ElementCore from './elementCore';
+            <pre id="source-code" class="prettyprint source "><code>import Grid from './grid';
+import Coordinates from './coordinates';
+import Cube from './cube';
 
 /**
- * class for rendering interactive element in the game
- * @extends ElementCore
+ * class of terrain grid which provide navigation algorithm for terrain
+ * @extends Grid
  */
-class Actor extends ElementCore{
+class TerrainGrid extends Grid {
 	constructor(props) {
 		props = props || {};
 		super(props);
-		this._position = null;
-		this._initPosition = props.position ? props.position : {x: 0, y: 0};
-		this._onRender = props.onRender ? props.onRender : () => {
-		};
-		this._sprite = null;
-		this._onClick = props.onClick ? props.onClick : null;
-		this._assetData = props.assetData;
+		this._point = props.point;
 	}
-	
-	DIRECTION_RIGHT = 1;
-	DIRECTION_LEFT = -1;
-	
-	getRenderObject() {
-		return this._sprite;
-	}
-	
-	setTransform(transform){
-		if(this._sprite){
-			this._sprite.x += transform.x;
-			this._sprite.y += transform.y;
+
+	getData(center, range) {
+
+		const length = range.radius * 2 + 1,
+			coordinatesSet = [];
+
+		for (let index = 0; index &lt; length; ++index) {
+			let blockRow = [];
+			for (let columnIndex = 0; columnIndex &lt; length; ++columnIndex) {
+				let coordinatesX = center.x - (range.radius - 1) - Math.floor(index / 2) + columnIndex,
+					coordinatesY = center.y - range.radius + index;
+				blockRow.push(new Coordinates(coordinatesX, coordinatesY));
+			}
+			coordinatesSet.push(blockRow);
 		}
-		return this;
+
+		return coordinatesSet;
 	}
-	
-	setPosition(position) {
-		this._position = position;
-		if (this._sprite) {
-			this._sprite.x = position.x;
-			this._sprite.y = position.y;
-		}
-		
-		return this;
-	}
-	
-	getPosition(){
-		return this._position? this._position : this._initPosition;
-	}
-	
-	bindRender(onRender) {
-		this._onRender = onRender;
-		return this;
-	}
-	
-	render(delta) {
-		this.tick(delta);
-		this.onRender(delta);
-	}
-	
-	onRender(delta) {
-		if (this._sprite) {
-			this._onRender(this._sprite, delta);
-		}
-	}
-	
-	tick(delta) {
-	}
-	
-	dispose(option = false){
-		const disposeChildren = option;
-		this._sprite.destroy({children: disposeChildren, texture: disposeChildren, baseTexture: disposeChildren});
-		this._sprite = null;
-		
-		this._initPosition = null;
-		this._onRender = null;
-		this._onClick = null;
-		this._noAsset = null;
-		this._assetData = null;
+
+	/**
+	 * convert to cube Coordinates system
+	 * @returns {Cube}
+	 */
+	convertToCube() {
+		let z = this._point.y - (this._point.x - (this._point.x &amp; 1)) / 2;
+		let y = -this._point.x - z;
+		return Cube(this._point.x, y, z);
 	}
 }
 
-export default Actor;</code></pre>
+export default TerrainGrid;</code></pre>
         </article>
     </section>
 

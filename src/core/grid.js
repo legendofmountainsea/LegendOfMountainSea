@@ -1,9 +1,13 @@
-export default class Grid {
-    constructor(props){
-
-    }
-
-    getData(point, range){
-
-    }
+/**
+ * class of a Grid which provide a navigation algorithm
+ */
+class Grid {
+	/**
+	 *
+	 * @param props {Object}
+	 */
+	constructor(props) {
+	}
 }
+
+export default Grid;
