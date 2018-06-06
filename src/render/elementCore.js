@@ -4,7 +4,8 @@
 class ElementCore {
 	/**
 	 * Create a render element
-	 * @param props {object}
+	 * @param {Object} props - Element props json object
+	 * @param {Object} props.assetData Element asset data information
 	 */
 	constructor(props) {
 		this._ID = null;
