@@ -50,7 +50,7 @@ export default class StageAgent {
 		};
 		
 		this._renderer.stage.mousemove = (e) => {
-			
+
 			const {layerX, layerY} = e.data.originalEvent;
 			
 			this._controller.onMouseMove({

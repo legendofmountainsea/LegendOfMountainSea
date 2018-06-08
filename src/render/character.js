@@ -13,6 +13,7 @@ class Character extends Actor {
 		props = props || {};
 		super(props);
 		this._frames = {};
+		this._destinationHexagon = null;
 		this._destination = null;
 		this._animationStatus = 'STAND';
 	}
@@ -59,9 +60,18 @@ class Character extends Actor {
 		this._destination = position;
 		this.playWalk();
 	}
+
+	moveToHexagon(hexagon){
+		this._destinationHexagon = hexagon;
+		this.moveTo(hexagon.getPosition());
+	}
 	
 	getDestination() {
 		return this._destination;
+	}
+
+	getDestinationHexagon(){
+		return this._destinationHexagon;
 	}
 	
 	getDirection() {
@@ -71,11 +81,21 @@ class Character extends Actor {
 	tick(delta) {
 		this.updatePosition(delta);
 	}
+
+	updateDestination(){
+		if(!this.getDestination() || !this.getDestinationHexagon()){
+			return;
+		}
+
+		this._destination = this.getDestinationHexagon().getPosition();
+	}
 	
 	updatePosition(delta) {
 		if (!this._sprite || !this.getDestination()) {
 			return;
 		}
+
+		this.updateDestination();
 		
 		if (this.isArrivedAtDestination()) {
 			if (this._animationStatus === 'WALK') {
