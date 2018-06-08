@@ -21,6 +21,9 @@ class Hexagon extends Pattern {
 		super.initResources(resources);
 		
 		this._sprite.interactive = true;
+		this._sprite.mouseup = (e) => {
+
+		};
 		
 		return this;
 	}
