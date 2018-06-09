@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: LOMSRenderer</title>
+    <title>Source: render/layerAgent.js</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -725,1206 +725,220 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="LOMSRenderer.html">Class: LOMSRenderer</h1>
+        <h1 class="page-title" data-filename="render_layerAgent.js.html">Source: render/layerAgent.js</h1>
         
 
 
+    
+    <section>
+        <header>
+            <div class="header content-size">
+                <h2>render/layerAgent.js</h2>
+            </div>
+        </header>
+        <article>
+            <pre id="source-code" class="prettyprint source "><code>import {uuid} from 'loms.uuid';
+import Coordinates from '../core/coordinates';
 
-<section>
-    
-<header>
-    <div class="header content-size">
-        <h2>LOMSRenderer
-        </h2>
-        
-            <div class="class-description">class for renderer</div>
-        
-    </div>
-</header>  
+/**
+ * a class for managing elements' index and instance on layer
+ */
+class LayerAgent {
+	/**
+	 * create a layer agent
+	 * @param props {Object}
+	 * @param props.container {Object} pixijs container class
+	 */
+	constructor(props) {
+		props = props || {};
+		this._container = props.container;
+		this._layer = {};
+	}
 
-<article class="content-size">
-    <div class="container-overview">
-    
-    
-    
-        
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="LOMSRenderer">
-            <a class="share-icon" href="#LOMSRenderer"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                new LOMSRenderer
-            </span>
-            <span class="signature">(props)</span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line9">lomsRenderer.js:9</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        init renderer for game
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
+	/**
+	 * add elememt to this layer
+	 * @param element {ElementCore} instance of this element
+	 * @param index {number} index order of this element
+	 * @returns {LayerAgent}
+	 */
+	addElement(element, index = 0) {
 		
-		<th>Name</th>
+		element.setID(uuid()).setIndex(index);
 		
+		const result = this._getTopElementInLayer(index);
 		
-		<th>Type</th>
+		const childIndex = (result) ? this._container.getChildIndex(result.getRenderObject()) : 0;
 		
+		this._addToLayer(element, index);
 		
+		this._container.addChildAt(element.getRenderObject(), childIndex);
 		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+		return this;
+	}
+
+	/**
+	 * algorithm for sorting element in children array to render current
+	 * e.g. building that could block character in front
+	 */
+	updateDepthRenderOrder() {
+		this._container.children.sort((a, b) => {
+			const elementA = this._getElement(a),
+				elementB = this._getElement(b);
+			
+			if (elementA.getIndex() &lt; elementB.getIndex() || elementA.getPosition().y &lt; elementB.getPosition().y) {
+				return -1;
+			}
+			
+			return 1;
+		});
+		
+		for (const index in this._layer) {
+			let layer = this._layer[index];
+			layer.sort((a, b) => {
+				
+				const positionA = a.getPosition(),
+					positionB = b.getPosition();
+				
+				if (positionA.y > positionB.y) {
+					return -1;
+				}
+				
+				return 1;
+			});
+		}
+	}
+
+	/**
+	 * remove element from this layer
+	 * @param element {ElementCore} element instance
+	 * @param option {boolean} dispose all the resource that relate to the element
+	 * @returns {LayerAgent}
+	 */
+	removeElement(element, option) {
+		this._removeFromLayer(element, element.getIndex());
+		this._container.removeChild(element.getRenderObject());
+		element.dispose(option);
+		return this;
+	}
+
+	/**
+	 * move layer
+	 * @param layerTo {Array} layer movement information
+	 * @returns {LayerAgent}
+	 */
+	moveLayerTo(layerTo) {
+		for (const movingInfo of layerTo) {
+			
+			if (!this._layer[movingInfo.index]) {
+				continue;
+			}
+			
+			let deltaX = 0,
+				deltaY = 0;
+			
+			for (const element of this._layer[movingInfo.index]) {
+				
+				deltaX = (movingInfo.deltaX) ? (movingInfo.deltaX) : 0;
+				deltaY = (movingInfo.deltaY) ? (movingInfo.deltaY) : 0;
+				
+				element.setTransform(new Coordinates(deltaX, deltaY));
+			}
+		}
+
+		return this;
+	}
+
+	/**
+	 * remove elements by index
+	 * @param index {number} index which element should be removed
+	 * @param option {boolean} dispose all the resource that relate to the element
+	 * @returns {LayerAgent}
+	 */
+	removeElementsByIndex(index, option) {
+		let elements = this._layer[index];
+		
+		this._layer[index] = null;
+		delete this._layer[index];
+		
+		if (!elements || elements.length === 0) {
+			return this;
+		}
+		
+		for (let element of elements) {
+			this._container.removeChild(element.getRenderObject());
+			element.dispose(option);
+		}
+
+		return this;
+	}
+
+	_addToLayer(element, index) {
+		if (!this._layer[index]) {
+			this._layer[index] = [];
+		}
+		
+		this._layer[index].push(element);
+
+		return this;
+	}
 	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>props</code></td>
-            
-            
-            <td class="type">
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-    
-</dd>
-
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <h3 class="subsection-title">Methods</h3>
-        
-        <dl class="list-methods">
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="addActor">
-            <a class="share-icon" href="#addActor"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                addActor
-            </span>
-            <span class="signature">(actor)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line152">lomsRenderer.js:152</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        add actor to stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
+	_getElement(renderObject) {
+		for (const index in this._layer) {
+			
+			let layer = this._layer[index];
+			for (let i = 0; i &lt; layer.length; ++i) {
+				if (layer[i].getRenderObject() === renderObject) {
+					return layer[i];
+				}
+			}
+		}
 		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+		return null;
+	}
 	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>actor</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Actor.html">Actor</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="addTerrain">
-            <a class="share-icon" href="#addTerrain"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                addTerrain
-            </span>
-            <span class="signature">(terrain)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line130">lomsRenderer.js:130</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        add terrain to stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
+	_removeFromLayer(element, index) {
+		let layer = this._layer[index];
+		for (let i = 0; i &lt; layer.length; ++i) {
+			if (layer[i].getID() === element.getID()) {
+				layer.splice(i, 1);
+				break;
+			}
+		}
 		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+		return this;
+	}
 	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>terrain</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Terrain.html">Terrain</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="addUI">
-            <a class="share-icon" href="#addUI"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                addUI
-            </span>
-            <span class="signature">(ui)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line141">lomsRenderer.js:141</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        add ui to stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
+	_getTopElementInLayer(index) {
+		let elements = null;
 		
-		<th>Name</th>
+		for (let layerIndex = index; layerIndex > 0; --layerIndex) {
+			
+			if (this._layer[layerIndex] &amp;&amp; this._layer[layerIndex].length > 0) {
+				elements = this._layer[layerIndex];
+				break;
+			}
+		}
 		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+		return elements ? elements[0] : null;
+	}
 	
-	<tbody>
+	tick(delta) {
+		for (let index in this._layer) {
+			for (let element of this._layer[index]) {
+				element.render(delta);
+			}
+		}
+	}
 	
-	
-        <tr>
-            
-                <td class="name"><code>ui</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="UIText.html">UIText</a></span>
+	render(delta) {
+		this.tick(delta);
+	}
+}
 
+export default LayerAgent;</code></pre>
+        </article>
+    </section>
 
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="clearStage">
-            <a class="share-icon" href="#clearStage"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                clearStage
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line175">lomsRenderer.js:175</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        clear ui and actor in current stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="getController">
-            <a class="share-icon" href="#getController"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                getController
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="Controller.html">Controller</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line121">lomsRenderer.js:121</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        get controller instance
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="Controller.html">Controller</a>
-                        
-                    
-            </td>
-            <td class="description last">class for gamer input control</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="initAssetLoader">
-            <a class="share-icon" href="#initAssetLoader"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                initAssetLoader
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line58">lomsRenderer.js:58</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        init asset loader for loading asset files
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-todo">TODO</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>show progress information</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="initRenderer">
-            <a class="share-icon" href="#initRenderer"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                initRenderer
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line28">lomsRenderer.js:28</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        init renderer and stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-todo">TODO</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>left mouse click feature</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="renderScene">
-            <a class="share-icon" href="#renderScene"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                renderScene
-            </span>
-            <span class="signature">(scene)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line110">lomsRenderer.js:110</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        switch to next scene
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>scene</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Scene.html">Scene</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                class for every scene which renderer could render</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        </dl>
-    
-    
-    
-    
-    
-
-    
-</article>
-
-</section>  
 
 
 
@@ -1934,7 +948,7 @@
 
         <footer class="content-size">
             <div class="footer">
-                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 09 2018 16:04:38 GMT+0200 (西欧夏令时)
+                Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 09 2018 16:04:38 GMT+0200 (西欧夏令时)
             </div>
         </footer>
     </div>

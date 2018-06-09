@@ -1,7 +1,17 @@
 import LayerAgent from './layerAgent';
 
-export default class StageAgent {
+/**
+ * a class for managing elements on stage
+ */
+class StageAgent {
+	/**
+	 * create a stage agent
+	 * @param props {Object}
+	 * @param props.renderer {LOMSRenderer} renderer instance
+	 * @param props.controller {Controller} controller instance
+	 */
 	constructor(props) {
+		props = props || {};
 		this._renderer = props.renderer;
 		this._controller = props.controller;
 		this._terrain = null;
@@ -12,7 +22,11 @@ export default class StageAgent {
 	TERRAIN_LAYER_INDEX = 1;
 	UI_LAYER_INDEX = 2;
 	MOUSE_LAYER_INDEX = 3;
-	
+
+	/**
+	 * init stage
+	 * @returns {StageAgent}
+	 */
 	init() {
 		let hitArea = new PIXI.Rectangle(0, 0, this._renderer.view.width, this._renderer.view.height);
 		this._renderer.stage.interactive = true;
@@ -24,9 +38,9 @@ export default class StageAgent {
 		
 		return this;
 	}
-	
+
 	_initLayerAgent() {
-		this._layerAgent = new LayerAgent({contatiner: this._renderer.stage});
+		this._layerAgent = new LayerAgent({container: this._renderer.stage});
 		this._layerAgent.addElement(this._controller.getMouseInstance(), this.MOUSE_LAYER_INDEX);
 		return this;
 	}
@@ -78,7 +92,12 @@ export default class StageAgent {
 		
 		return this;
 	}
-	
+
+	/**
+	 * add a terrain scene to render
+	 * @param terrain {Terrain} terrain scene
+	 * @returns {StageAgent}
+	 */
 	addTerrain(terrain) {
 		this._terrain = terrain;
 		
@@ -86,22 +105,40 @@ export default class StageAgent {
 		
 		return this;
 	}
-	
+
+	/**
+	 * add a ui element to render
+	 * @param uiElement {UIText | Pattern} ui element
+	 * @returns {StageAgent}
+	 */
 	addUI(uiElement) {
 		this._layerAgent.addElement(uiElement, this.UI_LAYER_INDEX);
 		return this;
 	}
-	
+
+	/**
+	 * add a actor to render
+	 * @param actor {Actor}
+	 * @returns {StageAgent}
+	 */
 	addActor(actor) {
 		this._layerAgent.addElement(actor, this.ACTOR_LAYER_INDEX);
 		return this;
 	}
-	
+
+	/**
+	 * clear all actors
+	 * @returns {StageAgent}
+	 */
 	clearActors() {
 		this._layerAgent.removeElementsByIndex(this.ACTOR_LAYER_INDEX, true);
 		return this;
 	}
-	
+
+	/**
+	 * clear all UI
+	 * @returns {StageAgent}
+	 */
 	clearUI() {
 		this._layerAgent.removeElementsByIndex(this.UI_LAYER_INDEX, true);
 		return this;
@@ -114,3 +151,5 @@ export default class StageAgent {
 		return this;
 	}
 }
+
+export default StageAgent;

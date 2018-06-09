@@ -1,12 +1,27 @@
 import {uuid} from 'loms.uuid';
 import Coordinates from '../core/coordinates';
 
-export default class LayerAgent {
+/**
+ * a class for managing elements' index and instance on layer
+ */
+class LayerAgent {
+	/**
+	 * create a layer agent
+	 * @param props {Object}
+	 * @param props.container {Object} pixijs container class
+	 */
 	constructor(props) {
-		this._container = props.contatiner;
+		props = props || {};
+		this._container = props.container;
 		this._layer = {};
 	}
-	
+
+	/**
+	 * add elememt to this layer
+	 * @param element {ElementCore} instance of this element
+	 * @param index {number} index order of this element
+	 * @returns {LayerAgent}
+	 */
 	addElement(element, index = 0) {
 		
 		element.setID(uuid()).setIndex(index);
@@ -21,7 +36,11 @@ export default class LayerAgent {
 		
 		return this;
 	}
-	
+
+	/**
+	 * algorithm for sorting element in children array to render current
+	 * e.g. building that could block character in front
+	 */
 	updateDepthRenderOrder() {
 		this._container.children.sort((a, b) => {
 			const elementA = this._getElement(a),
@@ -49,13 +68,25 @@ export default class LayerAgent {
 			});
 		}
 	}
-	
+
+	/**
+	 * remove element from this layer
+	 * @param element {ElementCore} element instance
+	 * @param option {boolean} dispose all the resource that relate to the element
+	 * @returns {LayerAgent}
+	 */
 	removeElement(element, option) {
 		this._removeFromLayer(element, element.getIndex());
 		this._container.removeChild(element.getRenderObject());
 		element.dispose(option);
+		return this;
 	}
-	
+
+	/**
+	 * move layer
+	 * @param layerTo {Array} layer movement information
+	 * @returns {LayerAgent}
+	 */
 	moveLayerTo(layerTo) {
 		for (const movingInfo of layerTo) {
 			
@@ -74,8 +105,16 @@ export default class LayerAgent {
 				element.setTransform(new Coordinates(deltaX, deltaY));
 			}
 		}
+
+		return this;
 	}
-	
+
+	/**
+	 * remove elements by index
+	 * @param index {number} index which element should be removed
+	 * @param option {boolean} dispose all the resource that relate to the element
+	 * @returns {LayerAgent}
+	 */
 	removeElementsByIndex(index, option) {
 		let elements = this._layer[index];
 		
@@ -83,21 +122,25 @@ export default class LayerAgent {
 		delete this._layer[index];
 		
 		if (!elements || elements.length === 0) {
-			return;
+			return this;
 		}
 		
 		for (let element of elements) {
 			this._container.removeChild(element.getRenderObject());
 			element.dispose(option);
 		}
+
+		return this;
 	}
-	
+
 	_addToLayer(element, index) {
 		if (!this._layer[index]) {
 			this._layer[index] = [];
 		}
 		
 		this._layer[index].push(element);
+
+		return this;
 	}
 	
 	_getElement(renderObject) {
@@ -152,3 +195,5 @@ export default class LayerAgent {
 		this.tick(delta);
 	}
 }
+
+export default LayerAgent;

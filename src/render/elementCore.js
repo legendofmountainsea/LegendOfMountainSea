@@ -8,7 +8,9 @@ class ElementCore {
 	 * @param props.assetData {Object} element asset data information
 	 */
 	constructor(props) {
+		props = props || {};
 		this._ID = null;
+		this._stage = null;
 		this._index = 0;
 		this._noAsset = !props.assetData;
 	}
@@ -37,6 +39,25 @@ class ElementCore {
 	setID(ID) {
 		this._ID = ID;
 		return this;
+	}
+
+	/**
+	 * set stage instance
+	 * @param stage {StageAgent} a StageAgent instance
+	 * @returns {ElementCore}
+	 */
+	setStage(stage) {
+		this._stage = stage;
+		return this;
+	}
+
+	/**
+	 * get stage instance
+	 * @param stage {StageAgent} a StageAgent instance
+	 * @returns {null|*}
+	 */
+	getStage(stage) {
+		return this._stage;
 	}
 	
 	/**
