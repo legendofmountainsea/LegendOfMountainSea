@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: LOMSRenderer</title>
+    <title>Class: StageAgent</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -725,7 +725,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="LOMSRenderer.html">Class: LOMSRenderer</h1>
+        <h1 class="page-title" data-filename="StageAgent.html">Class: StageAgent</h1>
         
 
 
@@ -734,10 +734,10 @@
     
 <header>
     <div class="header content-size">
-        <h2>LOMSRenderer
+        <h2>StageAgent
         </h2>
         
-            <div class="class-description">class for renderer</div>
+            <div class="class-description">a class for managing elements on stage</div>
         
     </div>
 </header>  
@@ -750,10 +750,10 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="LOMSRenderer">
-            <a class="share-icon" href="#LOMSRenderer"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="StageAgent">
+            <a class="share-icon" href="#StageAgent"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                new LOMSRenderer
+                new StageAgent
             </span>
             <span class="signature">(props)</span>
             
@@ -764,7 +764,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line9">lomsRenderer.js:9</a>
+            <a href="render_stageAgent.js.html#line6">stageAgent.js:6</a>
         </div>
         
     </div>
@@ -775,7 +775,7 @@
     
     
     <div class="description">
-        init renderer for game
+        create a stage agent
     </div>
     
 
@@ -811,13 +811,86 @@
             
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
             
             
             
             <td class="description last">
                 
-                </td>
+                
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>renderer</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                renderer instance</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>controller</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Controller.html">Controller</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                controller instance</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
         </tr>
 	
 	
@@ -889,7 +962,7 @@
             <span class="">
                 addActor
             </span>
-            <span class="signature">(actor)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">(actor)</span><span class="type-signature"><a href="StageAgent.html">StageAgent</a></span>
             
             
             
@@ -898,7 +971,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line152">lomsRenderer.js:152</a>
+            <a href="render_stageAgent.js.html#line124">stageAgent.js:124</a>
         </div>
         
     </div>
@@ -909,7 +982,7 @@
     
     
     <div class="description">
-        add actor to stage
+        add a actor to render
     </div>
     
 
@@ -1015,7 +1088,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="StageAgent.html">StageAgent</a>
                         
                     
             </td>
@@ -1039,7 +1112,7 @@
             <span class="">
                 addTerrain
             </span>
-            <span class="signature">(terrain)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">(terrain)</span><span class="type-signature"><a href="StageAgent.html">StageAgent</a></span>
             
             
             
@@ -1048,7 +1121,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line130">lomsRenderer.js:130</a>
+            <a href="render_stageAgent.js.html#line101">stageAgent.js:101</a>
         </div>
         
     </div>
@@ -1059,7 +1132,7 @@
     
     
     <div class="description">
-        add terrain to stage
+        add a terrain scene to render
     </div>
     
 
@@ -1106,7 +1179,7 @@
             
             <td class="description last">
                 
-                </td>
+                terrain scene</td>
         </tr>
 	
 	
@@ -1165,7 +1238,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="StageAgent.html">StageAgent</a>
                         
                     
             </td>
@@ -1189,7 +1262,7 @@
             <span class="">
                 addUI
             </span>
-            <span class="signature">(ui)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">(uiElement)</span><span class="type-signature"><a href="StageAgent.html">StageAgent</a></span>
             
             
             
@@ -1198,7 +1271,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line141">lomsRenderer.js:141</a>
+            <a href="render_stageAgent.js.html#line114">stageAgent.js:114</a>
         </div>
         
     </div>
@@ -1209,7 +1282,7 @@
     
     
     <div class="description">
-        add ui to stage
+        add a ui element to render
     </div>
     
 
@@ -1240,13 +1313,16 @@
 	
         <tr>
             
-                <td class="name"><code>ui</code></td>
+                <td class="name"><code>uiElement</code></td>
             
             
             <td class="type">
             
                 
 <span class="param-type"><a href="UIText.html">UIText</a></span>
+|
+
+<span class="param-type"><a href="Pattern.html">Pattern</a></span>
 
 
             
@@ -1256,7 +1332,7 @@
             
             <td class="description last">
                 
-                </td>
+                ui element</td>
         </tr>
 	
 	
@@ -1315,7 +1391,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="StageAgent.html">StageAgent</a>
                         
                     
             </td>
@@ -1334,12 +1410,12 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="clearStage">
-            <a class="share-icon" href="#clearStage"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="clearActors">
+            <a class="share-icon" href="#clearActors"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                clearStage
+                clearActors
             </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">()</span><span class="type-signature"><a href="StageAgent.html">StageAgent</a></span>
             
             
             
@@ -1348,7 +1424,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line175">lomsRenderer.js:175</a>
+            <a href="render_stageAgent.js.html#line133">stageAgent.js:133</a>
         </div>
         
     </div>
@@ -1359,7 +1435,7 @@
     
     
     <div class="description">
-        clear ui and actor in current stage
+        clear all actors
     </div>
     
 
@@ -1420,7 +1496,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="StageAgent.html">StageAgent</a>
                         
                     
             </td>
@@ -1439,12 +1515,12 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="getController">
-            <a class="share-icon" href="#getController"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="clearUI">
+            <a class="share-icon" href="#clearUI"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                getController
+                clearUI
             </span>
-            <span class="signature">()</span><span class="type-signature"><a href="Controller.html">Controller</a></span>
+            <span class="signature">()</span><span class="type-signature"><a href="StageAgent.html">StageAgent</a></span>
             
             
             
@@ -1453,7 +1529,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line121">lomsRenderer.js:121</a>
+            <a href="render_stageAgent.js.html#line142">stageAgent.js:142</a>
         </div>
         
     </div>
@@ -1464,7 +1540,7 @@
     
     
     <div class="description">
-        get controller instance
+        clear all UI
     </div>
     
 
@@ -1525,119 +1601,7 @@
             
             <td class="type">
             
-                        <a href="Controller.html">Controller</a>
-                        
-                    
-            </td>
-            <td class="description last">class for gamer input control</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="initAssetLoader">
-            <a class="share-icon" href="#initAssetLoader"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                initAssetLoader
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line58">lomsRenderer.js:58</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        init asset loader for loading asset files
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-todo">TODO</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>show progress information</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="StageAgent.html">StageAgent</a>
                         
                     
             </td>
@@ -1656,12 +1620,12 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="initRenderer">
-            <a class="share-icon" href="#initRenderer"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="init">
+            <a class="share-icon" href="#init"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                initRenderer
+                init
             </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">()</span><span class="type-signature"><a href="StageAgent.html">StageAgent</a></span>
             
             
             
@@ -1670,7 +1634,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line28">lomsRenderer.js:28</a>
+            <a href="render_stageAgent.js.html#line30">stageAgent.js:30</a>
         </div>
         
     </div>
@@ -1681,7 +1645,7 @@
     
     
     <div class="description">
-        init renderer and stage
+        init stage
     </div>
     
 
@@ -1689,163 +1653,6 @@
     
     
     
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-todo">TODO</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>left mouse click feature</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="renderScene">
-            <a class="share-icon" href="#renderScene"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                renderScene
-            </span>
-            <span class="signature">(scene)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line110">lomsRenderer.js:110</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        switch to next scene
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>scene</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Scene.html">Scene</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                class for every scene which renderer could render</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
     
     
     
@@ -1899,7 +1706,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="StageAgent.html">StageAgent</a>
                         
                     
             </td>

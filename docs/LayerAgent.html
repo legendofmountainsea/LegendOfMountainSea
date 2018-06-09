@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: LOMSRenderer</title>
+    <title>Class: LayerAgent</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -725,7 +725,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="LOMSRenderer.html">Class: LOMSRenderer</h1>
+        <h1 class="page-title" data-filename="LayerAgent.html">Class: LayerAgent</h1>
         
 
 
@@ -734,10 +734,10 @@
     
 <header>
     <div class="header content-size">
-        <h2>LOMSRenderer
+        <h2>LayerAgent
         </h2>
         
-            <div class="class-description">class for renderer</div>
+            <div class="class-description">a class for managing elements' index and instance on layer</div>
         
     </div>
 </header>  
@@ -750,10 +750,10 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="LOMSRenderer">
-            <a class="share-icon" href="#LOMSRenderer"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="LayerAgent">
+            <a class="share-icon" href="#LayerAgent"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                new LOMSRenderer
+                new LayerAgent
             </span>
             <span class="signature">(props)</span>
             
@@ -764,7 +764,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line9">lomsRenderer.js:9</a>
+            <a href="render_layerAgent.js.html#line7">layerAgent.js:7</a>
         </div>
         
     </div>
@@ -775,7 +775,7 @@
     
     
     <div class="description">
-        init renderer for game
+        create a layer agent
     </div>
     
 
@@ -811,13 +811,63 @@
             
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
             
             
             
             <td class="description last">
                 
-                </td>
+                
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>container</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                pixijs container class</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
         </tr>
 	
 	
@@ -884,12 +934,12 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="addActor">
-            <a class="share-icon" href="#addActor"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="addElement">
+            <a class="share-icon" href="#addElement"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                addActor
+                addElement
             </span>
-            <span class="signature">(actor)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">(element, index)</span><span class="type-signature"><a href="LayerAgent.html">LayerAgent</a></span>
             
             
             
@@ -898,7 +948,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line152">lomsRenderer.js:152</a>
+            <a href="render_layerAgent.js.html#line25">layerAgent.js:25</a>
         </div>
         
     </div>
@@ -909,7 +959,7 @@
     
     
     <div class="description">
-        add actor to stage
+        add elememt to this layer
     </div>
     
 
@@ -930,6 +980,8 @@
 		<th>Type</th>
 		
 		
+		<th>Default</th>
+		
 		
 		<th class="last">Description</th>
 	</tr>
@@ -940,173 +992,56 @@
 	
         <tr>
             
-                <td class="name"><code>actor</code></td>
+                <td class="name"><code>element</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type"><a href="Actor.html">Actor</a></span>
+<span class="param-type"><a href="ElementCore.html">ElementCore</a></span>
 
 
             
             </td>
             
             
-            
-            <td class="description last">
+                <td class="default">
                 
                 </td>
+            
+            
+            <td class="description last">
+                
+                instance of this element</td>
         </tr>
 	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="addTerrain">
-            <a class="share-icon" href="#addTerrain"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                addTerrain
-            </span>
-            <span class="signature">(terrain)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line130">lomsRenderer.js:130</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        add terrain to stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
 	
 	
         <tr>
             
-                <td class="name"><code>terrain</code></td>
+                <td class="name"><code>index</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type"><a href="Terrain.html">Terrain</a></span>
+<span class="param-type">number</span>
 
 
             
             </td>
             
             
-            
-            <td class="description last">
+                <td class="default">
+                
+                    0
                 
                 </td>
+            
+            
+            <td class="description last">
+                
+                index order of this element</td>
         </tr>
 	
 	
@@ -1165,7 +1100,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="LayerAgent.html">LayerAgent</a>
                         
                     
             </td>
@@ -1184,12 +1119,12 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="addUI">
-            <a class="share-icon" href="#addUI"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="moveLayerTo">
+            <a class="share-icon" href="#moveLayerTo"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                addUI
+                moveLayerTo
             </span>
-            <span class="signature">(ui)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">(layerTo)</span><span class="type-signature"><a href="LayerAgent.html">LayerAgent</a></span>
             
             
             
@@ -1198,7 +1133,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line141">lomsRenderer.js:141</a>
+            <a href="render_layerAgent.js.html#line90">layerAgent.js:90</a>
         </div>
         
     </div>
@@ -1209,7 +1144,7 @@
     
     
     <div class="description">
-        add ui to stage
+        move layer
     </div>
     
 
@@ -1240,13 +1175,13 @@
 	
         <tr>
             
-                <td class="name"><code>ui</code></td>
+                <td class="name"><code>layerTo</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type"><a href="UIText.html">UIText</a></span>
+<span class="param-type">Array</span>
 
 
             
@@ -1256,7 +1191,7 @@
             
             <td class="description last">
                 
-                </td>
+                layer movement information</td>
         </tr>
 	
 	
@@ -1315,7 +1250,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="LayerAgent.html">LayerAgent</a>
                         
                     
             </td>
@@ -1334,12 +1269,12 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="clearStage">
-            <a class="share-icon" href="#clearStage"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="removeElement">
+            <a class="share-icon" href="#removeElement"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                clearStage
+                removeElement
             </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
+            <span class="signature">(element, option)</span><span class="type-signature"><a href="LayerAgent.html">LayerAgent</a></span>
             
             
             
@@ -1348,7 +1283,7 @@
     
         
         <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line175">lomsRenderer.js:175</a>
+            <a href="render_layerAgent.js.html#line78">layerAgent.js:78</a>
         </div>
         
     </div>
@@ -1359,441 +1294,7 @@
     
     
     <div class="description">
-        clear ui and actor in current stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="getController">
-            <a class="share-icon" href="#getController"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                getController
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="Controller.html">Controller</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line121">lomsRenderer.js:121</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        get controller instance
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="Controller.html">Controller</a>
-                        
-                    
-            </td>
-            <td class="description last">class for gamer input control</td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="initAssetLoader">
-            <a class="share-icon" href="#initAssetLoader"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                initAssetLoader
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line58">lomsRenderer.js:58</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        init asset loader for loading asset files
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-todo">TODO</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>show progress information</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="initRenderer">
-            <a class="share-icon" href="#initRenderer"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                initRenderer
-            </span>
-            <span class="signature">()</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line28">lomsRenderer.js:28</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        init renderer and stage
-    </div>
-    
-
-    
-    
-    
-    
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-todo">TODO</dt>
-    <dd class="tag-todo">
-        <ul>
-            <li>left mouse click feature</li>
-        </ul>
-    </dd>
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
-        <h4 class="name" id="renderScene">
-            <a class="share-icon" href="#renderScene"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                renderScene
-            </span>
-            <span class="signature">(scene)</span><span class="type-signature"><a href="LOMSRenderer.html">LOMSRenderer</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-        <div class="tag-source">
-            <a href="render_lomsRenderer.js.html#line110">lomsRenderer.js:110</a>
-        </div>
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        switch to next scene
+        remove element from this layer
     </div>
     
 
@@ -1824,13 +1325,13 @@
 	
         <tr>
             
-                <td class="name"><code>scene</code></td>
+                <td class="name"><code>element</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type"><a href="Scene.html">Scene</a></span>
+<span class="param-type"><a href="ElementCore.html">ElementCore</a></span>
 
 
             
@@ -1840,7 +1341,30 @@
             
             <td class="description last">
                 
-                class for every scene which renderer could render</td>
+                element instance</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>option</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                dispose all the resource that relate to the element</td>
         </tr>
 	
 	
@@ -1899,7 +1423,7 @@
             
             <td class="type">
             
-                        <a href="LOMSRenderer.html">LOMSRenderer</a>
+                        <a href="LayerAgent.html">LayerAgent</a>
                         
                     
             </td>
@@ -1909,6 +1433,255 @@
     </tbody>
 </table>
 
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="removeElementsByIndex">
+            <a class="share-icon" href="#removeElementsByIndex"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                removeElementsByIndex
+            </span>
+            <span class="signature">(index, option)</span><span class="type-signature"><a href="LayerAgent.html">LayerAgent</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_layerAgent.js.html#line118">layerAgent.js:118</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        remove elements by index
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                index which element should be removed</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>option</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                dispose all the resource that relate to the element</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="LayerAgent.html">LayerAgent</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="updateDepthRenderOrder">
+            <a class="share-icon" href="#updateDepthRenderOrder"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                updateDepthRenderOrder
+            </span>
+            <span class="signature">()</span>
+            
+            
+            
+            
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="render_layerAgent.js.html#line44">layerAgent.js:44</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        algorithm for sorting element in children array to render currente.g. building that could block character in front
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
     
     
     
