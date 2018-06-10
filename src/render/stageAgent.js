@@ -40,7 +40,7 @@ class StageAgent {
 	}
 
 	_initLayerAgent() {
-		this._layerAgent = new LayerAgent({container: this._renderer.stage});
+		this._layerAgent = new LayerAgent({container: this._renderer.stage, stage: this});
 		this._layerAgent.addElement(this._controller.getMouseInstance(), this.MOUSE_LAYER_INDEX);
 		return this;
 	}
@@ -55,7 +55,7 @@ class StageAgent {
 				layerY: e.data.originalEvent.layerY,
 			});
 		};
-		
+
 		this._renderer.stage.mouseup = (e) => {
 			this._controller.onMouseUp({
 				layerX: e.data.originalEvent.layerX,
@@ -91,6 +91,10 @@ class StageAgent {
 		});
 		
 		return this;
+	}
+
+	onClickEventTrigger(e){
+		this._controller.onMouseClick(e);
 	}
 
 	/**

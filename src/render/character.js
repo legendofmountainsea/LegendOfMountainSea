@@ -63,7 +63,7 @@ class Character extends Actor {
 
 	moveToHexagon(hexagon){
 		this._destinationHexagon = hexagon;
-		this.moveTo(hexagon.getPosition());
+		this.moveTo(hexagon.toGlobalPosition());
 	}
 	
 	getDestination() {
@@ -87,7 +87,7 @@ class Character extends Actor {
 			return;
 		}
 
-		this._destination = this.getDestinationHexagon().getPosition();
+		this._destination = this.getDestinationHexagon().toGlobalPosition();
 	}
 	
 	updatePosition(delta) {

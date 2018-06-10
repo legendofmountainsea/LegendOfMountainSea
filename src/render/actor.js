@@ -16,14 +16,14 @@ class Actor extends ElementCore{
 		this._onClick = props.onClick ? props.onClick : null;
 		this._assetData = props.assetData;
 	}
-	
+
 	DIRECTION_RIGHT = 1;
 	DIRECTION_LEFT = -1;
-	
+
 	getRenderObject() {
 		return this._sprite;
 	}
-	
+
 	setTransform(transform){
 		if(this._sprite){
 			this._sprite.x += transform.x;
@@ -31,45 +31,53 @@ class Actor extends ElementCore{
 		}
 		return this;
 	}
-	
+
 	setPosition(position) {
 		this._position = position;
 		if (this._sprite) {
 			this._sprite.x = position.x;
 			this._sprite.y = position.y;
 		}
-		
+
 		return this;
 	}
-	
+
 	getPosition(){
 		return this._position? this._position : this._initPosition;
 	}
-	
+
+	toGlobalPosition(){
+		const worldTransformX = this._sprite.worldTransform.tx,
+			worldTransformY = this._sprite.worldTransform.ty;
+
+		return new PIXI.Point(worldTransformX, worldTransformY);
+	}
+
 	bindRender(onRender) {
 		this._onRender = onRender;
 		return this;
 	}
-	
+
 	render(delta) {
 		this.tick(delta);
 		this.onRender(delta);
 	}
-	
+
 	onRender(delta) {
 		if (this._sprite) {
 			this._onRender(this._sprite, delta);
 		}
 	}
-	
+
 	tick(delta) {
 	}
-	
+
 	dispose(option = false){
+		super.dispose(option);
 		const disposeChildren = option;
 		this._sprite.destroy({children: disposeChildren, texture: disposeChildren, baseTexture: disposeChildren});
 		this._sprite = null;
-		
+
 		this._initPosition = null;
 		this._onRender = null;
 		this._onClick = null;

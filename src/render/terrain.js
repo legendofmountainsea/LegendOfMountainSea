@@ -38,7 +38,7 @@ class Terrain extends ElementCore {
 	 */
 	_initLayerAgent() {
 		this._container = new PIXI.Container();
-		this._layerAgent = new LayerAgent({container: this._container});
+		this._layerAgent = new LayerAgent({container: this._container, stage: this._stage});
 		
 		return this;
 	}

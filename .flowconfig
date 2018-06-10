@@ -1,0 +1,11 @@
+[ignore]
+<PROJECT_ROOT>/node_modules/.*
+[include]
+
+[libs]
+./flow/
+[lints]
+
+[options]
+
+[strict]

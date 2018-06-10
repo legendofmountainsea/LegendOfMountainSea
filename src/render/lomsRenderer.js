@@ -162,6 +162,7 @@ class LOMSRenderer {
 	 * @private
 	 */
 	_addElementToStage(element){
+		element.setStage(this._stageAgent);
 		if (!element.isNoAsset()) {
 			element.initResources(this._resources);
 		}

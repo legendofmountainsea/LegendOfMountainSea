@@ -28,6 +28,10 @@ class Pawn {
 		const {layerX, layerY} = e;
 		this._character.moveTo({x: layerX, y: layerY});
 	}
+
+	onMouseClick(hexagon) {
+		this._character.moveToHexagon(hexagon);
+	}
 	
 	onPressKeyA(e) {
 		this._character.playAttack();
