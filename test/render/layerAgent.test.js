@@ -5,7 +5,7 @@ describe('LayerAgent', () => {
 	let layerAgent;
 	
 	beforeEach(() => {
-		layerAgent = new LayerAgent({stage: null});
+		layerAgent = new LayerAgent();
 	});
 	
 	afterEach(() => {

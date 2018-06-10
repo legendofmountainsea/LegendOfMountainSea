@@ -9,10 +9,12 @@ class LayerAgent {
 	 * create a layer agent
 	 * @param props {Object}
 	 * @param props.container {Object} pixijs container class
+	 * @param props.stage {StageAgent} StageAgent instance
 	 */
 	constructor(props) {
 		props = props || {};
 		this._container = props.container;
+		this._stage = props.stage;
 		this._layer = {};
 	}
 
@@ -24,7 +26,7 @@ class LayerAgent {
 	 */
 	addElement(element, index = 0) {
 		
-		element.setID(uuid()).setIndex(index);
+		element.setID(uuid()).setIndex(index).setStage(this._stage);
 		
 		const result = this._getTopElementInLayer(index);
 		

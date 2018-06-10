@@ -1,29 +1,38 @@
+//@flow
+
+type ControllerProps = {
+	mouse: Object;
+}
+
 /**
  * class for gamer input control
  */
 class Controller {
+
+	_mouse: Object;
+	_pawn: Object | null;
+
 	/**
 	 * create player input controller
-	 * @todo create warning if props object does not contain mouse instance
 	 * @param props {object}
 	 */
-	constructor(props) {
-		props = props || {};
-		this._mouse = props.mouse ? props.mouse : null;
+	constructor(props: ControllerProps) {
+		this._mouse = props.mouse;
 		this._pawn = null;
 		this._bindKeyboardEvent();
 	}
-	
-	_bindKeyboardEvent() {
+
+	_bindKeyboardEvent(): Controller {
 		document.addEventListener('keyup', this._onKeyDown.bind(this), false);
+		return this;
 	}
-	
-	_onKeyDown(event) {
+
+	_onKeyDown(event: KeyboardEvent): void {
 		if (!this._pawn) {
 			return;
 		}
 		const keyName = event.key;
-		
+
 		switch (keyName) {
 			case 'a':
 			case 'A':
@@ -45,7 +54,7 @@ class Controller {
 				break;
 		}
 	}
-	
+
 	/**
 	 * get mouse instance
 	 * @returns {Mouse}
@@ -53,85 +62,102 @@ class Controller {
 	getMouseInstance() {
 		return this._mouse;
 	}
-	
-	bindMouseOnRightEdge(onRightEdge) {
+
+	bindMouseOnRightEdge(onRightEdge: any => any): Controller {
 		this._mouse.bindOnRightEdge(onRightEdge);
+
 		return this;
 	}
-	
-	bindMouseOnLeftEdge(onLeftEdge) {
+
+	bindMouseOnLeftEdge(onLeftEdge: any => any): Controller {
 		this._mouse.bindOnLeftEdge(onLeftEdge);
+
 		return this;
 	}
-	
-	bindMouseOnTopEdge(onTopEdge) {
+
+	bindMouseOnTopEdge(onTopEdge: any => any): Controller {
 		this._mouse.bindOnTopEdge(onTopEdge);
+
 		return this;
 	}
-	
-	bindMouseOnBottomEdge(onBottomEdge) {
+
+	bindMouseOnBottomEdge(onBottomEdge: any => any): Controller {
 		this._mouse.bindOnBottomEdge(onBottomEdge);
+
 		return this;
 	}
-	
-	bindOnMouseDrag(onMouseMove) {
+
+	bindOnMouseDrag(onMouseMove: any => any): Controller {
 		this._mouse.bindOnMouseDrag(onMouseMove);
+
 		return this;
 	}
-	
-	setMousePosition(position) {
+
+	setMousePosition(position: Object): Controller {
 		this._mouse.showAtPosition(position);
+
+		return this;
 	}
-	
-	setMouseOutEdge(isOut) {
+
+	setMouseOutEdge(isOut: boolean): Controller {
 		this._mouse.setOut(isOut);
 		this._mouse.setMouseDown(false);
+
+		return this;
 	}
-	
-	onMouseUp(e){
-		if(this._mouse.isOut()){
+
+
+	onMouseUp(e: KeyboardEvent) {
+		if (this._mouse.isOut()) {
 			return;
 		}
-		
+
 		this._mouse.onMouseUp(e);
 	}
-	
+
 	/**
 	 * when mouse button is down, this function will be trigger
 	 * @param e {event} mouse event object
 	 */
-	onMouseDown(e) {
-		if(this._mouse.isOut()){
+	onMouseDown(e: KeyboardEvent) {
+		if (this._mouse.isOut()) {
 			return;
 		}
-		
+
 		this._mouse.onMouseDown(e);
-		
+	}
+
+	onMouseClick(e: Object) {
+		if (this._mouse.isOut()) {
+			return;
+		}
+
 		if (!this._pawn) {
 			return;
 		}
-		this._pawn.onMouseDown(e);
+		this._pawn.onMouseClick(e);
 	}
-	
-	onMouseMove(position) {
-		if(this._mouse.isOut()){
+
+	onMouseMove(position: Object) {
+		if (this._mouse.isOut()) {
 			return;
 		}
-		
-		if(this._mouse.isDown()){
+
+		if (this._mouse.isDown()) {
 			this._mouse.onMouseDrag(position);
 		}
 		else {
 			this._mouse.showAtPosition(position);
 		}
 	}
-	
+
 	/**
 	 * possess a pawn to control
 	 * @param pawn {Pawn}
 	 */
-	possess(pawn) {
+	possess(pawn: Object): Controller {
 		this._pawn = pawn;
+		return this;
 	}
 }
 

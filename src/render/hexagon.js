@@ -22,7 +22,7 @@ class Hexagon extends Pattern {
 		
 		this._sprite.interactive = true;
 		this._sprite.mouseup = (e) => {
-
+			this._stage.onClickEventTrigger(this);
 		};
 		
 		return this;

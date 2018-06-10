@@ -138,9 +138,11 @@ class ElementCore {
 	/**
 	 * dispose element on the map or in memory
 	 * @param option {boolean} remove from memory or not
-	 * @abstract
 	 */
 	dispose(option){
+		this._ID = null;
+		this._stage = null;
+		this._noAsset = null;
 	}
 }
 
