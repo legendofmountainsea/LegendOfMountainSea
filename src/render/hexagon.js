@@ -1,6 +1,7 @@
 import Pattern from './pattern';
 
-export const COS_60_DEGREES = Math.cos(Math.PI / 6);
+export const COS_30_DEGREES = Math.cos(Math.PI / 6);
+export const TAN_30_DEGREES = Math.tan(Math.PI / 6);
 
 /**
  * class for rendering a hexagon grid on terrain
@@ -16,48 +17,60 @@ class Hexagon extends Pattern {
 		this._positionOnTerrain = null;
 		this._data = props.data ? props.data : {};
 	}
-	
+
 	initResources(resources) {
 		super.initResources(resources);
-		
+
 		this._sprite.interactive = true;
 		this._sprite.mouseup = (e) => {
 			this._stage.onClickEventTrigger(this);
 		};
-		
+
 		return this;
 	}
-	
+
 	setData(data) {
 		this._data = data;
 		return this;
 	}
-	
+
 	getName() {
 		return this._assetData.DATA.NAME;
 	}
-	
+
 	setDimensions(dimensions) {
 		const {height, width} = dimensions;
 		this._height = height;
 		this._width = width;
+
+		let topLeftPolygonX = TAN_30_DEGREES * this._height * 0.5;
+
+		this._sprite.hitArea = new PIXI.Polygon([
+			topLeftPolygonX, 0,
+			this._width - topLeftPolygonX, 0,
+			this._width, this._height * 0.5,
+			this._width - topLeftPolygonX, this._height,
+			topLeftPolygonX, this._height,
+			0, this._height * 0.5,
+		]);
+
 		return this;
 	}
-	
+
 	onRender(delta) {
 		if (this._sprite) {
 			this._onRender(this._sprite, delta);
 		}
 		return this;
 	}
-	
+
 	setPositionOnTerrain(position) {
 		this._positionOnTerrain = position;
 		this.adjustRenderPosition(position);
-		
+
 		return this;
 	}
-	
+
 	/**
 	 * found right render position for the center of hexagon
 	 * @param position {Coordinates}
@@ -65,20 +78,20 @@ class Hexagon extends Pattern {
 	 */
 	adjustRenderPosition(position) {
 		this.setPosition({
-			x: (this._width / 2) + position.x * (this._height * COS_60_DEGREES ),
+			x: (this._width / 2) + position.x * (this._height * COS_30_DEGREES ),
 			y: position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2),
 		});
-		
+
 		return this;
 	}
-	
+
 	getPositionOnTerrain() {
 		return this._positionOnTerrain;
 	}
-	
+
 	tick(delta) {
 	}
-	
+
 	dispose(option) {
 		super.dispose(option);
 		this._positionOnTerrain = null;
