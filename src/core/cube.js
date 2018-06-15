@@ -21,7 +21,7 @@ class Cube {
 	 * @returns {Coordinates}
 	 */
 	convertToGridCoordinates(){
-		let row = this.z + (this.x - (this.x&1)) / 2;
+		let row = this.z + (this.x - (this.x & 1)) / 2;
 		return new Coordinates(this.x, row);
 	}
 }

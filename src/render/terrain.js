@@ -1,5 +1,6 @@
+import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
 import ElementCore from './elementCore';
-import Hexagon, {COS_60_DEGREES} from './hexagon';
+import Hexagon, {COS_30_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
 import Coordinates from '../core/coordinates';
@@ -189,17 +190,17 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 */
 	renderHexagonRegion(topLeft) {
-		const terrainResource = this._resources[this._assetData.DATA.NAME];
+		const terrainResource = this._resources[S_worldTerrainAsset.HEXAGON.DATA.NAME];
 		const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
 		const {height, width} = terrainResource.texture;
 		const winDimension = Window.getDimension();
 		
-		const topLeftX = -parseInt(topLeft.x / (height * COS_60_DEGREES)),
+		const topLeftX = -parseInt(topLeft.x / (height * COS_30_DEGREES)),
 			topLeftY = -parseInt(topLeft.y / height);
 		
 		const numberOfHexagonOnX = parseInt((winDimension.width / width) * this.PRE_RENDER_SCALE),
 			numberOfHexagonOnY = parseInt((winDimension.height / height) * this.PRE_RENDER_SCALE),
-			renderStartingPointX = -parseInt(renderStartingCoordinates.x / (height * COS_60_DEGREES)),
+			renderStartingPointX = -parseInt(renderStartingCoordinates.x / (height * COS_30_DEGREES)),
 			renderStartingPointY = -parseInt(renderStartingCoordinates.y / height);
 		
 		this._renderPointOnTerrain = [];
