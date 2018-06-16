@@ -4,6 +4,8 @@ export const COS_30_DEGREES = Math.cos(Math.PI / 6);
 
 /**
  * class for rendering a hexagon grid on terrain
+ * @param props {Object}
+ * @param props.terrain {Terrain}
  * @extends Pattern
  */
 class Hexagon extends Pattern {
@@ -37,6 +39,14 @@ class Hexagon extends Pattern {
 		return this._assetData.DATA.NAME;
 	}
 
+	/**
+	 * set hexagon dimensions info to tell render how to render correct position on terrain,
+	 * then set a hit area to avoid hit zone overlap
+	 * @param dimensions {Object}
+	 * @param dimensions.height {number}
+	 * @param dimensions.width {number}
+	 * @returns {Hexagon}
+	 */
 	setDimensions(dimensions) {
 		const {height, width} = dimensions;
 		this._height = height;
@@ -55,6 +65,11 @@ class Hexagon extends Pattern {
 		return this;
 	}
 
+	/**
+	 * set position on terrain with a grid position system
+	 * @param position {Coordinates} a grid position coordinates which x & y always is integer
+	 * @returns {Hexagon}
+	 */
 	setPositionOnTerrain(position) {
 		this._positionOnTerrain = position;
 		this.adjustRenderPosition(position);
@@ -76,6 +91,10 @@ class Hexagon extends Pattern {
 		return this;
 	}
 
+	/**
+	 * get hexagon position on terrain grid system
+	 * @returns {null|*}
+	 */
 	getPositionOnTerrain() {
 		return this._positionOnTerrain;
 	}
