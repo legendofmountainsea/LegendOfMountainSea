@@ -1,7 +1,6 @@
 import Pattern from './pattern';
 
 export const COS_30_DEGREES = Math.cos(Math.PI / 6);
-export const TAN_30_DEGREES = Math.tan(Math.PI / 6);
 
 /**
  * class for rendering a hexagon grid on terrain
@@ -43,16 +42,7 @@ class Hexagon extends Pattern {
 		this._height = height;
 		this._width = width;
 
-		let topLeftPolygonX = TAN_30_DEGREES * this._height * 0.5;
-
-		this._sprite.hitArea = new PIXI.Polygon([
-			topLeftPolygonX, 0,
-			this._width - topLeftPolygonX, 0,
-			this._width, this._height * 0.5,
-			this._width - topLeftPolygonX, this._height,
-			topLeftPolygonX, this._height,
-			0, this._height * 0.5,
-		]);
+		this._sprite.hitArea = new PIXI.Circle(0, 0, this._height * 0.5);
 
 		return this;
 	}
