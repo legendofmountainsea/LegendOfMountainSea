@@ -1,7 +1,7 @@
 import expect from 'expect.js';
 import Hexagon from '../../src/render/hexagon';
 
-const COS_60_DEGREES = Math.cos(Math.PI / 6);
+const COS_30_DEGREES = Math.cos(Math.PI / 6);
 describe('Hexagon', () => {
 	let hexagon,
 		height = 70,
@@ -25,7 +25,7 @@ describe('Hexagon', () => {
 			y: 1,
 		});
 		
-		expect(hexagon.getPosition().x).to.be((width / 2) + (height * COS_60_DEGREES ));
+		expect(hexagon.getPosition().x).to.be((width / 2) + (height * COS_30_DEGREES ));
 		expect(hexagon.getPosition().y).to.be(height + (height / 2) * (1 + 1 % 2));
 	});
 	

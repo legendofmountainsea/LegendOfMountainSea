@@ -42,8 +42,9 @@ class Hexagon extends Pattern {
 		this._height = height;
 		this._width = width;
 
-		this._sprite.hitArea = new PIXI.Circle(0, 0, this._height * 0.5);
-
+		if (this._sprite) {
+			this._sprite.hitArea = new PIXI.Circle(0, 0, this._height * 0.5);
+		}
 		return this;
 	}
 
