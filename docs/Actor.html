@@ -19,7 +19,7 @@
     
     
     <script>
-    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{"outputSourceFiles":true}};
+    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{}};
     </script>
     
 
@@ -65,6 +65,8 @@
                 <li class="  " data-name="Actor#getPosition"><a href="Actor.html#getPosition">getPosition</a></li>
             
                 <li class="  " data-name="Actor#getRenderObject"><a href="Actor.html#getRenderObject">getRenderObject</a></li>
+            
+                <li class="  " data-name="Actor#getStage"><a href="Actor.html#getStage">getStage</a></li>
             
                 <li class="  " data-name="Actor#initResources"><a href="Actor.html#initResources">initResources</a></li>
             
@@ -117,6 +119,8 @@
                 <li class="  " data-name="Character#getPosition"><a href="Character.html#getPosition">getPosition</a></li>
             
                 <li class="  " data-name="Character#getRenderObject"><a href="Character.html#getRenderObject">getRenderObject</a></li>
+            
+                <li class="  " data-name="Character#getStage"><a href="Character.html#getStage">getStage</a></li>
             
                 <li class="  " data-name="Character#initResources"><a href="Character.html#initResources">initResources</a></li>
             
@@ -252,6 +256,8 @@
             
                 <li class="parent  " data-name="ElementCore#getRenderObject"><a href="ElementCore.html#getRenderObject">getRenderObject</a></li>
             
+                <li class="parent  " data-name="ElementCore#getStage"><a href="ElementCore.html#getStage">getStage</a></li>
+            
                 <li class="parent  " data-name="ElementCore#initResources"><a href="ElementCore.html#initResources">initResources</a></li>
             
                 <li class="parent  " data-name="ElementCore#isNoAsset"><a href="ElementCore.html#isNoAsset">isNoAsset</a></li>
@@ -317,6 +323,12 @@
             <span class="subtitle">Methods</span>
             
                 <li class="parent  " data-name="Hexagon#adjustRenderPosition"><a href="Hexagon.html#adjustRenderPosition">adjustRenderPosition</a></li>
+            
+                <li class="parent  " data-name="Hexagon#getPositionOnTerrain"><a href="Hexagon.html#getPositionOnTerrain">getPositionOnTerrain</a></li>
+            
+                <li class="parent  " data-name="Hexagon#setDimensions"><a href="Hexagon.html#setDimensions">setDimensions</a></li>
+            
+                <li class="parent  " data-name="Hexagon#setPositionOnTerrain"><a href="Hexagon.html#setPositionOnTerrain">setPositionOnTerrain</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -447,6 +459,8 @@
                 <li class="  " data-name="Pattern#getPosition"><a href="Pattern.html#getPosition">getPosition</a></li>
             
                 <li class="  " data-name="Pattern#getRenderObject"><a href="Pattern.html#getRenderObject">getRenderObject</a></li>
+            
+                <li class="  " data-name="Pattern#getStage"><a href="Pattern.html#getStage">getStage</a></li>
             
                 <li class="  " data-name="Pattern#initResources"><a href="Pattern.html#initResources">initResources</a></li>
             
@@ -588,6 +602,8 @@
             
                 <li class="  " data-name="Terrain#getRenderObject"><a href="Terrain.html#getRenderObject">getRenderObject</a></li>
             
+                <li class="  " data-name="Terrain#getStage"><a href="Terrain.html#getStage">getStage</a></li>
+            
                 <li class="parent  " data-name="Terrain#hexagonRenderRecycle"><a href="Terrain.html#hexagonRenderRecycle">hexagonRenderRecycle</a></li>
             
                 <li class="  " data-name="Terrain#initResources"><a href="Terrain.html#initResources">initResources</a></li>
@@ -698,6 +714,8 @@
             
                 <li class="  " data-name="UIText#getRenderObject"><a href="UIText.html#getRenderObject">getRenderObject</a></li>
             
+                <li class="  " data-name="UIText#getStage"><a href="UIText.html#getStage">getStage</a></li>
+            
                 <li class="  " data-name="UIText#initResources"><a href="UIText.html#initResources">initResources</a></li>
             
                 <li class="  " data-name="UIText#isNoAsset"><a href="UIText.html#isNoAsset">isNoAsset</a></li>
@@ -762,10 +780,6 @@
             
         </h4>
     
-        
-        <div class="tag-source">
-            <a href="render_actor.js.html#line7">actor.js:7</a>
-        </div>
         
     </div>
 
@@ -853,7 +867,7 @@
             </span>
             <span class="signature">(option)</span>
             
-            <span class="access-signature">abstract</span>
+            
             
                 <span class="access-signature inherited"><a href="ElementCore.html#dispose">inherited</a></span>
             
@@ -862,10 +876,6 @@
             
         </h4>
     
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line134">elementCore.js:134</a>
-        </div>
         
     </div>
 
@@ -986,10 +996,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line68">elementCore.js:68</a>
-        </div>
-        
     </div>
 
     
@@ -1096,10 +1102,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line76">elementCore.js:76</a>
-        </div>
-        
     </div>
 
     
@@ -1204,10 +1206,6 @@
             
         </h4>
     
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line101">elementCore.js:101</a>
-        </div>
         
     </div>
 
@@ -1314,10 +1312,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line93">elementCore.js:93</a>
-        </div>
-        
     </div>
 
     
@@ -1406,6 +1400,157 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="getStage">
+            <a class="share-icon" href="#getStage"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getStage
+            </span>
+            <span class="signature">(stage)</span><span class="type-signature">null | *</span>
+            
+            
+            
+                <span class="access-signature inherited"><a href="ElementCore.html#getStage">inherited</a></span>
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get stage instance
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>stage</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="StageAgent.html">StageAgent</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                a StageAgent instance</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        null
+                         | 
+                    
+                        *
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="initResources">
             <a class="share-icon" href="#initResources"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
@@ -1420,10 +1565,6 @@
             
         </h4>
     
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line23">elementCore.js:23</a>
-        </div>
         
     </div>
 
@@ -1544,10 +1685,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line30">elementCore.js:30</a>
-        </div>
-        
     </div>
 
     
@@ -1652,10 +1789,6 @@
             
         </h4>
     
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line125">elementCore.js:125</a>
-        </div>
         
     </div>
 
@@ -1778,10 +1911,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line117">elementCore.js:117</a>
-        </div>
-        
     </div>
 
     
@@ -1900,10 +2029,6 @@
             
         </h4>
     
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line39">elementCore.js:39</a>
-        </div>
         
     </div>
 
@@ -2053,10 +2178,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line59">elementCore.js:59</a>
-        </div>
-        
     </div>
 
     
@@ -2199,10 +2320,6 @@
             
         </h4>
     
-        
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line49">elementCore.js:49</a>
-        </div>
         
     </div>
 
@@ -2354,10 +2471,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line85">elementCore.js:85</a>
-        </div>
-        
     </div>
 
     
@@ -2479,10 +2592,6 @@
         </h4>
     
         
-        <div class="tag-source">
-            <a href="render_elementCore.js.html#line109">elementCore.js:109</a>
-        </div>
-        
     </div>
 
     
@@ -2603,7 +2712,7 @@
 
         <footer class="content-size">
             <div class="footer">
-                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 09 2018 16:04:38 GMT+0200 (西欧夏令时)
+                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jun 16 2018 17:14:09 GMT+0200 (西欧夏令时)
             </div>
         </footer>
     </div>
