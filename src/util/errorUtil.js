@@ -31,45 +31,11 @@ export class DevConsole {
 
 			EXECUTE_IN_CLIENT(() => {
 				console.warn = (warn) => {
-
-					if (typeof error === 'object') {
-						const warnJson = this.destroyCircular(warn);
-						const warnTemplate = `error: ${warnJson.name} <br/>
-				info: ${warnJson.message} <br/>
-				stack: ${warnJson.stack.replace(/\n/gi, '<br/>')}`;
-						consoleWarning(warnTemplate);
-						return;
-					}
-
-					// People sometimes throw things besides Error objects, so…
-					if (typeof error === 'function') {
-						// JSON.stringify discards functions. We do too, unless a function is thrown directly.
-						consoleWarning(`[Function: ${(warn.name || 'anonymous')}]`);
-						return;
-					}
-
-					consoleWarning(warn);
+					this.parseMessage(warn, consoleWarning);
 				};
 
 				console.error = (error) => {
-
-					if (typeof error === 'object') {
-						const errorJson = this.destroyCircular(error);
-						const errorTemplate = `error: ${errorJson.name} <br/>
-				info: ${errorJson.message} <br/>
-				stack: ${errorJson.stack.replace(/\n/gi, '<br/>')}`;
-						consoleAlert(errorTemplate);
-						return;
-					}
-
-					// People sometimes throw things besides Error objects, so…
-					if (typeof error === 'function') {
-						// JSON.stringify discards functions. We do too, unless a function is thrown directly.
-						consoleAlert(`[Function: ${(error.name || 'anonymous')}]`);
-						return;
-					}
-
-					consoleAlert(error);
+					this.parseMessage(error, consoleAlert);
 				};
 
 				global.window.console = console;
@@ -84,19 +50,44 @@ export class DevConsole {
 		}
 	}
 
-	destroyCircular(errorObject) {
-		const jsonObject = Array.isArray(errorObject) ? [] : {};
+	parseMessage(message, popupMessageCallback) {
 
-		if (typeof errorObject.name === 'string') {
-			jsonObject.name = errorObject.name;
+		if (typeof message === 'object') {
+			const messageJson = this.destroyCircular(message);
+
+			const messageType = `Type: ${messageJson.name} <br/>`;
+			const messageInfo = `info: ${messageJson.message} <br/>`;
+			const messageDetail = `stack: ${messageJson.stack.replace(/\\n/gi, '<br/>')}`;
+
+			const messageTemplate = messageType + messageInfo + messageDetail;
+
+			popupMessageCallback(messageTemplate);
+			return;
 		}
 
-		if (typeof errorObject.message === 'string') {
-			jsonObject.message = errorObject.message;
+		// People sometimes throw things besides Error objects, so…
+		if (typeof message === 'function') {
+			// JSON.stringify discards functions. We do too, unless a function is thrown directly.
+			popupMessageCallback(`[Function: ${(message.name || 'anonymous')}]`);
+			return;
 		}
 
-		if (typeof errorObject.stack === 'string') {
-			jsonObject.stack = errorObject.stack;
+		popupMessageCallback(message);
+	}
+
+	destroyCircular(messageObject) {
+		const jsonObject = Array.isArray(messageObject) ? [] : {};
+
+		if (typeof messageObject.name === 'string') {
+			jsonObject.name = messageObject.name;
+		}
+
+		if (typeof messageObject.message === 'string') {
+			jsonObject.message = messageObject.message;
+		}
+
+		if (typeof messageObject.stack === 'string') {
+			jsonObject.stack = messageObject.stack;
 		}
 
 		return jsonObject;
