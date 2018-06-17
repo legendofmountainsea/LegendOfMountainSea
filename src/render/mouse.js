@@ -60,8 +60,8 @@ class Mouse extends ElementCore {
 	
 	onMouseDrag(position) {
 		const delta = {
-			deltaX: this._sprite.x - position.x,
-			deltaY: this._sprite.y - position.y,
+			deltaX:  position.x - this._sprite.x,
+			deltaY: position.y - this._sprite.y,
 		};
 		this._onMouseDrag(delta);
 		this.showAtPosition(position);
