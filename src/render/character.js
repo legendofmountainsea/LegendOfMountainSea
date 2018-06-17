@@ -97,7 +97,7 @@ class Character extends Actor {
 
 		this.updateDestination();
 		
-		if (this.isArrivedAtDestination()) {
+		if (this._isArrivedAtDestination()) {
 			if (this._animationStatus === 'WALK') {
 				this.playStand();
 			}
@@ -114,27 +114,19 @@ class Character extends Actor {
 	movingOnAxisXToDestination(delta) {
 		const {x} = this._sprite.position,
 			distanceX = this.getDestination().x - x;
-		
-		let deltaX = x;
-		
-		if (0 !== distanceX) {
-			
-			if (Math.abs(Math.sign(distanceX) * delta) > Math.abs(distanceX)) {
-				deltaX = x + distanceX;
-			}
-			else {
-				deltaX = x + Math.sign(distanceX) * delta;
-			}
-			
-			if (this.isMovingDirectionNeedToChange()) {
-				this._sprite.scale.x = -this._sprite.scale.x;
-			}
+
+		if(0 === distanceX){
+			return x;
 		}
-		
-		return deltaX;
+
+		if (this._isMovingDirectionNeedToChange()) {
+			this._sprite.scale.x = -this._sprite.scale.x;
+		}
+
+		return this._getAxisDelta(x,delta,distanceX);
 	}
 	
-	isMovingDirectionNeedToChange() {
+	_isMovingDirectionNeedToChange() {
 		const {x} = this._sprite.position,
 			destination = this.getDestination();
 		const distanceX = destination.x - x;
@@ -148,23 +140,29 @@ class Character extends Actor {
 	movingOnAxisYToDestination(delta) {
 		const {y} = this._sprite.position,
 			distanceY = this.getDestination().y - y;
-		
-		let deltaY = y;
-		
-		if (0 !== distanceY) {
-			
-			if (Math.abs(Math.sign(distanceY) * delta) > Math.abs(distanceY)) {
-				deltaY = y + (distanceY);
-			}
-			else {
-				deltaY = y + Math.sign(distanceY) * delta;
-			}
+
+		if(0 === distanceY){
+			return y;
 		}
-		
-		return deltaY;
+
+		return this._getAxisDelta(y,delta,distanceY);
+	}
+
+	_getAxisDelta(axisOrigin, delta, distance){
+		let axisDelta = axisOrigin,
+			singOfDistance = Math.sign(distance);
+
+		if(Math.abs(singOfDistance * delta) > Math.abs(distance)){
+			axisDelta = axisOrigin + distance;
+		}
+		else {
+			axisDelta = axisOrigin + singOfDistance * delta;
+		}
+
+		return axisDelta;
 	}
 	
-	isArrivedAtDestination() {
+	_isArrivedAtDestination() {
 		const {x, y} = this._sprite.position,
 			destination = this.getDestination();
 		
