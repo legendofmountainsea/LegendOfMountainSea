@@ -1,13 +1,21 @@
+//@flow
+
+type PawnProps = {
+	character: Object;
+}
+
 /**
  * a class for pawn in game that player could control
  */
 class Pawn {
+
+	_character: Object;
+
 	/**
 	 * create a pawn in game
 	 * @param props
 	 */
-	constructor(props) {
-		props = props || {};
+	constructor(props: PawnProps) {
 		this._character = props.character;
 	}
 	
@@ -15,37 +23,37 @@ class Pawn {
 	 * get the character instance
 	 * @returns {Character}
 	 */
-	getCharacter() {
+	getCharacter(): Object {
 		return this._character;
 	}
 	
-	onMouseDown(e) {
+	onMouseDown(e: Object) {
 		const {layerX, layerY} = e;
 		this._character.moveTo({x: layerX, y: layerY});
 	}
 	
-	onMouseUp(e) {
+	onMouseUp(e: Object) {
 		const {layerX, layerY} = e;
 		this._character.moveTo({x: layerX, y: layerY});
 	}
 
-	onMouseClick(hexagon) {
+	onMouseClick(hexagon: Object) {
 		this._character.moveToHexagon(hexagon);
 	}
 	
-	onPressKeyA(e) {
+	onPressKeyA(e: Object) {
 		this._character.playAttack();
 	}
 	
-	onPressKeyB(e) {
+	onPressKeyB(e: Object) {
 		this._character.playBattle();
 	}
 	
-	onPressKeyD(e) {
+	onPressKeyD(e: Object) {
 		this._character.playNearDeath();
 	}
 	
-	onPressKeyU(e) {
+	onPressKeyU(e: Object) {
 		this._character.playUltimate();
 	}
 }
