@@ -1,4 +1,5 @@
 //@flow
+import Pawn from './pawn';
 
 type ControllerProps = {
 	mouse: Object;
@@ -10,7 +11,7 @@ type ControllerProps = {
 class Controller {
 
 	_mouse: Object;
-	_pawn: Object | null;
+	_pawn: Pawn | null;
 
 	/**
 	 * create player input controller
@@ -135,6 +136,9 @@ class Controller {
 		if (!this._pawn) {
 			return;
 		}
+
+
+
 		this._pawn.onMouseClick(e);
 	}
 

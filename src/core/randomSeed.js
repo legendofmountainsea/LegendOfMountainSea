@@ -1,4 +1,3 @@
-//TODO: https://github.com/SkyHarp/LegendOfMountainSea/issues/21
 export default class RandomSeed {
 	constructor(props){
 		props = props || {};

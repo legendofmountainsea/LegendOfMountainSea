@@ -15,6 +15,7 @@ class Character extends Actor {
 		this._frames = {};
 		this._destinationHexagon = null;
 		this._destination = null;
+		this._navigator = null;
 		this._animationStatus = 'STAND';
 	}
 	

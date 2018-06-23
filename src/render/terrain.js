@@ -21,6 +21,7 @@ class Terrain extends ElementCore {
 		super(props);
 		this._container = null;
 		this._resources = null;
+		this._navigator = null;
 		this._isPointsOnTerrainChanged = false;
 		this._coordinates = props.coordinates ? props.coordinates : new Coordinates(0, 0);
 		this._noAsset = !props.assetData;
