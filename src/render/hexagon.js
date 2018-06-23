@@ -1,6 +1,14 @@
+//@flow
+
 import Pattern from './pattern';
+import Terrain from './terrain';
+import Coordinates from '../core/coordinates';
 
 export const COS_30_DEGREES = Math.cos(Math.PI / 6);
+
+type HexagonPropsType = {
+	terrain: Terrain,
+}
 
 /**
  * class for rendering a hexagon grid on terrain
@@ -9,17 +17,16 @@ export const COS_30_DEGREES = Math.cos(Math.PI / 6);
  * @extends Pattern
  */
 class Hexagon extends Pattern {
-	constructor(props) {
-		props = props || {};
+	constructor(props: HexagonPropsType) {
 		super(props);
 		this._height = 0;
 		this._width = 0;
 		this._terrain = props.terrain;
 		this._positionOnTerrain = null;
-		this._data = props.data ? props.data : {};
+		//this._data = props.data ? props.data : {};
 	}
 
-	initResources(resources) {
+	initResources(resources: Object) {
 		super.initResources(resources);
 
 		this._sprite.interactive = true;
@@ -30,12 +37,12 @@ class Hexagon extends Pattern {
 		return this;
 	}
 
-	setData(data) {
-		this._data = data;
-		return this;
-	}
+	// setData(data) {
+	// 	this._data = data;
+	// 	return this;
+	// }
 
-	getName() {
+	getName():string {
 		return this._assetData.DATA.NAME;
 	}
 
@@ -47,7 +54,7 @@ class Hexagon extends Pattern {
 	 * @param dimensions.width {number}
 	 * @returns {Hexagon}
 	 */
-	setDimensions(dimensions) {
+	setDimensions(dimensions: {height: number, width: number }) {
 		const {height, width} = dimensions;
 		this._height = height;
 		this._width = width;
@@ -58,7 +65,7 @@ class Hexagon extends Pattern {
 		return this;
 	}
 
-	onRender(delta) {
+	onRender(delta: number) {
 		if (this._sprite) {
 			this._onRender(this._sprite, delta);
 		}
@@ -70,7 +77,7 @@ class Hexagon extends Pattern {
 	 * @param position {Coordinates} a grid position coordinates which x & y always is integer
 	 * @returns {Hexagon}
 	 */
-	setPositionOnTerrain(position) {
+	setPositionOnTerrain(position: Coordinates) {
 		this._positionOnTerrain = position;
 		this.adjustRenderPosition(position);
 
@@ -82,7 +89,7 @@ class Hexagon extends Pattern {
 	 * @param position {Coordinates}
 	 * @returns {Hexagon}
 	 */
-	adjustRenderPosition(position) {
+	adjustRenderPosition(position: Coordinates) {
 		this.setPosition({
 			x: (this._width / 2) + position.x * (this._height * COS_30_DEGREES ),
 			y: position.y * this._height + (this._height / 2) * (1 + Math.abs(position.x) % 2),
@@ -99,10 +106,10 @@ class Hexagon extends Pattern {
 		return this._positionOnTerrain;
 	}
 
-	tick(delta) {
+	tick(delta: number) {
 	}
 
-	dispose(option) {
+	dispose(option: boolean = false) {
 		super.dispose(option);
 		this._positionOnTerrain = null;
 	}

@@ -1,4 +1,14 @@
+//@flow
+
 import Actor from './actor';
+import Coordinates from '../core/coordinates';
+import Hexagon from './hexagon';
+import type ActorPropsType from './actor';
+
+
+type CharacterPropsType = {
+	...ActorPropsType,
+}
 
 /**
  * class for render player's character
@@ -9,8 +19,7 @@ class Character extends Actor {
 	 * create a character
 	 * @param props
 	 */
-	constructor(props) {
-		props = props || {};
+	constructor(props: CharacterPropsType) {
 		super(props);
 		this._frames = {};
 		this._destinationHexagon = null;
@@ -25,7 +34,7 @@ class Character extends Actor {
 	 * @returns {Character}
 	 * @override
 	 */
-	initResources(resources) {
+	initResources(resources: Object) {
 		
 		for (let asset in this._assetData.DATA) {
 			this._frames[this._assetData.DATA[asset].NAME] = [];
@@ -45,7 +54,7 @@ class Character extends Actor {
 		return this;
 	}
 	
-	setElement(sprite) {
+	setElement(sprite: Object) {
 		this._sprite = sprite;
 	}
 	
@@ -57,21 +66,21 @@ class Character extends Actor {
 		this._sprite.play();
 	}
 	
-	moveTo(position) {
+	moveTo(position: Coordinates) {
 		this._destination = position;
 		this.playWalk();
 	}
 
-	moveToHexagon(hexagon){
+	moveToHexagon(hexagon: Hexagon){
 		this._destinationHexagon = hexagon;
 		this.moveTo(hexagon.toGlobalPosition());
 	}
 	
-	getDestination() {
+	getDestination(): Coordinates {
 		return this._destination;
 	}
 
-	getDestinationHexagon(){
+	getDestinationHexagon(): Hexagon{
 		return this._destinationHexagon;
 	}
 	
@@ -79,7 +88,7 @@ class Character extends Actor {
 		return this._sprite.scale.x;
 	}
 	
-	tick(delta) {
+	tick(delta: number) {
 		this.updatePosition(delta);
 	}
 
@@ -91,7 +100,7 @@ class Character extends Actor {
 		this._destination = this.getDestinationHexagon().toGlobalPosition();
 	}
 	
-	updatePosition(delta) {
+	updatePosition(delta: number) {
 		if (!this._sprite || !this.getDestination()) {
 			return;
 		}
@@ -108,11 +117,12 @@ class Character extends Actor {
 		
 		const deltaX = this.movingOnAxisXToDestination(delta),
 			deltaY = this.movingOnAxisYToDestination(delta);
-		
-		this.setPosition({x: deltaX, y: deltaY});
+
+
+		this.setPosition(new Coordinates(deltaX,deltaY));
 	}
 	
-	movingOnAxisXToDestination(delta) {
+	movingOnAxisXToDestination(delta: number): number {
 		const {x} = this._sprite.position,
 			distanceX = this.getDestination().x - x;
 
@@ -127,7 +137,7 @@ class Character extends Actor {
 		return this._getAxisDelta(x,delta,distanceX);
 	}
 	
-	_isMovingDirectionNeedToChange() {
+	_isMovingDirectionNeedToChange(): boolean {
 		const {x} = this._sprite.position,
 			destination = this.getDestination();
 		const distanceX = destination.x - x;
@@ -138,7 +148,7 @@ class Character extends Actor {
 	}
 	
 	
-	movingOnAxisYToDestination(delta) {
+	movingOnAxisYToDestination(delta: number): number {
 		const {y} = this._sprite.position,
 			distanceY = this.getDestination().y - y;
 
@@ -149,7 +159,7 @@ class Character extends Actor {
 		return this._getAxisDelta(y,delta,distanceY);
 	}
 
-	_getAxisDelta(axisOrigin, delta, distance){
+	_getAxisDelta(axisOrigin: number, delta: number, distance: number): number{
 		let axisDelta = axisOrigin,
 			singOfDistance = Math.sign(distance);
 
@@ -202,16 +212,16 @@ class Character extends Actor {
 		});
 	}
 	
-	setAnimationStatus(status) {
+	setAnimationStatus(status: string) {
 		this._animationStatus = status;
 		return this;
 	}
 	
-	getAnimationStatus() {
+	getAnimationStatus(): string {
 		return this._animationStatus;
 	}
 	
-	setAnimation(name, loop = true, onComplete) {
+	setAnimation(name: string, loop: boolean = true, onComplete: void => void = () => {} ) {
 		
 		if (!this._sprite || this._noAsset) {
 			return;
@@ -228,7 +238,7 @@ class Character extends Actor {
 		this._sprite.play();
 	}
 	
-	dispose(option) {
+	dispose(option: boolean = false) {
 		super.dispose(option);
 		this._frames = null;
 		this._destination = null;

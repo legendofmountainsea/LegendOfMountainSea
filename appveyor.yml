@@ -11,6 +11,8 @@ notifications:
 
 # Install scripts. (runs after repo cloning)
 install:
+  - node -v
+  - npm -v
   # install modules
   - npm install
   - npm run build-win
