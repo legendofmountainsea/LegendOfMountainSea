@@ -11,8 +11,6 @@ notifications:
 
 # Install scripts. (runs after repo cloning)
 install:
-  # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node 9.2.0 x64
   # install modules
   - npm install
   - npm run build-win
