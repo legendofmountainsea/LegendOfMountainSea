@@ -1,20 +1,28 @@
+//@flow
+
 import ElementCore from './elementCore';
+import Coordinates from '../core/coordinates';
+
+export type ActorPropsType = {
+	assetData: Object,
+	position: Coordinates,
+	onRender: number => void | null,
+	onClick: void => void | null,
+}
 
 /**
  * class for rendering interactive element in the game
  * @extends ElementCore
  */
-class Actor extends ElementCore{
-	constructor(props) {
-		props = props || {};
+class Actor extends ElementCore {
+	constructor(props: ActorPropsType) {
 		super(props);
 		this._position = null;
-		this._initPosition = props.position ? props.position : {x: 0, y: 0};
-		this._onRender = props.onRender ? props.onRender : () => {
-		};
 		this._sprite = null;
-		this._onClick = props.onClick ? props.onClick : null;
+		this._initPosition = props.position;
 		this._assetData = props.assetData;
+		this._onRender = props.onRender;
+		this._onClick = props.onClick;
 	}
 
 	DIRECTION_RIGHT = 1;
@@ -24,7 +32,7 @@ class Actor extends ElementCore{
 		return this._sprite;
 	}
 
-	setTransform(transform){
+	setTransform(transform: Coordinates): Actor{
 		if(this._sprite){
 			this._sprite.x += transform.x;
 			this._sprite.y += transform.y;
@@ -32,7 +40,7 @@ class Actor extends ElementCore{
 		return this;
 	}
 
-	setPosition(position) {
+	setPosition(position: Coordinates): Actor{
 		this._position = position;
 		if (this._sprite) {
 			this._sprite.x = position.x;
@@ -42,37 +50,37 @@ class Actor extends ElementCore{
 		return this;
 	}
 
-	getPosition(){
+	getPosition(): Coordinates{
 		return this._position? this._position : this._initPosition;
 	}
 
-	toGlobalPosition(){
+	toGlobalPosition(): Coordinates{
 		const worldTransformX = this._sprite.worldTransform.tx,
 			worldTransformY = this._sprite.worldTransform.ty;
 
-		return new PIXI.Point(worldTransformX, worldTransformY);
+		return new Coordinates(worldTransformX, worldTransformY);
 	}
 
-	bindRender(onRender) {
+	bindRender(onRender: (number) => void): Actor{
 		this._onRender = onRender;
 		return this;
 	}
 
-	render(delta) {
+	render(delta: number) {
 		this.tick(delta);
 		this.onRender(delta);
 	}
 
-	onRender(delta) {
-		if (this._sprite) {
+	onRender(delta: number) {
+		if (this._sprite && this._onRender) {
 			this._onRender(this._sprite, delta);
 		}
 	}
 
-	tick(delta) {
+	tick(delta: number) {
 	}
 
-	dispose(option = false){
+	dispose(option: boolean = false){
 		super.dispose(option);
 		const disposeChildren = option;
 		this._sprite.destroy({children: disposeChildren, texture: disposeChildren, baseTexture: disposeChildren});

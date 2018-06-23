@@ -12,6 +12,7 @@ class TerrainNavigator {
      * @param props {Object}
      */
     constructor(props: TerrainNavigatorType) {
+
     }
 }
 

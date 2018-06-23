@@ -1,3 +1,5 @@
+//@flow
+
 import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
 import ElementCore from './elementCore';
 import Hexagon, {COS_30_DEGREES} from './hexagon';
@@ -5,6 +7,11 @@ import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
 import Coordinates from '../core/coordinates';
 import Window from '../module/window';
+
+type TerrainPropsType = {
+	assetData: Object,
+	coordinates: Coordinates, //TODO set to Coordinates
+};
 
 /**
  * class for rendering terrain on the map
@@ -16,16 +23,15 @@ class Terrain extends ElementCore {
 	 * @param props {object}
 	 * @todo https://github.com/SkyHarp/LegendOfMountainSea/issues/40
 	 */
-	constructor(props) {
-		props = props || {};
+	constructor(props: TerrainPropsType) {
 		super(props);
 		this._container = null;
 		this._resources = null;
 		this._navigator = null;
 		this._isPointsOnTerrainChanged = false;
-		this._coordinates = props.coordinates ? props.coordinates : new Coordinates(0, 0);
-		this._noAsset = !props.assetData;
 		this._assetData = props.assetData;
+		this._coordinates = props.coordinates;
+		this._noAsset = !props.assetData;
 		this._hexagons = [];
 		this._renderPointOnTerrain = [];
 	}
@@ -34,28 +40,32 @@ class Terrain extends ElementCore {
 	RENDER_OUTSIDE_OF_EDGE = 3;
 
 	/**
-	 * create terrain layer to manage render elements
-	 * @returns {Terrain}
-	 * @private
-	 */
-	_initLayerAgent() {
-		this._container = new PIXI.Container();
-		this._layerAgent = new LayerAgent({container: this._container, stage: this._stage});
-
-		return this;
-	}
-
-	/**
 	 * init terrain asset resources for render
 	 * @param resources
 	 * @returns {Terrain}
 	 * @override
 	 */
-	initResources(resources) {
+	initResources(resources: Object): Terrain{
 		this._resources = resources;
 		this._initLayerAgent();
 
 		this.setTransform(new Coordinates(0, 0));
+
+		return this;
+	}
+
+	_initNavigator() {
+
+	}
+
+	/**
+	 * create terrain layer to manage render elements
+	 * @returns {Terrain}
+	 * @private
+	 */
+	_initLayerAgent(): Terrain{
+		this._container = new PIXI.Container();
+		this._layerAgent = new LayerAgent({container: this._container, stage: this._stage});
 
 		return this;
 	}
@@ -66,7 +76,7 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 * @override
 	 */
-	setTransform(transform) {
+	setTransform(transform: Coordinates): Terrain{
 
 		this._coordinates.x += transform.x;
 		this._coordinates.y += transform.y;
@@ -87,12 +97,9 @@ class Terrain extends ElementCore {
 	 * flush current terrain in memory, save render coordinates in TerrainChain for re-render
 	 * @returns {Terrain}
 	 */
-	flush() {
-		TerrainChain.updateRenderStartingCoordinates({...this._coordinates});
-		this._coordinates = {
-			x: 0,
-			y: 0,
-		};
+	flush(): Terrain{
+		TerrainChain.updateRenderStartingCoordinates({x:this._coordinates.x, y:this._coordinates.y});
+		this._coordinates = new Coordinates(0,0);
 		this._isPointsOnTerrainChanged = true;
 		return this;
 	}
@@ -102,7 +109,7 @@ class Terrain extends ElementCore {
 	 * @param hexagon {Hexagon}
 	 * @returns {Terrain}
 	 */
-	addHexagon(hexagon) {
+	addHexagon(hexagon: Hexagon): Terrain{
 		this._hexagons.push(hexagon);
 		this._layerAgent.addElement(hexagon, 0);
 		return this;
@@ -112,7 +119,7 @@ class Terrain extends ElementCore {
 	 * remove hexagon element from terrain render array
 	 * @param hexagon
 	 */
-	removeHexagon(hexagon) {
+	removeHexagon(hexagon: Hexagon) {
 		for (let index = 0; index < this._hexagons.length; ++index) {
 			if (this._hexagons[index].getID() === hexagon.getID()) {
 				this._hexagons.splice(index, 1);
@@ -137,7 +144,7 @@ class Terrain extends ElementCore {
 	 * @returns {Coordinates}
 	 * @override
 	 */
-	getPosition() {
+	getPosition(): Coordinates{
 		return new Coordinates(this._container.x, this._container.y);
 	}
 
@@ -146,7 +153,7 @@ class Terrain extends ElementCore {
 	 * @param delta {number}
 	 * @override
 	 */
-	tick(delta) {
+	tick(delta: number) {
 		if (!this._isPointsOnTerrainChanged) {
 			return;
 		}
@@ -159,7 +166,7 @@ class Terrain extends ElementCore {
 	 * @param delta
 	 * @override
 	 */
-	onRender(delta) {
+	onRender(delta: number) {
 
 	}
 
@@ -168,7 +175,7 @@ class Terrain extends ElementCore {
 	 * if hexagon is not show on the map, remove from memory
 	 * @returns {Terrain}
 	 */
-	hexagonRenderRecycle() {
+	hexagonRenderRecycle(): Terrain{
 		for (let index = 0; index < this._hexagons.length; ++index) {
 			const hexagon = this._hexagons[index];
 			let isRecyclingHexagon = true;
@@ -194,7 +201,7 @@ class Terrain extends ElementCore {
 	 * @param topLeft {Coordinates}
 	 * @returns {Terrain}
 	 */
-	renderHexagonRegion(topLeft) {
+	renderHexagonRegion(topLeft: Coordinates): Terrain{
 		const terrainResource = this._resources[S_worldTerrainAsset.HEXAGON.DATA.NAME];
 		const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
 		const {height, width} = terrainResource.texture;
@@ -251,7 +258,7 @@ class Terrain extends ElementCore {
 	 * @param delta {number}
 	 * @override
 	 */
-	render(delta) {
+	render(delta: number) {
 		this.tick(delta);
 		this.onRender(delta);
 	}
@@ -261,7 +268,7 @@ class Terrain extends ElementCore {
 	 * @param option {boolean}
 	 * @override
 	 */
-	dispose(option) {
+	dispose(option: boolean = false) {
 		this._container.destroy({children: true, texture: true, baseTexture: true});
 		this._container = null;
 	}

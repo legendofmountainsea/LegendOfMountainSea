@@ -5,6 +5,7 @@ import T_contentListContent from '../static/interface/systemModal/contentListCon
 import T_contentListContainer from '../static/interface/systemModal/contentListContainer.html';
 
 import Scene from '../scene/scene';
+import Coordinates from '../core/coordinates';
 
 import Pattern from '../render/pattern';
 import UIText from '../render/uiText';
@@ -34,7 +35,7 @@ export default class MainMenu extends Scene {
 		
 		let logo = new Pattern({
 			assetData: S_mainMenuAsset.LOGO,
-			position: {x: 200, y: 200},
+			position: new Coordinates(200, 200),
 		});
 		
 		logo.bindRender((sprite, delta) => {
@@ -43,7 +44,7 @@ export default class MainMenu extends Scene {
 		
 		let newGameText = new UIText({
 			string: languageContent ? languageContent.newGame : 'New Game',
-			position: {x: 400, y: 400},
+			position: new Coordinates(400, 400),
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
 				this.dispose();
@@ -65,7 +66,7 @@ export default class MainMenu extends Scene {
 		
 		let loadGameText = new UIText({
 			string: languageContent ? languageContent.loadGame : 'Load Game',
-			position: {x: 400, y: 450},
+			position: new Coordinates(400, 450),
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
 				const loadGameModal = T_modalTemplate({
@@ -84,7 +85,7 @@ export default class MainMenu extends Scene {
 		
 		let quitGameText = new UIText({
 			string: languageContent ? languageContent.quit : 'Quit',
-			position: {x: 400, y: 500},
+			position: new Coordinates(400, 500),
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
 				this._renderer.close();

@@ -9,6 +9,7 @@ import Pawn from '../control/pawn';
 import Character from '../render/character';
 import Pattern from '../render/pattern';
 import Terrain from '../render/terrain';
+import Coordinates from '../core/coordinates';
 
 export default class WorldScene extends Scene {
 	constructor(props) {
@@ -24,7 +25,7 @@ export default class WorldScene extends Scene {
 		
 		let systemMenuIcon = new Pattern({
 			assetData: S_gameMenuAsset.SYSTEM_ICON,
-			position: {x: 20, y: 20},
+			position: new Coordinates(20,20),
 			onClick: (e) => {
 				const systemModal = T_modalTemplate({content:'system'});
 				$('#GUIContainer').html(systemModal);
@@ -37,7 +38,7 @@ export default class WorldScene extends Scene {
 		
 		let houyi = new Character({
 			assetData: S_worldAsset.HOUYI,
-			position: {x: 100, y: 400},
+			position: new Coordinates(100,400), //TODO init at hexagon position
 		});
 		
 		const controller = this._renderer.getController();
@@ -47,6 +48,7 @@ export default class WorldScene extends Scene {
 		
 		let worldTerrain = new Terrain({
 			assetData: S_worldTerrainAsset.HEXAGON,
+			coordinates: new Coordinates(0,0),
 		});
 		this._renderer.addTerrain(worldTerrain);
 	}
