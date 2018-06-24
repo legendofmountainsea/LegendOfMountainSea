@@ -22,6 +22,12 @@ export default class WorldScene extends Scene {
 		let music = new Audio('./assets/sound/Choose_Your_Path.mp3');
 		music.loop = true;
 		music.play();
+
+		let worldTerrain = new Terrain({
+			assetData: S_worldTerrainAsset.HEXAGON,
+			coordinates: new Coordinates(0,0),
+		});
+		this._renderer.addTerrain(worldTerrain);
 		
 		let systemMenuIcon = new Pattern({
 			assetData: S_gameMenuAsset.SYSTEM_ICON,
@@ -38,18 +44,14 @@ export default class WorldScene extends Scene {
 		
 		let houyi = new Character({
 			assetData: S_worldAsset.HOUYI,
-			position: new Coordinates(100,400), //TODO init at hexagon position
+			position: new Coordinates(100,400),
 		});
+
+		houyi.setNavigator(worldTerrain.getNavigator());
 		
 		const controller = this._renderer.getController();
 		controller.possess(new Pawn({character: houyi}));
 		
 		this._renderer.addActor(houyi);
-		
-		let worldTerrain = new Terrain({
-			assetData: S_worldTerrainAsset.HEXAGON,
-			coordinates: new Coordinates(0,0),
-		});
-		this._renderer.addTerrain(worldTerrain);
 	}
 }

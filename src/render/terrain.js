@@ -1,16 +1,19 @@
 //@flow
 
 import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
+
+import Coordinates from '../core/coordinates';
+import TerrainNavigator from '../core/terrainNavigator';
+
 import ElementCore from './elementCore';
 import Hexagon, {COS_30_DEGREES} from './hexagon';
 import LayerAgent from './layerAgent';
 import TerrainChain from '../chain/terrainChain';
-import Coordinates from '../core/coordinates';
 import Window from '../module/window';
 
 type TerrainPropsType = {
 	assetData: Object,
-	coordinates: Coordinates, //TODO set to Coordinates
+	coordinates: Coordinates,
 };
 
 /**
@@ -54,8 +57,17 @@ class Terrain extends ElementCore {
 		return this;
 	}
 
-	_initNavigator() {
+	getNavigator() {
+		if(!this._navigator){
+			this._initNavigator();
+		}
 
+		return this._navigator;
+	}
+
+	_initNavigator(): Terrain{
+		this._navigator = new TerrainNavigator({terrain: this});
+		return this;
 	}
 
 	/**

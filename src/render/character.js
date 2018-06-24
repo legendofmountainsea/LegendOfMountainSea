@@ -4,6 +4,7 @@ import Actor from './actor';
 import Coordinates from '../core/coordinates';
 import Hexagon from './hexagon';
 import type ActorPropsType from './actor';
+import Navigator from "../core/navigator";
 
 
 type CharacterPropsType = {
@@ -22,6 +23,7 @@ class Character extends Actor {
 	constructor(props: CharacterPropsType) {
 		super(props);
 		this._frames = {};
+		this._navigator = null;
 		this._destinationHexagon = null;
 		this._destination = null;
 		this._navigator = null;
@@ -53,6 +55,11 @@ class Character extends Actor {
 		
 		return this;
 	}
+
+	setNavigator(navigator: Navigator){
+		this._navigator = navigator;
+		return this;
+	}
 	
 	setElement(sprite: Object) {
 		this._sprite = sprite;
@@ -74,6 +81,10 @@ class Character extends Actor {
 	moveToHexagon(hexagon: Hexagon){
 		this._destinationHexagon = hexagon;
 		this.moveTo(hexagon.toGlobalPosition());
+	}
+
+	navigateTo(hexagon: Hexagon){
+
 	}
 	
 	getDestination(): Coordinates {
