@@ -4,7 +4,7 @@ import Actor from './actor';
 import Coordinates from '../core/coordinates';
 import Hexagon from './hexagon';
 import type ActorPropsType from './actor';
-import Navigator from "../core/navigator";
+import Navigator from '../core/navigator';
 
 
 type CharacterPropsType = {

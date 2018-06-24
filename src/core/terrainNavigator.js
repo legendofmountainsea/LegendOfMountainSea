@@ -1,10 +1,10 @@
 //@flow
 
-import type NavigatorType from './navigator';
 import Navigator from './navigator';
+import Terrain from '../render/terrain';
 
-type TerrainNavigatorType = {
-	...NavigatorType,
+type TerrainNavigatorPropsType = {
+	terrain: Terrain
 };
 
 /**
@@ -16,7 +16,7 @@ class TerrainNavigator extends Navigator {
      * create a terrain navigator
      * @param props {Object}
      */
-    constructor(props: TerrainNavigatorType) {
+    constructor(props: TerrainNavigatorPropsType) {
         super(props);
     }
 }
