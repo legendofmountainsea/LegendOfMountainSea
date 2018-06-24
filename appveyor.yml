@@ -11,6 +11,7 @@ notifications:
 
 # Install scripts. (runs after repo cloning)
 install:
+  - ps: Install-Product node 10.0.0 x64
   - node -v
   - npm -v
   # install modules
