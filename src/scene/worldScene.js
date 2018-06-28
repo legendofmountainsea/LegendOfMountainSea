@@ -27,7 +27,7 @@ export default class WorldScene extends Scene {
 			assetData: S_worldTerrainAsset.HEXAGON,
 			coordinates: new Coordinates(0,0),
 		});
-		this._renderer.addTerrain(worldTerrain);
+
 		
 		let systemMenuIcon = new Pattern({
 			assetData: S_gameMenuAsset.SYSTEM_ICON,
@@ -53,5 +53,7 @@ export default class WorldScene extends Scene {
 		controller.possess(new Pawn({character: houyi}));
 		
 		this._renderer.addActor(houyi);
+
+		this._renderer.addTerrain(worldTerrain);
 	}
 }
