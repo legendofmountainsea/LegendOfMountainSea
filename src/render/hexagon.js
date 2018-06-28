@@ -8,6 +8,7 @@ export const COS_30_DEGREES = Math.cos(Math.PI / 6);
 
 type HexagonPropsType = {
 	terrain: Terrain,
+	position: Coordinates,
 }
 
 /**

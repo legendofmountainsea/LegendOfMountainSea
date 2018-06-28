@@ -6,7 +6,6 @@ import Actor from './actor';
  */
 class Pattern extends Actor {
 	constructor(props) {
-		props = props || {};
 		super(props);
 	}
 	

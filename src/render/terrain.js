@@ -247,6 +247,9 @@ class Terrain extends ElementCore {
 				let hexagon = new Hexagon({
 					assetData: TerrainChain.getTerrainAssetData(new Coordinates(renderStartingPointX + index, renderStartingPointY + columnIndex)),
 					terrain: this,
+					position: renderPoint,
+					height: height,
+					width: width,
 				}).initResources(
 					this._resources,
 				).setDimensions({

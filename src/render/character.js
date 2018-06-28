@@ -8,8 +8,8 @@ import Navigator from '../core/navigator';
 
 
 type CharacterPropsType = {
-	...ActorPropsType,
-}
+	...ActorPropsType
+};
 
 /**
  * class for render player's character

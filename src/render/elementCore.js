@@ -8,7 +8,6 @@ class ElementCore {
 	 * @param props.assetData {Object} element asset data information
 	 */
 	constructor(props) {
-		props = props || {};
 		this._ID = null;
 		this._stage = null;
 		this._index = 0;
