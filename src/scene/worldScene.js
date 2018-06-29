@@ -28,7 +28,8 @@ export default class WorldScene extends Scene {
 			coordinates: new Coordinates(0,0),
 		});
 
-		
+		this._renderer.addTerrain(worldTerrain);
+
 		let systemMenuIcon = new Pattern({
 			assetData: S_gameMenuAsset.SYSTEM_ICON,
 			position: new Coordinates(20,20),
@@ -53,7 +54,5 @@ export default class WorldScene extends Scene {
 		controller.possess(new Pawn({character: houyi}));
 		
 		this._renderer.addActor(houyi);
-
-		this._renderer.addTerrain(worldTerrain);
 	}
 }

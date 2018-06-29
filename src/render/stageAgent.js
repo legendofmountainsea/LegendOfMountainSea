@@ -17,9 +17,9 @@ class StageAgent {
 		this._terrain = null;
 		this._layerAgent = null;
 	}
-	
-	ACTOR_LAYER_INDEX = 0;
-	TERRAIN_LAYER_INDEX = 1;
+
+	TERRAIN_LAYER_INDEX = 0;
+	ACTOR_LAYER_INDEX = 1;
 	UI_LAYER_INDEX = 2;
 	MOUSE_LAYER_INDEX = 3;
 
