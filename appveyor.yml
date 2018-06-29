@@ -20,7 +20,7 @@ install:
 
 # Post-install test scripts.
 test_script:
-  - npm test
+  - npm run flow && npm run lint
 
 after_test:
   - npm install istanbul@1.1.0-alpha.1
