@@ -20,11 +20,11 @@ install:
   # install modules
   - npm install
   - npm run build-win
-  - npm run flow
+  - 
 
 # Post-install test scripts.
 test_script:
-  - npm run lint
+  - npm run lint && npm run flow && exit 0
 
 after_test:
   - npm install istanbul@1.1.0-alpha.1
