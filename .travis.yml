@@ -20,7 +20,7 @@ before_script:
   - export CC_TEST_REPORTER_ID=cf8d5db98b9c576e25427d1cc6b19fb0aabb3eeeaad6cf2bc400aed10bfe14bb
 
 script:
-  - npm test
+  - npm run flow && npm run lint
 
 after_script:
   - npm install mocha-lcov-reporter
