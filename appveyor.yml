@@ -1,7 +1,6 @@
 # Test against the latest version of this Node.js version
 environment:
-  matrix:
-    - nodejs_version: 10
+  nodejs_version: "10"
 
 notifications:
   - provider: Webhook
@@ -9,12 +8,10 @@ notifications:
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
-    
-platform: x64
 
 # Install scripts. (runs after repo cloning)
 install:
-  - ps: Install-Product node $env:nodejs_version x64
+  - ps: Install-Product node 10.0.0 x64
   - node -v
   - npm -v
   # install modules
@@ -23,8 +20,7 @@ install:
 
 # Post-install test scripts.
 test_script:
-  - npm run flow
-  - npm run lint
+  - npm run flow check && npm run lint
 
 after_test:
   - npm install istanbul@1.1.0-alpha.1
