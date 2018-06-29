@@ -20,10 +20,10 @@ install:
   # install modules
   - npm install
   - npm run build-win
+  - npm run flow
 
 # Post-install test scripts.
 test_script:
-  - npm run flow
   - npm run lint
 
 after_test:
