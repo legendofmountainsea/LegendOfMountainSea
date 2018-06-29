@@ -36,7 +36,7 @@ describe('LayerAgent', () => {
 	it('should get a lower index', () => {
 		
 		const actor = {id: 'a'},
-			index = 2,
+			index = 0,
 			indexB = 3;
 		
 		layerAgent._addToLayer(actor, index);

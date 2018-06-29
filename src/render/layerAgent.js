@@ -12,7 +12,6 @@ class LayerAgent {
 	 * @param props.stage {StageAgent} StageAgent instance
 	 */
 	constructor(props) {
-		props = props || {};
 		this._container = props.container;
 		this._stage = props.stage;
 		this._layer = {};
@@ -30,13 +29,27 @@ class LayerAgent {
 		
 		const result = this._getTopElementInLayer(index);
 		
-		const childIndex = (result) ? this._container.getChildIndex(result.getRenderObject()) : 0;
+		const childIndex = (result) ? this._container.getChildIndex(result.getRenderObject()) + 1 : 0;
 		
 		this._addToLayer(element, index);
 		
 		this._container.addChildAt(element.getRenderObject(), childIndex);
 		
 		return this;
+	}
+
+	_getTopElementInLayer(index) {
+		let elements = null;
+
+		for (let layerIndex = index; layerIndex >= 0; --layerIndex) {
+
+			if (this._layer[layerIndex] && this._layer[layerIndex].length > 0) {
+				elements = this._layer[layerIndex];
+				break;
+			}
+		}
+
+		return elements ? elements[0] : null;
 	}
 
 	/**
@@ -169,20 +182,6 @@ class LayerAgent {
 		}
 		
 		return this;
-	}
-	
-	_getTopElementInLayer(index) {
-		let elements = null;
-		
-		for (let layerIndex = index; layerIndex > 0; --layerIndex) {
-			
-			if (this._layer[layerIndex] && this._layer[layerIndex].length > 0) {
-				elements = this._layer[layerIndex];
-				break;
-			}
-		}
-		
-		return elements ? elements[0] : null;
 	}
 	
 	tick(delta) {
