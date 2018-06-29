@@ -8,10 +8,13 @@ notifications:
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
+    
+  platform:
+  - x64
 
 # Install scripts. (runs after repo cloning)
 install:
-  - ps: Install-Product node 10.0.0 x86
+  - ps: Install-Product node 10.0.0 x64
   - node -v
   - npm -v
   # install modules
