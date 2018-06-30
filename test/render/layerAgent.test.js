@@ -5,7 +5,7 @@ describe('LayerAgent', () => {
 	let layerAgent;
 	
 	beforeEach(() => {
-		layerAgent = new LayerAgent();
+		layerAgent = new LayerAgent({container:null, stage:null});
 	});
 	
 	afterEach(() => {
@@ -48,7 +48,6 @@ describe('LayerAgent', () => {
 		
 		expect(resultB).to.eql(actor);
 	});
-	//_removeFromLayer
 	
 	it('should remove the right element', () => {
 		
