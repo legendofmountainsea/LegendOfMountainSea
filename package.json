@@ -36,7 +36,8 @@
     "run-win": "nwjs-v0.30.1-win-x64\\nw.exe .",
     "start-mac": "npm run build-client && npm run run-mac",
     "start-win": "npm run build-client && npm run run-win",
-    "test": "mocha test/**/*.test.js --compilers js:babel-register && npm run flow check && npm run lint && npm run build-prod"
+    "test": "npm run unit-testing && npm run flow check && npm run lint && npm run build-prod",
+    "unit-testing": "mocha test/**/*.test.js --compilers js:babel-register"
   },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
