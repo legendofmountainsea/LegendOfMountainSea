@@ -161,6 +161,13 @@ class Terrain extends ElementCore {
 	}
 
 	/**
+	 * TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/91
+	 */
+	getHexagonsBetween(){
+
+	}
+
+	/**
 	 * tick function for renderer
 	 * @param delta {number}
 	 * @override

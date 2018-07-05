@@ -24,6 +24,7 @@ class Character extends Actor {
 		super(props);
 		this._frames = {};
 		this._navigator = null;
+		this._currentHexagon = null;
 		this._destinationHexagon = null;
 		this._destination = null;
 		this._navigator = null;
@@ -84,7 +85,7 @@ class Character extends Actor {
 	}
 
 	navigateTo(hexagon: Hexagon){
-
+		this._navigator.getNavigation({current:this._currentHexagon, destination:hexagon});
 	}
 	
 	getDestination(): Coordinates {
