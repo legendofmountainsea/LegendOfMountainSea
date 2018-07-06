@@ -50,6 +50,11 @@ class Terrain extends ElementCore {
 	 */
 	initResources(resources: Object): Terrain{
 		this._resources = resources;
+
+        const terrainResource = this._resources[S_worldTerrainAsset.HEXAGON.DATA.NAME];
+        const {height, width} = terrainResource.texture;
+        TerrainChain.setHexagonSize({height,width});
+
 		this._initLayerAgent();
 
 		this.setTransform(new Coordinates(0, 0));
@@ -110,7 +115,7 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 */
 	flush(): Terrain{
-		TerrainChain.updateRenderStartingCoordinates({x:this._coordinates.x, y:this._coordinates.y});
+		TerrainChain.updateRenderStartingCoordinates(new Coordinates(this._coordinates.x, this._coordinates.y));
 		this._coordinates = new Coordinates(0,0);
 		this._isPointsOnTerrainChanged = true;
 		return this;
@@ -123,7 +128,7 @@ class Terrain extends ElementCore {
 	 */
 	addHexagon(hexagon: Hexagon): Terrain{
 		this._hexagons.push(hexagon);
-		this._layerAgent.addElement(hexagon, 0);
+		this._layerAgent.addElement(hexagon);
 		return this;
 	}
 
@@ -215,60 +220,81 @@ class Terrain extends ElementCore {
 		return this;
 	}
 
+    /**
+	 * check if hexagon is already rendered on the terrain
+     * @param renderPoint {Coordinates} render position
+     * @returns {boolean}
+     * @private
+     */
+	_isHexagonAlreadyRendered(renderPoint: Coordinates): boolean{
+        return this._hexagons.find((hexagon) => {
+            const position = hexagon.getPositionOnTerrain();
+            return position.x === renderPoint.x && position.y === renderPoint.y;
+        });
+	}
+
+    /**
+	 * create new hexagon to render on the point
+     * @param renderPoint {Coordinates} render position
+     * @private
+     */
+	_createHexagonOnRegion(renderPoint: Coordinates): void{
+        const {height, width} = TerrainChain.getHexagonSize();
+
+        const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
+
+        const renderStartingPointX = parseInt(renderStartingCoordinates.x / (height * COS_30_DEGREES)),
+            renderStartingPointY = parseInt(renderStartingCoordinates.y / height);
+
+        const hexagon = new Hexagon({
+            assetData: TerrainChain.getTerrainAssetData(new Coordinates(renderStartingPointX + renderPoint.x, renderStartingPointY + renderPoint.y)),
+            terrain: this,
+            position: renderPoint,
+            height: height,
+            width: width,
+        }).initResources(
+            this._resources,
+        ).setDimensions({
+            height,
+            width,
+        });
+
+        hexagon.setPositionOnTerrain(renderPoint);
+
+        this._isPointsOnTerrainChanged = true;
+
+        this.addHexagon(hexagon);
+	}
+
 	/**
 	 * render hexagon array by Coordinates
 	 * @param topLeft {Coordinates}
 	 * @returns {Terrain}
 	 */
 	renderHexagonRegion(topLeft: Coordinates): Terrain{
-		const terrainResource = this._resources[S_worldTerrainAsset.HEXAGON.DATA.NAME];
-		const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
-		const {height, width} = terrainResource.texture;
+		const {height, width} = TerrainChain.getHexagonSize();
 		const winDimension = Window.getDimension();
 
 		const topLeftX = parseInt(topLeft.x / (height * COS_30_DEGREES)),
 			topLeftY = parseInt(topLeft.y / height);
 
 		const numberOfHexagonOnX = parseInt((winDimension.width / width) * this.PRE_RENDER_SCALE),
-			numberOfHexagonOnY = parseInt((winDimension.height / height) * this.PRE_RENDER_SCALE),
-			renderStartingPointX = parseInt(renderStartingCoordinates.x / (height * COS_30_DEGREES)),
-			renderStartingPointY = parseInt(renderStartingCoordinates.y / height);
+			numberOfHexagonOnY = parseInt((winDimension.height / height) * this.PRE_RENDER_SCALE);
 
 		this._renderPointOnTerrain = [];
 
 		for (let index = topLeftX - this.RENDER_OUTSIDE_OF_EDGE; index < (topLeftX + numberOfHexagonOnX); ++index) {
 			for (let columnIndex = topLeftY - this.RENDER_OUTSIDE_OF_EDGE; columnIndex < (topLeftY + numberOfHexagonOnY); ++columnIndex) {
 
-				let renderPoint = new Coordinates(index, columnIndex);
+				const renderPoint = new Coordinates(index, columnIndex);
 
 				this._renderPointOnTerrain.push(renderPoint);
 
-				if (this._hexagons.find((hexagon) => {
-						let position = hexagon.getPositionOnTerrain();
-						return position.x === index && position.y === columnIndex;
-					})
-				) {
+				if (this._isHexagonAlreadyRendered(renderPoint)) {
 					continue;
 				}
 
-				let hexagon = new Hexagon({
-					assetData: TerrainChain.getTerrainAssetData(new Coordinates(renderStartingPointX + index, renderStartingPointY + columnIndex)),
-					terrain: this,
-					position: renderPoint,
-					height: height,
-					width: width,
-				}).initResources(
-					this._resources,
-				).setDimensions({
-					height,
-					width,
-				});
-
-				hexagon.setPositionOnTerrain(renderPoint);
-
-				this._isPointsOnTerrainChanged = true;
-
-				this.addHexagon(hexagon);
+				this._createHexagonOnRegion(renderPoint);
 			}
 		}
 
