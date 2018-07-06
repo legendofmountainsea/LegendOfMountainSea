@@ -21,7 +21,7 @@ class Coordinates {
 	 * @param coordinates {Coordinates}
 	 * @returns {Coordinates}
 	 */
-	set(coordinates: Coordinates) {
+	set(coordinates: Coordinates | {x: number, y: number}) {
 		this.x = coordinates.x;
 		this.y = coordinates.y;
 		return this;
