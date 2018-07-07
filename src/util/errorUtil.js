@@ -11,11 +11,11 @@ export class NativeModuleMissingError extends Error {
 	}
 }
 
-const CONFIG_CRASHING = '**LOMS** Config json file is crashing! CONFIG_CRASHING';
+const CHARACTER_DATA_CRASHING = '**LOMS** Character data is crashing! CHARACTER_DATA_CRASHING ID: ';
 
-export class ConfigCrashingError extends Error {
-	constructor() {
-		super(CONFIG_CRASHING);
+export class CharacterCrashingError extends Error {
+	constructor(props) {
+		super(CHARACTER_DATA_CRASHING + props.ID);
 		this.name = this.constructor.name;
 		Error.captureStackTrace(this);
 	}

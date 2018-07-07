@@ -3,8 +3,8 @@
 import ElementCore from './elementCore';
 import Coordinates from '../core/coordinates';
 
-export type ActorPropsType = {
-	assetData: Object,
+type ActorPropsType = {
+    assetData: Object | null,
 	position: Coordinates,
 	onRender: number => void | null,
 	onClick: void => void | null,
@@ -15,6 +15,14 @@ export type ActorPropsType = {
  * @extends ElementCore
  */
 class Actor extends ElementCore {
+
+    _position: Coordinates | null;
+    _sprite: any;
+    _initPosition: Coordinates;
+    _assetData: Object | null;
+    _onRender: (any,number) => void | null;
+    _onClick: void => void | null;
+
 	constructor(props: ActorPropsType) {
 		super(props);
 		this._position = null;
@@ -84,13 +92,6 @@ class Actor extends ElementCore {
 		super.dispose(option);
 		const disposeChildren = option;
 		this._sprite.destroy({children: disposeChildren, texture: disposeChildren, baseTexture: disposeChildren});
-		this._sprite = null;
-
-		this._initPosition = null;
-		this._onRender = null;
-		this._onClick = null;
-		this._noAsset = null;
-		this._assetData = null;
 	}
 }
 
