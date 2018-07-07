@@ -3,12 +3,15 @@
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
 import Hexagon from './hexagon';
-import type ActorPropsType from './actor';
 import Navigator from '../core/navigator';
+import {CharacterCrashingError} from '../util/errorUtil';
 
 
 type CharacterPropsType = {
-	...ActorPropsType
+    assetData: Object | null,
+    position: Coordinates,
+    onRender: number => void | null,
+    onClick: void => void | null,
 };
 
 /**
@@ -16,6 +19,14 @@ type CharacterPropsType = {
  * @extends Actor
  */
 class Character extends Actor {
+
+    _frames: Object;
+    _navigator: Navigator | null;
+    _currentHexagon: Hexagon | null;
+    _destinationHexagon: Hexagon | null;
+    _destination: Coordinates | null;
+    _animationStatus: string;
+
 	/**
 	 * create a character
 	 * @param props
@@ -38,22 +49,27 @@ class Character extends Actor {
 	 * @override
 	 */
 	initResources(resources: Object) {
-		
-		for (let asset in this._assetData.DATA) {
-			this._frames[this._assetData.DATA[asset].NAME] = [];
-			
-			let resource = resources[this._assetData.DATA[asset].NAME];
-			for (let texture in resource.textures) {
-				this._frames[this._assetData.DATA[asset].NAME].push(resource.textures[texture]);
-			}
-		}
-		
-		const animatedSprite = new PIXI.extras.AnimatedSprite(this._frames[this._assetData.DATA[this._animationStatus].NAME]);
-		
-		this.setElement(animatedSprite);
-		
-		this.initSprite();
-		
+
+		if(this._assetData) {
+
+			const assetDataInfo = this._assetData.DATA;
+
+            for (let asset in assetDataInfo) {
+                this._frames[assetDataInfo[asset].NAME] = [];
+
+                let resource = resources[assetDataInfo[asset].NAME];
+                for (let texture in resource.textures) {
+                    this._frames[assetDataInfo[asset].NAME].push(resource.textures[texture]);
+                }
+            }
+
+            const animatedSprite = new PIXI.extras.AnimatedSprite(this._frames[assetDataInfo[this._animationStatus].NAME]);
+
+            this.setElement(animatedSprite);
+
+            this.initSprite();
+        }
+
 		return this;
 	}
 
@@ -68,7 +84,9 @@ class Character extends Actor {
 	
 	initSprite() {
 		this._sprite.anchor.set(0.5, 0.5);
-		this._sprite.animationSpeed = this._assetData.DATA[this._animationStatus].SPEED;
+		if(this._assetData){
+            this._sprite.animationSpeed = this._assetData.DATA[this._animationStatus].SPEED;
+		}
 		
 		this.setPosition(this._initPosition);
 		this._sprite.play();
@@ -85,14 +103,20 @@ class Character extends Actor {
 	}
 
 	navigateTo(hexagon: Hexagon){
-		this._navigator.getNavigation({current:this._currentHexagon, destination:hexagon});
+        const navigator = this._navigator;
+
+		if(!navigator){
+			return;
+		}
+
+        navigator.getNavigation({current:this._currentHexagon, destination:hexagon});
 	}
 	
-	getDestination(): Coordinates {
+	getDestination(): Coordinates | null {
 		return this._destination;
 	}
 
-	getDestinationHexagon(): Hexagon{
+	getDestinationHexagon(): Hexagon | null{
 		return this._destinationHexagon;
 	}
 	
@@ -105,15 +129,17 @@ class Character extends Actor {
 	}
 
 	updateDestination(){
-		if(!this.getDestination() || !this.getDestinationHexagon()){
+        const destinationHexagon = this.getDestinationHexagon();
+
+		if(!this.getDestination() || !destinationHexagon){
 			return;
 		}
 
-		this._destination = this.getDestinationHexagon().toGlobalPosition();
+		this._destination = destinationHexagon.toGlobalPosition();
 	}
 	
 	updatePosition(delta: number) {
-		if (!this._sprite || !this.getDestination()) {
+		if (!this._sprite) {
 			return;
 		}
 
@@ -135,8 +161,15 @@ class Character extends Actor {
 	}
 	
 	movingOnAxisXToDestination(delta: number): number {
+
+        const destination = this.getDestination();
+
+        if(!destination){
+            throw CharacterCrashingError(this);
+        }
+
 		const {x} = this._sprite.position,
-			distanceX = this.getDestination().x - x;
+			distanceX = destination.x - x;
 
 		if(0 === distanceX){
 			return x;
@@ -150,8 +183,14 @@ class Character extends Actor {
 	}
 	
 	_isMovingDirectionNeedToChange(): boolean {
-		const {x} = this._sprite.position,
-			destination = this.getDestination();
+        const destination = this.getDestination();
+
+        if(!destination){
+            throw CharacterCrashingError(this);
+        }
+
+		const {x} = this._sprite.position;
+
 		const distanceX = destination.x - x;
 		
 		const direction = Math.sign(distanceX) < 0 ? this.DIRECTION_LEFT : this.DIRECTION_RIGHT;
@@ -161,8 +200,14 @@ class Character extends Actor {
 	
 	
 	movingOnAxisYToDestination(delta: number): number {
+        const destination = this.getDestination();
+
+        if(!destination){
+            throw CharacterCrashingError(this);
+        }
+
 		const {y} = this._sprite.position,
-			distanceY = this.getDestination().y - y;
+			distanceY = destination.y - y;
 
 		if(0 === distanceY){
 			return y;
@@ -186,8 +231,13 @@ class Character extends Actor {
 	}
 	
 	_isArrivedAtDestination() {
-		const {x, y} = this._sprite.position,
-			destination = this.getDestination();
+		const destination = this.getDestination();
+
+        if(!destination){
+            throw CharacterCrashingError(this);
+        }
+
+		const {x, y} = this._sprite.position;
 		
 		return (x === destination.x && y === destination.y);
 	}
@@ -235,7 +285,7 @@ class Character extends Actor {
 	
 	setAnimation(name: string, loop: boolean = true, onComplete: void => void = () => {} ) {
 		
-		if (!this._sprite || this._noAsset) {
+		if (!this._sprite || this._noAsset || !this._assetData) {
 			return;
 		}
 		
@@ -252,7 +302,7 @@ class Character extends Actor {
 	
 	dispose(option: boolean = false) {
 		super.dispose(option);
-		this._frames = null;
+		this._frames = {};
 		this._destination = null;
 	}
 }

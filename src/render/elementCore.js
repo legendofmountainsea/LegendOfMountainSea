@@ -1,32 +1,47 @@
+//@flow
+import StageAgent from './stageAgent';
+import Coordinates from '../core/coordinates';
+
+type ElementCorePropsType = {
+    assetData: Object | null,
+};
 /**
  * Common element class which render on the map.
  **/
 class ElementCore {
+
+	_ID: string | null;
+    _stage: StageAgent | null;
+    _index: number;
+    _noAsset: boolean;
+
 	/**
 	 * Create a render element
 	 * @param props {Object} element props json object
 	 * @param props.assetData {Object} element asset data information
 	 */
-	constructor(props) {
+	constructor(props: ElementCorePropsType) {
 		this._ID = null;
 		this._stage = null;
 		this._index = 0;
 		this._noAsset = !props.assetData;
 	}
-	
-	/**
+
+    /**
 	 * init asset resource for render
-	 * @param resources {object} game resources info object
+     * @param resources {object} game resources info object
+     * @returns {ElementCore}
 	 * @abstract
-	 */
-	initResources(resources){
+     */
+	initResources(resources: Object): ElementCore{
+		return this;
 	}
 	
 	/**
 	 * check element has asset or not
 	 * @returns {boolean} return true if element has asset
 	 */
-	isNoAsset() {
+	isNoAsset(): boolean {
 		return this._noAsset;
 	}
 	
@@ -34,8 +49,7 @@ class ElementCore {
 	 * set object's ID
 	 * @param ID {string}
 	 * @returns {ElementCore}
-	 */
-	setID(ID) {
+	 */	setID(ID: string) {
 		this._ID = ID;
 		return this;
 	}
@@ -45,26 +59,25 @@ class ElementCore {
 	 * @param stage {StageAgent} a StageAgent instance
 	 * @returns {ElementCore}
 	 */
-	setStage(stage) {
+	setStage(stage: StageAgent) {
 		this._stage = stage;
 		return this;
 	}
 
 	/**
 	 * get stage instance
-	 * @param stage {StageAgent} a StageAgent instance
 	 * @returns {null|*}
 	 */
-	getStage(stage) {
+	getStage() {
 		return this._stage;
 	}
 	
 	/**
 	 * set object's render index
-	 * @param index
+	 * @param index {number}
 	 * @returns {ElementCore}
 	 */
-	setIndex(index){
+	setIndex(index: number){
 		this._index = index;
 		return this;
 	}
@@ -73,7 +86,7 @@ class ElementCore {
 	 * get object's ID
 	 * @returns {null|string}
 	 */
-	getID() {
+	getID(): string| null {
 		return this._ID;
 	}
 	
@@ -81,7 +94,7 @@ class ElementCore {
 	 * get object's render index
 	 * @returns {number}
 	 */
-	getIndex(){
+	getIndex(): number {
 		return this._index;
 	}
 	
@@ -90,7 +103,8 @@ class ElementCore {
 	 * @param transform {Coordinates}
 	 * @abstract
 	 */
-	setTransform(transform){
+	setTransform(transform: Coordinates): ElementCore{
+		return this;
 	}
 	
 	/**
@@ -98,7 +112,7 @@ class ElementCore {
 	 * @return {object}
 	 * @abstract
 	 */
-	getRenderObject(){
+	getRenderObject(): any{
 	}
 	
 	/**
@@ -106,7 +120,8 @@ class ElementCore {
 	 * @return {Coordinates}
 	 * @abstract
 	 */
-	getPosition(){
+	getPosition(): Coordinates{
+		return new Coordinates(0,0);
 	}
 	
 	/**
@@ -114,7 +129,7 @@ class ElementCore {
 	 * @param delta {number}
 	 * @abstract
 	 */
-	tick(delta) {
+	tick(delta: number) {
 	}
 	
 	/**
@@ -122,7 +137,7 @@ class ElementCore {
 	 * @param delta {number}
 	 * @abstract
 	 */
-	render(delta) {
+	render(delta: number) {
 	}
 	
 	/**
@@ -130,7 +145,7 @@ class ElementCore {
 	 * @param delta {number}
 	 * @abstract
 	 */
-	onRender(delta){
+	onRender(delta: number){
 	
 	}
 	
@@ -138,10 +153,9 @@ class ElementCore {
 	 * dispose element on the map or in memory
 	 * @param option {boolean} remove from memory or not
 	 */
-	dispose(option){
+	dispose(option: boolean){
 		this._ID = null;
 		this._stage = null;
-		this._noAsset = null;
 	}
 }
 

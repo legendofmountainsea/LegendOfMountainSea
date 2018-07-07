@@ -12,7 +12,7 @@ import TerrainChain from '../chain/terrainChain';
 import Window from '../module/window';
 
 type TerrainPropsType = {
-	assetData: Object,
+    assetData: Object | null,
 	coordinates: Coordinates,
 };
 
@@ -21,6 +21,18 @@ type TerrainPropsType = {
  * @extends ElementCore
  */
 class Terrain extends ElementCore {
+
+    _container: any;
+    _resources: any;
+    _layerAgent: LayerAgent;
+    _navigator: TerrainNavigator | null;
+    _isPointsOnTerrainChanged: boolean;
+    _assetData: Object | null;
+    _coordinates: Coordinates;
+    _noAsset: boolean;
+    _hexagons:  Array<Hexagon>;
+    _renderPointOnTerrain: Array<Coordinates>;
+
 	/**
 	 * create terrain
 	 * @param props {object}
@@ -227,7 +239,7 @@ class Terrain extends ElementCore {
      * @private
      */
 	_isHexagonAlreadyRendered(renderPoint: Coordinates): boolean{
-        return this._hexagons.find((hexagon) => {
+        return !!this._hexagons.find((hexagon) => {
             const position = hexagon.getPositionOnTerrain();
             return position.x === renderPoint.x && position.y === renderPoint.y;
         });

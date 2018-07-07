@@ -34,11 +34,11 @@ class TerrainChain {
         return renderStartingCoordinates;
     }
 
-    static setHexagonSize(size:hexagonSizeType) {
+    static setHexagonSize(size: hexagonSizeType) {
         hexagonSize = size;
     }
 
-    static getHexagonSize():hexagonSizeType {
+    static getHexagonSize(): hexagonSizeType {
         return hexagonSize;
     }
 
