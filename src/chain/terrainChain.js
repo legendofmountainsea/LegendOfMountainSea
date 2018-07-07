@@ -13,6 +13,7 @@ type hexagonSizeType = {
 let renderStartingCoordinates: Coordinates = new Coordinates(0, 0);
 let seed: number | null = null;
 let hexagonSize: hexagonSizeType = {height: 0, width: 0};
+//let terrainGrids = [];
 
 /**
  * class for connecting data and terrain

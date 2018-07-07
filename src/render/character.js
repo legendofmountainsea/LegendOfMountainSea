@@ -139,7 +139,7 @@ class Character extends Actor {
 	}
 	
 	updatePosition(delta: number) {
-		if (!this._sprite) {
+		if (!this._sprite || !this.getDestination()) {
 			return;
 		}
 
@@ -165,7 +165,7 @@ class Character extends Actor {
         const destination = this.getDestination();
 
         if(!destination){
-            throw CharacterCrashingError(this);
+            throw new CharacterCrashingError(this);
         }
 
 		const {x} = this._sprite.position,
@@ -186,7 +186,7 @@ class Character extends Actor {
         const destination = this.getDestination();
 
         if(!destination){
-            throw CharacterCrashingError(this);
+            throw new CharacterCrashingError(this);
         }
 
 		const {x} = this._sprite.position;
@@ -203,7 +203,7 @@ class Character extends Actor {
         const destination = this.getDestination();
 
         if(!destination){
-            throw CharacterCrashingError(this);
+            throw new CharacterCrashingError(this);
         }
 
 		const {y} = this._sprite.position,
@@ -234,7 +234,7 @@ class Character extends Actor {
 		const destination = this.getDestination();
 
         if(!destination){
-            throw CharacterCrashingError(this);
+            throw new CharacterCrashingError(this);
         }
 
 		const {x, y} = this._sprite.position;

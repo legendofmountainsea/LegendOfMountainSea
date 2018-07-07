@@ -3,11 +3,8 @@ import Grid from './grid';
 import Coordinates from './coordinates';
 import Cube from './cube';
 
-import type GridPropsType from './grid';
-
 type TerrainGridPropsType = {
 	point:Coordinates,
-	test: string,
 };
 
 /**
