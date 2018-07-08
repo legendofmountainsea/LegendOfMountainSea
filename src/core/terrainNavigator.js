@@ -2,7 +2,7 @@
 
 import Navigator from './navigator';
 import Terrain from '../render/terrain';
-import Hexagon from '../render/hexagon';
+import Grid from './grid';
 
 type TerrainNavigatorPropsType = {
 	terrain: Terrain
@@ -21,8 +21,14 @@ class TerrainNavigator extends Navigator {
 		super(props);
 	}
 
-	getNavigation(destinationInfo: { current:Hexagon, destination: Hexagon }) {
-
+	/**
+	 * get navigation from here(current) to here(destination)
+	 * @param destinationInfo {Object}
+	 * @returns {Array}
+	 * @abstract
+	 */
+	getNavigation(destinationInfo: {current: Grid, destination: Grid}): Array<Grid> {
+		return [];
 	}
 }
 

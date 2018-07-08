@@ -12,7 +12,7 @@ import TerrainChain from '../chain/terrainChain';
 import Window from '../module/window';
 
 type TerrainPropsType = {
-    assetData: Object | null,
+	assetData: Object | null,
 	coordinates: Coordinates,
 };
 
@@ -22,16 +22,15 @@ type TerrainPropsType = {
  */
 class Terrain extends ElementCore {
 
-    _container: any;
-    _resources: any;
-    _layerAgent: LayerAgent;
-    _navigator: TerrainNavigator | null;
-    _isPointsOnTerrainChanged: boolean;
-    _assetData: Object | null;
-    _coordinates: Coordinates;
-    _noAsset: boolean;
-    _hexagons:  Array<Hexagon>;
-    _renderPointOnTerrain: Array<Coordinates>;
+	_container: any;
+	_resources: any;
+	_layerAgent: LayerAgent;
+	_navigator: TerrainNavigator | null;
+	_isPointsOnTerrainChanged: boolean;
+	_assetData: Object | null;
+	_coordinates: Coordinates;
+	_hexagons: Array<Hexagon>;
+	_renderPointOnTerrain: Array<Coordinates>;
 
 	/**
 	 * create terrain
@@ -46,7 +45,6 @@ class Terrain extends ElementCore {
 		this._isPointsOnTerrainChanged = false;
 		this._assetData = props.assetData;
 		this._coordinates = props.coordinates;
-		this._noAsset = !props.assetData;
 		this._hexagons = [];
 		this._renderPointOnTerrain = [];
 	}
@@ -60,12 +58,12 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 * @override
 	 */
-	initResources(resources: Object): Terrain{
+	initResources(resources: Object): Terrain {
 		this._resources = resources;
 
-        const terrainResource = this._resources[S_worldTerrainAsset.HEXAGON.DATA.NAME];
-        const {height, width} = terrainResource.texture;
-        TerrainChain.setHexagonSize({height,width});
+		const terrainResource = this._resources[S_worldTerrainAsset.HEXAGON.DATA.NAME];
+		const {height, width} = terrainResource.texture;
+		TerrainChain.setHexagonSize({height, width});
 
 		this._initLayerAgent();
 
@@ -75,14 +73,14 @@ class Terrain extends ElementCore {
 	}
 
 	getNavigator() {
-		if(!this._navigator){
+		if (!this._navigator) {
 			this._initNavigator();
 		}
 
 		return this._navigator;
 	}
 
-	_initNavigator(): Terrain{
+	_initNavigator(): Terrain {
 		this._navigator = new TerrainNavigator({terrain: this});
 		return this;
 	}
@@ -92,7 +90,7 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 * @private
 	 */
-	_initLayerAgent(): Terrain{
+	_initLayerAgent(): Terrain {
 		this._container = new PIXI.Container();
 		this._layerAgent = new LayerAgent({container: this._container, stage: this._stage});
 
@@ -105,7 +103,7 @@ class Terrain extends ElementCore {
 	 * @returns {Terrain}
 	 * @override
 	 */
-	setTransform(transform: Coordinates): Terrain{
+	setTransform(transform: Coordinates): Terrain {
 
 		this._coordinates.x += transform.x;
 		this._coordinates.y += transform.y;
@@ -126,9 +124,9 @@ class Terrain extends ElementCore {
 	 * flush current terrain in memory, save render coordinates in TerrainChain for re-render
 	 * @returns {Terrain}
 	 */
-	flush(): Terrain{
+	flush(): Terrain {
 		TerrainChain.updateRenderStartingCoordinates(new Coordinates(this._coordinates.x, this._coordinates.y));
-		this._coordinates = new Coordinates(0,0);
+		this._coordinates = new Coordinates(0, 0);
 		this._isPointsOnTerrainChanged = true;
 		return this;
 	}
@@ -138,7 +136,7 @@ class Terrain extends ElementCore {
 	 * @param hexagon {Hexagon}
 	 * @returns {Terrain}
 	 */
-	addHexagon(hexagon: Hexagon): Terrain{
+	addHexagon(hexagon: Hexagon): Terrain {
 		this._hexagons.push(hexagon);
 		this._layerAgent.addElement(hexagon);
 		return this;
@@ -173,14 +171,14 @@ class Terrain extends ElementCore {
 	 * @returns {Coordinates}
 	 * @override
 	 */
-	getPosition(): Coordinates{
+	getPosition(): Coordinates {
 		return new Coordinates(this._container.x, this._container.y);
 	}
 
 	/**
 	 * TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/91
 	 */
-	getHexagonsBetween(){
+	getHexagonsBetween() {
 
 	}
 
@@ -211,7 +209,7 @@ class Terrain extends ElementCore {
 	 * if hexagon is not show on the map, remove from memory
 	 * @returns {Terrain}
 	 */
-	hexagonRenderRecycle(): Terrain{
+	hexagonRenderRecycle(): Terrain {
 		for (let index = 0; index < this._hexagons.length; ++index) {
 			const hexagon = this._hexagons[index];
 			let isRecyclingHexagon = true;
@@ -232,50 +230,53 @@ class Terrain extends ElementCore {
 		return this;
 	}
 
-    /**
+	/**
 	 * check if hexagon is already rendered on the terrain
-     * @param renderPoint {Coordinates} render position
-     * @returns {boolean}
-     * @private
-     */
-	_isHexagonAlreadyRendered(renderPoint: Coordinates): boolean{
-        return !!this._hexagons.find((hexagon) => {
-            const position = hexagon.getPositionOnTerrain();
-            return position.x === renderPoint.x && position.y === renderPoint.y;
-        });
+	 * @param renderPoint {Coordinates} render position
+	 * @returns {boolean}
+	 * @private
+	 */
+	_isHexagonAlreadyRendered(renderPoint: Coordinates): boolean {
+		return !!this._hexagons.find((hexagon) => {
+			const position = hexagon.getPositionOnTerrain();
+			return position.x === renderPoint.x && position.y === renderPoint.y;
+		});
 	}
 
-    /**
+	/**
 	 * create new hexagon to render on the point
-     * @param renderPoint {Coordinates} render position
-     * @private
-     */
-	_createHexagonOnRegion(renderPoint: Coordinates): void{
-        const {height, width} = TerrainChain.getHexagonSize();
+	 * @param renderPoint {Coordinates} render position
+	 * @private
+	 */
+	_createHexagonOnRegion(renderPoint: Coordinates): void {
+		const {height, width} = TerrainChain.getHexagonSize();
 
-        const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
+		const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
 
-        const renderStartingPointX = parseInt(renderStartingCoordinates.x / (height * COS_30_DEGREES)),
-            renderStartingPointY = parseInt(renderStartingCoordinates.y / height);
+		const renderStartingPointX = parseInt(renderStartingCoordinates.x / (height * COS_30_DEGREES)),
+			renderStartingPointY = parseInt(renderStartingCoordinates.y / height);
 
-        const hexagon = new Hexagon({
-            assetData: TerrainChain.getTerrainAssetData(new Coordinates(renderStartingPointX + renderPoint.x, renderStartingPointY + renderPoint.y)),
-            terrain: this,
-            position: renderPoint,
-            height: height,
-            width: width,
-        }).initResources(
-            this._resources,
-        ).setDimensions({
-            height,
-            width,
-        });
+		const gridCoordinates = new Coordinates(renderStartingPointX + renderPoint.x, renderStartingPointY + renderPoint.y);
 
-        hexagon.setPositionOnTerrain(renderPoint);
+		const hexagon = new Hexagon({
+			assetData: TerrainChain.getTerrainAssetData(gridCoordinates),
+			gridCoordinates: gridCoordinates,
+			terrain: this,
+			position: renderPoint,
+			height: height,
+			width: width,
+		}).initResources(
+			this._resources,
+		).setDimensions({
+			height,
+			width,
+		});
 
-        this._isPointsOnTerrainChanged = true;
+		hexagon.setPositionOnTerrain(renderPoint);
 
-        this.addHexagon(hexagon);
+		this._isPointsOnTerrainChanged = true;
+
+		this.addHexagon(hexagon);
 	}
 
 	/**
@@ -283,7 +284,7 @@ class Terrain extends ElementCore {
 	 * @param topLeft {Coordinates}
 	 * @returns {Terrain}
 	 */
-	renderHexagonRegion(topLeft: Coordinates): Terrain{
+	renderHexagonRegion(topLeft: Coordinates): Terrain {
 		const {height, width} = TerrainChain.getHexagonSize();
 		const winDimension = Window.getDimension();
 

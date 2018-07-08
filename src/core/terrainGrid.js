@@ -4,7 +4,7 @@ import Coordinates from './coordinates';
 import Cube from './cube';
 
 type TerrainGridPropsType = {
-	point:Coordinates,
+	point: Coordinates,
 };
 
 /**
@@ -47,6 +47,15 @@ class TerrainGrid extends Grid {
 		let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
 		let y = -this._point.x - z;
 		return Cube(this._point.x, y, z);
+	}
+
+	/**
+	 * get distance to cube
+	 * @param grid {TerrainGrid}
+	 * @returns {number}
+	 */
+	distanceTo(grid: Grid){
+		return 0;
 	}
 }
 

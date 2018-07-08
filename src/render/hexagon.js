@@ -3,12 +3,14 @@
 import Pattern from './pattern';
 import Terrain from './terrain';
 import Coordinates from '../core/coordinates';
+import TerrainGrid from '../core/terrainGrid';
 
 export const COS_30_DEGREES = Math.cos(Math.PI / 6);
 
 type HexagonPropsType = {
     terrain: Terrain,
     position: Coordinates,
+    gridCoordinates: Coordinates,
 }
 
 /**
@@ -18,13 +20,27 @@ type HexagonPropsType = {
  * @extends Pattern
  */
 class Hexagon extends Pattern {
+
+    _terrainGrid: TerrainGrid;
+
     constructor(props: HexagonPropsType) {
         super(props);
         this._height = 0;
         this._width = 0;
         this._terrain = props.terrain;
+        this._gridCoordinates = props.gridCoordinates;
         this._positionOnTerrain = null;
         //this._data = props.data ? props.data : {};
+
+        this._initGrid();
+    }
+
+    _initGrid(){
+        this._terrainGrid = new TerrainGrid({point: this._gridCoordinates});
+    }
+
+    getGrid(){
+        return this._terrainGrid;
     }
 
     initResources(resources: Object) {
