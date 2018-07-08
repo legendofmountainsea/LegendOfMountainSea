@@ -3,6 +3,7 @@
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
 import Hexagon from './hexagon';
+import Grid from '../core/grid';
 import Navigator from '../core/navigator';
 import {CharacterCrashingError} from '../util/errorUtil';
 
@@ -22,7 +23,7 @@ class Character extends Actor {
 
     _frames: Object;
     _navigator: Navigator | null;
-    _currentHexagon: Hexagon | null;
+    _currentGrid: Grid | null;
     _destinationHexagon: Hexagon | null;
     _destination: Coordinates | null;
     _animationStatus: string;
@@ -35,7 +36,7 @@ class Character extends Actor {
 		super(props);
 		this._frames = {};
 		this._navigator = null;
-		this._currentHexagon = null;
+		this._currentGrid = null;
 		this._destinationHexagon = null;
 		this._destination = null;
 		this._navigator = null;
@@ -102,14 +103,14 @@ class Character extends Actor {
 		this.moveTo(hexagon.toGlobalPosition());
 	}
 
-	navigateTo(hexagon: Hexagon){
+	navigateTo(grid: Grid){
         const navigator = this._navigator;
 
-		if(!navigator){
+		if(!navigator || !this._currentGrid){
 			return;
 		}
 
-        navigator.getNavigation({current:this._currentHexagon, destination:hexagon});
+        navigator.getNavigation({current: this._currentGrid, destination: grid});
 	}
 	
 	getDestination(): Coordinates | null {
