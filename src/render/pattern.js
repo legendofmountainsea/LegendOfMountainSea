@@ -1,19 +1,34 @@
+//@flow
 import Actor from './actor';
+import Coordinates from '../core/coordinates';
+
+type PatternPropsType = {
+	assetData?: Object,
+	position: Coordinates,
+	onRender?: (any,number) => void,
+	onClick?: void => void,
+}
 
 /**
  * class for rendering static element
  * @extends Actor
  */
 class Pattern extends Actor {
-	constructor(props) {
+	constructor(props: PatternPropsType) {
 		super(props);
 	}
 	
 	getName() {
-		return this._assetData.DATA.NAME;
+		const assetData = this._assetData;
+
+		if(!assetData || assetData.DATA){
+			return null;
+		}
+
+		return assetData.DATA.NAME;
 	}
 	
-	initResources(resources) {
+	initResources(resources: Object) {
 		let resource = resources[this.getName()];
 		
 		this._sprite = new PIXI.Sprite(resource.texture);
@@ -29,10 +44,11 @@ class Pattern extends Actor {
 	}
 	
 	_initMouseEvent(){
-		if (this._onClick) {
+		const onClick = this._onClick;
+		if (onClick) {
 			this._sprite.interactive = true;
 			this._sprite.mousedown = (e) => {
-				this._onClick(e);
+				onClick(e);
 			};
 			this._sprite.cursor = null;
 		}

@@ -4,10 +4,10 @@ import ElementCore from './elementCore';
 import Coordinates from '../core/coordinates';
 
 type ActorPropsType = {
-    assetData: Object | null,
+    assetData?: Object,
 	position: Coordinates,
-	onRender: number => void | null,
-	onClick: void => void | null,
+	onRender?: (any,number) => void,
+	onClick?: void => void,
 }
 
 /**
@@ -19,9 +19,9 @@ class Actor extends ElementCore {
     _position: Coordinates | null;
     _sprite: any;
     _initPosition: Coordinates;
-    _assetData: Object | null;
-    _onRender: (any,number) => void | null;
-    _onClick: void => void | null;
+    _assetData: ?Object;
+    _onRender: ?((any,number) => void);
+    _onClick: ?(void => void);
 
 	constructor(props: ActorPropsType) {
 		super(props);
