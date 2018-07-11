@@ -9,10 +9,10 @@ import {CharacterCrashingError} from '../util/errorUtil';
 
 
 type CharacterPropsType = {
-    assetData: Object | null,
+    assetData?: Object ,
     position: Coordinates,
-    onRender: number => void | null,
-    onClick: void => void | null,
+    onRender?: (any,number) => void,
+    onClick?: void => void,
 };
 
 /**

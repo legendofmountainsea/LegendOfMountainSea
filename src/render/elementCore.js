@@ -3,7 +3,7 @@ import StageAgent from './stageAgent';
 import Coordinates from '../core/coordinates';
 
 type ElementCorePropsType = {
-    assetData: Object | null,
+    assetData?: Object,
 };
 /**
  * Common element class which render on the map.

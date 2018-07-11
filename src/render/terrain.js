@@ -6,13 +6,13 @@ import Coordinates from '../core/coordinates';
 import TerrainNavigator from '../core/terrainNavigator';
 
 import ElementCore from './elementCore';
-import Hexagon, {COS_30_DEGREES} from './hexagon';
+import Hexagon from './hexagon';
 import LayerAgent from './layerAgent';
-import TerrainChain from '../chain/terrainChain';
+import TerrainChain,{COS_30_DEGREES} from '../chain/terrainChain';
 import Window from '../module/window';
 
 type TerrainPropsType = {
-	assetData: Object | null,
+	assetData?: Object,
 	coordinates: Coordinates,
 };
 
@@ -27,7 +27,7 @@ class Terrain extends ElementCore {
 	_layerAgent: LayerAgent;
 	_navigator: TerrainNavigator | null;
 	_isPointsOnTerrainChanged: boolean;
-	_assetData: Object | null;
+	_assetData: ?Object;
 	_coordinates: Coordinates;
 	_hexagons: Array<Hexagon>;
 	_renderPointOnTerrain: Array<Coordinates>;
@@ -249,7 +249,7 @@ class Terrain extends ElementCore {
 	 * @private
 	 */
 	_createHexagonOnRegion(renderPoint: Coordinates): void {
-		const {height, width} = TerrainChain.getHexagonSize();
+		const {height} = TerrainChain.getHexagonSize();
 
 		const renderStartingCoordinates = TerrainChain.getRenderStartingCoordinates();
 
@@ -259,20 +259,10 @@ class Terrain extends ElementCore {
 		const gridCoordinates = new Coordinates(renderStartingPointX + renderPoint.x, renderStartingPointY + renderPoint.y);
 
 		const hexagon = new Hexagon({
-			assetData: TerrainChain.getTerrainAssetData(gridCoordinates),
 			gridCoordinates: gridCoordinates,
 			terrain: this,
 			position: renderPoint,
-			height: height,
-			width: width,
-		}).initResources(
-			this._resources,
-		).setDimensions({
-			height,
-			width,
-		});
-
-		hexagon.setPositionOnTerrain(renderPoint);
+		}).initResources(this._resources);
 
 		this._isPointsOnTerrainChanged = true;
 
