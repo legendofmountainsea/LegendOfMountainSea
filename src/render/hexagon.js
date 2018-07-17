@@ -4,7 +4,7 @@ import Pattern from './pattern';
 import Terrain from './terrain';
 import Coordinates from '../core/coordinates';
 import TerrainGrid from '../core/terrainGrid';
-import TerrainChain from "../chain/terrainChain";
+import TerrainChain from '../chain/terrainChain';
 
 type HexagonPropsType = {
 	assetData?: Object,
