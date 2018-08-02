@@ -68,7 +68,8 @@ class TerrainChain {
 				});
 			} catch (e) {
 				console.error(e);
-				seed = new RandomSeed().random();
+
+				seed = new RandomSeed({seed:null}).random();
 			}
 		}
 

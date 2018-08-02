@@ -2,7 +2,9 @@
 
 import Navigator from './navigator';
 import Terrain from '../render/terrain';
-import Grid from './grid';
+import TerrainGrid from './terrainGrid';
+import Coordinates from './coordinates';
+import Grid from "./grid";
 
 type TerrainNavigatorPropsType = {
 	terrain: Terrain
@@ -24,10 +26,15 @@ class TerrainNavigator extends Navigator {
 	/**
 	 * get navigation from here(current) to here(destination)
 	 * @param destinationInfo {Object}
+	 * @param destinationInfo.current {TerrainGrid} start point of the grid
+	 * @param destinationInfo.destination {TerrainGrid} destination point of the grid
 	 * @returns {Array}
 	 * @abstract
 	 */
 	getNavigation(destinationInfo: {current: Grid, destination: Grid}): Array<Grid> {
+
+		const neighbor: Array<Grid> = destinationInfo.current.getNeighbor();
+
 		return [];
 	}
 }
