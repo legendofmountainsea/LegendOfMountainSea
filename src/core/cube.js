@@ -30,7 +30,7 @@ class Cube {
 	 * @param cube {Cube}
 	 * @returns {number}
 	 */
-	distanceTo(cube){
+	distanceTo(cube: Cube){
 		return Math.max(Math.abs(this.x - cube.x), Math.abs(this.y - cube.y), Math.abs(this.z - cube.z));
 	}
 }

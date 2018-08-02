@@ -22,10 +22,10 @@ class TerrainGrid extends Grid {
 	}
 
 	// getData(center, range) {
-    //
+	//
 	// 	const length = range.radius * 2 + 1,
 	// 		coordinatesSet = [];
-    //
+	//
 	// 	for (let index = 0; index < length; ++index) {
 	// 		let blockRow = [];
 	// 		for (let columnIndex = 0; columnIndex < length; ++columnIndex) {
@@ -35,7 +35,7 @@ class TerrainGrid extends Grid {
 	// 		}
 	// 		coordinatesSet.push(blockRow);
 	// 	}
-    //
+	//
 	// 	return coordinatesSet;
 	// }
 
@@ -43,19 +43,41 @@ class TerrainGrid extends Grid {
 	 * convert to cube Coordinates system
 	 * @returns {Cube}
 	 */
-	convertToCube() {
+	convertToCube():Cube {
 		let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
 		let y = -this._point.x - z;
 		return Cube(this._point.x, y, z);
 	}
 
 	/**
+	 * get neighbor grid
+	 * @returns {Array}
+	 */
+	getNeighbor(): Array<Grid> {
+
+		const currentPoint = this._point;
+
+		const neighborPoints = [new Coordinates(currentPoint.x - 1, currentPoint.y - 1), new Coordinates(currentPoint.x - 1, currentPoint.y),
+			new Coordinates(currentPoint.x, currentPoint.y + 1), new Coordinates(currentPoint.x + 1, currentPoint.y),
+			new Coordinates(currentPoint.x + 1, currentPoint.y - 1), new Coordinates(currentPoint.x, currentPoint.y - 1)];
+
+		const neighborGrids = [];
+
+		for (const point of neighborPoints){
+			neighborGrids.push(new TerrainGrid({point:point}));
+		}
+
+		return neighborGrids;
+	}
+
+	/**
 	 * get distance to cube
-	 * @param grid {TerrainGrid}
+	 * @param grid {Grid}
 	 * @returns {number}
 	 */
-	distanceTo(grid: Grid){
-		return 0;
+	distanceTo(grid: Grid): number {
+		const gridToCube = grid.convertToCube();
+		return this.convertToCube().distanceTo(gridToCube);
 	}
 }
 

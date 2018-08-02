@@ -137,8 +137,6 @@ class Controller {
 			return;
 		}
 
-
-
 		this._pawn.onMouseClick(e);
 	}
 

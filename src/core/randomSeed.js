@@ -1,15 +1,23 @@
-export default class RandomSeed {
-	constructor(props){
-		props = props || {};
+//@flow
+
+type RandomSeedPropsType = {
+	seed: number | null
+};
+
+class RandomSeed {
+
+	_seed: number;
+
+	constructor(props: RandomSeedPropsType){
 		this._seed = props.seed || this._getDefaultSeed();
 	}
 	
-	_getDefaultSeed(){
-		let today = new Date(Date.now());
-		this._seed = today.getYear() + today.getMonth() + today.getDate() + today.getHours() + today.getMinutes() + today.getSeconds();
+	_getDefaultSeed(): number {
+		let today: Date = new Date(Date.now());
+		return today.getFullYear() + today.getMonth() + today.getDate() + today.getHours() + today.getMinutes() + today.getSeconds();
 	}
 	
-	setSeed(seed){
+	setSeed(seed: number){
 		this._seed = seed;
 	}
 	
@@ -17,7 +25,7 @@ export default class RandomSeed {
 		return this._seed;
 	}
 	
-	random(min, max){
+	random(min?: number, max?: number): number{
 		max = max || 1;
 		min = min || 0;
 		
@@ -27,3 +35,5 @@ export default class RandomSeed {
 		return min + rnd * (max - min);
 	}
 }
+
+export default RandomSeed;

@@ -1,5 +1,6 @@
 //@flow
 import Coordinates from './coordinates';
+import Cube from './cube';
 
 export type GridPropsType = {
     point: Coordinates,
@@ -18,6 +19,18 @@ class Grid {
 	 */
 	constructor(props: GridPropsType) {
         this._point = props.point;
+	}
+
+	convertToCube(): Cube{
+		throw new Error('Grid convertToCube needs to override!');
+	}
+
+	/**
+	 * get neighbor grid
+	 * @returns {Array}
+	 */
+	getNeighbor():Array<Grid> {
+		return [];
 	}
 
 	/**

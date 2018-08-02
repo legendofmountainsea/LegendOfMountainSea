@@ -57,6 +57,7 @@ class Hexagon extends Pattern {
 			}
 
 
+
 			// let worldTransformX = this._terrain._container.worldTransform.tx,
 			//     worldTransformY = this._terrain._container.worldTransform.ty;
 			//
