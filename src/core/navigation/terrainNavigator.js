@@ -1,10 +1,8 @@
 //@flow
 
 import Navigator from './navigator';
-import Terrain from '../render/terrain';
-import TerrainGrid from './terrainGrid';
-import Coordinates from './coordinates';
-import Grid from "./grid";
+import Terrain from '../../render/terrain';
+import Grid from './grid';
 
 type TerrainNavigatorPropsType = {
 	terrain: Terrain
@@ -33,7 +31,7 @@ class TerrainNavigator extends Navigator {
 	 */
 	getNavigation(destinationInfo: {current: Grid, destination: Grid}): Array<Grid> {
 
-		const neighbor: Array<Grid> = destinationInfo.current.getNeighbor();
+		//const neighbor: Array<Grid> = destinationInfo.current.getNeighbor();
 
 		return [];
 	}

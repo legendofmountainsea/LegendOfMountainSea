@@ -3,8 +3,8 @@
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
 import Hexagon from './hexagon';
-import Grid from '../core/grid';
-import Navigator from '../core/navigator';
+import Grid from '../core/navigation/grid';
+import Navigator from '../core/navigation/navigator';
 import {CharacterCrashingError} from '../util/errorUtil';
 
 

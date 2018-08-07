@@ -1,6 +1,6 @@
 //@flow
 import Grid from './grid';
-import Coordinates from './coordinates';
+import Coordinates from '../coordinates';
 import Cube from './cube';
 
 type TerrainGridPropsType = {

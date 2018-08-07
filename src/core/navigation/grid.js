@@ -1,5 +1,5 @@
 //@flow
-import Coordinates from './coordinates';
+import Coordinates from '../coordinates';
 import Cube from './cube';
 
 export type GridPropsType = {
