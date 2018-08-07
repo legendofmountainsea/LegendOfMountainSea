@@ -1,5 +1,5 @@
 import expect from 'expect.js';
-import TerrainGrid from '../../src/core/terrainGrid';
+import TerrainGrid from '../../src/core/navigation/terrainGrid';
 import Coordinates from '../../src/core/coordinates';
 
 describe("TerrainGrid", () => {

@@ -3,7 +3,7 @@
 import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
 
 import Coordinates from '../core/coordinates';
-import TerrainNavigator from '../core/terrainNavigator';
+import TerrainNavigator from '../core/navigation/terrainNavigator';
 
 import ElementCore from './elementCore';
 import Hexagon from './hexagon';

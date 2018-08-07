@@ -1,4 +1,4 @@
-import Coordinates from './coordinates';
+import Coordinates from '../coordinates';
 
 /**
  * class of a Cube which provide a better navigation algorithm for grids
