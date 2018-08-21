@@ -2,7 +2,10 @@
 import Grid from './grid';
 
 type PathNodePropsType = {
-	point: Grid
+	point: Grid,
+	step: number,
+	destination: Grid,
+	from: PathNode | null,
 };
 
 /**
@@ -11,7 +14,9 @@ type PathNodePropsType = {
 class PathNode {
 	_from: PathNode | null;
 	_toward: PathNode | null;
+	_destination: Grid;
 	_point: Grid;
+	_step: number;
 
 	/**
 	 * create a path node
@@ -20,8 +25,18 @@ class PathNode {
 	 */
 	constructor(props: PathNodePropsType){
 		this._point = props.point;
-		this._from = null;
+		this._step = props.step;
+		this._destination = props.destination;
+		this._from = props.from;
 		this._toward = null;
+	}
+
+	setFrom(point: PathNode): void {
+		this._from = point;
+	}
+
+	setToward(point: PathNode): void {
+		this._toward = point;
 	}
 
 
