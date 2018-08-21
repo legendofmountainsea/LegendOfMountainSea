@@ -3,6 +3,7 @@
 import Navigator from './navigator';
 import Terrain from '../../render/terrain';
 import Grid from './grid';
+import PathNode from './pathNode';
 
 type TerrainNavigatorPropsType = {
 	terrain: Terrain
@@ -31,7 +32,23 @@ class TerrainNavigator extends Navigator {
 	 */
 	getNavigation(destinationInfo: {current: Grid, destination: Grid}): Array<Grid> {
 
-		//const neighbor: Array<Grid> = destinationInfo.current.getNeighbor();
+		const {current, destination} = destinationInfo;
+		const neighbor: Array<Grid> = current.getNeighbor();
+		const pathNodes: Array<PathNode> = [];
+		const startNode: PathNode = new PathNode({point:current, step:0, destination: destination, from: null});
+
+		for(const grid of neighbor){
+
+			const pathNode = new PathNode({point: grid, step: 1, destination: destination, from: startNode});
+			pathNodes.push(pathNode);
+		}
+
+		this.getCorrectPath(pathNodes);
+
+		return [];
+	}
+
+	getCorrectPath(pathNodes: Array<PathNode>): Array<Grid> {
 
 		return [];
 	}
