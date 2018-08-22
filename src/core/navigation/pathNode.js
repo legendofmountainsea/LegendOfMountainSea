@@ -39,7 +39,9 @@ class PathNode {
 		this._toward = point;
 	}
 
-
+	getWeight(): number{
+		return this._point.distanceTo(this._destination) + this._step;
+	}
 }
 
 export default PathNode;
