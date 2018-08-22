@@ -50,6 +50,12 @@ class TerrainNavigator extends Navigator {
 
 	getCorrectPath(pathNodes: Array<PathNode>): Array<Grid> {
 
+		const weight: Set<number> = new Set();
+
+		for(const path of pathNodes ){
+			weight.add(path.getWeight());
+		}
+
 		return [];
 	}
 }
