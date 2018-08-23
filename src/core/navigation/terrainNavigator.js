@@ -30,30 +30,45 @@ class TerrainNavigator extends Navigator {
 	 * @returns {Array}
 	 * @abstract
 	 */
-	getNavigation(destinationInfo: {current: Grid, destination: Grid}): Array<Grid> {
+	getNavigation(destinationInfo: { current: Grid, destination: Grid }): Array<Grid> {
 
 		const {current, destination} = destinationInfo;
-		const neighbor: Array<Grid> = current.getNeighbor();
-		const pathNodes: Array<PathNode> = [];
-		const startNode: PathNode = new PathNode({point:current, step:0, destination: destination, from: null});
+		const startNode: PathNode = new PathNode({point: current, step: 0, destination: destination, from: null});
 
-		for(const grid of neighbor){
-
-			const pathNode = new PathNode({point: grid, step: 1, destination: destination, from: startNode});
-			pathNodes.push(pathNode);
-		}
-
-		this.getCorrectPath(pathNodes);
+		this.getCorrectPath(startNode.getNeighbor());
 
 		return [];
 	}
 
 	getCorrectPath(pathNodes: Array<PathNode>): Array<Grid> {
 
-		const weight: Set<number> = new Set();
+		//init
+		const weights: Array<number> = [];
+		const openPathMap: {[number | typeof undefined]: Array<PathNode>} = {};
 
-		for(const path of pathNodes ){
-			weight.add(path.getWeight());
+		for (const path of pathNodes) {
+			const weight = path.getWeight();
+			weights.push(weight);
+			if (openPathMap[weight] === null) {
+				openPathMap[weight] = [];
+			}
+
+			openPathMap[weight].push(path);
+		}
+
+		weights.sort((a, b) => (a - b));
+
+		const weightSet: Set<number> = new Set();
+
+		for (const weight of weights) {
+			weightSet.add(weight);
+		}
+
+		//scanPath
+		let currentWeight = weightSet.values().next().value;
+		let openPathsWithWeight: Array<PathNode> | typeof undefined = openPathMap[currentWeight];
+		if(openPathsWithWeight){
+			openPathsWithWeight.sort((a: PathNode, b: PathNode) => (a.getStep() - b.getStep()));
 		}
 
 		return [];
