@@ -39,6 +39,14 @@
     "test": "npm run unit-testing && npm run flow check && npm run lint && npm run build-prod",
     "unit-testing": "mocha test/**/*.test.js --compilers js:babel-register"
   },
+  "prettier": {
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "parser": "flow"
+  },
   "author": "Tyreal Gray",
   "license": "GPL-2.0",
   "devDependencies": {
@@ -59,6 +67,7 @@
     "jsdoc-babel": "0.4.0",
     "mocha": "5.1.1",
     "nwjs-builder-phoenix": "1.14.6",
+    "prettier": "1.14.2",
     "script-loader": "0.7.0",
     "webpack": "3.6.0",
     "webpack-dev-server": "2.7.1",
