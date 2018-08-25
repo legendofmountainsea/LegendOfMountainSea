@@ -29,7 +29,7 @@ class Grid {
 	 * get neighbor grid
 	 * @returns {Array}
 	 */
-	getNeighbor():Array<Grid> {
+	getNeighbors():Array<Grid> {
 		return [];
 	}
 

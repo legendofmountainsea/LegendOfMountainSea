@@ -21,7 +21,7 @@ class Pattern extends Actor {
 	getName() {
 		const assetData = this._assetData;
 
-		if(!assetData || assetData.DATA){
+		if(!assetData || !assetData.DATA){
 			return null;
 		}
 
@@ -30,7 +30,7 @@ class Pattern extends Actor {
 	
 	initResources(resources: Object) {
 		let resource = resources[this.getName()];
-		
+
 		this._sprite = new PIXI.Sprite(resource.texture);
 		
 		this._sprite.anchor.set(0.5, 0.5);

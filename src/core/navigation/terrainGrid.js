@@ -4,81 +4,80 @@ import Coordinates from '../coordinates';
 import Cube from './cube';
 
 type TerrainGridPropsType = {
-	point: Coordinates,
+    point: Coordinates,
 };
+
+const ODD_Q_DIRECTIONS = [
+    [[+1, 0], [+1, -1], [0, -1], [-1, -1], [-1, 0], [0, +1]],
+    [[+1, +1], [+1, 0], [0, -1], [-1, 0], [-1, +1], [0, +1]],
+];
 
 /**
  * class of terrain grid which provide navigation algorithm for terrain
  * @extends Grid
  */
 class TerrainGrid extends Grid {
-	/**
-	 * create a terrain grid
-	 * @param props {Object}
-	 * @param props.point {Coordinates} position on terrain
-	 */
-	constructor(props: TerrainGridPropsType) {
-		super(props);
-	}
+    /**
+     * create a terrain grid
+     * @param props {Object}
+     * @param props.point {Coordinates} position on terrain
+     */
+    constructor(props: TerrainGridPropsType) {
+        super(props);
+    }
 
-	// getData(center, range) {
-	//
-	// 	const length = range.radius * 2 + 1,
-	// 		coordinatesSet = [];
-	//
-	// 	for (let index = 0; index < length; ++index) {
-	// 		let blockRow = [];
-	// 		for (let columnIndex = 0; columnIndex < length; ++columnIndex) {
-	// 			let coordinatesX = center.x - (range.radius - 1) - Math.floor(index / 2) + columnIndex,
-	// 				coordinatesY = center.y - range.radius + index;
-	// 			blockRow.push(new Coordinates(coordinatesX, coordinatesY));
-	// 		}
-	// 		coordinatesSet.push(blockRow);
-	// 	}
-	//
-	// 	return coordinatesSet;
-	// }
+    /**
+     * convert to cube Coordinates system
+     * @returns {Cube}
+     */
+    convertToCube(): Cube {
+        let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
+        let y = -this._point.x - z;
+        return Cube(this._point.x, y, z);
+    }
 
-	/**
-	 * convert to cube Coordinates system
-	 * @returns {Cube}
-	 */
-	convertToCube():Cube {
-		let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
-		let y = -this._point.x - z;
-		return Cube(this._point.x, y, z);
-	}
+    /**
+     * get neighbor grid
+     * @returns {Array}
+     */
+    getNeighbors(): Array<Grid> {
+        const neighborGrids = [];
 
-	/**
-	 * get neighbor grid
-	 * @returns {Array}
-	 */
-	getNeighbor(): Array<Grid> {
+        for (const point of this.getNeighborsPoints()) {
+            neighborGrids.push(new TerrainGrid({ point: point }));
+        }
 
-		const currentPoint = this._point;
+        return neighborGrids;
+    }
 
-		const neighborPoints = [new Coordinates(currentPoint.x - 1, currentPoint.y - 1), new Coordinates(currentPoint.x - 1, currentPoint.y),
-			new Coordinates(currentPoint.x, currentPoint.y + 1), new Coordinates(currentPoint.x + 1, currentPoint.y),
-			new Coordinates(currentPoint.x + 1, currentPoint.y - 1), new Coordinates(currentPoint.x, currentPoint.y - 1)];
+    getNeighborsPoints(): Array<Coordinates> {
+        const currentPoint = this._point;
 
-		const neighborGrids = [];
+        const directionSet = ODD_Q_DIRECTIONS[currentPoint.x & 1];
 
-		for (const point of neighborPoints){
-			neighborGrids.push(new TerrainGrid({point:point}));
-		}
+        const neighborPoints = [];
 
-		return neighborGrids;
-	}
+        for (const direction of directionSet) {
+            neighborPoints.push(
+                new Coordinates(
+                    currentPoint.x + direction[0],
+                    currentPoint.y + direction[1],
+                ),
+            );
+        }
 
-	/**
-	 * get distance to cube
-	 * @param grid {Grid}
-	 * @returns {number}
-	 */
-	distanceTo(grid: Grid): number {
-		const gridToCube = grid.convertToCube();
-		return this.convertToCube().distanceTo(gridToCube);
-	}
+        return neighborPoints;
+    }
+
+    /**
+     * get distance to cube
+     * @param grid {Grid}
+     * @returns {number}
+     */
+    distanceTo(grid: Grid): number {
+        const gridToCube = grid.convertToCube();
+        return this.convertToCube().distanceTo(gridToCube);
+    }
 }
 
 export default TerrainGrid;

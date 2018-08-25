@@ -35,7 +35,7 @@ class TerrainNavigator extends Navigator {
 		const {current, destination} = destinationInfo;
 		const startNode: PathNode = new PathNode({point: current, step: 0, destination: destination, from: null});
 
-		this.getCorrectPath(startNode.getNeighbor());
+		this.getCorrectPath(startNode.getNeighbors());
 
 		return [];
 	}

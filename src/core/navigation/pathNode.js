@@ -43,8 +43,8 @@ class PathNode {
 		return this._step;
 	}
 
-	getNeighbor(): Array<PathNode> {
-		const neighbor: Array<Grid> = this.getLocation().getNeighbor();
+	getNeighbors(): Array<PathNode> {
+		const neighbor: Array<Grid> = this.getLocation().getNeighbors();
 		const startNode: PathNode = new PathNode({point: this.getLocation(), step: this.getStep(), destination: this.getDestination(), from: null});
 		const pathNodes: Array<PathNode> = [];
 
