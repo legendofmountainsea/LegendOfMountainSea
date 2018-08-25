@@ -67,8 +67,6 @@ class TerrainChain {
 					seed = Store.getConfig().seed;
 				});
 			} catch (e) {
-				console.error(e);
-
 				seed = new RandomSeed({seed:null}).random();
 			}
 		}
