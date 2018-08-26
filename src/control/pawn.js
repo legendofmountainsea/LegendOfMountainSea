@@ -38,7 +38,7 @@ class Pawn {
 	}
 
 	onMouseClick(hexagon: Object) {
-		this._character.moveToHexagon(hexagon);
+		this._character.navigateTo(hexagon.getGrid());
 	}
 	
 	onPressKeyA(e: Object) {

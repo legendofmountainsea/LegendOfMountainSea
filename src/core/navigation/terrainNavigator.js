@@ -1,12 +1,12 @@
 //@flow
 
-import Navigator from './navigator';
-import Terrain from '../../render/terrain';
+import type Terrain from '../../render/terrain';
 import Grid from './grid';
 import PathNode from './pathNode';
+import Navigator from './navigator';
 
 type TerrainNavigatorPropsType = {
-	terrain: Terrain
+	terrain: Terrain,
 };
 
 /**
@@ -27,51 +27,127 @@ class TerrainNavigator extends Navigator {
 	 * @param destinationInfo {Object}
 	 * @param destinationInfo.current {TerrainGrid} start point of the grid
 	 * @param destinationInfo.destination {TerrainGrid} destination point of the grid
-	 * @returns {Array}
+	 * @returns {Array<Grid>} array of Grid
 	 * @abstract
 	 */
-	getNavigation(destinationInfo: { current: Grid, destination: Grid }): Array<Grid> {
+	getNavigation(destinationInfo: {
+		current: Grid,
+		destination: Grid,
+	}): Array<Grid> {
+		const { current, destination } = destinationInfo;
+		const startNode: PathNode = new PathNode({
+			point: current,
+			step: 0,
+			destination: destination,
+			from: null,
+		});
 
-		const {current, destination} = destinationInfo;
-		const startNode: PathNode = new PathNode({point: current, step: 0, destination: destination, from: null});
-
-		this.getCorrectPath(startNode.getNeighbors());
-
-		return [];
+		return this.getCorrectPath(startNode);
 	}
 
-	getCorrectPath(pathNodes: Array<PathNode>): Array<Grid> {
+	/**
+	 * get an array of grid that should navigate a correct path, return empty array if there is no correct path
+	 * @param pathNodes {Array} array of PathNode
+	 * @returns {Array<Grid>} array of Grid
+	 */
+	getCorrectPath(startNode: PathNode): Array<Grid> {
+		const pathNodes = startNode.getNeighbors();
+		const scannedPaths = [startNode];
+		const correctPath = [];
 
-		//init
-		const weights: Array<number> = [];
-		const openPathMap: {[number | typeof undefined]: Array<PathNode>} = {};
+		let openPaths: Array<PathNode> = pathNodes;
+		let correctNode: PathNode | null = null;
+		let shouldScan: boolean = !(correctNode || !openPaths.length);
 
-		for (const path of pathNodes) {
-			const weight = path.getWeight();
-			weights.push(weight);
-			if (openPathMap[weight] === null) {
-				openPathMap[weight] = [];
+		while (shouldScan) {
+			const {
+				node,
+				closedPaths,
+				newOpenPaths,
+			} = TerrainNavigator.getCorrectNode(openPaths);
+
+			correctNode = node;
+
+			scannedPaths.push(...closedPaths);
+
+			openPaths = openPaths.filter(
+				(item) => !scannedPaths.includes(item),
+			);
+
+			openPaths.push(...newOpenPaths);
+
+			shouldScan = !(correctNode || !openPaths.length);
+		}
+
+		if (correctNode) {
+			let lastNode: PathNode | null = correctNode.getFrom();
+			correctPath.unshift(correctNode.getLocation());
+
+			while (lastNode && lastNode.getFrom()) {
+				correctPath.unshift(lastNode.getLocation());
+				lastNode = lastNode.getFrom();
+			}
+		}
+
+		return correctPath;
+	}
+
+	static getCorrectNode(
+		paths: Array<PathNode>,
+	): {
+		node: PathNode | null,
+		closedPaths: Array<PathNode>,
+		newOpenPaths: Array<PathNode>,
+	} {
+		let node = null;
+
+		const pathsMatchWeight: Array<PathNode> = [];
+		const smallestWeight = TerrainNavigator.getSmallestWeight(paths);
+		const priorityPathsByStep: Array<PathNode> = [];
+
+		const closedPaths = [];
+		const newOpenPaths = [];
+
+		for (const path of paths) {
+			if (path.getWeight() === smallestWeight) {
+				pathsMatchWeight.push(path);
+			}
+		}
+
+		pathsMatchWeight.sort((a, b) => a.getStep() - b.getStep());
+
+		const priorityStepNumber = pathsMatchWeight[0].getStep();
+
+		for (const path of pathsMatchWeight) {
+			if (path.getStep() !== priorityStepNumber) {
+				break;
 			}
 
-			openPathMap[weight].push(path);
+			priorityPathsByStep.push(path);
 		}
 
-		weights.sort((a, b) => (a - b));
+		for (const path of priorityPathsByStep) {
+			if (path.isAtDestination()) {
+				node = path;
+				break;
+			}
 
-		const weightSet: Set<number> = new Set();
-
-		for (const weight of weights) {
-			weightSet.add(weight);
+			closedPaths.push(path);
+			newOpenPaths.push(...path.getNeighbors());
 		}
 
-		//scanPath
-		let currentWeight = weightSet.values().next().value;
-		let openPathsWithWeight: Array<PathNode> | typeof undefined = openPathMap[currentWeight];
-		if(openPathsWithWeight){
-			openPathsWithWeight.sort((a: PathNode, b: PathNode) => (a.getStep() - b.getStep()));
+		return { node, closedPaths, newOpenPaths };
+	}
+
+	static getSmallestWeight(paths: Array<PathNode>): number {
+		const weights = [];
+		for (const path of paths) {
+			weights.push(path.getWeight());
 		}
 
-		return [];
+		weights.sort((a, b) => a - b);
+
+		return weights[0];
 	}
 }
 

@@ -50,17 +50,17 @@ class StageAgent {
 		this._initControllerEvent();
 		
 		this._renderer.stage.mousedown = (e) => {
-			this._controller.onMouseDown({
-				layerX: e.data.originalEvent.layerX,
-				layerY: e.data.originalEvent.layerY,
-			});
+			// this._controller.onMouseDown({
+			// 	layerX: e.data.originalEvent.layerX,
+			// 	layerY: e.data.originalEvent.layerY,
+			// });
 		};
 
 		this._renderer.stage.mouseup = (e) => {
-			this._controller.onMouseUp({
-				layerX: e.data.originalEvent.layerX,
-				layerY: e.data.originalEvent.layerY,
-			});
+			// this._controller.onMouseUp({
+			// 	layerX: e.data.originalEvent.layerX,
+			// 	layerY: e.data.originalEvent.layerY,
+			// });
 		};
 		
 		this._renderer.stage.mousemove = (e) => {
@@ -108,6 +108,10 @@ class StageAgent {
 		this._layerAgent.addElement(this._terrain, this.TERRAIN_LAYER_INDEX);
 		
 		return this;
+	}
+
+	getTerrain() {
+		return this._terrain;
 	}
 
 	/**
