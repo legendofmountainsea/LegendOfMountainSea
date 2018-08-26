@@ -1,4 +1,6 @@
-const path = require('path');
+const path = require('path'),
+	webpack = require('webpack'),
+	CircularDependencyPlugin = require('circular-dependency-plugin');
 
 module.exports = {
 	output: {
@@ -38,4 +40,12 @@ module.exports = {
 			'pixi': path.resolve(__dirname, '/node_modules/pixi.js/bin/pixi.min.js'),
 		},
 	},
+	plugins: [
+		new webpack.optimize.ModuleConcatenationPlugin(),
+		new CircularDependencyPlugin({
+			exclude: /node_modules/,
+			failOnError: true,
+			cwd: process.cwd(),
+		}),
+	],
 };

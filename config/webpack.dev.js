@@ -6,7 +6,6 @@ const webConfig = {
 	entry: './src/main.dev.js',
 	devtool: 'eval-source-map',
 	plugins: [
-		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
 				comments: false,
