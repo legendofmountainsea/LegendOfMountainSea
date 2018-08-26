@@ -2,14 +2,16 @@
 
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
-import Hexagon from './hexagon';
 import Grid from '../core/navigation/grid';
 import Navigator from '../core/navigation/navigator';
 import {CharacterCrashingError} from '../util/errorUtil';
+import type { AnimationAssetType } from '../static/type/assetDataType';
+import TerrainChain from '../chain/terrainChain';
+import TerrainGrid from '../core/navigation/terrainGrid';
 
 
 type CharacterPropsType = {
-    assetData?: Object ,
+    assetData?: AnimationAssetType,
     position: Coordinates,
     onRender?: (any,number) => void,
     onClick?: void => void,
@@ -24,9 +26,9 @@ class Character extends Actor {
     _frames: Object;
     _navigator: Navigator | null;
     _currentGrid: Grid | null;
-    _destinationHexagon: Hexagon | null;
     _destination: Coordinates | null;
     _animationStatus: string;
+	_navigation: Array<Grid>;
 
 	/**
 	 * create a character
@@ -35,11 +37,10 @@ class Character extends Actor {
 	constructor(props: CharacterPropsType) {
 		super(props);
 		this._frames = {};
-		this._navigator = null;
-		this._currentGrid = null;
-		this._destinationHexagon = null;
+		this._currentGrid = new TerrainGrid({point: new Coordinates(0,0)});
 		this._destination = null;
 		this._navigator = null;
+		this._navigation = [];
 		this._animationStatus = 'STAND';
 	}
 	
@@ -53,13 +54,15 @@ class Character extends Actor {
 
 		if(this._assetData) {
 
-			const assetDataInfo = this._assetData.DATA;
+			const assetData: AnimationAssetType = this._assetData;
+
+			const assetDataInfo = assetData.DATA;
 
             for (let asset in assetDataInfo) {
                 this._frames[assetDataInfo[asset].NAME] = [];
 
-                let resource = resources[assetDataInfo[asset].NAME];
-                for (let texture in resource.textures) {
+                const resource = resources[assetDataInfo[asset].NAME];
+                for (const texture in resource.textures) {
                     this._frames[assetDataInfo[asset].NAME].push(resource.textures[texture]);
                 }
             }
@@ -85,8 +88,10 @@ class Character extends Actor {
 	
 	initSprite() {
 		this._sprite.anchor.set(0.5, 0.5);
-		if(this._assetData){
-            this._sprite.animationSpeed = this._assetData.DATA[this._animationStatus].SPEED;
+		const assetData: AnimationAssetType = this._assetData;
+
+		if(assetData){
+            this._sprite.animationSpeed = assetData.DATA[this._animationStatus].SPEED;
 		}
 		
 		this.setPosition(this._initPosition);
@@ -98,11 +103,6 @@ class Character extends Actor {
 		this.playWalk();
 	}
 
-	moveToHexagon(hexagon: Hexagon){
-		this._destinationHexagon = hexagon;
-		this.moveTo(hexagon.toGlobalPosition());
-	}
-
 	navigateTo(grid: Grid){
         const navigator = this._navigator;
 
@@ -110,17 +110,39 @@ class Character extends Actor {
 			return;
 		}
 
-        navigator.getNavigation({current: this._currentGrid, destination: grid});
+        this._navigation = navigator.getNavigation({current: this._currentGrid, destination: grid});
+
+		if(!this._navigation.length){
+			return;
+		}
+
+		this.playWalk();
+
+		const coordinates = this._navigation[0].getPoint();
+
+		// let spriteTransformX = this._sprite.worldTransform.tx,
+		// 	spriteTransformY = this._sprite.worldTransform.ty;
+
+		if(!this._stage){
+			return;
+		}
+
+		const terrain = this._stage.getTerrain();
+
+		const container = terrain._container;
+
+		let worldTransformX = container.worldTransform.tx,
+			worldTransformY = container.worldTransform.ty;
+
+		const adjustedCoordinates = TerrainChain.adjustHexagonRenderPosition(new Coordinates(coordinates.x, coordinates.y));
+
+		this._destination = new Coordinates(adjustedCoordinates.x +worldTransformX, adjustedCoordinates.y +worldTransformY);
 	}
 	
 	getDestination(): Coordinates | null {
 		return this._destination;
 	}
 
-	getDestinationHexagon(): Hexagon | null{
-		return this._destinationHexagon;
-	}
-	
 	getDirection() {
 		return this._sprite.scale.x;
 	}
@@ -130,13 +152,29 @@ class Character extends Actor {
 	}
 
 	updateDestination(){
-        const destinationHexagon = this.getDestinationHexagon();
-
-		if(!this.getDestination() || !destinationHexagon){
+		if(!this.getDestination()){
 			return;
 		}
 
-		this._destination = destinationHexagon.toGlobalPosition();
+		const coordinates = this._navigation[0].getPoint();
+
+		// let spriteTransformX = this._sprite.worldTransform.tx,
+		// 	spriteTransformY = this._sprite.worldTransform.ty;
+
+		if(!this._stage){
+			return;
+		}
+
+		const terrain = this._stage.getTerrain();
+
+		const container = terrain._container;
+
+		let worldTransformX = container.worldTransform.tx,
+			worldTransformY = container.worldTransform.ty;
+
+		const adjustedCoordinates = TerrainChain.adjustHexagonRenderPosition(new Coordinates(coordinates.x, coordinates.y));
+
+		this._destination = new Coordinates(adjustedCoordinates.x +worldTransformX, adjustedCoordinates.y +worldTransformY);
 	}
 	
 	updatePosition(delta: number) {
@@ -147,10 +185,7 @@ class Character extends Actor {
 		this.updateDestination();
 		
 		if (this._isArrivedAtDestination()) {
-			if (this._animationStatus === 'WALK') {
-				this.playStand();
-			}
-			this._destination = null;
+			this.updateNavigation();
 			return;
 		}
 		
@@ -159,6 +194,19 @@ class Character extends Actor {
 
 
 		this.setPosition(new Coordinates(deltaX,deltaY));
+	}
+
+	updateNavigation(): void {
+		this._currentGrid = this._navigation.shift();
+
+		if(!this._navigation.length){
+			if (this._animationStatus === 'WALK') {
+				this.playStand();
+			}
+			this._destination = null;
+		}else {
+			this.updateDestination();
+		}
 	}
 	
 	movingOnAxisXToDestination(delta: number): number {

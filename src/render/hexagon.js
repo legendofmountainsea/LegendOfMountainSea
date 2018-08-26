@@ -1,10 +1,11 @@
 //@flow
 
 import Pattern from './pattern';
-import Terrain from './terrain';
 import Coordinates from '../core/coordinates';
 import TerrainGrid from '../core/navigation/terrainGrid';
 import TerrainChain from '../chain/terrainChain';
+
+import type Terrain from './terrain';
 
 type HexagonPropsType = {
 	assetData?: Object,
