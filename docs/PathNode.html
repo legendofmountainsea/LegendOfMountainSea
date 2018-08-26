@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Class: TerrainChain</title>
+    <title>Class: PathNode</title>
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -845,7 +845,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="TerrainChain.html">Class: TerrainChain</h1>
+        <h1 class="page-title" data-filename="PathNode.html">Class: PathNode</h1>
         
 
 
@@ -854,10 +854,10 @@
     
 <header>
     <div class="header content-size">
-        <h2>TerrainChain
+        <h2>PathNode
         </h2>
         
-            <div class="class-description">class for connecting data and terrain</div>
+            <div class="class-description">a class for managing path in a star navigation algorithm</div>
         
     </div>
 </header>  
@@ -870,12 +870,12 @@
         
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="TerrainChain">
-            <a class="share-icon" href="#TerrainChain"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="PathNode">
+            <a class="share-icon" href="#PathNode"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                new TerrainChain
+                new PathNode
             </span>
-            <span class="signature">()</span>
+            <span class="signature">(props)</span>
             
             
             
@@ -890,11 +890,174 @@
 <dd>
     
     
+    <div class="description">
+        create a path node
+    </div>
+    
 
     
     
     
     
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                
+                
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>point</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Grid.html">Grid</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                current position in path</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>step</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                current step</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>destination</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Grid.html">Grid</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                destination where player wants to be</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>from</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Grid.html">Grid</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                where this path connect with, if null this path is a start point</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
     
     
     
@@ -956,14 +1119,14 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id=".getTerrainAssetData">
-            <a class="share-icon" href="#.getTerrainAssetData"><span class="glyphicon glyphicon-link"></span></a>
+        <h4 class="name" id="getDestination">
+            <a class="share-icon" href="#getDestination"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
-                TerrainChain.getTerrainAssetData
+                getDestination
             </span>
-            <span class="signature">(renderPoint)</span><span class="type-signature">Object</span>
+            <span class="signature">()</span><span class="type-signature"><a href="Grid.html">Grid</a></span>
             
-            <span class="access-signature">static</span>
+            
             
             
         </h4>
@@ -977,7 +1140,7 @@
     
     
     <div class="description">
-        get terrain asset data for render by render coordinates point
+        get destination where player wants to be
     </div>
     
 
@@ -985,51 +1148,6 @@
     
     
     
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>renderPoint</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Coordinates.html">Coordinates</a></span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
     
     
     
@@ -1083,7 +1201,7 @@
             
             <td class="type">
             
-                        Object
+                        <a href="Grid.html">Grid</a>
                         
                     
             </td>
@@ -1093,6 +1211,628 @@
     </tbody>
 </table>
 
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getFrom">
+            <a class="share-icon" href="#getFrom"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getFrom
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="PathNode.html">PathNode</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get where this path connect with
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="PathNode.html">PathNode</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getLocation">
+            <a class="share-icon" href="#getLocation"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getLocation
+            </span>
+            <span class="signature">()</span><span class="type-signature"><a href="Grid.html">Grid</a></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get this path's grid location
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="Grid.html">Grid</a>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getNeighbors">
+            <a class="share-icon" href="#getNeighbors"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getNeighbors
+            </span>
+            <span class="signature">()</span><span class="type-signature">Array.&lt;<a href="PathNode.html">PathNode</a>></span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get neighbors pathNode according to this path's grid location
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        Array.&lt;<a href="PathNode.html">PathNode</a>>
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getStep">
+            <a class="share-icon" href="#getStep"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getStep
+            </span>
+            <span class="signature">()</span><span class="type-signature">number</span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get current step
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getWeight">
+            <a class="share-icon" href="#getWeight"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                getWeight
+            </span>
+            <span class="signature">()</span><span class="type-signature">number</span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        get navigation weight on this path
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        number
+                        
+                    
+            </td>
+            <td class="description last"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="setFrom">
+            <a class="share-icon" href="#setFrom"><span class="glyphicon glyphicon-link"></span></a>
+            <span class="">
+                setFrom
+            </span>
+            <span class="signature">(point)</span>
+            
+            
+            
+            
+        </h4>
+    
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        set where this path connect with
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>point</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="PathNode.html">PathNode</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
     
     
     
