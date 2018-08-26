@@ -5,7 +5,6 @@ const webpack = require('webpack'),
 const nodeConfig = {
 	entry: './src/main.client.js',
 	plugins: [
-		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
 				comments: false,

@@ -37,9 +37,10 @@
     "start-mac": "npm run build-client && npm run run-mac",
     "start-win": "npm run build-client && npm run run-win",
     "test": "npm run unit-testing && npm run flow check && npm run lint && npm run build-prod",
-    "unit-testing": "mocha test/**/*.test.js --compilers js:babel-register"
+    "unit-testing": "mocha test/**/*.test.js --require babel-core/register"
   },
   "prettier": {
+    "useTabs": true,
     "tabWidth": 4,
     "singleQuote": true,
     "trailingComma": "all",
@@ -59,6 +60,7 @@
     "babel-preset-env": "1.6.0",
     "babel-preset-flow": "6.23.0",
     "babel-register": "6.26.0",
+    "circular-dependency-plugin": "^4.4.0",
     "eslint": "4.9.0",
     "expect.js": "0.3.1",
     "flow-bin": "0.74.0",

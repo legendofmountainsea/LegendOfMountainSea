@@ -6,7 +6,6 @@ const webpack = require('webpack'),
 const nodeConfig = {
 	entry: './src/main.client.js',
 	plugins: [
-		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.UglifyJsPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production'),
