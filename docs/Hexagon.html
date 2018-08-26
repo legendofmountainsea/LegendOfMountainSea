@@ -19,7 +19,7 @@
     
     
     <script>
-    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{}};
+    var config = {"monospaceLinks":false,"cleverLinks":false,"applicationName":"LegendOfMountainSea","default":{}};
     </script>
     
 
@@ -29,7 +29,7 @@
 <div id="wrap" class="clearfix">
     
 <div class="navigation">
-    <h3 class="applicationName"><a href="index.html"></a></h3>
+    <h3 class="applicationName"><a href="index.html">LegendOfMountainSea</a></h3>
     <button id="menuToggle" class="btn btn-link btn-lg menu-toggle">
         <span class="glyphicon glyphicon-menu-hamburger"></span>
     </button>
@@ -304,6 +304,8 @@
             
                 <li class="parent  " data-name="Grid#distanceTo"><a href="Grid.html#distanceTo">distanceTo</a></li>
             
+                <li class="parent  " data-name="Grid#getNeighbors"><a href="Grid.html#getNeighbors">getNeighbors</a></li>
+            
             </ul>
             <ul class="events itemMembers">
             
@@ -331,8 +333,6 @@
                 <li class="parent  " data-name="Hexagon#adjustRenderPosition"><a href="Hexagon.html#adjustRenderPosition">adjustRenderPosition</a></li>
             
                 <li class="parent  " data-name="Hexagon#getPositionOnTerrain"><a href="Hexagon.html#getPositionOnTerrain">getPositionOnTerrain</a></li>
-            
-                <li class="parent  " data-name="Hexagon#setDimensions"><a href="Hexagon.html#setDimensions">setDimensions</a></li>
             
                 <li class="parent  " data-name="Hexagon#setPositionOnTerrain"><a href="Hexagon.html#setPositionOnTerrain">setPositionOnTerrain</a></li>
             
@@ -457,6 +457,44 @@
             <span class="subtitle">Methods</span>
             
                 <li class="parent  " data-name="Navigator#getNavigation"><a href="Navigator.html#getNavigation">getNavigation</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="PathNode">
+            <span class="title  ">
+                
+                <a href="PathNode.html">PathNode</a>
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="PathNode#getDestination"><a href="PathNode.html#getDestination">getDestination</a></li>
+            
+                <li class="parent  " data-name="PathNode#getFrom"><a href="PathNode.html#getFrom">getFrom</a></li>
+            
+                <li class="parent  " data-name="PathNode#getLocation"><a href="PathNode.html#getLocation">getLocation</a></li>
+            
+                <li class="parent  " data-name="PathNode#getNeighbors"><a href="PathNode.html#getNeighbors">getNeighbors</a></li>
+            
+                <li class="parent  " data-name="PathNode#getStep"><a href="PathNode.html#getStep">getStep</a></li>
+            
+                <li class="parent  " data-name="PathNode#getWeight"><a href="PathNode.html#getWeight">getWeight</a></li>
+            
+                <li class="parent  " data-name="PathNode#setFrom"><a href="PathNode.html#setFrom">setFrom</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -626,8 +664,6 @@
             
                 <li class="parent  " data-name="Terrain#flush"><a href="Terrain.html#flush">flush</a></li>
             
-                <li class="parent  " data-name="Terrain#getHexagonsBetween"><a href="Terrain.html#getHexagonsBetween">getHexagonsBetween</a></li>
-            
                 <li class="  " data-name="Terrain#getID"><a href="Terrain.html#getID">getID</a></li>
             
                 <li class="  " data-name="Terrain#getIndex"><a href="Terrain.html#getIndex">getIndex</a></li>
@@ -716,6 +752,8 @@
             
                 <li class="parent  " data-name="TerrainGrid#distanceTo"><a href="TerrainGrid.html#distanceTo">distanceTo</a></li>
             
+                <li class="parent  " data-name="TerrainGrid#getNeighbors"><a href="TerrainGrid.html#getNeighbors">getNeighbors</a></li>
+            
             </ul>
             <ul class="events itemMembers">
             
@@ -739,6 +777,8 @@
             <ul class="methods itemMembers">
             
             <span class="subtitle">Methods</span>
+            
+                <li class="parent  " data-name="TerrainNavigator#getCorrectPath"><a href="TerrainNavigator.html#getCorrectPath">getCorrectPath</a></li>
             
                 <li class="parent  " data-name="TerrainNavigator#getNavigation"><a href="TerrainNavigator.html#getNavigation">getNavigation</a></li>
             
@@ -1262,220 +1302,6 @@
             
 <dt>
     <div class="nameContainer">
-        <h4 class="name" id="setDimensions">
-            <a class="share-icon" href="#setDimensions"><span class="glyphicon glyphicon-link"></span></a>
-            <span class="">
-                setDimensions
-            </span>
-            <span class="signature">(dimensions)</span><span class="type-signature"><a href="Hexagon.html">Hexagon</a></span>
-            
-            
-            
-            
-        </h4>
-    
-        
-    </div>
-
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        set hexagon dimensions info to tell render how to render correct position on terrain,then set a hit area to avoid hit zone overlap
-    </div>
-    
-
-    
-    
-    
-    
-    
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>dimensions</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                
-                
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-            
-            
-            
-            <td class="description last">
-                
-                </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-            </td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Type</th>
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-        <tr>
-            
-            <td class="type">
-            
-                        <a href="Hexagon.html">Hexagon</a>
-                        
-                    
-            </td>
-            <td class="description last"></td>
-        </tr>
-    
-    </tbody>
-</table>
-
-    
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <div class="nameContainer">
         <h4 class="name" id="setPositionOnTerrain">
             <a class="share-icon" href="#setPositionOnTerrain"><span class="glyphicon glyphicon-link"></span></a>
             <span class="">
@@ -1638,7 +1464,7 @@
 
         <footer class="content-size">
             <div class="footer">
-                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jul 08 2018 18:33:17 GMT+0200 (西欧夏令时)
+                Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Aug 27 2018 01:02:38 GMT+0200 (西欧夏令时)
             </div>
         </footer>
     </div>
