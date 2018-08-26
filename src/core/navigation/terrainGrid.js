@@ -33,7 +33,7 @@ class TerrainGrid extends Grid {
     convertToCube(): Cube {
         let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
         let y = -this._point.x - z;
-        return Cube(this._point.x, y, z);
+        return new Cube(this._point.x, y, z);
     }
 
     /**

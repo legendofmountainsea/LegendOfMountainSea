@@ -1,5 +1,5 @@
 //@flow
-import Terrain from '../../render/terrain';
+import type Terrain from '../../render/terrain';
 import Grid from './grid';
 
 export type NavigatorPropsType = {
@@ -27,9 +27,9 @@ class Navigator {
 	 * @returns {Array}
 	 * @abstract
 	 */
-    getNavigation(destinationInfo: {current: Grid, destination: Grid}): Array<Grid> {
+	getNavigation(destinationInfo: { current: Grid, destination: Grid }): Array<Grid> {
 		return [];
-    }
+	}
 }
 
 export default Navigator;

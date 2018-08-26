@@ -33,6 +33,10 @@ class Grid {
 		return [];
 	}
 
+	getPoint() {
+		return this._point;
+	}
+
 	/**
 	 * get distance to cube
 	 * @param grid {Grid}

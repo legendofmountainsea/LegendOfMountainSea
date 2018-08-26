@@ -27,8 +27,8 @@ test_script:
 
 after_test:
   - npm install istanbul@1.1.0-alpha.1
-  - npm install codecov
-  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R spec --compilers js:babel-register
+  - npm install codecov@3.0.4
+  - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.test.js -R spec --require babel-core/register
   - ./node_modules/.bin/codecov
 
 cache:
