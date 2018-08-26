@@ -2,9 +2,10 @@
 
 import ElementCore from './elementCore';
 import Coordinates from '../core/coordinates';
+import type { AnimationAssetType, NoneAnimationAssetType } from '../static/type/assetDataType';
 
 type ActorPropsType = {
-    assetData?: Object,
+    assetData?: NoneAnimationAssetType | AnimationAssetType,
 	position: Coordinates,
 	onRender?: (any,number) => void,
 	onClick?: void => void,
@@ -19,7 +20,7 @@ class Actor extends ElementCore {
     _position: Coordinates | null;
     _sprite: any;
     _initPosition: Coordinates;
-    _assetData: ?Object;
+    _assetData: ?(NoneAnimationAssetType | AnimationAssetType);
     _onRender: ?((any,number) => void);
     _onClick: ?(void => void);
 

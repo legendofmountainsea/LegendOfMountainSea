@@ -1,9 +1,10 @@
 //@flow
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
+import type { NoneAnimationAssetType } from '../static/type/assetDataType';
 
 type PatternPropsType = {
-	assetData?: Object,
+	assetData?: NoneAnimationAssetType,
 	position: Coordinates,
 	onRender?: (any,number) => void,
 	onClick?: void => void,
@@ -19,7 +20,7 @@ class Pattern extends Actor {
 	}
 	
 	getName() {
-		const assetData = this._assetData;
+		const assetData: NoneAnimationAssetType | null = this._assetData;
 
 		if(!assetData || !assetData.DATA){
 			return null;

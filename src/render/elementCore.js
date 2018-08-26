@@ -1,9 +1,10 @@
 //@flow
 import StageAgent from './stageAgent';
 import Coordinates from '../core/coordinates';
+import type { AnimationAssetType, NoneAnimationAssetType } from '../static/type/assetDataType';
 
 type ElementCorePropsType = {
-    assetData?: Object,
+    assetData?: NoneAnimationAssetType | AnimationAssetType,
 };
 /**
  * Common element class which render on the map.

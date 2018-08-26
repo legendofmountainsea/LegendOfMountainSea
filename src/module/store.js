@@ -1,4 +1,3 @@
-//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/26
 import {EXECUTE_IN_CLIENT, EXECUTE_IN_CLIENT_WITH_RETURN} from '../util/envUtil';
 import RandomSeed from '../core/randomSeed';
 

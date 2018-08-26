@@ -1,5 +1,4 @@
 import {consoleAlert, consoleWarning} from '../interface/devConsole';
-import {EXECUTE_IN_CLIENT} from './envUtil';
 
 const NATIVE_MODULE_MISSING = '**LOMS** Native Module is missing! NATIVE_MODULE_MISSING';
 
@@ -29,7 +28,7 @@ export class DevConsole {
 	waitForConsoleThenStart() {
 		if (typeof global.window !== 'undefined') {
 
-			EXECUTE_IN_CLIENT(() => {
+			if (nw) {
 				console.warn = (warn) => {
 					this.parseMessage(warn, consoleWarning);
 				};
@@ -41,7 +40,7 @@ export class DevConsole {
 				global.window.console = console;
 
 				console.warn('DevConsole on');
-			});
+			}
 
 		} else {
 			setTimeout(() => {

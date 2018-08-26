@@ -1,5 +1,3 @@
-//TODO https://github.com/SkyHarp/LegendOfMountainSea/issues/67
-
 import Store from '../module/store';
 
 let content = null;
