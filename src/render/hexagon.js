@@ -1,9 +1,9 @@
 //@flow
 
 import Pattern from './pattern';
-import Coordinates from '../core/coordinates';
 import TerrainGrid from '../core/navigation/terrainGrid';
 import TerrainChain from '../chain/terrainChain';
+import type Coordinates from '../core/coordinates';
 
 import type Terrain from './terrain';
 
@@ -56,21 +56,6 @@ class Hexagon extends Pattern {
 			if(stage){
 				stage.onClickEventTrigger(this);
 			}
-
-
-
-			// let worldTransformX = this._terrain._container.worldTransform.tx,
-			//     worldTransformY = this._terrain._container.worldTransform.ty;
-			//
-			// console.log(worldTransformX, worldTransformY);
-			//
-			// worldTransformX = this._sprite.worldTransform.tx;
-			// worldTransformY = this._sprite.worldTransform.ty;
-			//
-			// console.log(worldTransformX, worldTransformY);
-			//
-			// console.log((this._width / 2) + this._positionOnTerrain.x * (this._height * COS_30_DEGREES ),
-			//     this._positionOnTerrain.y * this._height + (this._height / 2) * (1 + Math.abs(this._positionOnTerrain.x) % 2),)
 		};
 
 		this.setPosition(TerrainChain.adjustHexagonRenderPosition(this._positionOnTerrain));

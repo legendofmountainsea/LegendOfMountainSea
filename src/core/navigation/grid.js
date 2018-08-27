@@ -1,6 +1,6 @@
 //@flow
-import Coordinates from '../coordinates';
-import Cube from './cube';
+import type Cube from './cube';
+import type Coordinates from '../coordinates';
 
 export type GridPropsType = {
     point: Coordinates,

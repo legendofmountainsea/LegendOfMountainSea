@@ -2,12 +2,12 @@
 
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
-import Grid from '../core/navigation/grid';
-import Navigator from '../core/navigation/navigator';
 import {CharacterCrashingError} from '../util/errorUtil';
-import type { AnimationAssetType } from '../static/type/assetDataType';
 import TerrainChain from '../chain/terrainChain';
 import TerrainGrid from '../core/navigation/terrainGrid';
+import type Grid from '../core/navigation/grid';
+import type Navigator from '../core/navigation/navigator';
+import type { AnimationAssetType } from '../static/type/assetDataType';
 
 
 type CharacterPropsType = {

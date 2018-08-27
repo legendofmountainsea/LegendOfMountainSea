@@ -1,5 +1,5 @@
 //@flow
-import Pawn from './pawn';
+import type Pawn from './pawn';
 
 type ControllerProps = {
 	mouse: Object;

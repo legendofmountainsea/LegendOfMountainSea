@@ -1,6 +1,6 @@
 //@flow
+import type Grid from './grid';
 import type Terrain from '../../render/terrain';
-import Grid from './grid';
 
 export type NavigatorPropsType = {
 	terrain: Terrain

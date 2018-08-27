@@ -1,5 +1,5 @@
 //@flow
-import Grid from './grid';
+import type Grid from './grid';
 
 type PathNodePropsType = {
 	point: Grid,

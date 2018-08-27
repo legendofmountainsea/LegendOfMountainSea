@@ -1,6 +1,6 @@
 //@flow
 import Actor from './actor';
-import Coordinates from '../core/coordinates';
+import type Coordinates from '../core/coordinates';
 import type { NoneAnimationAssetType } from '../static/type/assetDataType';
 
 type PatternPropsType = {

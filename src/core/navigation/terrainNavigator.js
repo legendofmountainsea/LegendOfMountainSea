@@ -47,7 +47,7 @@ class TerrainNavigator extends Navigator {
 
 	/**
 	 * get an array of grid that should navigate a correct path, return empty array if there is no correct path
-	 * @param pathNodes {Array} array of PathNode
+	 * @param startNode {PathNode} array of PathNode
 	 * @returns {Array<Grid>} array of Grid
 	 */
 	getCorrectPath(startNode: PathNode): Array<Grid> {
