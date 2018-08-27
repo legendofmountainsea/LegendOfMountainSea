@@ -11,7 +11,6 @@ class StageAgent {
 	 * @param props.controller {Controller} controller instance
 	 */
 	constructor(props) {
-		props = props || {};
 		this._renderer = props.renderer;
 		this._controller = props.controller;
 		this._terrain = null;
@@ -50,17 +49,17 @@ class StageAgent {
 		this._initControllerEvent();
 		
 		this._renderer.stage.mousedown = (e) => {
-			// this._controller.onMouseDown({
-			// 	layerX: e.data.originalEvent.layerX,
-			// 	layerY: e.data.originalEvent.layerY,
-			// });
+			this._controller.onMouseDown({
+				layerX: e.data.originalEvent.layerX,
+				layerY: e.data.originalEvent.layerY,
+			});
 		};
 
 		this._renderer.stage.mouseup = (e) => {
-			// this._controller.onMouseUp({
-			// 	layerX: e.data.originalEvent.layerX,
-			// 	layerY: e.data.originalEvent.layerY,
-			// });
+			this._controller.onMouseUp({
+				layerX: e.data.originalEvent.layerX,
+				layerY: e.data.originalEvent.layerY,
+			});
 		};
 		
 		this._renderer.stage.mousemove = (e) => {

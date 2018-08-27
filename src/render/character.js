@@ -25,7 +25,7 @@ class Character extends Actor {
 
     _frames: Object;
     _navigator: Navigator | null;
-    _currentGrid: Grid | null;
+    _currentGrid: Grid;
     _destination: Coordinates | null;
     _animationStatus: string;
 	_navigation: Array<Grid>;
@@ -37,13 +37,13 @@ class Character extends Actor {
 	constructor(props: CharacterPropsType) {
 		super(props);
 		this._frames = {};
-		this._currentGrid = new TerrainGrid({point: new Coordinates(0,0)});
+		this._currentGrid = new TerrainGrid({point: props.position});
 		this._destination = null;
 		this._navigator = null;
 		this._navigation = [];
 		this._animationStatus = 'STAND';
 	}
-	
+
 	/**
 	 * init asset resource for render
 	 * @param resources
@@ -81,11 +81,11 @@ class Character extends Actor {
 		this._navigator = navigator;
 		return this;
 	}
-	
+
 	setElement(sprite: Object) {
 		this._sprite = sprite;
 	}
-	
+
 	initSprite() {
 		this._sprite.anchor.set(0.5, 0.5);
 		const assetData: AnimationAssetType = this._assetData;
@@ -93,52 +93,36 @@ class Character extends Actor {
 		if(assetData){
             this._sprite.animationSpeed = assetData.DATA[this._animationStatus].SPEED;
 		}
-		
-		this.setPosition(this._initPosition);
+
+		const position: Coordinates | null = this._convertGridPositionToTerrain(this._initPosition);
+
+		if(!position) {
+			throw new CharacterCrashingError(this);
+		}
+
+		this.setPosition(position);
 		this._sprite.play();
 	}
-	
+
 	moveTo(position: Coordinates) {
+		if (this._animationStatus !== 'WALK') {
+			this.playWalk();
+		}
 		this._destination = position;
-		this.playWalk();
 	}
 
 	navigateTo(grid: Grid){
         const navigator = this._navigator;
 
-		if(!navigator || !this._currentGrid){
+		if(!navigator || !this._currentGrid || this._navigation.length){
 			return;
 		}
 
         this._navigation = navigator.getNavigation({current: this._currentGrid, destination: grid});
 
-		if(!this._navigation.length){
-			return;
-		}
-
-		this.playWalk();
-
-		const coordinates = this._navigation[0].getPoint();
-
-		// let spriteTransformX = this._sprite.worldTransform.tx,
-		// 	spriteTransformY = this._sprite.worldTransform.ty;
-
-		if(!this._stage){
-			return;
-		}
-
-		const terrain = this._stage.getTerrain();
-
-		const container = terrain._container;
-
-		let worldTransformX = container.worldTransform.tx,
-			worldTransformY = container.worldTransform.ty;
-
-		const adjustedCoordinates = TerrainChain.adjustHexagonRenderPosition(new Coordinates(coordinates.x, coordinates.y));
-
-		this._destination = new Coordinates(adjustedCoordinates.x +worldTransformX, adjustedCoordinates.y +worldTransformY);
+		this._setDestinationByNavigation();
 	}
-	
+
 	getDestination(): Coordinates | null {
 		return this._destination;
 	}
@@ -146,7 +130,7 @@ class Character extends Actor {
 	getDirection() {
 		return this._sprite.scale.x;
 	}
-	
+
 	tick(delta: number) {
 		this.updatePosition(delta);
 	}
@@ -156,13 +140,26 @@ class Character extends Actor {
 			return;
 		}
 
+		this._setDestinationByNavigation();
+	}
+
+	_setDestinationByNavigation(): void{
+		if(!this._navigation.length){
+			return;
+		}
+
 		const coordinates = this._navigation[0].getPoint();
 
-		// let spriteTransformX = this._sprite.worldTransform.tx,
-		// 	spriteTransformY = this._sprite.worldTransform.ty;
+		const position: Coordinates | null = this._convertGridPositionToTerrain(coordinates);
 
+		if(position){
+			this.moveTo(position);
+		}
+	}
+
+	_convertGridPositionToTerrain(coordinates: Coordinates): Coordinates | null {
 		if(!this._stage){
-			return;
+			return null;
 		}
 
 		const terrain = this._stage.getTerrain();
@@ -172,23 +169,23 @@ class Character extends Actor {
 		let worldTransformX = container.worldTransform.tx,
 			worldTransformY = container.worldTransform.ty;
 
-		const adjustedCoordinates = TerrainChain.adjustHexagonRenderPosition(new Coordinates(coordinates.x, coordinates.y));
+		const adjustedCoordinates = TerrainChain.adjustHexagonRenderPosition(coordinates);
 
-		this._destination = new Coordinates(adjustedCoordinates.x +worldTransformX, adjustedCoordinates.y +worldTransformY);
+		return new Coordinates(adjustedCoordinates.x +worldTransformX, adjustedCoordinates.y +worldTransformY);
 	}
-	
+
 	updatePosition(delta: number) {
 		if (!this._sprite || !this.getDestination()) {
 			return;
 		}
 
 		this.updateDestination();
-		
+
 		if (this._isArrivedAtDestination()) {
 			this.updateNavigation();
 			return;
 		}
-		
+
 		const deltaX = this.movingOnAxisXToDestination(delta),
 			deltaY = this.movingOnAxisYToDestination(delta);
 
@@ -208,7 +205,7 @@ class Character extends Actor {
 			this.updateDestination();
 		}
 	}
-	
+
 	movingOnAxisXToDestination(delta: number): number {
 
         const destination = this.getDestination();
@@ -230,7 +227,7 @@ class Character extends Actor {
 
 		return this._getAxisDelta(x,delta,distanceX);
 	}
-	
+
 	_isMovingDirectionNeedToChange(): boolean {
         const destination = this.getDestination();
 
@@ -241,13 +238,13 @@ class Character extends Actor {
 		const {x} = this._sprite.position;
 
 		const distanceX = destination.x - x;
-		
+
 		const direction = Math.sign(distanceX) < 0 ? this.DIRECTION_LEFT : this.DIRECTION_RIGHT;
-		
+
 		return (this._sprite.scale.x !== direction);
 	}
-	
-	
+
+
 	movingOnAxisYToDestination(delta: number): number {
         const destination = this.getDestination();
 
@@ -278,7 +275,7 @@ class Character extends Actor {
 
 		return axisDelta;
 	}
-	
+
 	_isArrivedAtDestination() {
 		const destination = this.getDestination();
 
@@ -287,68 +284,68 @@ class Character extends Actor {
         }
 
 		const {x, y} = this._sprite.position;
-		
+
 		return (x === destination.x && y === destination.y);
 	}
-	
+
 	playStand() {
 		this.setAnimation('STAND');
 		this.setAnimationStatus('STAND');
 	}
-	
+
 	playWalk() {
 		this.setAnimation('WALK');
 		this.setAnimationStatus('WALK');
 	}
-	
+
 	playAttack() {
 		this.setAnimation('ATTACK', false, () => {
 			this.setAnimation(this.getAnimationStatus());
 		});
 	}
-	
+
 	playBattle() {
 		this.setAnimation('BATTLE');
 		this.setAnimationStatus('BATTLE');
 	}
-	
+
 	playNearDeath() {
 		this.setAnimation('NEAR_DEATH');
 		this.setAnimationStatus('NEAR_DEATH');
 	}
-	
+
 	playUltimate() {
 		this.setAnimation('ULTIMATE', false, () => {
 			this.setAnimation(this.getAnimationStatus());
 		});
 	}
-	
+
 	setAnimationStatus(status: string) {
 		this._animationStatus = status;
 		return this;
 	}
-	
+
 	getAnimationStatus(): string {
 		return this._animationStatus;
 	}
-	
+
 	setAnimation(name: string, loop: boolean = true, onComplete: void => void = () => {} ) {
-		
+
 		if (!this._sprite || this._noAsset || !this._assetData) {
 			return;
 		}
-		
+
 		this._sprite.textures = this._frames[this._assetData.DATA[name].NAME];
-		
+
 		this._sprite.animationSpeed = this._assetData.DATA[name].SPEED;
-		
+
 		this._sprite.onComplete = onComplete;
-		
+
 		this._sprite.loop = loop;
-		
+
 		this._sprite.play();
 	}
-	
+
 	dispose(option: boolean = false) {
 		super.dispose(option);
 		this._frames = {};

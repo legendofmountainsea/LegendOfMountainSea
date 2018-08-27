@@ -28,13 +28,13 @@ class Pawn {
 	}
 	
 	onMouseDown(e: Object) {
-		const {layerX, layerY} = e;
-		this._character.moveTo({x: layerX, y: layerY});
+		//const {layerX, layerY} = e;
+		//this._character.moveTo({x: layerX, y: layerY});
 	}
 	
 	onMouseUp(e: Object) {
-		const {layerX, layerY} = e;
-		this._character.moveTo({x: layerX, y: layerY});
+		//const {layerX, layerY} = e;
+		//this._character.moveTo({x: layerX, y: layerY});
 	}
 
 	onMouseClick(hexagon: Object) {

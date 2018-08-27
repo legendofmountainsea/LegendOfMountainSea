@@ -20,15 +20,20 @@ describe('Pawn', () => {
 		pawn = null;
 	});
 
-	it('should be able to set destination', () => {
-		const mouseEvent = {
-			layerX: 5, layerY: 6,
-		};
-		pawn.onMouseDown(mouseEvent);
+	it(`character's destination should be null`, () => {
 
+		// const gridCoordinates = new Coordinates(5,6);
+		//
+		// const hexagon = new Hexagon({
+		// 	gridCoordinates: gridCoordinates,
+		// 	terrain: {},
+		// 	position:  pawn.getCharacter()._convertGridPositionToTerrain(gridCoordinates),
+		// });
+		//
+		// pawn.onMouseClick(hexagon);
+		//
 		const character = pawn.getCharacter();
-		expect(character.getDestination().x).to.be(5);
-		expect(character.getDestination().y).to.be(6);
+		expect(character.getDestination()).to.be(null);
 	});
 
 });
