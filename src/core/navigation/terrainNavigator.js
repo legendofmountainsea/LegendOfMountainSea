@@ -97,7 +97,7 @@ class TerrainNavigator extends Navigator {
 	excludeScannedPath(
 		openPaths: Array<PathNode>,
 		scannedPaths: Array<PathNode>,
-	): Array<Grid> {
+	): Array<PathNode> {
 		const result: Array<Grid> = [];
 
 		for (const openPath of openPaths) {
