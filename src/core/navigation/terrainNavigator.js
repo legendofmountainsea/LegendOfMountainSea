@@ -42,6 +42,10 @@ class TerrainNavigator extends Navigator {
 			from: null,
 		});
 
+		if (startNode.isAtDestination()) {
+			return [];
+		}
+
 		return this.getCorrectPath(startNode);
 	}
 
@@ -52,7 +56,7 @@ class TerrainNavigator extends Navigator {
 	 */
 	getCorrectPath(startNode: PathNode): Array<Grid> {
 		const pathNodes = startNode.getNeighbors();
-		const scannedPaths = [startNode];
+		const scannedPaths: Array<PathNode> = [startNode];
 		const correctPath = [];
 
 		let openPaths: Array<PathNode> = pathNodes;
@@ -70,9 +74,7 @@ class TerrainNavigator extends Navigator {
 
 			scannedPaths.push(...closedPaths);
 
-			openPaths = openPaths.filter(
-				(item) => !scannedPaths.includes(item),
-			);
+			openPaths = this.excludeScannedPath(openPaths, scannedPaths);
 
 			openPaths.push(...newOpenPaths);
 
@@ -90,6 +92,27 @@ class TerrainNavigator extends Navigator {
 		}
 
 		return correctPath;
+	}
+
+	excludeScannedPath(
+		openPaths: Array<PathNode>,
+		scannedPaths: Array<PathNode>,
+	): Array<Grid> {
+		const result: Array<Grid> = [];
+
+		for (const openPath of openPaths) {
+			const shouldBeExcluded = scannedPaths.find((path) => {
+				return openPath.getLocation() === path.getLocation();
+			});
+
+			if (shouldBeExcluded) {
+				continue;
+			}
+
+			result.push(openPath);
+		}
+
+		return result;
 	}
 
 	static getCorrectNode(
