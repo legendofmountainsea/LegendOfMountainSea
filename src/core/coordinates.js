@@ -26,6 +26,10 @@ class Coordinates {
 		this.y = coordinates.y;
 		return this;
 	}
+
+	isEqual(coordinates: Coordinates): boolean {
+		return (this.x === coordinates.x && this.y === coordinates.y);
+	}
 }
 
 export default Coordinates;

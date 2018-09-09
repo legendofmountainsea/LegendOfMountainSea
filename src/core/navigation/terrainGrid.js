@@ -3,13 +3,15 @@ import Cube from './cube';
 import Coordinates from '../coordinates';
 import Grid from './grid';
 
+import TerrainChain from '../../chain/terrainChain';
+
 type TerrainGridPropsType = {
-    point: Coordinates,
+	point: Coordinates,
 };
 
 const ODD_Q_DIRECTIONS = [
-    [[+1, 0], [+1, -1], [0, -1], [-1, -1], [-1, 0], [0, +1]],
-    [[+1, +1], [+1, 0], [0, -1], [-1, 0], [-1, +1], [0, +1]],
+	[[+1, 0], [+1, -1], [0, -1], [-1, -1], [-1, 0], [0, +1]],
+	[[+1, +1], [+1, 0], [0, -1], [-1, 0], [-1, +1], [0, +1]],
 ];
 
 /**
@@ -17,67 +19,73 @@ const ODD_Q_DIRECTIONS = [
  * @extends Grid
  */
 class TerrainGrid extends Grid {
-    /**
-     * create a terrain grid
-     * @param props {Object}
-     * @param props.point {Coordinates} position on terrain
-     */
-    constructor(props: TerrainGridPropsType) {
-        super(props);
-    }
+	/**
+	 * create a terrain grid
+	 * @param props {Object}
+	 * @param props.point {Coordinates} position on terrain
+	 */
+	constructor(props: TerrainGridPropsType) {
+		super(props);
+	}
 
-    /**
-     * convert to cube Coordinates system
-     * @returns {Cube}
-     */
-    convertToCube(): Cube {
-        let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
-        let y = -this._point.x - z;
-        return new Cube(this._point.x, y, z);
-    }
+	/**
+	 * convert to cube Coordinates system
+	 * @returns {Cube}
+	 */
+	convertToCube(): Cube {
+		let z = this._point.y - (this._point.x - (this._point.x & 1)) / 2;
+		let y = -this._point.x - z;
+		return new Cube(this._point.x, y, z);
+	}
 
-    /**
-     * get neighbor grid
-     * @returns {Array}
-     */
-    getNeighbors(): Array<Grid> {
-        const neighborGrids = [];
+	/**
+	 * get neighbor grid
+	 * @returns {Array}
+	 */
+	getNeighbors(): Array<Grid> {
+		const neighborGrids = [];
 
-        for (const point of this.getNeighborsPoints()) {
-            neighborGrids.push(new TerrainGrid({ point: point }));
-        }
+		for (const point of this.getNeighborsPoints()) {
+			neighborGrids.push(new TerrainGrid({ point: point }));
+		}
 
-        return neighborGrids;
-    }
+		return neighborGrids;
+	}
 
-    getNeighborsPoints(): Array<Coordinates> {
-        const currentPoint = this._point;
+	getNeighborsPoints(isIgnoredBlocking: boolean = false): Array<Coordinates> {
+		const currentPoint = this._point;
 
-        const directionSet = ODD_Q_DIRECTIONS[currentPoint.x & 1];
+		const directionSet = ODD_Q_DIRECTIONS[currentPoint.x & 1];
 
-        const neighborPoints = [];
+		const neighborPoints = [];
 
-        for (const direction of directionSet) {
-            neighborPoints.push(
-                new Coordinates(
-                    currentPoint.x + direction[0],
-                    currentPoint.y + direction[1],
-                ),
-            );
-        }
+		for (const direction of directionSet) {
+			const point = new Coordinates(
+				currentPoint.x + direction[0],
+				currentPoint.y + direction[1],
+			);
 
-        return neighborPoints;
-    }
+			const { height } = TerrainChain.getTerrainNavigationInfo(point);
 
-    /**
-     * get distance to cube
-     * @param grid {Grid}
-     * @returns {number}
-     */
-    distanceTo(grid: Grid): number {
-        const gridToCube = grid.convertToCube();
-        return this.convertToCube().distanceTo(gridToCube);
-    }
+			if (!isIgnoredBlocking && height > 150) {
+				continue;
+			}
+
+			neighborPoints.push(point);
+		}
+
+		return neighborPoints;
+	}
+
+	/**
+	 * get distance to cube
+	 * @param grid {Grid}
+	 * @returns {number}
+	 */
+	distanceTo(grid: Grid): number {
+		const gridToCube = grid.convertToCube();
+		return this.convertToCube().distanceTo(gridToCube);
+	}
 }
 
 export default TerrainGrid;

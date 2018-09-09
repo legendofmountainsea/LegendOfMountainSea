@@ -78,7 +78,7 @@ class TerrainNavigator extends Navigator {
 
 			openPaths.push(...newOpenPaths);
 
-			shouldScan = !(correctNode || !openPaths.length);
+			shouldScan = !( correctNode || !openPaths.length || openPaths.length > 50);
 		}
 
 		if (correctNode) {
