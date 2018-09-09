@@ -118,6 +118,15 @@ class Character extends Actor {
 			return;
 		}
 
+		if(this._currentGrid.getPoint().isEqual(grid.getPoint())){
+			return;
+		}
+
+		//TODO remove this later
+		if(TerrainChain.getTerrainNavigationInfo(grid.getPoint()).height > 150){
+			return;
+		}
+
         this._navigation = navigator.getNavigation({current: this._currentGrid, destination: grid});
 
 		this._setDestinationByNavigation();

@@ -45,7 +45,7 @@ export default class WorldScene extends Scene {
 		
 		let houyi = new Character({
 			assetData: S_worldAsset.HOUYI,
-			position: new Coordinates(1,3),
+			position: new Coordinates(1,1),
 		});
 
 		houyi.setNavigator(worldTerrain.getNavigator());

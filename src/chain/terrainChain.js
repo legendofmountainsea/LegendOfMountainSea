@@ -2,29 +2,29 @@
 import Perlin from 'loms.perlin';
 import Coordinates from '../core/coordinates';
 import RandomSeed from '../core/randomSeed';
-import S_worldTerrainAsset, {ASSETS_ID} from '../static/terrain/worldTerrainAsset';
-import {EXECUTE_IN_CLIENT} from '../util/envUtil';
+import S_worldTerrainAsset, {
+	ASSETS_ID,
+} from '../static/terrain/worldTerrainAsset';
+import { EXECUTE_IN_CLIENT } from '../util/envUtil';
 import Store from '../module/store';
+import type { NoneAnimationAssetType } from '../static/type/assetDataType';
 
 type hexagonSizeType = {
-	height: number, width: number
-}
+	height: number,
+	width: number,
+};
 
 export const COS_30_DEGREES = Math.cos(Math.PI / 6);
 
-let renderStartingCoordinates: Coordinates = new Coordinates(0, 0);
 let seed: number | null = null;
-let hexagonSize: hexagonSizeType = {height: 0, width: 0};
-
-//let terrainGrids = [];
+let renderStartingCoordinates: Coordinates = new Coordinates(0, 0);
+let hexagonSize: hexagonSizeType = { height: 0, width: 0 };
 
 /**
  * class for connecting data and terrain
  */
 class TerrainChain {
-
 	static updateRenderStartingCoordinates(coordinates: Coordinates) {
-
 		renderStartingCoordinates.set({
 			x: renderStartingCoordinates.x + coordinates.x,
 			y: renderStartingCoordinates.y + coordinates.y,
@@ -34,7 +34,6 @@ class TerrainChain {
 	}
 
 	static getRenderStartingCoordinates() {
-
 		return renderStartingCoordinates;
 	}
 
@@ -47,9 +46,12 @@ class TerrainChain {
 	}
 
 	static adjustHexagonRenderPosition(position: Coordinates): Coordinates {
-
-		let x = (hexagonSize.width / 2) + position.x * (hexagonSize.height * COS_30_DEGREES ),
-			y = position.y * hexagonSize.height + (hexagonSize.height / 2) * (1 + Math.abs(position.x) % 2);
+		let x =
+			hexagonSize.width / 2 +
+			position.x * (hexagonSize.height * COS_30_DEGREES),
+			y =
+				position.y * hexagonSize.height +
+				(hexagonSize.height / 2) * (1 + (Math.abs(position.x) % 2));
 
 		return new Coordinates(x, y);
 	}
@@ -59,28 +61,53 @@ class TerrainChain {
 	 * @param renderPoint {Coordinates}
 	 * @returns {Object}
 	 */
-	static getTerrainAssetData(renderPoint: Coordinates): Object {
+	static getTerrainAssetData(
+		renderPoint: Coordinates,
+	): NoneAnimationAssetType {
+		const { height } = TerrainChain.getTerrainNavigationInfo(renderPoint);
 
-		if (!seed) {
-			try {
-				EXECUTE_IN_CLIENT(() => {
-					seed = Store.getConfig().seed;
-				});
-			} catch (e) {
-				seed = new RandomSeed({seed:null}).random();
-			}
-		}
+		return TerrainChain.getAssetData(TerrainChain.getTerrainType(height));
+	}
 
-		Perlin.seed(seed);
+	/**
+	 * get navigation information about giving point
+	 * @param renderPoint
+	 * @returns {{height: number}}
+	 */
+	static getTerrainNavigationInfo(renderPoint: Coordinates): Object {
+		Perlin.seed(TerrainChain.getSeed());
 
 		let vx = renderPoint.x * 0.01,
 			vy = renderPoint.y * 0.2;
 
-
 		let noise = Perlin.perlin2(vx, vy);
-		let height = parseInt((noise * 255)) + 135;
+		let height = parseInt(noise * 255) + 135;
 
-		return TerrainChain.getAssetData(TerrainChain.getTerrainType(height));
+		return {
+			height,
+		};
+	}
+
+	/**
+	 * get seed number
+	 * @returns {number}
+	 */
+	static getSeed(): number {
+		if (seed === null) {
+
+			EXECUTE_IN_CLIENT(() => {
+				seed = Store.getConfig().seed;
+			});
+
+			if (seed === null) {
+				seed = new RandomSeed({
+					seed: null,
+				}).random();
+				Store.addConfig({seed: seed});
+			}
+		}
+
+		return seed;
 	}
 
 	static getTerrainType(height: number) {
@@ -98,7 +125,7 @@ class TerrainChain {
 		return type;
 	}
 
-	static getAssetData(id: string): Object {
+	static getAssetData(id: string): NoneAnimationAssetType {
 		let asset = null;
 		switch (id) {
 			case ASSETS_ID.FOREST_ID:
