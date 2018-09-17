@@ -76,7 +76,7 @@
     "webpack-merge": "4.1.2"
   },
   "dependencies": {
-    "bootstrap": "4.0.0",
+    "bootstrap": "4.1.2",
     "jquery": "3.3.1",
     "loms.perlin": "1.0.2",
     "loms.uuid": "1.0.0",
