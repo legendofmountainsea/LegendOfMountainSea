@@ -12,9 +12,6 @@
     "appId": "io.github.skyharp.tyrealgray.loms",
     "nwVersion": "0.30.1",
     "packed": true,
-    "targets": [
-      "zip"
-    ],
     "strippedProperties": [
       "build"
     ]
@@ -68,7 +65,7 @@
     "jsdoc": "3.5.5",
     "jsdoc-babel": "0.4.0",
     "mocha": "5.1.1",
-    "nwjs-builder-phoenix": "1.14.6",
+    "nwjs-builder-phoenix": "1.14.8",
     "prettier": "1.14.2",
     "script-loader": "0.7.0",
     "webpack": "3.6.0",

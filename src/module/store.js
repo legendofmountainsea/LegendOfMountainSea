@@ -5,7 +5,7 @@ let config = null;
 export default class Store {
 	
 	static _getInitConfig() {
-		return {language: systemLanguage, seed: new RandomSeed().random()};
+		return {language: systemLanguage, seed: new RandomSeed({seed:null}).random()};
 	}
 	
 	static _getConfigPath() {
