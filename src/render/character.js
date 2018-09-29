@@ -2,19 +2,18 @@
 
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
-import {CharacterCrashingError} from '../util/errorUtil';
+import { CharacterCrashingError } from '../util/errorUtil';
 import TerrainChain from '../chain/terrainChain';
 import TerrainGrid from '../core/navigation/terrainGrid';
 import type Grid from '../core/navigation/grid';
 import type Navigator from '../core/navigation/navigator';
 import type { AnimationAssetType } from '../static/type/assetDataType';
 
-
 type CharacterPropsType = {
-    assetData?: AnimationAssetType,
-    position: Coordinates,
-    onRender?: (any,number) => void,
-    onClick?: void => void,
+	assetData?: AnimationAssetType,
+	position: Coordinates,
+	onRender?: (any, number) => void,
+	onClick?: (void) => void,
 };
 
 /**
@@ -22,12 +21,11 @@ type CharacterPropsType = {
  * @extends Actor
  */
 class Character extends Actor {
-
-    _frames: Object;
-    _navigator: Navigator | null;
-    _currentGrid: Grid;
-    _destination: Coordinates | null;
-    _animationStatus: string;
+	_frames: Object;
+	_navigator: Navigator | null;
+	_currentGrid: Grid;
+	_destination: Coordinates | null;
+	_animationStatus: string;
 	_navigation: Array<Grid>;
 
 	/**
@@ -37,7 +35,7 @@ class Character extends Actor {
 	constructor(props: CharacterPropsType) {
 		super(props);
 		this._frames = {};
-		this._currentGrid = new TerrainGrid({point: props.position});
+		this._currentGrid = new TerrainGrid({ point: props.position });
 		this._destination = null;
 		this._navigator = null;
 		this._navigation = [];
@@ -51,33 +49,35 @@ class Character extends Actor {
 	 * @override
 	 */
 	initResources(resources: Object) {
-
-		if(this._assetData) {
-
+		if (this._assetData) {
 			const assetData: AnimationAssetType = this._assetData;
 
 			const assetDataInfo = assetData.DATA;
 
-            for (let asset in assetDataInfo) {
-                this._frames[assetDataInfo[asset].NAME] = [];
+			for (let asset in assetDataInfo) {
+				this._frames[assetDataInfo[asset].NAME] = [];
 
-                const resource = resources[assetDataInfo[asset].NAME];
-                for (const texture in resource.textures) {
-                    this._frames[assetDataInfo[asset].NAME].push(resource.textures[texture]);
-                }
-            }
+				const resource = resources[assetDataInfo[asset].NAME];
+				for (const texture in resource.textures) {
+					this._frames[assetDataInfo[asset].NAME].push(
+						resource.textures[texture],
+					);
+				}
+			}
 
-            const animatedSprite = new PIXI.extras.AnimatedSprite(this._frames[assetDataInfo[this._animationStatus].NAME]);
+			const animatedSprite = new PIXI.extras.AnimatedSprite(
+				this._frames[assetDataInfo[this._animationStatus].NAME],
+			);
 
-            this.setElement(animatedSprite);
+			this.setElement(animatedSprite);
 
-            this.initSprite();
-        }
+			this.initSprite();
+		}
 
 		return this;
 	}
 
-	setNavigator(navigator: Navigator){
+	setNavigator(navigator: Navigator) {
 		this._navigator = navigator;
 		return this;
 	}
@@ -90,13 +90,16 @@ class Character extends Actor {
 		this._sprite.anchor.set(0.5, 0.5);
 		const assetData: AnimationAssetType = this._assetData;
 
-		if(assetData){
-            this._sprite.animationSpeed = assetData.DATA[this._animationStatus].SPEED;
+		if (assetData) {
+			this._sprite.animationSpeed =
+				assetData.DATA[this._animationStatus].SPEED;
 		}
 
-		const position: Coordinates | null = this._convertGridPositionToTerrain(this._initPosition);
+		const position: Coordinates | null = this._convertGridPositionToTerrain(
+			this._initPosition,
+		);
 
-		if(!position) {
+		if (!position) {
 			throw new CharacterCrashingError(this);
 		}
 
@@ -111,23 +114,28 @@ class Character extends Actor {
 		this._destination = position;
 	}
 
-	navigateTo(grid: Grid){
-        const navigator = this._navigator;
+	navigateTo(grid: Grid) {
+		const navigator = this._navigator;
 
-		if(!navigator || !this._currentGrid || this._navigation.length){
+		if (!navigator || !this._currentGrid || this._navigation.length) {
 			return;
 		}
 
-		if(this._currentGrid.getPoint().isEqual(grid.getPoint())){
+		if (this._currentGrid.getPoint().isEqual(grid.getPoint())) {
 			return;
 		}
 
 		//TODO remove this later
-		if(TerrainChain.getTerrainNavigationInfo(grid.getPoint()).height > 150){
+		if (
+			TerrainChain.getTerrainNavigationInfo(grid.getPoint()).height > 150
+		) {
 			return;
 		}
 
-        this._navigation = navigator.getNavigation({current: this._currentGrid, destination: grid});
+		this._navigation = navigator.getNavigation({
+			current: this._currentGrid,
+			destination: grid,
+		});
 
 		this._setDestinationByNavigation();
 	}
@@ -144,30 +152,43 @@ class Character extends Actor {
 		this.updatePosition(delta);
 	}
 
-	updateDestination(){
-		if(!this.getDestination()){
+	updateDestination() {
+		if (!this.getDestination()) {
 			return;
 		}
 
 		this._setDestinationByNavigation();
 	}
 
-	_setDestinationByNavigation(): void{
-		if(!this._navigation.length){
+	_setDestinationByNavigation(): void {
+		if (!this._navigation.length) {
 			return;
 		}
 
 		const coordinates = this._navigation[0].getPoint();
 
-		const position: Coordinates | null = this._convertGridPositionToTerrain(coordinates);
+		const position: Coordinates | null = this._convertGridPositionToTerrain(
+			coordinates,
+		);
 
-		if(position){
+		const destination: Coordinates | null = this.getDestination();
+
+		if (
+			position &&
+			!(
+				destination &&
+				destination.x === position.x &&
+				destination.y === position.y
+			)
+		) {
 			this.moveTo(position);
 		}
 	}
 
-	_convertGridPositionToTerrain(coordinates: Coordinates): Coordinates | null {
-		if(!this._stage){
+	_convertGridPositionToTerrain(
+		coordinates: Coordinates,
+	): Coordinates | null {
+		if (!this._stage) {
 			return null;
 		}
 
@@ -178,9 +199,14 @@ class Character extends Actor {
 		let worldTransformX = container.worldTransform.tx,
 			worldTransformY = container.worldTransform.ty;
 
-		const adjustedCoordinates = TerrainChain.adjustHexagonRenderPosition(coordinates);
+		const adjustedCoordinates = TerrainChain.adjustHexagonRenderPosition(
+			coordinates,
+		);
 
-		return new Coordinates(adjustedCoordinates.x +worldTransformX, adjustedCoordinates.y +worldTransformY);
+		return new Coordinates(
+			adjustedCoordinates.x + worldTransformX,
+			adjustedCoordinates.y + worldTransformY,
+		);
 	}
 
 	updatePosition(delta: number) {
@@ -191,6 +217,11 @@ class Character extends Actor {
 		this.updateDestination();
 
 		if (this._isArrivedAtDestination()) {
+			if (this._destination) {
+				this.setPosition(
+					new Coordinates(this._destination.x, this._destination.y),
+				);
+			}
 			this.updateNavigation();
 			return;
 		}
@@ -198,35 +229,33 @@ class Character extends Actor {
 		const deltaX = this.movingOnAxisXToDestination(delta),
 			deltaY = this.movingOnAxisYToDestination(delta);
 
-
-		this.setPosition(new Coordinates(deltaX,deltaY));
+		this.setPosition(new Coordinates(deltaX, deltaY));
 	}
 
 	updateNavigation(): void {
 		this._currentGrid = this._navigation.shift();
 
-		if(!this._navigation.length){
+		if (!this._navigation.length) {
 			if (this._animationStatus === 'WALK') {
 				this.playStand();
 			}
 			this._destination = null;
-		}else {
+		} else {
 			this.updateDestination();
 		}
 	}
 
 	movingOnAxisXToDestination(delta: number): number {
+		const destination = this.getDestination();
 
-        const destination = this.getDestination();
+		if (!destination) {
+			throw new CharacterCrashingError(this);
+		}
 
-        if(!destination){
-            throw new CharacterCrashingError(this);
-        }
-
-		const {x} = this._sprite.position,
+		const { x } = this._sprite.position,
 			distanceX = destination.x - x;
 
-		if(0 === distanceX){
+		if (0 === distanceX) {
 			return x;
 		}
 
@@ -234,51 +263,52 @@ class Character extends Actor {
 			this._sprite.scale.x = -this._sprite.scale.x;
 		}
 
-		return this._getAxisDelta(x,delta,distanceX);
+		return this._getAxisDelta(x, delta, distanceX);
 	}
 
 	_isMovingDirectionNeedToChange(): boolean {
-        const destination = this.getDestination();
+		const destination = this.getDestination();
 
-        if(!destination){
-            throw new CharacterCrashingError(this);
-        }
+		if (!destination) {
+			throw new CharacterCrashingError(this);
+		}
 
-		const {x} = this._sprite.position;
+		const { x } = this._sprite.position;
 
 		const distanceX = destination.x - x;
 
-		const direction = Math.sign(distanceX) < 0 ? this.DIRECTION_LEFT : this.DIRECTION_RIGHT;
+		const direction =
+			Math.sign(distanceX) < 0
+				? this.DIRECTION_LEFT
+				: this.DIRECTION_RIGHT;
 
-		return (this._sprite.scale.x !== direction);
+		return this._sprite.scale.x !== direction;
 	}
 
-
 	movingOnAxisYToDestination(delta: number): number {
-        const destination = this.getDestination();
+		const destination = this.getDestination();
 
-        if(!destination){
-            throw new CharacterCrashingError(this);
-        }
+		if (!destination) {
+			throw new CharacterCrashingError(this);
+		}
 
-		const {y} = this._sprite.position,
+		const { y } = this._sprite.position,
 			distanceY = destination.y - y;
 
-		if(0 === distanceY){
+		if (0 === distanceY) {
 			return y;
 		}
 
-		return this._getAxisDelta(y,delta,distanceY);
+		return this._getAxisDelta(y, delta, distanceY);
 	}
 
-	_getAxisDelta(axisOrigin: number, delta: number, distance: number): number{
+	_getAxisDelta(axisOrigin: number, delta: number, distance: number): number {
 		let axisDelta = axisOrigin,
 			singOfDistance = Math.sign(distance);
 
-		if(Math.abs(singOfDistance * delta) > Math.abs(distance)){
+		if (Math.abs(singOfDistance * delta) > Math.abs(distance)) {
 			axisDelta = axisOrigin + distance;
-		}
-		else {
+		} else {
 			axisDelta = axisOrigin + singOfDistance * delta;
 		}
 
@@ -288,13 +318,16 @@ class Character extends Actor {
 	_isArrivedAtDestination() {
 		const destination = this.getDestination();
 
-        if(!destination){
-            throw new CharacterCrashingError(this);
-        }
+		if (!destination) {
+			throw new CharacterCrashingError(this);
+		}
 
-		const {x, y} = this._sprite.position;
+		const { x, y } = this._sprite.position;
 
-		return (x === destination.x && y === destination.y);
+		const isAlmostAtAxisX = Math.abs(x - destination.x) < 1;
+		const isAlmostAtAxisY = Math.abs(y - destination.y) < 1;
+
+		return isAlmostAtAxisX && isAlmostAtAxisY;
 	}
 
 	playStand() {
@@ -338,8 +371,11 @@ class Character extends Actor {
 		return this._animationStatus;
 	}
 
-	setAnimation(name: string, loop: boolean = true, onComplete: void => void = () => {} ) {
-
+	setAnimation(
+		name: string,
+		loop: boolean = true,
+		onComplete: (void) => void = () => {},
+	) {
 		if (!this._sprite || this._noAsset || !this._assetData) {
 			return;
 		}
