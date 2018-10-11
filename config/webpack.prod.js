@@ -4,7 +4,7 @@ const webpack = require('webpack'),
 	
 
 const nodeConfig = {
-	entry: './src/main.client.js',
+	entry: ['babel-polyfill', './src/main.client.js'],
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin(),
 		new webpack.DefinePlugin({

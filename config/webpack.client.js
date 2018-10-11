@@ -3,7 +3,7 @@ const webpack = require('webpack'),
 	common = require('./webpack.common.js');
 
 const nodeConfig = {
-	entry: './src/main.client.js',
+	entry: ['babel-polyfill', './src/main.client.js'],
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
