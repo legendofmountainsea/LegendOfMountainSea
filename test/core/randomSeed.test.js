@@ -6,8 +6,10 @@ describe('RandomSeed', () => {
 	
 	beforeEach(() => {
 		randomSeed = new RandomSeed({
-			seed:1126,
+			seed:null,
 		});
+
+		randomSeed.setSeedNumber(1126);
 	});
 	
 	afterEach(() => {
@@ -16,22 +18,22 @@ describe('RandomSeed', () => {
 	
 	it('seed 1126 first random number should always be 0.10555126886145405', () => {
 		expect(randomSeed.random()).to.be(0.10555126886145405);
-		randomSeed.setSeed(1126);
+		randomSeed.setSeedNumber(1126);
 		expect(randomSeed.random()).to.be(0.10555126886145405);
 	});
 	
 	it('seed 1126 second random number should always be 0.9436728395061729', () => {
 		randomSeed.random();
 		expect(randomSeed.random()).to.be(0.9436728395061729);
-		randomSeed.setSeed(1126);
+		randomSeed.setSeedNumber(1126);
 		randomSeed.random();
 		expect(randomSeed.random()).to.be(0.9436728395061729);
 	});
 	
 	it('seed 2 first random number should not be 0.10555126886145405', () => {
-		randomSeed.setSeed(2);
+		randomSeed.setSeedNumber(2);
 		expect(randomSeed.random()).to.not.be(0.10555126886145405);
-		randomSeed.setSeed(2);
+		randomSeed.setSeedNumber(2);
 		expect(randomSeed.random()).to.not.be(0.10555126886145405);
 	});
 	
