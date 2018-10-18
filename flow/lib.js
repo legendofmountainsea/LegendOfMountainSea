@@ -8,3 +8,8 @@ declare module 'bootstrap' {
 declare module 'loms.perlin' {
 	declare export default any;
 }
+
+declare module 'loms.uuid' {
+	declare export function uuid(): string;
+	declare export default any;
+}

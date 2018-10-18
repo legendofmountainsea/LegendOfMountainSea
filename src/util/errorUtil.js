@@ -10,6 +10,16 @@ export class NativeModuleMissingError extends Error {
 	}
 }
 
+const SEED_MODULE_INIT_CRASHING = '**LOMS** Seed module init with error! SEED_MODULE_INIT_CRASHING';
+
+export class SeedCrashingError extends Error {
+	constructor() {
+		super(SEED_MODULE_INIT_CRASHING);
+		this.name = this.constructor.name;
+		Error.captureStackTrace(this);
+	}
+}
+
 const CHARACTER_DATA_CRASHING = '**LOMS** Character data is crashing! CHARACTER_DATA_CRASHING ID: ';
 
 export class CharacterCrashingError extends Error {
