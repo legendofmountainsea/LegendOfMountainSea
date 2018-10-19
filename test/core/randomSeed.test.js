@@ -6,35 +6,33 @@ describe('RandomSeed', () => {
 	
 	beforeEach(() => {
 		randomSeed = new RandomSeed({
-			seed:null,
+			seed:'01CT6BN9P32TJRS27SAFDFVS7H',
 		});
-
-		randomSeed.setSeedNumber(1126);
 	});
 	
 	afterEach(() => {
 		randomSeed = null;
 	});
 	
-	it('seed 1126 first random number should always be 0.10555126886145405', () => {
-		expect(randomSeed.random()).to.be(0.10555126886145405);
-		randomSeed.setSeedNumber(1126);
-		expect(randomSeed.random()).to.be(0.10555126886145405);
+	it('seed 01CT6BN9P32TJRS27SAFDFVS7I first random number should always be 0.5429569615912209', () => {
+		expect(randomSeed.random()).to.be(0.5429569615912209);
+		randomSeed.setSeed('01CT6BN9P32TJRS27SAFDFVS7H');
+		expect(randomSeed.random()).to.be(0.5429569615912209);
 	});
 	
-	it('seed 1126 second random number should always be 0.9436728395061729', () => {
+	it('seed 01CT6BN9P32TJRS27SAFDFVS7I second random number should always be 0.25402091906721536', () => {
 		randomSeed.random();
-		expect(randomSeed.random()).to.be(0.9436728395061729);
-		randomSeed.setSeedNumber(1126);
+		expect(randomSeed.random()).to.be(0.25402091906721536);
+		randomSeed.setSeed('01CT6BN9P32TJRS27SAFDFVS7H');
 		randomSeed.random();
-		expect(randomSeed.random()).to.be(0.9436728395061729);
+		expect(randomSeed.random()).to.be(0.25402091906721536);
 	});
 	
-	it('seed 2 first random number should not be 0.10555126886145405', () => {
-		randomSeed.setSeedNumber(2);
-		expect(randomSeed.random()).to.not.be(0.10555126886145405);
-		randomSeed.setSeedNumber(2);
-		expect(randomSeed.random()).to.not.be(0.10555126886145405);
+	it('seed 01CT6BN9P32TJRS27SAFDFVS7I first random number should not be 0.10555126886145405', () => {
+		randomSeed.setSeed('01CT6BN9P32TJRS27SAFDFVS7I');
+		expect(randomSeed.random()).to.not.be(0.5429569615912209);
+		randomSeed.setSeed('01CT6BN9P32TJRS27SAFDFVS7I');
+		expect(randomSeed.random()).to.not.be(0.5429569615912209);
 	});
 	
 });

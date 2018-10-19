@@ -16,7 +16,7 @@ type hexagonSizeType = {
 
 export const COS_30_DEGREES = Math.cos(Math.PI / 6);
 
-let seed: number | null = null;
+let seed: string | null = null;
 let renderStartingCoordinates: Coordinates = new Coordinates(0, 0);
 let hexagonSize: hexagonSizeType = { height: 0, width: 0 };
 
@@ -75,7 +75,10 @@ class TerrainChain {
 	 * @returns {{height: number}}
 	 */
 	static getTerrainNavigationInfo(renderPoint: Coordinates): Object {
-		Perlin.seed(TerrainChain.getSeed());
+
+		const seedNumber = new RandomSeed({seed: TerrainChain.getSeed()});
+
+		Perlin.seed(seedNumber.getSeedNumber());
 
 		let vx = renderPoint.x * 0.01,
 			vy = renderPoint.y * 0.2;
@@ -92,7 +95,7 @@ class TerrainChain {
 	 * get seed number
 	 * @returns {number}
 	 */
-	static getSeed(): number {
+	static getSeed(): string {
 		if (seed === null) {
 
 			EXECUTE_IN_CLIENT(() => {
@@ -102,7 +105,7 @@ class TerrainChain {
 			if (seed === null) {
 				seed = new RandomSeed({
 					seed: null,
-				}).random();
+				}).getSeed();
 				Store.addConfig({seed: seed});
 			}
 		}
