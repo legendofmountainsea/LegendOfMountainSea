@@ -1,6 +1,5 @@
 //@flow
 import {uuid} from 'loms.uuid';
-import { SeedCrashingError } from '../util/errorUtil';
 
 type RandomSeedPropsType = {
 	seed: string | null
@@ -8,34 +7,24 @@ type RandomSeedPropsType = {
 
 class RandomSeed {
 
-	_seed: string | null;
+	_seed: string;
 	_seedNumber: number;
 
 	constructor(props: RandomSeedPropsType){
-		this._seed = props.seed || this._getDefaultSeed();
-		this._seedNumber = this._getSeedNumber();
+		this._seed = props.seed || uuid();
+		this._createSeedNumber(this._seed);
 	}
 
-	_getSeedNumber(): number {
-
-		const seed = this._seed;
-		if(!seed){
-			throw SeedCrashingError();
-		}
-
+	_createSeedNumber(seed: string): void {
 		let number = 0;
 		for(const seedCharacter of seed) {
 			number += seedCharacter.charCodeAt(0);
 		}
 
-		return number;
+		this._seedNumber = number;
 	}
-	
-	_getDefaultSeed(): string {
-		return uuid();
-	}
-	
-	setSeedNumber(seed: number): void {
+
+	_setSeedNumber(seed: number): void {
 		this._seedNumber = seed;
 	}
 	
@@ -43,8 +32,13 @@ class RandomSeed {
 		return this._seedNumber;
 	}
 
-	getSeed(){
+	getSeed(): string {
 		return this._seed;
+	}
+
+	setSeed(seed: string) {
+		this._seed = seed;
+		this._createSeedNumber(seed);
 	}
 	
 	random(min?: number, max?: number): number{
