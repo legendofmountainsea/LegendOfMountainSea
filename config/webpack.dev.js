@@ -1,17 +1,10 @@
-const webpack = require('webpack'),
-	merge = require('webpack-merge'),
+const merge = require('webpack-merge'),
 	common = require('./webpack.common.js');
 
 const webConfig = {
 	entry: ['babel-polyfill', './src/main.dev.js'],
 	devtool: 'eval-source-map',
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin({
-			output: {
-				comments: false,
-			},
-		}),
-	],
+	mode: 'development',
 };
 
 module.exports = merge(common, webConfig);
