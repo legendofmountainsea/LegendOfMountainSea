@@ -96,13 +96,13 @@ class TerrainChain {
 	 * @returns {number}
 	 */
 	static getSeed(): string {
-		if (seed === null) {
+		if (!seed) {
 
 			EXECUTE_IN_CLIENT(() => {
 				seed = Store.getConfig().seed;
 			});
 
-			if (seed === null) {
+			if (!seed) {
 				seed = new RandomSeed({
 					seed: null,
 				}).getSeed();
