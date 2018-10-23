@@ -2,8 +2,10 @@
   "plugins": ["node_modules/jsdoc-babel"],
   "babel": {
     "babelrc": false,
-    "presets": ["flow"],
-    "plugins": ["transform-class-properties", "babel-plugin-transform-object-rest-spread"]
+    "presets": [
+      "@babel/preset-flow"
+    ],
+    "plugins": ["@babel/plugin-proposal-class-properties", "@babel/plugin-proposal-object-rest-spread"]
   },
   "templates": {
     "applicationName": "LegendOfMountainSea"

@@ -1,10 +1,15 @@
 {
   "presets": [
-    "env",
-    "flow"
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-flow"
   ],
   "plugins": [
-    "transform-class-properties",
-    "babel-plugin-transform-object-rest-spread"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

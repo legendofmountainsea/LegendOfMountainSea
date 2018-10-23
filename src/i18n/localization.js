@@ -1,3 +1,6 @@
+import zhCN from './zh-CN/zh-CN';
+import enUS from './en-US/en-US';
+
 import Store from '../module/store';
 
 let content = null;
@@ -29,8 +32,8 @@ export default class Localization {
 	
 	static getSupportLanguages(){
 		return {
-			'zh-CN': require('./zh-CN/zh-CN'),
-			'en-US': require('./en-US/en-US'),
+			'zh-CN': zhCN,
+			'en-US': enUS,
 		};
 	}
 }
