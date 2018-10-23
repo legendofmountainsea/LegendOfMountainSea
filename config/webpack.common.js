@@ -14,10 +14,18 @@ module.exports = {
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['env'],
+						presets: [
+							[
+							'@babel/preset-env',
+							{
+								useBuiltIns: 'usage',
+							},
+						],
+							'@babel/preset-flow',
+						],
 						plugins: [
-							require('babel-plugin-transform-object-rest-spread'),
-							require('babel-plugin-transform-class-properties'),
+							'@babel/plugin-proposal-class-properties',
+							'@babel/plugin-proposal-object-rest-spread',
 						],
 					},
 				},
