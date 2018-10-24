@@ -5,6 +5,7 @@ import Coordinates from '../core/coordinates';
 import { CharacterCrashingError } from '../util/errorUtil';
 import TerrainChain from '../chain/terrainChain';
 import TerrainGrid from '../core/navigation/terrainGrid';
+import {AnimationName} from '../static/animation';
 import type Grid from '../core/navigation/grid';
 import type Navigator from '../core/navigation/navigator';
 import type { AnimationAssetType } from '../static/type/assetDataType';
@@ -39,7 +40,7 @@ class Character extends Actor {
 		this._destination = null;
 		this._navigator = null;
 		this._navigation = [];
-		this._animationStatus = 'STAND';
+		this._animationStatus = AnimationName.STAND;
 	}
 
 	/**
@@ -108,7 +109,7 @@ class Character extends Actor {
 	}
 
 	moveTo(position: Coordinates) {
-		if (this._animationStatus !== 'WALK') {
+		if (this._animationStatus !== AnimationName.WALK) {
 			this.playWalk();
 		}
 		this._destination = position;
@@ -236,7 +237,7 @@ class Character extends Actor {
 		this._currentGrid = this._navigation.shift();
 
 		if (!this._navigation.length) {
-			if (this._animationStatus === 'WALK') {
+			if (this._animationStatus === AnimationName.WALK) {
 				this.playStand();
 			}
 			this._destination = null;
@@ -331,33 +332,33 @@ class Character extends Actor {
 	}
 
 	playStand() {
-		this.setAnimation('STAND');
-		this.setAnimationStatus('STAND');
+		this.setAnimation(AnimationName.STAND);
+		this.setAnimationStatus(AnimationName.STAND);
 	}
 
 	playWalk() {
-		this.setAnimation('WALK');
-		this.setAnimationStatus('WALK');
+		this.setAnimation(AnimationName.WALK);
+		this.setAnimationStatus(AnimationName.WALK);
 	}
 
 	playAttack() {
-		this.setAnimation('ATTACK', false, () => {
+		this.setAnimation(AnimationName.ATTACK, false, () => {
 			this.setAnimation(this.getAnimationStatus());
 		});
 	}
 
 	playBattle() {
-		this.setAnimation('BATTLE');
-		this.setAnimationStatus('BATTLE');
+		this.setAnimation(AnimationName.BATTLE);
+		this.setAnimationStatus(AnimationName.BATTLE);
 	}
 
 	playNearDeath() {
-		this.setAnimation('NEAR_DEATH');
-		this.setAnimationStatus('NEAR_DEATH');
+		this.setAnimation(AnimationName.NEAR_DEATH);
+		this.setAnimationStatus(AnimationName.NEAR_DEATH);
 	}
 
 	playUltimate() {
-		this.setAnimation('ULTIMATE', false, () => {
+		this.setAnimation(AnimationName.ULTIMATE, false, () => {
 			this.setAnimation(this.getAnimationStatus());
 		});
 	}
