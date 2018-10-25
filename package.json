@@ -12,9 +12,7 @@
   "chromium-args": "--disable-raf-throttling",
   "scripts": {
     "build-client": "webpack --config config/webpack.client.js",
-    "build-mac": "npm run build-prod && npm run dist-mac",
     "build-prod": "webpack --config config/webpack.prod.js",
-    "build-win": "npm run build-prod && npm run dist-win",
     "dev": "webpack-dev-server --open --config config/webpack.dev.js",
     "doc": "./node_modules/.bin/jsdoc src -c ./docs/jsdoc.json -t ./node_modules/@pixi/jsdoc-template -R README.md -r -d docs",
     "flow": "flow",
