@@ -1,20 +1,13 @@
 {
-  "name": "legend_of_mountain_sea",
+  "name": "LegendOfMountainSea",
   "version": "0.0.1",
   "description": "4X sandbox game with Mountain & Sea Classics",
+  "private": true,
   "main": "index.html",
   "window": {
     "title": "loms",
     "icon": "LOMS.png",
     "frame": false
-  },
-  "build": {
-    "appId": "io.github.skyharp.tyrealgray.loms",
-    "nwVersion": "0.30.1",
-    "packed": true,
-    "strippedProperties": [
-      "build"
-    ]
   },
   "chromium-args": "--disable-raf-throttling",
   "scripts": {
@@ -23,10 +16,8 @@
     "build-prod": "webpack --config config/webpack.prod.js",
     "build-win": "npm run build-prod && npm run dist-win",
     "dev": "webpack-dev-server --open --config config/webpack.dev.js",
-    "dist-mac": "build --tasks mac-x64 .",
-    "dist-win": "build --tasks win-x64 .",
-    "flow": "flow",
     "doc": "./node_modules/.bin/jsdoc src -c ./docs/jsdoc.json -t ./node_modules/@pixi/jsdoc-template -R README.md -r -d docs",
+    "flow": "flow",
     "lint": "eslint --ext .js src",
     "lint-fix": "eslint --ext .js src --fix",
     "run-mac": "./nwjs-v0.30.1-osx-x64/nwjs.app/Contents/MacOS/nwjs .",
@@ -67,7 +58,6 @@
     "jsdoc": "3.5.5",
     "jsdoc-babel": "0.5.0",
     "mocha": "5.1.1",
-    "nwjs-builder-phoenix": "1.14.8",
     "prettier": "1.14.2",
     "script-loader": "0.7.0",
     "webpack": "4.22.0",
