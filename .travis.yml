@@ -11,7 +11,7 @@ node_js:
   - "10"
 install:
   - npm install
-  - npm run build-mac
+  - npm run build-prod
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.4.5-darwin-amd64 > ./cc-test-reporter
@@ -20,7 +20,7 @@ before_script:
   - export CC_TEST_REPORTER_ID=cf8d5db98b9c576e25427d1cc6b19fb0aabb3eeeaad6cf2bc400aed10bfe14bb
 
 script:
-  - npm run unit-testing && npm run flow check && npm run lint
+  - npm run flow check && npm run lint
 
 after_script:
   - npm install mocha-lcov-reporter@1.3.0

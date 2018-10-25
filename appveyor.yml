@@ -19,7 +19,7 @@ install:
   - npm -v
   # install modules
   - npm install
-  - npm run build-win
+  - npm run build-prod
 
 # Post-install test scripts.
 test_script:
