@@ -103,6 +103,7 @@ export default class MainMenu extends Scene {
 		EXECUTE_IN_CLIENT(() => {
 			let languageInfoText = new UIText({
 				string: `language: ${Localization.getCurrentLanguage()}`,
+				position: new Coordinates(0, 0),
 			});
 			this._renderer.addUI(languageInfoText);
 		});

@@ -1,4 +1,4 @@
-# LegendOfMountainSea ![icon](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/LOMS.png)
+# LegendOfMountainSea ![icon](https://raw.githubusercontent.com/SkyHarp/LegendOfMountainSea/master/assets/LOMS.png)
 
 [![Platform](https://img.shields.io/badge/platform-osx%20%7C%20win-orange.svg?style=flat-square)](https://github.com/SkyHarp/LegendOfMountainSea/releases)
 [![npm](https://img.shields.io/npm/v/loms-cli.svg?style=flat-square&label=loms-cli)](https://www.npmjs.com/package/loms-cli)
