@@ -5,7 +5,9 @@ export default class Window {
 	static enterFullscreen() {
 		EXECUTE_IN_CLIENT(() => {
 			nwWinGUI.maximize();
-			nwWinGUI.enterFullscreen();
+
+			//TODO test if comment this is better
+			//nwWinGUI.enterFullscreen();
 		});
 	}
 	
