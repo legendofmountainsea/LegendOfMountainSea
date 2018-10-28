@@ -47,6 +47,7 @@
   },
   "globals": {
     "nw": true,
+    "qinjs": true,
     "PIXI": true,
     "nwWinGUI": true,
     "pathHelper": true,
