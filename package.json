@@ -69,7 +69,8 @@
     "loms.perlin": "1.0.2",
     "loms.uuid": "1.0.0",
     "pixi.js": "4.8.1",
-    "popper.js": "1.12.9"
+    "popper.js": "1.12.9",
+    "qin.js": "0.1.6"
   },
   "optionalDependencies": {
     "7zip-bin-mac": "1.0.1"
