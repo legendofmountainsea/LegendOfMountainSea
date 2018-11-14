@@ -13,3 +13,6 @@ nwjs-*-osx-x64/*
 
 #ide
 .idea/*
+
+#DB
+QINJS_*_DB
