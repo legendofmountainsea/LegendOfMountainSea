@@ -65,12 +65,15 @@
   },
   "dependencies": {
     "bootstrap": "4.1.2",
+    "colyseus.js": "0.9.15",
     "jquery": "3.3.1",
     "loms.perlin": "1.0.2",
+    "loms.server": "0.0.1",
     "loms.uuid": "1.0.0",
     "pixi.js": "4.8.1",
     "popper.js": "1.12.9",
-    "qin.js": "0.1.6"
+    "qin-renderer.js": "0.0.3",
+    "qin.js": "0.1.8"
   },
   "optionalDependencies": {
     "7zip-bin-mac": "1.0.1"
