@@ -6,8 +6,10 @@ type ChatRoomPropsType = {
 }
 
 class ChatRoom {
+	_state: Object;
 	_instance: any;
 	constructor(props: ChatRoomPropsType){
+		this._state = {};
 		this._instance = props.instance;
 		this._init();
 	}
@@ -17,9 +19,10 @@ class ChatRoom {
 		// 	//console.log(`${ this._instance.sessionId } joined!`);
 		// });
 		//
-		// this._instance.onStateChange.add((state)=>{
-		// 	//console.log("new state:", state);
-		// });
+		this._instance.onStateChange.add((state)=>{
+			this._state = state;
+			//console.log("new state:", state);
+		});
 
 		this._instance.listen('messages/:index', (change) => {
 			new ChatBubble({content: change.value});
