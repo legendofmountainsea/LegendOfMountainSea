@@ -6,4 +6,11 @@ export default {
             PATH: './assets/interface/systemIcon.png',
         },
     },
+	SPEECH_BUBBLE_ICON: {
+		IS_CONTAIN_ANIMATION: false,
+		DATA: {
+			NAME: 'speechBubbleIcon',
+			PATH: './assets/interface/speech-bubble.png',
+		},
+	},
 };

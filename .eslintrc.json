@@ -53,6 +53,7 @@
     "pathHelper": true,
     "appRootPath": true,
     "systemLanguage": true,
-    "fileSystem": true
+    "fileSystem": true,
+    "LOMSServer": true
   }
 }
