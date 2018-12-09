@@ -23,7 +23,7 @@ export default class WorldScene extends Scene {
 		EXECUTE_IN_CLIENT(()=>{
 			const lomsServer = new LOMSServer({});
 			lomsServer.start();
-			const network = new NetworkClient({}).connect();
+			new NetworkClient({}).connect();
 		});
 	}
 	
