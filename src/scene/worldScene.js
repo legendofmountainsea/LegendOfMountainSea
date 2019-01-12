@@ -12,7 +12,7 @@ import Character from '../render/character';
 import Pattern from '../render/pattern';
 import Terrain from '../render/terrain';
 import Coordinates from '../core/coordinates';
-import NetworkClient from '../network/networkClient';
+import Socket from '../module/socket';
 import { EXECUTE_IN_CLIENT } from '../util/envUtil';
 
 export default class WorldScene extends Scene {
@@ -23,9 +23,10 @@ export default class WorldScene extends Scene {
 
 		//TODO: show progress
 		EXECUTE_IN_CLIENT(() => {
-			const lomsServer = new LOMSServer({});
+			const lomsServer = Socket.getServer();
 			lomsServer.start();
-			new NetworkClient({}).connect();
+			const networkClient = Socket.getClient();
+			networkClient.connect();
 		});
 	}
 

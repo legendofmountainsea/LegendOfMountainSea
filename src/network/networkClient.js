@@ -15,7 +15,7 @@ class NetworkClient {
 	_client: any;
 	_chatRoom: ChatRoom;
 
-	constructor(props:NetworkClientPropsType){
+	constructor(props: NetworkClientPropsType){
 		this._ip = props.ip || 'localhost';
 		this._port = props.port || '1126';
 		//this._profile = props.profile;
