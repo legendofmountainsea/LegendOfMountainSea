@@ -1,19 +1,35 @@
+// @flow
 import Mouse from './mouse';
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
 import Window from '../module/window';
+import type Scene from '../scene/scene';
+import type Terrain from './terrain';
+import type UIText from './uiText';
+import type ElementCore from './elementCore';
+import type Actor from './actor';
+import type { AnimationAssetType, NoneAnimationAssetType } from '../static/type/assetDataType';
+
+type LOMSRendererPropsType = {
+
+};
 
 /**
  * class for renderer
  */
 class LOMSRenderer {
-	
+
+	_renderer: PIXI.Application;
+	_resources: Object;
+	_controller: Controller;
+	_stageAgent: StageAgent;
+	_onAssetLoadingFinish: Function;
+
 	/**
 	 * init renderer for game
 	 * @param props
 	 */
-	constructor(props) {
-		this._controller = null;
+	constructor(props: LOMSRendererPropsType) {
 		this._onAssetLoadingFinish = () => {
 		};
 		this.initRenderer();
@@ -40,9 +56,13 @@ class LOMSRenderer {
 		this._stageAgent = new StageAgent({renderer: this._renderer, controller: this._controller});
 		
 		this._stageAgent.init();
-		
-		document.getElementById('CanvasContainer').appendChild(this._renderer.view);
-		
+
+		const canvasContainerDiv = document.getElementById('CanvasContainer');
+
+		if(canvasContainerDiv){
+			canvasContainerDiv.appendChild(this._renderer.view);
+		}
+
 		this._renderer.view.addEventListener('contextmenu', (e) => {
 			e.preventDefault();
 		});
@@ -69,7 +89,7 @@ class LOMSRenderer {
 		return this;
 	}
 	
-	_setAssetLoadingListener(onFinish) {
+	_setAssetLoadingListener(onFinish: Function) {
 		this._onAssetLoadingFinish = onFinish;
 	}
 	
@@ -79,7 +99,7 @@ class LOMSRenderer {
 	 * @returns {LOMSRenderer}
 	 * @private
 	 */
-	_prepareAssets(assetsSet) {
+	_prepareAssets(assetsSet: Array<NoneAnimationAssetType | AnimationAssetType>) {
 		let loader = PIXI.loader;
 		loader.reset();
 		
@@ -107,7 +127,7 @@ class LOMSRenderer {
 	 * @param scene {Scene} class for every scene which renderer could render
 	 * @returns {LOMSRenderer}
 	 */
-	renderScene(scene) {
+	renderScene(scene: Scene) {
 		scene.setRenderer(this);
 		this._setAssetLoadingListener(scene.onAssetsFinish());
 		this._prepareAssets(scene.getAssetsDate());
@@ -127,7 +147,7 @@ class LOMSRenderer {
 	 * @param terrain {Terrain}
 	 * @returns {LOMSRenderer}
 	 */
-	addTerrain(terrain) {
+	addTerrain(terrain: Terrain) {
 		this._addElementToStage(terrain);
 		this._stageAgent.addTerrain(terrain);
 		return this;
@@ -138,7 +158,7 @@ class LOMSRenderer {
 	 * @param ui {UIText}
 	 * @returns {LOMSRenderer}
 	 */
-	addUI(ui){
+	addUI(ui: UIText){
 		this._addElementToStage(ui);
 		this._stageAgent.addUI(ui);
 		return this;
@@ -149,7 +169,7 @@ class LOMSRenderer {
 	 * @param actor {Actor}
 	 * @returns {LOMSRenderer}
 	 */
-	addActor(actor) {
+	addActor(actor: Actor) {
 		this._addElementToStage(actor);
 		this._stageAgent.addActor(actor);
 		return this;
@@ -161,7 +181,7 @@ class LOMSRenderer {
 	 * @returns {LOMSRenderer}
 	 * @private
 	 */
-	_addElementToStage(element){
+	_addElementToStage(element: ElementCore){
 		element.setStage(this._stageAgent);
 		if (!element.isNoAsset()) {
 			element.initResources(this._resources);

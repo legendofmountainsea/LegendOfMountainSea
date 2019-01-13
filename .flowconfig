@@ -7,6 +7,9 @@
 [lints]
 
 [options]
+module.name_mapper='^raw-loader!\(.*\.html?\)' -> '\1'
 module.file_ext=.html
-module.name_mapper.extension='html' -> 'empty/object'
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
 [strict]

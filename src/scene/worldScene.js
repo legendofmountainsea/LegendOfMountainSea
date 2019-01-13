@@ -1,3 +1,4 @@
+// @flow
 import $ from 'jquery';
 import S_gameMenuAsset from '../static/gameMenuAsset';
 import S_worldAsset from '../static/heroCharacter/heroAsset';
@@ -15,16 +16,19 @@ import Coordinates from '../core/coordinates';
 import Socket from '../module/socket';
 import { EXECUTE_IN_CLIENT } from '../util/envUtil';
 
-export default class WorldScene extends Scene {
-	constructor(props) {
+type WorldScenePropsType = {
+
+};
+
+class WorldScene extends Scene {
+
+	constructor(props: WorldScenePropsType) {
 		super(props);
 		this._assetsData = [S_gameMenuAsset, S_worldAsset, S_worldTerrainAsset];
 		this._onFinish = this.onFinish.bind(this);
 
 		//TODO: show progress
 		EXECUTE_IN_CLIENT(() => {
-			const lomsServer = Socket.getServer();
-			lomsServer.start();
 			const networkClient = Socket.getClient();
 			networkClient.connect();
 		});
@@ -96,3 +100,5 @@ export default class WorldScene extends Scene {
 		this._renderer.addActor(houyi);
 	}
 }
+
+export default WorldScene;

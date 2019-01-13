@@ -1,3 +1,4 @@
+// @flow
 import $ from 'jquery';
 import S_mainMenuAsset from '../static/mainMenuAsset';
 import T_modalTemplate from '../static/interface/modalTemplate.html';
@@ -13,13 +14,22 @@ import Style from '../static/textStyle';
 import WorldScene from '../scene/worldScene';
 import Localization from '../i18n/localization';
 import { EXECUTE_IN_CLIENT } from '../util/envUtil';
+import Socket from '../module/socket';
+import type { AnimationAssetType, NoneAnimationAssetType } from '../static/type/assetDataType';
 
-export default class MainMenu extends Scene {
-	constructor(props) {
+type MainMenuPropsType = {
+};
+
+class MainMenu extends Scene {
+
+	_backGroundMusic: Audio;
+	_assetsData: Array<AnimationAssetType | NoneAnimationAssetType>
+	_onFinish: Function;
+
+	constructor(props: MainMenuPropsType) {
 		super(props);
 		this._assetsData = [S_mainMenuAsset];
 		this._onFinish = this.onFinish.bind(this);
-		this._backGroundMusic = null;
 	}
 
 	onFinish() {
@@ -40,7 +50,7 @@ export default class MainMenu extends Scene {
 			position: new Coordinates(200, 200),
 		});
 
-		logo.bindRender((sprite, delta) => {
+		logo.bindRender((sprite: PIXI.Sprite, delta: number) => {
 			sprite.rotation += 0.01 * delta;
 		});
 
@@ -50,10 +60,17 @@ export default class MainMenu extends Scene {
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
 				this.dispose();
-				const worldScene = new WorldScene();
+				const worldScene = new WorldScene({});
 				this._renderer.renderScene(worldScene);
 				this._backGroundMusic.pause();
 				this._backGroundMusic = null;
+
+				EXECUTE_IN_CLIENT(() => {
+					const server = Socket.getServer();
+					if(!server.isStart()){
+						server.start();
+					}
+				});
 			},
 		});
 
@@ -72,9 +89,9 @@ export default class MainMenu extends Scene {
 			style: Style.MAIN_MENU,
 			onClick: (e) => {
 				const loadGameModal = T_modalTemplate({
-					titleName: languageContent.loadGame,
-					okButtonName: languageContent.loadGame,
-					closeButtonName: languageContent.quit,
+					titleName: languageContent ? languageContent.loadGame: '',
+					okButtonName: languageContent ? languageContent.loadGame: '',
+					closeButtonName: languageContent ? languageContent.quit: '',
 					content: T_contentListContainer({
 						listContent: listContents(),
 					}),
@@ -116,3 +133,5 @@ export default class MainMenu extends Scene {
 		return this;
 	}
 }
+
+export default MainMenu;

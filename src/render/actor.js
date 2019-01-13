@@ -70,7 +70,7 @@ class Actor extends ElementCore {
 		return new Coordinates(worldTransformX, worldTransformY);
 	}
 
-	bindRender(onRender: (number) => void): Actor{
+	bindRender(onRender: (PIXI.Sprite, number) => void): Actor{
 		this._onRender = onRender;
 		return this;
 	}
