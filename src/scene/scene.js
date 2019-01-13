@@ -1,15 +1,28 @@
+// @flow
+
+import type { AnimationAssetType } from '../static/type/assetDataType';
+import type LOMSRenderer from '../render/lomsRenderer';
+
+type ScenePropsType = {
+};
+
 /**
  * class for every scene which renderer could render
  */
 class Scene {
-    constructor(props) {
-        this.props = props;
-        this._renderer = null;
-        this._assetsData = {};
+
+	_props: Object;
+	_renderer: LOMSRenderer;
+	_assetsData: Array<AnimationAssetType>;
+	_onFinish: Function;
+
+    constructor(props: ScenePropsType) {
+        this._props = props;
+        this._assetsData = [];
         this._onFinish = () => {};
     }
 
-    setRenderer(renderer){
+    setRenderer(renderer: LOMSRenderer){
         this._renderer = renderer;
     }
 

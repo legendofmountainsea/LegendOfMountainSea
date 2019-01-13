@@ -1,8 +1,13 @@
 declare var PIXI: any;
+declare var Audio: any;
+declare var LOMSServer: any;
 declare module 'jquery' {
 	declare export default any;
 }
 declare module 'bootstrap' {
+	declare export default any;
+}
+declare module 'pixi.js' {
 	declare export default any;
 }
 declare module 'loms.perlin' {
