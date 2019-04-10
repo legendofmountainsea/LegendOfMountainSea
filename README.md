@@ -8,7 +8,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/b89efe9442ffb2142766/maintainability)](https://codeclimate.com/github/SkyHarp/LegendOfMountainSea/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b89efe9442ffb2142766/test_coverage)](https://codeclimate.com/github/SkyHarp/LegendOfMountainSea/test_coverage)
 [![Build Status](https://img.shields.io/travis/SkyHarp/LegendOfMountainSea/master.svg?style=flat-square&logo=travis&label=osx)](https://travis-ci.org/SkyHarp/LegendOfMountainSea)
-[![AppVeyor branch](https://img.shields.io/appveyor/ci/TyrealGray/legendofmountainsea/master.svg?style=flat-square&logo=appveyor&label=win)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea)
+[![AppVeyor branch](https://img.shields.io/appveyor/ci/TyrealGray/legendofmountainsea/master.svg?style=flat-square&logo=appveyor&label=win)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea) [![Greenkeeper badge](https://badges.greenkeeper.io/SkyHarp/LegendOfMountainSea.svg)](https://greenkeeper.io/)
 
 4X sandbox game with legend of Mountain and Sea Classics
 
