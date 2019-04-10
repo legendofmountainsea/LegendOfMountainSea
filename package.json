@@ -65,7 +65,7 @@
   "dependencies": {
     "bootstrap": "4.3.1",
     "colyseus.js": "0.10.4",
-    "jquery": "3.3.1",
+    "jquery": "3.4.0",
     "loms.perlin": "1.0.2",
     "loms.server": "0.0.2",
     "loms.uuid": "1.0.0",
