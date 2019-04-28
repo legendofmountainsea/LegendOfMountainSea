@@ -53,7 +53,7 @@ If a community member engages in unacceptable behavior, the community organizers
 
 ## 6. Reporting Guidelines
 
-If you are subject to or witness unacceptable behavior, or have any other concerns, please notify a community organizer as soon as possible. ityrealgray@gmail.com.
+If you are subject to or witness unacceptable behavior, or have any other concerns, please notify a community organizer as soon as possible.
 In your report please include:
 
 - Your contact information.
@@ -72,11 +72,7 @@ We expect all community participants (contributors, paid or otherwise; sponsors;
 
 This code of conduct and its related procedures also applies to unacceptable behavior occurring outside the scope of community activities when such behavior has the potential to adversely affect the safety and well-being of community members.
 
-## 9. Contact info
-
-ityrealgray@gmail.com
-
-## 10. License and attribution
+## 9. License and attribution
 
 This Code of Conduct is distributed under a [Creative Commons Attribution-ShareAlike license](http://creativecommons.org/licenses/by-sa/3.0/).
 
