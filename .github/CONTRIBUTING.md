@@ -10,7 +10,7 @@ Take a look at the features requested by others in the community and consider op
 All game assets are in [here](https://github.com/SkyHarp/LegendOfMountainSea/tree/master/assets), and our game needs nice looking interface and character! We are using [piskel](https://github.com/piskelapp/piskel) for drawing the character.
 
 ### a Chinese history hobbyist
-We have a huge task about Chinese ancient legends translation and story creation, feel free to join our [community](https://loms.space/). We welcome the non-technical discussions, share your idea with us.
+We have a huge task about Chinese ancient legends translation and story creation, feel free to join our [community](https://gitter.im/SkyHarp/LegendOfMountainSea/). We welcome the non-technical discussions, share your idea with us.
 
 ## Code of Conduct
 SkyHarp has a [Code of Conduct](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CODE_OF_CONDUCT.md) that all contributors are expected to follow. This code describes the minimum behavior expectations for all contributors.
