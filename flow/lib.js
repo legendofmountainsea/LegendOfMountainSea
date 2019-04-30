@@ -1,13 +1,21 @@
 declare var PIXI: any;
 declare var Audio: any;
 declare var LOMSServer: any;
+declare module 'pixi.js' {
+	declare export default any;
+	declare export var Loader: any;
+	declare export var Rectangle: any;
+	declare export var Circle: any;
+	declare export var AnimatedSprite: any;
+	declare export var Sprite: any;
+	declare export var Container: any;
+	declare export var Application: any;
+}
+
 declare module 'jquery' {
 	declare export default any;
 }
 declare module 'bootstrap' {
-	declare export default any;
-}
-declare module 'pixi.js' {
 	declare export default any;
 }
 declare module 'loms.perlin' {
