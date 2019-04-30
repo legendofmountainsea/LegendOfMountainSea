@@ -1,6 +1,5 @@
 // @flow
 import 'bootstrap';
-import 'pixi.js';
 
 import LOMSRenderer from './render/lomsRenderer';
 import MainMenu from './view/mainMenu';

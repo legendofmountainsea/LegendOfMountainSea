@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import Actor from './actor';
 
 /**
