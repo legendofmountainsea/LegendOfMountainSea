@@ -1,3 +1,4 @@
+import * as PIXI from 'pixi.js';
 import ElementCore from './elementCore';
 
 const MOUSE_DEFAULT_TEXTURE_PATH = '../../assets/interface/mouse.png';
@@ -48,11 +49,11 @@ class Mouse extends ElementCore {
 	STATUS_RIGHT_EDGE = 'STATUS_RIGHT_EDGE';
 	
 	init() {
-		this.TEXTURE_DEFAULT = new PIXI.Texture.fromImage(MOUSE_DEFAULT_TEXTURE_PATH);
-		this.TEXTURE_UP = new PIXI.Texture.fromImage(MOUSE_UP_TEXTURE_PATH);
-		this.TEXTURE_DOWN = new PIXI.Texture.fromImage(MOUSE_DOWN_TEXTURE_PATH);
-		this.TEXTURE_LEFT = new PIXI.Texture.fromImage(MOUSE_LEFT_TEXTURE_PATH);
-		this.TEXTURE_RIGHT = new PIXI.Texture.fromImage(MOUSE_RIGHT_TEXTURE_PATH);
+		this.TEXTURE_DEFAULT = new PIXI.Texture.from(MOUSE_DEFAULT_TEXTURE_PATH);
+		this.TEXTURE_UP = new PIXI.Texture.from(MOUSE_UP_TEXTURE_PATH);
+		this.TEXTURE_DOWN = new PIXI.Texture.from(MOUSE_DOWN_TEXTURE_PATH);
+		this.TEXTURE_LEFT = new PIXI.Texture.from(MOUSE_LEFT_TEXTURE_PATH);
+		this.TEXTURE_RIGHT = new PIXI.Texture.from(MOUSE_RIGHT_TEXTURE_PATH);
 		
 		this._sprite = new PIXI.Sprite(this.TEXTURE_DEFAULT);
 		return this;
