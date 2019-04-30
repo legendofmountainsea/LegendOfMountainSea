@@ -1,4 +1,6 @@
 // @flow
+import * as PIXI from 'pixi.js';
+
 import Mouse from './mouse';
 import StageAgent from './stageAgent';
 import Controller from '../control/controller';
@@ -45,7 +47,7 @@ class LOMSRenderer {
 		
 		const {width, height} = Window.getDimension();
 		
-		this._renderer = new PIXI.Application(width, height, {backgroundColor: 0xeeeeee});
+		this._renderer = new PIXI.Application({width, height, backgroundColor: 0xeeeeee});
 		
 		this._controller = new Controller({
 			mouse: new Mouse({
@@ -76,10 +78,7 @@ class LOMSRenderer {
 	 * @todo show progress information
 	 */
 	initAssetLoader() {
-		let loader = PIXI.loader;
-		loader.onProgress.add((e) => {
-			//console.log(e.progress);
-		});
+		let loader = PIXI.Loader.shared;
 		
 		loader.onComplete.add((loader, resources) => {
 			this._resources = resources;
@@ -100,7 +99,7 @@ class LOMSRenderer {
 	 * @private
 	 */
 	_prepareAssets(assetsSet: Array<NoneAnimationAssetType | AnimationAssetType>) {
-		let loader = PIXI.loader;
+		let loader = PIXI.Loader.shared;
 		loader.reset();
 		
 		for (let assetsData of assetsSet) {
