@@ -1,5 +1,5 @@
 //@flow
-
+import * as PIXI from 'pixi.js';
 import S_worldTerrainAsset from '../static/terrain/worldTerrainAsset';
 
 import Coordinates from '../core/coordinates';
