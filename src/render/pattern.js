@@ -1,4 +1,5 @@
 //@flow
+import * as PIXI from 'pixi.js';
 import Actor from './actor';
 import type Coordinates from '../core/coordinates';
 import type { NoneAnimationAssetType } from '../static/type/assetDataType';

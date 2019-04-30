@@ -1,4 +1,5 @@
 //@flow
+import * as PIXI from 'pixi.js';
 
 import Actor from './actor';
 import Coordinates from '../core/coordinates';
@@ -66,7 +67,7 @@ class Character extends Actor {
 				}
 			}
 
-			const animatedSprite = new PIXI.extras.AnimatedSprite(
+			const animatedSprite = new PIXI.AnimatedSprite(
 				this._frames[assetDataInfo[this._animationStatus].NAME],
 			);
 

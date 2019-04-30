@@ -1,5 +1,5 @@
 //@flow
-
+import * as PIXI from 'pixi.js';
 import Pattern from './pattern';
 import TerrainGrid from '../core/navigation/terrainGrid';
 import TerrainChain from '../chain/terrainChain';
