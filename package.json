@@ -71,7 +71,7 @@
     "loms.uuid": "1.0.0",
     "pixi.js": "4.8.7",
     "popper.js": "1.15.0",
-    "qin-renderer.js": "0.0.3",
+    "qin-renderer.js": "0.0.4",
     "qin.js": "0.1.8"
   },
   "optionalDependencies": {
