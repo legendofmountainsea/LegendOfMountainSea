@@ -45,7 +45,7 @@
     "@babel/preset-flow": "7.0.0",
     "@babel/register": "7.4.4",
     "@pixi/jsdoc-template": "2.4.2",
-    "babel-eslint": "10.0.1",
+    "babel-eslint": "10.0.2",
     "babel-loader": "8.0.6",
     "circular-dependency-plugin": "5.0.2",
     "core-js": "3.1.4",
