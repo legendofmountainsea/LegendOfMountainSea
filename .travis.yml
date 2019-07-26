@@ -10,7 +10,7 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-0.4.5-darwin-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - export CC_TEST_REPORTER_ID=b93754d61350b44f04aa8b6de4ef126a31f87f09a41bd30bb2725705de589c89
+  - export CC_TEST_REPORTER_ID=43fce106ffa0ae9a4fc578de63fb3f8471e46f998f55eb00d8b6a4975cb222a5
 
 script:
   - npm run unit-testing && npm run flow check && npm run lint
