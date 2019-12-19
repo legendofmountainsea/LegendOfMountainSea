@@ -5,7 +5,7 @@
 [![PRs](https://img.shields.io/badge/PRs-welcome-yellow.svg?style=flat-square)](https://github.com/legendofmountainsea/LegendOfMountainSea/blob/master/.github/CONTRIBUTING.md)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/b89efe9442ffb2142766/maintainability)](https://codeclimate.com/github/legendofmountainsea/LegendOfMountainSea/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/b89efe9442ffb2142766/test_coverage)](https://codeclimate.com/github/legendofmountainsea/LegendOfMountainSea/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c28761af77d0f49bdba8/test_coverage)](https://codeclimate.com/github/legendofmountainsea/LegendOfMountainSea/test_coverage)
 [![Build Status](https://travis-ci.com/legendofmountainsea/LegendOfMountainSea.svg?branch=master)](https://travis-ci.com/legendofmountainsea/LegendOfMountainSea)
 [![Build status](https://ci.appveyor.com/api/projects/status/a4q4dagnfoinkyue/branch/master?svg=true)](https://ci.appveyor.com/project/TyrealGray/legendofmountainsea/branch/master)
 
