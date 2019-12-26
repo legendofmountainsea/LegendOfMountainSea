@@ -2,18 +2,15 @@
 There's a number of ways you can get involved, and we need volunteer to help this game come to fruition. If you are:
 
 ###  a developer
-If you find an [issues](https://github.com/SkyHarp/LegendOfMountainSea/issues) you would like to fix, open a pull request. Issues tagged as Good first issue are a good place to get started.
+If you find an [issues](https://github.com/legendofmountainsea/LegendOfMountainSea/issues) you would like to fix, open a pull request. Issues tagged as Good first issue are a good place to get started.
 
 Take a look at the features requested by others in the community and consider opening a pull request if you see something you want to work on.
 
 ### an artist
-All game assets are in [here](https://github.com/SkyHarp/LegendOfMountainSea/tree/master/assets), and our game needs nice looking interface and character! We are using [piskel](https://github.com/piskelapp/piskel) for drawing the character.
-
-### a Chinese history hobbyist
-We have a huge task about Chinese ancient legends translation and story creation, feel free to join our [community](https://gitter.im/SkyHarp/LegendOfMountainSea/). We welcome the non-technical discussions, share your idea with us.
+All game assets are in [here](https://github.com/legendofmountainsea/LegendOfMountainSea/tree/master/assets), and our game needs nice looking interface and character! We are using [piskel](https://github.com/piskelapp/piskel) for drawing the character.
 
 ## Code of Conduct
-SkyHarp has a [Code of Conduct](https://github.com/SkyHarp/LegendOfMountainSea/blob/master/.github/CODE_OF_CONDUCT.md) that all contributors are expected to follow. This code describes the minimum behavior expectations for all contributors.
+LOMS has a [Code of Conduct](https://github.com/legendofmountainsea/LegendOfMountainSea/blob/master/.github/CODE_OF_CONDUCT.md) that all contributors are expected to follow. This code describes the minimum behavior expectations for all contributors.
 
 ## Sending a pull request
 Small pull requests are much easier to review and more likely to get merged. Make sure the PR does only one thing, otherwise please split it.
